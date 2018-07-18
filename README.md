@@ -1,5 +1,7 @@
 # DEAP
 
+[![RRID:SCR_016158](/images/rrid.svg)](https://scicrunch.org/resolver/SCR_016158)
+
 Data Exploration and Analysis Portal
 
 ## Getting Started
