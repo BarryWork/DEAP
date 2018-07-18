@@ -86,6 +86,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     && Rscript -e 'install.packages("knitr", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("MuMIn", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("R.matlab", repos="https://cran.rstudio.com")' \
+    && Rscript -e 'install.packages("Rserve", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("tableone", repos="https://cran.rstudio.com")' 
 
 
