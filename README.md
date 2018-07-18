@@ -1,8 +1,8 @@
-# DEAP
+# Data Exploration and Analysis Portal (DEAP)
 
 [![RRID:SCR_016158](/images/rrid.svg)](https://scicrunch.org/resolver/SCR_016158)
 
-Data Exploration and Analysis Portal
+Access ABCD study data with the guide of domain experts that created this resource. 
 
 ## Getting Started
 
