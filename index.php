@@ -595,8 +595,10 @@
     <!-- Le javascript
 	 ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="js/bootstrap-transition.js"></script>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+<!--    <script src="js/bootstrap-transition.js"></script>
     <script src="js/bootstrap-alert.js"></script>
     <script src="js/bootstrap-modal.js"></script>
     <script src="js/bootstrap-dropdown.js"></script>
@@ -608,6 +610,7 @@
     <script src="js/bootstrap-collapse.js"></script>
     <script src="js/bootstrap-carousel.js"></script>
     <script src="js/bootstrap-typeahead.js"></script>
+-->
     <script src="/js/md5-min.js"></script>
     <script src="js/legal.js"></script>
     <script src="/js/togetherjs-min.js"></script>
@@ -684,7 +687,7 @@
           whatisthis = ((projects[newProject].islongitudinal == 'no')?"participants":"sessions");
           str += " <tr><td>" + whatisthis + "<sup title='includes user defined entries'>*</sup>:</td><td class='table-value'>" + projects[newProject].numRows + "</td></tr>";
           var per = 100 * (projects[newProject].numCols * projects[newProject].numRows - projects[newProject].numNAs) / (projects[newProject].numCols *
-															 projects[newProject].numRows);
+													 projects[newProject].numRows);
           //str += "<br>populated at: " + roundNumber(per, 2) + "&#37;";
           str += " <tr><td>male:</td><td class='table-value'>" + projects[newProject].male + "</td></tr>";
           str += " <tr><td>female:</td><td class='table-value'>" + projects[newProject].female + "</td></tr>";
