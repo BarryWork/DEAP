@@ -1,0 +1,548 @@
+body {
+    -webkit-font-smoothing: antialiased;
+    //font-family: "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "MS Sans Serif", "ＭＳ Ｐゴシック", "MS PGothic", Osaka, sans-serif;
+    font-family: "Hiragino Kaku Gothic Pro", "MS Sans Serif", "MS PGothic", sans-serif;
+    //font-family: sans-serif;
+}
+
+@font-face {
+    font-family: "Franchise";
+    src: url("/font/Franchise-Bold.woff") format('woff');
+}
+
+.header {
+    position: absolute;
+    top: 22px;
+    left: 0;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: visible;
+    height: 0;
+    z-index: 1;
+    padding: 0 33px;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.header__logo {
+    font-size: 51px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    font-family: Franchise;
+    color: #5f5f5f !important;
+}
+a {
+    color: inherit;
+}
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+* {
+    background-repeat: no-repeat;
+    padding: 0;
+    margin: 0;
+}
+.header__info-list {
+    font-size: 10px;
+    font-weight: bold;
+    margin: 6px 0 0 6px;
+}
+dl {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+.header__info-list>dt {
+    float: left;
+    width: 1em;
+    text-align: center;
+}
+.header__info-list>dd {
+    padding-left: 1.2em;
+    letter-spacing: 0.05em;
+}
+dd {
+    display: block;
+    -webkit-margin-start: 0px;
+}
+
+.wrapper {
+    height: 100vh;
+    min-width: 1024px;
+    min-height: 520px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bline {
+    border-left: 1.1px solid #BBB;
+    opacity: 0.4;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.bline1 {
+    transition-delay: 1s;
+    transform: translate(10%,0);
+    transition-timing-function: cubic-bezier(0.42,0,0.58,1);
+    animation: blinemove1 25s infinite;
+}
+
+@keyframes blinemove1 {
+    0% {
+        transform: translate(10%,0);
+    }
+    40% {
+        transform: translate(60%,0);
+    }
+    62% {
+        transform: translate(60%,0);
+    }
+    70% {
+        transform: translate(40%,0);
+    }
+    81% {
+        transform: translate(40%,0);
+    }
+    100% {
+        transform: translate(10%,0);        
+    }
+}
+
+.bline2 {
+    transition-delay: 5s;
+    transform: translate(90%,0);
+    transition-timing-function: ease-in-out;
+    animation: blinemove2 25s infinite;
+}
+
+@keyframes blinemove2 {
+    0% {
+        transform: translate(90%,0);
+    }
+    5% {
+        transform: translate(90%,0);
+    }
+    30% {
+        transform: translate(40%,0);
+    }
+    55% {
+        transform: translate(40%,0);
+    }
+    70% {
+        transform: translate(70%,0);
+    }
+    80% {
+        transform: translate(70%,0);
+    }
+    100% {
+        transform: translate(90%,0);        
+    }
+}
+.bline3 {
+    transition-delay: 1s;
+    transform: translate(50%,0);
+    transition-timing-function: ease-in-out;
+    animation: blinemove3 20s infinite;
+}
+
+@keyframes blinemove3 {
+    0% {
+        transform: translate(45%,0);
+    }
+    1% {
+        transform: translate(45%,0);
+    }
+    30% {
+        transform: translate(20%,0);
+    }
+    45% {
+        transform: translate(20%,0);
+    }
+    60% {
+        transform: translate(10%,0);
+    }
+    85% {
+        transform: translate(10%,0);
+    }
+    100% {
+        transform: translate(45%,0);        
+    }
+}
+
+.bline4 {
+    transition-delay: 10s;
+    transform: translate(0%,0);
+    transition-timing-function: ease-in-out;
+    animation: blinemove4 40s infinite;
+}
+
+@keyframes blinemove4 {
+    0% {
+        transform: translate(100%,0);
+    }
+    20% {
+        transform: translate(80%,0);
+    }
+    30% {
+        transform: translate(90%,0);
+    }
+    54% {
+        transform: translate(90%,0);
+    }
+    64% {
+        transform: translate(25%,0);
+    }
+    75% {
+        transform: translate(25%,0);
+    }
+    100% {
+        transform: translate(100%,0);        
+    }
+}
+
+.bline5 {
+    transition-delay: 10s;
+    transform: translate(0%,0);
+    transition-timing-function: ease-in-out;
+    animation: blinemove5 30s infinite;
+}
+
+@keyframes blinemove5 {
+    0% {
+        transform: translate(40%,0);
+    }
+    20% {
+        transform: translate(70%,0);
+    }
+    50% {
+        transform: translate(70%,0);
+    }
+    100% {
+        transform: translate(40%,0);        
+    }
+}
+.pagination {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -101px;
+    z-index: 1;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+.pagination li a {
+    font-family: Franchise;
+    font-size: 30px;
+    text-decoration: none;
+    color: #5f5f5f;
+    transition: all 0.2s ease-in;
+    display: block;
+    padding: 4px 0 4px 31px;
+    position: relative;
+}
+.pagination li a:hover {
+    font-size: 34px;
+    color: #4f4f4f;
+}
+
+.pagination li a::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1.2px;
+    background-color: #Cf4f4f;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -3px;
+    transition: all 0.3s ease;
+    color: #Cf4f4f;
+}
+.pagination li a:hover::before {
+    width: 25;
+}
+ol {
+    display: block;
+    list-style-type: decimal;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+.content {
+    height: 100%;
+    min-height: 520px;
+    position: relative;
+}
+.message {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%;
+}
+.message__content {
+    padding-left: 350px;
+    z-index: 1;
+}
+.message__heading {
+    //margin-left: -173px;
+}
+.heading {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+}
+.heading__en {
+    font-size: 134px;
+    letter-spacing: 0.055em;
+    font-family: Franchise;
+    position: relative;
+    margin: 0 70px 16px -5;
+    color: #2f2f2f;
+}
+.heading__ja {
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.18em;
+    position: relative;
+    margin: 0 80px 16px 0;
+    color: #5f5f5f;
+}
+.lead {
+    margin-top: -30px;
+    font-size: 14px;
+    letter-spacing: 0.21em;
+    line-height: 1.4;
+}
+.message__image {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    right: 18px;
+    background: url(/img/white.jpg) 50% 50% no-repeat;
+    z-index: -1;
+    background-size: cover;
+}
+.message__image::after {
+    content: "";
+    background: url(/img/brain\ digital2.jpg) 50% 50% no-repeat;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    background-size: cover;
+}
+.login {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 14px;
+    font-family: Franchise;
+    transform-origin: right top;
+    letter-spacing: 0.04em;
+    color: #6f6f6f;
+}
+
+.current {
+    position: absolute;
+    bottom: 8px;
+    right: 25px;
+    font-size: 18px;
+    font-family: Franchise;
+    transform-origin: right top;
+    transform: rotate(90deg);
+    letter-spacing: 0.04em;
+}
+.current__counter {
+    font-size: 28px;
+    vertical-align: middle;
+    top: 8px;
+}
+.login__name {
+    font-size: 28px;
+    color: #2f2f2f;
+    cursor: pointer;
+}
+.header__logo:hover::before {
+    content: "data use certification";
+    position: fixed;
+    font-size: 14pt;
+    top: 60px;
+    left: 32px;
+    animation: slidein2 0.6s;
+    color: #8f8f8f;
+}
+@keyframes slidein2 {
+    0% {
+        left: -10px;
+    }
+    100% {
+        left: 32px;
+    }
+}
+
+.login__name:hover::before {
+    content: "LOGOUT";
+    position: fixed;
+    font-size: 14pt;
+    top: 32px;
+    right: 25px;
+    animation: slidein 0.6s;
+    color: #8f8f8f;
+}
+@keyframes slidein {
+    0% {
+        right: -10px;
+    }
+    100% {
+        right: 25px;
+    }
+}
+.starter {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: black;
+    color: white;
+    z-index: 10;
+    animation: startermove 3s ease-out;
+    animation-fill-mode: forwards;
+    opacity: 1;
+}
+.starter-text {
+    top: 50%;
+    text-align: center;
+    font-size: 46px;
+    letter-spacing: 0.055em;
+    font-family: Franchise;
+    position: relative;
+    margin: 0 70px 16px -5;
+}
+
+.starter-subtext {
+    top: 51%;
+    text-align: center;
+    font-size: 32px;
+    letter-spacing: 0.055em;
+    font-family: Franchise;
+    position: relative;
+    margin: 0 70px 16px -5;
+}
+
+@keyframes blink {
+        /**
+     * At the start of the animation the dot
+     * has an opacity of .2
+     */
+    0% {
+        opacity: .2;
+    }
+        /**
+     * At 20% the dot is fully visible and
+     * then fades out slowly
+     */
+    20% {
+        opacity: 1;
+    }
+        /**
+     * Until it reaches an opacity of .2 and
+     * the animation can start again
+     */
+    100% {
+        opacity: .2;
+    }
+}
+
+.starter-subtext span {
+        /**
+     * Use the blink animation, which is defined above
+     */
+    animation-name: blink;
+        /**
+     * The animation should take 1.4 seconds
+     */
+    animation-duration: 1.4s;
+        /**
+     * It will repeat itself forever
+     */
+    animation-iteration-count: infinite;
+        /**
+     * This makes sure that the starting style (opacity: .2)
+     * of the animation is applied before the animation starts.
+     * Otherwise we would see a short flash or would have
+     * to set the default styling of the dots to the same
+     * as the animation. Same applies for the ending styles.
+     */
+    animation-fill-mode: both;
+}
+
+.starter-subtext span:nth-child(2) {
+        /**
+     * Starts the animation of the third dot
+     * with a delay of .2s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .2s;
+}
+
+.starter-subtext span:nth-child(3) {
+        /**
+     * Starts the animation of the third dot
+     * with a delay of .4s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .4s;
+}
+
+@keyframes startermove {
+    0% {
+        opacity: 1:
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@-webkit-keyframes startermove {
+    0% {
+        opacity: 1:
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+    
