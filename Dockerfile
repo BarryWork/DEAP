@@ -34,7 +34,6 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && rm /var/www/html/index.html \
     && git clone https://github.com/ABCD-STUDY/DEAP.git /var/www/html \
     && cd /var/www/html \
-    && git checkout containerize \
     && cd /var/www/html/applications/Ontology/searchServer \
     && npm install . \
     && groupadd processing -g 1000 \
