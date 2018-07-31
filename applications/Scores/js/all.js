@@ -1,6 +1,6 @@
 var DataFrame = dfjs.DataFrame;
 var data = null;
-var disableLocalStorage = true;
+var disableLocalStorage = false;
 
 // use data as a dataframe
 MathJax.Hub.Config({
@@ -46,7 +46,7 @@ loadAnalysisNames();
 function storageAvailable(type) {
     if (disableLocalStorage)
         return false;
-    
+
     try {
         var storage = window[type],
             x = '__storage_test__';
@@ -57,13 +57,13 @@ function storageAvailable(type) {
         return e instanceof DOMException && (
             // everything except Firefox
             e.code === 22 ||
-                // Firefox
-                e.code === 1014 ||
-                // test name field too, because code might not be present
-                // everything except Firefox
-                e.name === 'QuotaExceededError' ||
-                // Firefox
-                e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
             // acknowledge QuotaExceededError only if there's something already stored
             storage.length !== 0;
     }
@@ -76,7 +76,7 @@ function addOneMeasure( meas, vname ) {
     if (typeof vname === 'undefined') {
         vname = "no-block";
     }
-    
+
     console.log("Loading: " + meas);
 
     jQuery(document.getElementById(vname+'-table')).find(".loader").remove();
@@ -107,7 +107,7 @@ function addOneMeasure( meas, vname ) {
                 measuresPerBlock[vname] = [];
             }
             measuresPerBlock[vname].push(meas);
-            
+
             // make sure we have src_subject_id and eventname as well
             if (Object.keys(allMeasures).indexOf('src_subject_id') == -1 || allMeasures['src_subject_id'].length == 0) {
                 var dataFromStore = localStorage.getItem('src_subject_id');
@@ -128,13 +128,13 @@ function addOneMeasure( meas, vname ) {
     // ask the system to return this measure and add it to allMeasures (if it does not exist already)
     return jQuery.getJSON('/applications/Filter/runR.php', { 'value': meas }, function(data) {
         console.log("compute_block_id in runR is : " + vname + " loading: " + meas);
-        
+
         // add the current meas to compute_block_id in measuresPerBlock
         if (! (vname  in measuresPerBlock)) {
             measuresPerBlock[vname] = [];
         }
         measuresPerBlock[vname].push(meas);
-        
+
         // got the values, now add to allMeasures (merge with existing)
         var k  = Object.keys(allMeasures);
         k.splice(k.indexOf('src_subject_id'),1);
@@ -325,7 +325,7 @@ function _update(text, table_location, vname, hist_location) {
         //console.log("data is now: " + JSON.stringify(data));
     }
     //"src_subject_id", "eventname"
-    
+
     if (vname!= "" && vname && data.dim()[0] != 0){
         if (data.listColumns().indexOf(vname) > -1){
             var temp_json = JSON.parse(data.select("src_subject_id","eventname",vname).toJSON());
@@ -334,7 +334,7 @@ function _update(text, table_location, vname, hist_location) {
             return;
         }
     }
-    
+
     if (table_location.html() != "")
         table_location.height( table_location.height());
     if (hist_location.html() != "")
@@ -489,13 +489,15 @@ function insert_recipe_block(input, top) {
     var variable_name = input["name"]? input["name"] : new Date().getTime();
     var simplemd_initialize_text = input["content"] && JSON.parse(input["content"]) ? JSON.parse(input["content"]) : "### Describe the new item\nWhy should the reader be interested in this new item? Describe your rationale to provide it and explain your sources. Start the computation of the new item by listing required existing items, for example age here:\n```\nuse([\"age\"]);\n```\n\nAdd the calculation of the new measure in another section delimited by three tick marks:\n```\ndata = data.map(row => row.set('age_years', row.get('age')/12));\n```\n";
     var div = $("<div class = 'recipe-block' tabindex='0' style = 'position:relative;'></div>");
+    var fold_head = jQuery("<div class= 'fold-recipe row'></div>").appendTo(div);
+    fold_head.html( (typeof variable_name == "number" ? "New score calculation":variable_name) );
     if (typeof top !== 'undefined' && top) {
         div.insertAfter("#first-item");
     } else {
         div.appendTo(".container-fluid");
     }
-    var header = jQuery('<div class="header row"></div>').appendTo(div);
-    
+    var header = jQuery('<div class="header row" style="display:none"></div>').appendTo(div);
+
     var div_input = $("<div class = 'col-lg-4'></div>").appendTo(header);
     var div_table = $("<div class = 'col-lg-4' id = '"+variable_name+"-table"+"'></div>").appendTo(header);
     div_table.append('<div class="loader"></div>');
@@ -530,121 +532,15 @@ function insert_recipe_block(input, top) {
     bootstrap_texarea_description.find("input").val(input["description"]);
     //md
     var text_area = $('<textarea></textarea>').attr("id", variable_name );
-    var text_area_wrapper = $('<div class="col-md-12" style="padding-top:10px;border-top: 1px solid #CCC;"></div>').append(text_area).appendTo(div);
+    var text_area_wrapper = $('<div class="col-md-12" style="display:none;padding-top:10px;border-top: 1px solid #CCC;"></div>').append(text_area).appendTo(div);
 
     var div_operation = $("<div class = 'col-md-12'></div>").appendTo(div),
-        del = $('<i style = "right:5px;top:5px;position:absolute;font-size:30px; margin:5px; color: gray;" class="fas fa-times"></i>').appendTo(div),
-        save = $('<button type="button" class="btn btn-primary save-button">Save</button>').appendTo(div_input),
+        del = $('<i style = "right:5px;top:5px;position:absolute;font-size:30px; margin:5px; color: white;" class="fas fa-times"></i>').appendTo(div),
+        maximize = $('<i class="far fa-window-maximize" style = "right:35px;top:5px;position:absolute;font-size:30px; margin:5px; color: white;"></i>').appendTo(div);
+    save = $('<button type="button" class="btn btn-primary save-button">Save</button>').appendTo(div_input),
         checkbox = $('<div class="checkbox pull-right" style="margin-top: 7px;"><label><input type="checkbox" class="private-public" value="private"' + ((input['permission']=="private")?"checked":"") + '> Save as private</label></div>').appendTo(div_input);       
 
     //initialize md;
-    var simplemde = new SimpleMDE({
-        toolbar: false,
-        autofocus: false,
-        autosave: {
-            enabled: true,
-            uniqueId: variable_name+Math.random(),
-            delay: 1000,
-        },
-        blockStyles: {
-            bold: "__",
-            italic: "___"
-        },
-        element: document.getElementById(variable_name),
-        forceSync: true,
-        hideIcons: ["guide", "heading"],
-        indentWithTabs: false,
-        initialValue: simplemd_initialize_text,
-        insertTexts: {
-            horizontalRule: ["", "\n\n-----\n\n"],
-            image: ["![](http://", ")"],
-            link: ["[", "](http://)"],
-            table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],
-        },
-        lineWrapping: false,
-        parsingConfig: {
-            allowAtxHeaderWithoutSpace: true,
-            strikethrough: false,
-            underscoresBreakWords: true,
-        },
-        placeholder: "Type here...",
-        previewRender: function(plainText, preview) {
-            preview.innerHTML = this.parent.markdown(plainText);
-            var uniqid = Date.now();
-            preview.setAttribute('id',uniqid);
-            MathJax.Hub.Queue(["Typeset",MathJax.Hub,''+uniqid]);
-            return preview.innerHTML;
-        },
-        /* previewRender: function(plainText) {
-            return customMarkdownParser(plainText); // Returns HTML from a custom parser
-        },
-        previewRender: function(plainText, preview) { // Async method
-            setTimeout(function(){
-                preview.innerHTML = customMarkdownParser(plainText);
-            }, 250);
-
-            return "Loading...";
-        }, */
-        promptURLs: true,
-        renderingConfig: {
-            singleLineBreaks: false,
-            codeSyntaxHighlighting: true,
-        },
-        shortcuts: {
-            drawTable: "Cmd-Alt-T"
-        },
-        showIcons: ["code", "table"],
-        spellChecker: true,
-        status: false,
-        status: ["autosave", "lines", "words", "cursor"], // Optional usage
-        status: ["autosave", "lines", "words", "cursor", {
-            className: "keystrokes",
-            defaultValue: function(el) {
-                this.keystrokes = 0;
-                el.innerHTML = "0 Keystrokes";
-            },
-            onUpdate: function(el) {
-                el.innerHTML = ++this.keystrokes + " Keystrokes";
-            }
-        }, {
-            className: "toggleDisplay",
-            defaultValue: function(el) {
-                this.displayMode = 0;
-                el.innerHTML = "Cmd-P";
-            },
-            onUpdate: function(el) {
-                if (this.displayMode == 0) {
-                    el.innerHTML = 'Cmd-P';
-                } else {
-                    el.innerHTML = 'preview';
-                }
-                //simplemde.togglePreview();
-                //this.displayMode = 1;
-            }
-        }], // Another optional usage, with a custom status bar item that counts keystrokes
-        styleSelectedText: false,
-        tabSize: 4,
-    });
-
-    simplemde.codemirror.on("change", function() {
-        // at some point we should save what we have on the server --- if we are connected
-        //console.log(simplemde.value());
-
-        // lets parse the text, find out the groups that contain code
-        setTimeout(function(){parse(simplemde.value(),div_table,bootstrap_input_name.find("input").val(),div_hist)},0);
-    });
-    jQuery('#display').on('click', 'span.toggleDisplay', function() {
-        console.log("got a click on toggle display mode");
-    });
-    simplemde.codemirror.on("focus", function(){
-        console.log("got a focus event to display the editor");
-    });
-
-    // start by showing it nicely
-    simplemde.togglePreview();
-    jQuery('.editor-preview').on('click', function() {
-        simplemde.togglePreview();
-    });
     // always ask for age first, that will fill in the participant names
     /*
     (function(){
@@ -656,9 +552,6 @@ function insert_recipe_block(input, top) {
     })(simplemde,div_table,bootstrap_input_name,div_hist);
     */
 
-    setTimeout((function() {
-        parse(simplemde.value(),div_table,bootstrap_input_name.find("input").val(), div_hist);
-    }),0);
     /*
     setTimeout((function() {
         parse(simplemde.value(),div_table,bootstrap_input_name.find("input").val(), div_hist);
@@ -696,8 +589,130 @@ function insert_recipe_block(input, top) {
             div.remove();
         });
     });
+    var simplemde = null;
+    maximize.on("click", function(){
+        if(header.is(":visible")){
+            header.fadeOut();
+            text_area_wrapper.fadeOut();
+        }
+        else{
+            header.show();
+            text_area_wrapper.show();
+            if(simplemde) {
+                div.find(".fold-recipe")[0].scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});  
+                return;
+            }
+            simplemde = new SimpleMDE({
+                toolbar: false,
+                autofocus: false,
+                autosave: {
+                    enabled: true,
+                    uniqueId: variable_name+Math.random(),
+                    delay: 1000,
+                },
+                blockStyles: {
+                    bold: "__",
+                    italic: "___"
+                },
+                element: document.getElementById(variable_name),
+                forceSync: true,
+                hideIcons: ["guide", "heading"],
+                indentWithTabs: false,
+                initialValue: simplemd_initialize_text,
+                insertTexts: {
+                    horizontalRule: ["", "\n\n-----\n\n"],
+                    image: ["![](http://", ")"],
+                    link: ["[", "](http://)"],
+                    table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],
+                },
+                lineWrapping: false,
+                parsingConfig: {
+                    allowAtxHeaderWithoutSpace: true,
+                    strikethrough: false,
+                    underscoresBreakWords: true,
+                },
+                placeholder: "Type here...",
+                previewRender: function(plainText, preview) {
+                    preview.innerHTML = this.parent.markdown(plainText);
+                    var uniqid = Date.now();
+                    preview.setAttribute('id',uniqid);
+                    MathJax.Hub.Queue(["Typeset",MathJax.Hub,''+uniqid]);
+                    return preview.innerHTML;
+                },
+                promptURLs: true,
+                renderingConfig: {
+                    singleLineBreaks: false,
+                    codeSyntaxHighlighting: true,
+                },
+                shortcuts: {
+                    drawTable: "Cmd-Alt-T"
+                },
+                showIcons: ["code", "table"],
+                spellChecker: true,
+                status: false,
+                status: ["autosave", "lines", "words", "cursor"], // Optional usage
+                status: ["autosave", "lines", "words", "cursor", {
+                    className: "keystrokes",
+                    defaultValue: function(el) {
+                        this.keystrokes = 0;
+                        el.innerHTML = "0 Keystrokes";
+                    },
+                    onUpdate: function(el) {
+                        el.innerHTML = ++this.keystrokes + " Keystrokes";
+                    }
+                }, {
+                    className: "toggleDisplay",
+                    defaultValue: function(el) {
+                        this.displayMode = 0;
+                        el.innerHTML = "Cmd-P";
+                    },
+                    onUpdate: function(el) {
+                        if (this.displayMode == 0) {
+                            el.innerHTML = 'Cmd-P';
+                        } else {
+                            el.innerHTML = 'preview';
+                        }
+                        //simplemde.togglePreview();
+                        //this.displayMode = 1;
+                    }
+                }], // Another optional usage, with a custom status bar item that counts keystrokes
+                styleSelectedText: false,
+                tabSize: 4,
+            });
+
+            simplemde.codemirror.on("change", function() {
+                // at some point we should save what we have on the server --- if we are connected
+                //console.log(simplemde.value());
+
+                // lets parse the text, find out the groups that contain code
+                setTimeout(function(){parse(simplemde.value(),div_table,bootstrap_input_name.find("input").val(),div_hist)},0);
+            });
+            jQuery('#display').on('click', 'span.toggleDisplay', function() {
+                console.log("got a click on toggle display mode");
+            });
+            simplemde.codemirror.on("focus", function(){
+                console.log("got a focus event to display the editor");
+            });
+
+            // start by showing it nicely
+            simplemde.togglePreview();
+            jQuery('.editor-preview').on('click', function() {
+                simplemde.togglePreview();
+            });
+
+
+            div.find(".fold-recipe")[0].scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});  
+            setTimeout((function() {
+                parse(simplemde.value(),div_table,bootstrap_input_name.find("input").val(), div_hist);
+            }),0);
+        }
+    });
+
     if (typeof top !== 'undefined' && top) {
         jQuery(bootstrap_input_name).find('input').focus();
+    }
+    if (typeof variable_name == "number"){
+        setTimeout( function(){maximize.trigger("click")},100);
     }
 }
 
