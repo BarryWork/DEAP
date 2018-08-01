@@ -199,11 +199,11 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
   <script src="js/highlight.min.js"></script>
   <script src="js/simplemde.min.js"></script>
   <script type="text/javascript" src="js/MathJax-2.7.4/MathJax.js?config=TeX-AMS-MML_SVG-full"></script>
-  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="../../js/jquery-3.3.1.min.js"></script>
   <!-- <script src="js/popper.min.js"></script> -->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
   <script src="js/dataframe-min.js"></script>
   <script src="js/all.js"></script>
-  <script src="../../js/d3/d3.v3.min.js"></script>
+  <script src="../../js/d3.v3.min.js"></script>
   
 </html>

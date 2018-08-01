@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-            <link href="css/bootstrap.min.css" rel="stylesheet">
+            <link href="../../css/bootstrap.min.css" rel="stylesheet">
             <style>
                       body {
                           //padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -327,7 +327,7 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 </html>
 <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
 
-<script src="js/jquery-3.2.1.min.js"></script>
+<script src="../../js/jquery-3.3.1.min.js"></script>
 
 <!--<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>--!>
 <!-- <script src="./js/jquery-ui-1.9.2-mod.js"></script> -->
