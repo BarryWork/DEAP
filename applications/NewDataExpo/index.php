@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-            <link href="../../css/bootstrap.min.css" rel="stylesheet">
+            <link href="../../css/bootstrap.css" rel="stylesheet">
             <style>
                       body {
                           //padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -365,11 +365,11 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script src="./js/FileSaver.js"></script>
 <script src="./js/d3.js"></script>
 <script src="./js/d3-tip.js">         </script>
-<script src="./test/scatter.js" charset="utf-8"></script>
-<script src="./test/qq.js" charset="utf-8"></script>
-<script src="./test/hist.js" charset="utf-8"></script>
-<script src="./test/hist_cata.js" charset="utf-8"></script>
-<script src="./test/coeffient.js" charset="utf-8"></script>
+<script src="./js/scatter.js" charset="utf-8"></script>
+<script src="./js/qq.js" charset="utf-8"></script>
+<script src="./js/hist.js" charset="utf-8"></script>
+<script src="./js/hist_cata.js" charset="utf-8"></script>
+<script src="./js/coeffient.js" charset="utf-8"></script>
 <script src="../Ontology/js/highlight-js.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js" integrity="sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h" crossorigin="anonymous"></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
