@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href="css/github.min.css" rel="stylesheet">
     <!-- <link href="css/highlight.min.css" rel="stylesheet"> -->
     <link href="css/school-book.css" rel="stylesheet">
@@ -19,7 +19,7 @@
 body {
     //padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
-#editor { 
+#editor {
     position: absolute;
     top: 0;
     right: 0;
@@ -31,11 +31,11 @@ body {
     height:350px;
     margin-top:10px;
 }
-.row-fluid{   
+.row-fluid{
     margin-top:10px;
     margin-left:5px;
     margin-right:5px;
-    
+
 }
 button.btn.active {
     background-color: lightgreen;
@@ -100,17 +100,17 @@ text{
 }
 </style>
     <!--  <link href="/css/bootstrap-responsive.css" rel="stylesheet"> -->
-    <link href="css/fontawesome-all.min.css" rel="stylesheet">                          
+    <link href="css/fontawesome-all.min.css" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
-    
+
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" /> -->
     <link href="css/select2-bootstrap.css" rel ="stylesheet" type="test/css">
-    
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-    
+
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/apple-touch-icon-114-precomposed.png">
@@ -120,7 +120,7 @@ text{
     <!--             <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"> -->
     <!-- <link href="css/jquery-ui.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="css/style.css">
-    
+
 <?php
 session_start();
 include("../../code/php/AC.php");
@@ -146,9 +146,9 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
 
 
   </head>
-  
+
   <body spellcheck="false">
-    
+
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
       <a class="navbar-brand" href="#">Score Calculation</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -162,8 +162,8 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
         </ul>
       </div>
     </nav>
-    
-    
+
+
     <div class="container-fluid" style="margin-top: 10px;">
       <div class="row" id="first-item">
         <div class="col-md-12">
@@ -186,16 +186,16 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
           </div>
           <textarea id="display">
             ### Placeholder
-            
+
             You will see this text if you have not done something here.
           </textarea>
-	  
+
         </div>
       </div>
-      
-    </div> --!>
+
+    </div> -->
   </body>
-  
+
   <script src="js/highlight.min.js"></script>
   <script src="js/simplemde.min.js"></script>
   <script type="text/javascript" src="js/MathJax-2.7.4/MathJax.js?config=TeX-AMS-MML_SVG-full"></script>
@@ -205,5 +205,5 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
   <script src="js/dataframe-min.js"></script>
   <script src="js/all.js"></script>
   <script src="../../js/d3.v3.min.js"></script>
-  
+
 </html>
