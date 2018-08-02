@@ -13,7 +13,7 @@
                       body {
                           //padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
                            }
-                       #editor { 
+                       #editor {
                               position: absolute;
                               top: 0;
                               right: 0;
@@ -51,7 +51,7 @@ button.btn-sm.btn-outline-secondary {
                       }
 	.ace_search{
      position: fixed;
-}	
+}
 
 div.form-group {
     //margin-bottom: 0 !important;
@@ -64,10 +64,10 @@ div.col-sm-12.row.row-fluid.input-group {
             </style>
            <!--  <link href="/css/bootstrap-responsive.css" rel="stylesheet"> -->
 	    <link href ="css/jquery-ui.min.css" rel="stylesheet">
-            <link href="css/fontawesome-all.min.css" rel="stylesheet">                          
+            <link href="css/fontawesome-all.min.css" rel="stylesheet">
             <link href="custom_styles.css" rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
-               
+
             <link href="css/select2.min.css" rel="stylesheet" />
             <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" /> -->
             <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" rel ="stylesheet" type="test/css">
@@ -144,11 +144,11 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
           </li>
 	  <li class="nav-item">
                <a class="nav-link page-mode" href="/applications/Filter/index.php" target="_subsetting" title="Open the Subsetting application in another tab">Subsetting</a>
-          </li> 
+          </li>
           <li class="nav-item">
                <a class="nav-link page-mode" href="#"> <span id="mod-name">Mode</span></a>
           </li>
-    
+
 <!--           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span id="mod-name">Select</span> Mode <span class="caret"></span>
@@ -160,7 +160,7 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
           </li> -->
         </ul>
       </div>
-    
+
     </nav>
 
     <div class="container middle-page" style="margin-top: 100px;">
@@ -170,7 +170,7 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
         </div>
         <div id = "conrol-pannel" class="col-md-1" style="display: none;">
           <button type="button" id = "compute-button" class="btn btn-primary" onclick = "compute()" style="margin-left: 10px;z-index:99999; margin-top: 25px; width:80px;height: 165px;font-size:0.8rem;">Submit</button>
-          
+
         </div>
       </div>
       <!--ace.js editor for expert mode-->
@@ -190,7 +190,7 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
          </div>
       </div>
 
-    
+
       <div class="row tutorial-mode" tutafter=".model-definition" style="display: none;">
           <div class="col-md-12 tut-caption">
     Fig. 1: Model specification used to define and execute the statistical model.
@@ -208,7 +208,7 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
     Fig. 2: Data distributions for dependent (left) and independent variable (right).
        </div>
     </div>
-    
+
     <div class="row tutorial-mode" tutbefore=".model-output" style="display: none;">
        <div class="col-md-12">
            <p class="tut-p">Histograms are used to inspect the distributions of the data used in the model. For a continuous dependent variable (Fig. 2, left) we want to make sure that the data are roughly normally distributed (note, technically the residuals from the model should be roughly normally distributed, rather than the dependent variable. The distribution of the residuals can be seen in the model diagnostic plots below). In particular we want to check if there are large outliers or if the distribution is highly skewed. If large outliers are detected in the model, the user may wish to fit the model after censoring these (robust models are also a possibility, but not currently implemented in the DEAP multilevel module). If the data are highly skewed, a transformation (such as a log-transform) of the data can be tried, though even this may not be sufficient in some cases. The histogram on the right for the independent variable does not have to be Gaussian distributed, though extreme values (high leverage points) may have undue influence on the regression coefficients fitted by the model.</p>
@@ -220,7 +220,7 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
     Fig. 3: Scatter plot of the data with model curve and model confidence interval.
        </div>
     </div>
-    
+
     <div class="row tutorial-mode" tutafter=".model-output" style="display: none;">
        <div class="col-md-12">
     <p class="tut-p">The model output (Fig. 3) displays a scatter plot of the dependent and independent variables for each participant. The plot shows the trends in the data by displaying the calculated model as a line with 95% confidence intervals. The actual model function depends on the choice of covariates selected.</p>
@@ -343,7 +343,7 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script type="text/javascript" src="/js/HighChart414/js/highcharts-more.js"></script>
 <script type="text/javascript" src="/js/HighChart414/js/modules/exporting.js"></script>
 <script type="text/javascript" src="/js/jquery.mousewheel.min.js"></script>
-<script type="text/javascript" src="/js/jquery.tooltip.min.js"></script> 
+<script type="text/javascript" src="/js/jquery.tooltip.min.js"></script>
 <script src="/js/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="/js/pixastic/pixastic.core.js"></script>
 <script type="text/javascript" src="/js/pixastic/pixastic.jquery.js"></script>
@@ -386,4 +386,3 @@ jQuery(document).ready(function() {
 
 //hard coding, user cannot deselect the random effects.
 </script>
-
