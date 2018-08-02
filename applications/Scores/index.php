@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
     <link href="css/github.min.css" rel="stylesheet">
     <!-- <link href="css/highlight.min.css" rel="stylesheet"> -->
     <link href="css/school-book.css" rel="stylesheet">

@@ -355,7 +355,7 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script> -->
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
 <script src="./js/ontology_dialog.js" charset="utf-8"></script>
 <script src="./js/all-2.js?_=333"></script>
 <script src="./js/all4.js?_=333"></script>
