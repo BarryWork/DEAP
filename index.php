@@ -17,12 +17,12 @@
     <!-- ========== style sheet ========== -->
     <link rel="stylesheet" href="/css/master.css">
 
-<?php 
+<?php
 $status = session_status();
 if($status == PHP_SESSION_NONE){
        session_start();
 }
-//$_SESSION['project_name'] = "ABCD";
+$_SESSION['project_name'] = "ABCD";
 
 if (isset($_SESSION['project_name'])) {
     echo('<script type="text/javascript"> project_name = "ABCD";</script>'."\n");
@@ -64,7 +64,7 @@ echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; can_q
           <dd><a href="https://scicrunch.org/resolver/SCR_016158" style="color: black;">Data Exploration and Analysis Portal</a></dd>
         </dl>
       </header>
-      
+
       <div class="content">
         <div class="message">
           <div class="message__content">
