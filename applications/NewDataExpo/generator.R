@@ -19,12 +19,12 @@ censor = function(x, fraction=.005) {
     x
 }
 
-data = data[data$eventname == "baseline_year_1_arm_1",]
+#data = data[which(data$eventname == "baseline_year_1_arm_1"),]
 vlist = names(data)
 for(v in vlist){
     cat(v);
-    fvar = as.factor(data[[v]]);
-    fvar_length = length(names(fvar));
+    fvar = levels(as.factor(data[[v]]));
+    fvar_length = length(fvar);
     line = "";
     table = "";
     hs = c();
@@ -34,9 +34,9 @@ for(v in vlist){
         h = hist(data[[v]],plot=FALSE,breaks=10)
         hs = c(hs, list(list("transform"=list(), "histogram"=h)))
 
-        s = summary(data[[v]])
-        sm = c(sm, list(list("transform"=list(), "summary"=s)));
     }
+    s = summary(data[[v]])
+    sm = c(sm, list(list("transform"=list(), "summary"=s)));
 
     if (class(data[[v]]) == "numeric" & !all(data[[v]]==0,na.rm=TRUE)) {
         d = data[[v]]
@@ -81,9 +81,9 @@ for(v in vlist){
         } 
     }
 
-    if(class(data[[v]]) == "numeric" && fvar_length >10){
-        line = list(x = density(data[v]$x ,x = density(data[v]$y)))
-    }
+#    if (class(data[[v]]) == "numeric" && fvar_length >10) {
+#        line = list(x = density(data[v]$x ,x = density(data[v]$y)))
+#    }
 
     s = list(summary = sm, factors = summary(fvar), histograms = hs);
     write(toJSON(s),paste(sep = "", "/var/www/html/applications/NewDataExpo/variableInfo/",v,".json")) 
