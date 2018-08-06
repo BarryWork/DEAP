@@ -11,44 +11,29 @@ if (isset($_POST["ac"]) && $_POST["ac"]=="log") { /// do after login form is sub
     ////////////////////////
     // BLOCK ALL BUT ADMIN
     ////////////////////////
-//    if($_POST["username"] !== "admin" ) {
-        //$incorrect = 'The page is currently offline for general accounts to provide sufficient resources for a demonstration to the ABCD consortium. Please come back as soon as our presentation is finished.'; 
-//    } else {
-        
-        if ($USERS[$_POST["username"]]==$_POST["pw"]) { /// check if submitted username and password exist in $USERS array
-            // as a features users can login using their email address
-            // here we need to get the real user name and use that instead of the email address
-            if (strpos($_POST["username"], "@") !== false) {
-                // found email as user name, what is the real name?
-                $_SESSION["logged"]=getUserNameFromEmail($_POST["username"]);
-            } else {
-                $_SESSION["logged"]=$_POST["username"];
-            }
-            
+    if ($USERS[$_POST["username"]]==$_POST["pw"]) { /// check if submitted username and password exist in $USERS array
+        // as a features users can login using their email address
+        // here we need to get the real user name and use that instead of the email address
+        if (strpos($_POST["username"], "@") !== false) {
+            // found email as user name, what is the real name?
+            $_SESSION["logged"]=getUserNameFromEmail($_POST["username"]);
         } else {
-            audit( "login", "incorrect password for ".$_POST["username"] );
-            $incorrect = 'Incorrect username/password. Please, try again.';
-        };
-//    }
-    //////////////////////   
+            $_SESSION["logged"]=$_POST["username"];
+        }
+        
+    } else {
+        audit( "login", "incorrect password for ".$_POST["username"] );
+        $incorrect = 'Incorrect username/password. Please, try again.';
+    };
 };
-//if (isset($_SESSION["logged"])) {
-//    print_r(array_key_exists($_SESSION["logged"],$USERS));
-//}
 if (isset($_SESSION["logged"]) && array_key_exists($_SESSION["logged"],$USERS)) {
     $l = strlen('/login.php');
     if (isset($_POST["url"]) && $l > 0 && substr($_POST["url"],-$l) === '/login.php') {
         $u = $_POST["url"];
     } else {
-    //syslog(LOG_EMERG, "forward now because url is not set: ".$_POST['url']);
-        $u = "https://abcd-deap.ucsd.edu/index.php";
+        $u = "/index.php";
     }
-   //syslog(LOG_EMERG, "HI".$u);
     header("Location: ".$u); // if user is logged go to front page
-} else {
-    //echo ("session_start() returned: ".$ok. "\nSID: \"".session_id()."\"\n");
-    //echo ("did not find logged as session variable\n");
-    //var_dump($_SESSION);
 }
 ?>
 
