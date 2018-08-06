@@ -34,6 +34,8 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && rm /var/www/html/index.html \
     && git clone https://github.com/ABCD-STUDY/DEAP.git /var/www/html \
     && cd /var/www/html \
+    && cp /var/www/html/code/php/passwords.json_master /var/www/html/code/php/passwords.json \
+    && chown www-data:www-data /var/www/html/code/php/passwords.json \
     && cd /var/www/html/applications/Ontology/searchServer \
     && npm install . \
     && groupadd processing -g 1000 \
