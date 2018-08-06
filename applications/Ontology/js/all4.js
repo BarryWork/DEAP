@@ -132,7 +132,7 @@ jQuery(document).ready(function() {
 	    jQuery.getJSON("/applications/Ontology/searchTerm2.php?getStats=" + item, function(data) {
 		// add stats to #entries
 		var d = [];
-		if (typeof data['histograms'] !== 'undefined' && data['histograms'] !== "") {
+		if (typeof data['histograms'] !== 'undefined' && data['histograms'] !== "" && data['histograms'] !== null) {
 		    // pick the correct histogram
 		    histogram = undefined;
 		    for (var i = 0; i < data['histograms'].length; i++) {
