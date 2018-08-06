@@ -88,15 +88,13 @@
           </p>
           <p style="font-weight: 300;font-size: 14pt;line-height: 24px;">
             Select a filter from the drop-down menu. Adjust the filter program in the text field, press enter. 
-            Use the generated key in the "Search:" text field of the GAMM4 application.
+            Once you have selected the proper set save your search under a new name. Select that name as the subset during statistical analysis.
           </p>
-          <p>This is an experimental feature, please report any errors by email to hbartsch@ucsd.edu.</p>
-
           <p>
-            Here is a short description of the special functions available:
+            Here is a short description of the functions available:
             <dl>
                <dt>age=="120"</dt>
-       <dd>Filter measures such as "age" by using their name and a test for a specific value. You can either test for being the same (==), or test for numeric quantities such as "age<=130". More than one test can be applied at the same time by using brackets and the "and" operator. To restrict the age range to participants that are between 9 and 10 years old we can therefore use the filter: "(age>=(12*9)) and (age<(12*11))".</dd>       
+       <dd>Measures to filter by such as "age" are referenced by their name. You can either test for being the same (==), or test for numeric quantities such as "age<=130". More than one test can be applied at the same time by using brackets and the "and" operator. To restrict the age range to participants that are between 9 and 10 years old we can therefore use the filter: "(age>=(12*9)) and (age<(12*11))".</dd>       
                <dt>has(age)</dt>
                <dd>Returns true if age exists and is not empty or NA.</dd>
                <dt>quantile(age,0.75)</dt>
