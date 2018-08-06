@@ -180,18 +180,28 @@ jQuery(document).ready(function() {
 	    jQuery.getJSON("/applications/Ontology/searchTerm2.php?getStats=" + item, function(data) {
 		// add stats to #entries
 		var d = [];
-		if (typeof data['histograms'] !== 'undefined' && data['histograms'] !== "") {
-		    var temp;
-		    for(var vh in data['histograms']){
-			temp = data['histograms'][vh];
-	                if(temp.transform.length == 0) break;
+		if (typeof data['histograms'] !== 'undefined' && data['histograms'] !== "" && data['histograms'] !== null) {
+		    // pick the correct histogram
+		    histogram = undefined;
+		    for (var i = 0; i < data['histograms'].length; i++) {
+			if (data['histograms'][i]['transform'].length == 0) {
+			    histogram = data['histograms'][i];
+			    summary_obj = data['summary'][i]["summary"]; 	
+			    obj = Object.keys(data['summary'][i]["summary"]);
+			    break;
+			}
 		    }
-	            if(temp){
-		    for (var i = 0; i < temp['histogram']['counts'].length; i++) {
-			d.push({ 'frequency': temp['histogram']['counts'][i], 'x': temp['histogram']['mids'][i] });
-		    }
+		    if (histogram !== undefined && typeof histogram['histogram'] !== 'undefined') {
+			for (var i = 0; i < histogram['histogram']['counts'].length; i++) {
+			    d.push({ 'frequency': histogram['histogram']['counts'][i], 'x': histogram['histogram']['mids'][i] });
+			}
 		    }
 		}
+		else{
+		    summary_obj = data['summary'][0]["summary"];
+                    obj = Object.keys(data['summary'][0]["summary"]);
+		}
+
 		var sumstr = "<table><tbody style='font-size: 10pt; line-height: 1.1em;'>";
 		var obj = Object.keys(data['summary']);
 		for (var i = 0; i < obj.length; i++) {
