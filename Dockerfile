@@ -38,6 +38,8 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && chown www-data:www-data /var/www/html/code/php/passwords.json \
     && cd /var/www/html/applications/Ontology/searchServer \
     && npm install . \
+    && cd /var/www/html/applications/ModelBuilder/runner \
+    && npm install . \
     && groupadd processing -g 1000 \
     && useradd -ms /bin/bash processing -u 1000 -g 1000 -d /home/processing \
     && CRONTAB_DIR=/var/spool/cron/crontabs \
