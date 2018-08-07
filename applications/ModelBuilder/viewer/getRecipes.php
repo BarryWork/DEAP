@@ -32,7 +32,6 @@ if ($action == "save") {
     }
     
     // save the state
-    echo ("got save action with: \"".$name . "\" and values: " .json_encode($state));
     if ($name !== "" && $state !== "") {
         // create a dictionary that contains information about user, date, etc.
         $envelope = array();
