@@ -343,8 +343,6 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script type="text/javascript" src="/js/HighChart414/js/highcharts-more.js"></script>
 <script type="text/javascript" src="/js/HighChart414/js/modules/exporting.js"></script>
 <script type="text/javascript" src="/js/jquery.mousewheel.min.js"></script>
-<script type="text/javascript" src="/js/jquery.tooltip.min.js"></script>
-<script src="/js/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="/js/pixastic/pixastic.core.js"></script>
 <script type="text/javascript" src="/js/pixastic/pixastic.jquery.js"></script>
 <script type="text/javascript" src="/js/pixastic/actions/brightness.js"></script>
@@ -359,7 +357,6 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script src="./js/ontology_dialog.js" charset="utf-8"></script>
 <script src="./js/all-2.js?_=333"></script>
 <script src="./js/all4.js?_=333"></script>
-<script src="./js/ace.js"></script>
 <script src="./js/moment.js"></script>
 <script src="./js/JSZip.js"></script>
 <script src="./js/FileSaver.js"></script>
@@ -371,10 +368,13 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script src="./js/hist_cata.js" charset="utf-8"></script>
 <script src="./js/coeffient.js" charset="utf-8"></script>
 <script src="../Ontology/js/highlight-js.js" charset="utf-8"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js" integrity="sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h" crossorigin="anonymous"></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>
+
+<script src="./js/ace.js"></script>
 <script>
 
 jQuery(document).ready(function() {
