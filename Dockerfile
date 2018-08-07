@@ -40,6 +40,8 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && npm install . \
     && cd /var/www/html/applications/ModelBuilder/runner \
     && npm install . \
+    && cd /var/www/html/applications/ModelBuilder/viewer/ \
+    && chown -R www-data:www-data recipes \
     && groupadd processing -g 1000 \
     && useradd -ms /bin/bash processing -u 1000 -g 1000 -d /home/processing \
     && CRONTAB_DIR=/var/spool/cron/crontabs \
@@ -72,6 +74,7 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo 'cron' >> $ND_ENTRYPOINT \
          && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
          && echo "ServerName localhost" >> /etc/apache2/apache2.conf; \
+         && Rscript /var/www/html/applications/NewDataExpo/generator.R; \
        fi \
     && chmod -R 777 /deap-startup.sh
 
@@ -90,8 +93,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     && Rscript -e 'install.packages("MuMIn", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("R.matlab", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("Rserve", repos="https://cran.rstudio.com")' \
-    && Rscript -e 'install.packages("tableone", repos="https://cran.rstudio.com")' \
-    && Rscript /var/www/html/applications/NewDataExpo/generator.R
+    && Rscript -e 'install.packages("tableone", repos="https://cran.rstudio.com")'
 
 EXPOSE 80
 ENTRYPOINT ["/deap-startup.sh"]
