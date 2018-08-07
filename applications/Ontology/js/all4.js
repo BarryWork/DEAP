@@ -132,6 +132,7 @@ jQuery(document).ready(function() {
 	    jQuery.getJSON("/applications/Ontology/searchTerm2.php?getStats=" + item, function(data) {
 		// add stats to #entries
 		var d = [];
+                var obj = [];
 		if (typeof data['histograms'] !== 'undefined' && data['histograms'] !== "" && data['histograms'] !== null) {
 		    // pick the correct histogram
 		    histogram = undefined;
@@ -148,6 +149,10 @@ jQuery(document).ready(function() {
 			    d.push({ 'frequency': histogram['histogram']['counts'][i], 'x': histogram['histogram']['mids'][i] });
 			}
 		    }
+		}
+		else{
+		    summary_obj = data['summary'][0]["summary"];
+                    obj = Object.keys(data['summary'][0]["summary"]);
 		}
 		var sumstr = "<table><tbody style='font-size: 10pt; line-height: 1.1em;'>";
 		for (var i = 0; i < obj.length; i++) {
