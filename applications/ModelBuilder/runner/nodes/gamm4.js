@@ -58,6 +58,7 @@ GAMM4.prototype.work = function (inputs, outputs, state) {
 
     var code = (Math.random()*10000).toFixed(0);
     //R = R + "setwd(tempdir())\n";
+    R = R + "username = '" +  this._path.split("usercache\/")[1] + "' \n";
     R = R + "output_file = file(\""+this._path + "/" + code + "_output.txt"+"\", open = \"wt\")\n";
     R = R + "sink(output_file, type=\"message\")\n";
     R = R + "inputs = list(" + keys.map(function(x) {
@@ -124,6 +125,7 @@ GAMM4.prototype.work = function (inputs, outputs, state) {
 
     // export scatter and statistics
     R = R + "\n# export scatter now\n";
+    //R = R + "user_name = \"" + this._path.split("usercache\/")[1].split("_")[0]+"\"\n";
     var fname_scatter = this._path + "/" + code + "_scatter.json";
     R = R + "if (exists(\"scatter\")) write(toJSON(scatter),file=\"" + fname_scatter + "\")\n";
     var fname_lineplot = this._path + "/" + code + "_lineplot.json";
