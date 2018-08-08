@@ -72,7 +72,7 @@ echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; can_q
               <span class="heading__en">DEAP SCIENCE</span>
             </h1>
             <p class="lead message__text">
-              <span style="font-size: 27px">Data Exploration and Analysis Portal</span>
+              <span style="font-size: 29px; margin-left: -2px;">Data Exploration and Analysis Portal</span>
               <br> <span style="font-size: 11pt; letter-spacing: 0;">A service provided by the Data Analysis and Informatics Center of the ABCD study</span>
               <br> </p>
             <div class="message__image" style="transform: translateY(0px);"></div>
