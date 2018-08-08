@@ -11,7 +11,6 @@
     <!-- <link href="/css/bootstrap.css" rel="stylesheet"> -->
     <!-- <link href="/css/bootstrap-responsive.css" rel="stylesheet"> -->
     <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
    <!-- <link rel="stylesheet" type="text/css" href="/js/highslide/highslide.css" /> -->
 
@@ -28,6 +27,7 @@
     <link rel="shortcut icon" href="/img/favicon.png">
 
     <link href="css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/all.css">
   </head>
   <body>
 
@@ -93,15 +93,15 @@
           <p>
             Here is a short description of the functions available:
             <dl>
-               <dt>age=="120"</dt>
-       <dd>Measures to filter by such as "age" are referenced by their name. You can either test for being the same (==), or test for numeric quantities such as "age<=130". More than one test can be applied at the same time by using brackets and the "and" operator. To restrict the age range to participants that are between 9 and 10 years old we can therefore use the filter: "(age>=(12*9)) and (age<(12*11))".</dd>       
-               <dt>has(age)</dt>
+               <dt style="margin-top: 10px;">age=="120"</dt>
+       <dd>Measures to filter by such as "age" are referenced by their name. You can either test for being the same (==), or test for numeric quantities such as <code>age<="130"</code>. More than one test can be applied at the same time by using brackets and the "and" operator. To restrict the age range to participants that are between 9 and 10 years old we can therefore use the filter: "(age>=(12*9)) and (age<(12*11))".</dd>       
+               <dt style="margin-top: 10px;">has(age)</dt>
                <dd>Returns true if age exists and is not empty or NA.</dd>
-               <dt>quantile(age,0.75)</dt>
+               <dt style="margin-top: 10px;">quantile(age,0.75)</dt>
                <dd>Returns a threshold value for a given variable. This can be used as in: age > quantile(age,0.75).</dd>
                <!--<dt>visit()</dt>
                <dd>Returns for each visit a number that indicates the order as defined by "StudyDate". For the oldest visit of a subject this value will be 0.</dd>
-               <dt>visit( measure )</dt>
+               <dt style="margin-top: 10px;">visit( measure )</dt>
                <dd>Returns the sorting order given the measure. For example visit ("StudyDate") will return 
                the sorting order based on the StudyDate column (same as calling visit()). If a variable other
                than "StudyDate" is defined the sorting will be done numerically or alphabetically.</dd> -->
