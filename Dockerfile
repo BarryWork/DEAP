@@ -73,7 +73,7 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo 'alias deap="cd /var/www/html/" >> /root/.bashrc;' >> $ND_ENTRYPOINT \
          && echo 'cron' >> $ND_ENTRYPOINT \
          && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
-         && echo "ServerName localhost" >> /etc/apache2/apache2.conf; \
+         && echo "ServerName localhost" >> /etc/apache2/apache2.conf \
          && Rscript /var/www/html/applications/NewDataExpo/generator.R; \
        fi \
     && chmod -R 777 /deap-startup.sh
