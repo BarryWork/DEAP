@@ -317,6 +317,7 @@ ol {
     position: relative;
     margin: 0 70px 16px -5;
     color: #2f2f2f;
+    font-weight: 100;
 }
 .heading__ja {
     white-space: nowrap;
@@ -328,7 +329,7 @@ ol {
     color: #5f5f5f;
 }
 .lead {
-    margin-top: -30px;
+    margin-top: -40px;
     font-size: 14px;
     letter-spacing: 0.21em;
     line-height: 1.4;
