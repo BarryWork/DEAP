@@ -72,6 +72,7 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo 'chmod a+w /var/www/html/applications/Ontology/searchServer/log.log' >> $ND_ENTRYPOINT \
          && echo 'alias deap="cd /var/www/html/" >> /root/.bashrc;' >> $ND_ENTRYPOINT \
          && echo 'cron' >> $ND_ENTRYPOINT \
+         && echo '/usr/bin/bash /var/www/html/code/setup.sh' >> $ND_ENTRYPOINT \
          && echo 'if [ -d "/var/www/html/applications/NewDataExpo/variableInfo" ]; then /usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R &; fi' >> $ND_ENTRYPOINT \
          && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
          && echo "ServerName localhost" >> /etc/apache2/apache2.conf; \
