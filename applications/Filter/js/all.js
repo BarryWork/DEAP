@@ -597,18 +597,24 @@ function addOneMeasure( meas ) {
         var dataFromStore = localStorage.getItem(meas);
         if (dataFromStore) {
             allMeasures[meas] = JSON.parse(dataFromStore);
+            if (header.indexOf(meas) === -1)
+                header.push(meas);
 
             // make sure we have src_subject_id and eventname as well
             if (Object.keys(allMeasures).indexOf('src_subject_id') == -1 || allMeasures['src_subject_id'].length == 0) {
                 var dataFromStore = localStorage.getItem('src_subject_id');
                 if (dataFromStore) {
                     allMeasures['src_subject_id'] = JSON.parse(dataFromStore);
+                    if (header.indexOf('src_subject_id') === -1)
+                        header.push('src_subject_id');
                 }            
             }
             if (Object.keys(allMeasures).indexOf('eventname') == -1 || allMeasures['eventname'].length == 0) {
                 var dataFromStore = localStorage.getItem('eventname');
                 if (dataFromStore) {
                     allMeasures['eventname'] = JSON.parse(dataFromStore);
+                    if (header.indexOf('eventname') === -1)
+                        header.push('eventname');
                 }
             }
             return Promise.resolve();
