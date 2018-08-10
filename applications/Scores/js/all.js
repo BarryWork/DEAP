@@ -260,7 +260,7 @@ function announce(vname,label,data){
     }
 
     //Missing the scores sit self;
-    $.post("php/run.php",temp).done(function(data) {
+    $.post("getScores.php",temp).done(function(data) {
         console.log(data)
     });
 
@@ -570,7 +570,7 @@ function insert_recipe_block(input, top) {
 
         temp_data = {};
         //Missing the scores sit self;
-        $.post("php/run.php",temp).done(function(data) {
+        $.post("getScores.php",temp).done(function(data) {
             console.log(data)
         });
     });
@@ -582,7 +582,7 @@ function insert_recipe_block(input, top) {
         temp["action"] = "delete";
 
         //Missing the scores sit self;
-        $.post("php/run.php",temp).done(function(data){
+        $.post("getScores.php",temp).done(function(data){
             console.log(data);
             div.remove();
         });
@@ -716,7 +716,7 @@ function insert_recipe_block(input, top) {
 
 var simplemde;
 jQuery(document).ready(function() {
-    $.post("php/run.php", {action : "load"}).done(function(data){
+    $.post("getScores.php", {action : "load"}).done(function(data){
         recipes = JSON.parse(data);
         console.log(recipes);
         for (recipe in recipes) {
