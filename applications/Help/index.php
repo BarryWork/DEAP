@@ -92,6 +92,15 @@
 
         <div class = "card">
           <div class="card-header">
+            Plan
+          </div>
+          <div class="card-body">
+            <p>We support an hypothesis driven workflow on DEAP by providing material for registering your hypothesis using a sampling plan, design plan, analysis plan and analysis scripts. Please see the information in the <i>Plan</i> application.</p>
+          </div>
+        </div>
+
+        <div class = "card">
+          <div class="card-header">
             Explore
           </div>
           <div class="card-body">
@@ -126,15 +135,6 @@
           </div>
           <div class="card-body">
             <p>If you want to add measures to DEAP you can do this using the <i>Extend</i> application. It is not able to add your participants, but you can change and combine existing measures and use them during the analysis.</p>
-          </div>
-        </div>
-
-        <div class = "card">
-          <div class="card-header">
-            Plan
-          </div>
-          <div class="card-body">
-            <p>We support an hypothesis driven workflow on DEAP by providing material for registering your hypothesis using a sampling plan, design plan, analysis plan and analysis scripts. Please see the information in the <i>Plan</i> application.</p>
           </div>
         </div>
 
