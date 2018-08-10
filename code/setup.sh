@@ -31,6 +31,12 @@ if [ -z "${dataRds}" ] && [ ! -f "${dataRds}" ]; then
     mkdir -p "${rootpath}/data/${project}/ModelBuilder/viewer/recipes/"
     cp "${rootpath}/applications/ModelBuilder/viewer/recipes/GAMM4-FZ-CR.*" "${rootpath}/data/${project}/ModelBuilder/viewer/recipes/"
 
+    mkdir -p "${rootpath}/data/${project}/Scores/data/admin"
+    cp -R "${rootpath}/applications/Scores/data/admin/*.json" "${rootpath}/data/${project}/Scores/data/admin"    
+
+    mkdir -p "${rootpath}/data/${project}/Filter/data/"
+    cp -R "${rootpath}/applications/Filter/data/admin.json" "${rootpath}/data/${project}/Filter/data"    
+    
     # the owner of all of these should be the web-user (fixed user across all docker instances)
     chown -R www-data:www-data "${rootpath}/data/${project}/"
 elif [ -f "${rootpath}/data/${project}/data_uncorrected/nda17.Rds" ]; then

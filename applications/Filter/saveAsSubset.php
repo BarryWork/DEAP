@@ -44,7 +44,7 @@
    echo("did not get which one (yes or no)");
    return;
  }
- $fn = "data/filterSets_".$project_name."_".$key.".json";
+ $fn = "/var/www/html/data/ABCD/Filter/data/filterSets_".$project_name."_".$key.".json";
  $data = array();
  if (is_readable($fn)) {
    $data = json_decode(file_get_contents($fn), TRUE);

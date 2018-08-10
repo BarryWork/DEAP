@@ -4,6 +4,8 @@ session_start();
 include("/var/www/html/code/php/AC.php");
 $user_name = check_logged();
 
+$storelocation = "/var/www/html/data/ABCD/Scores/data/";
+
 $action = "start";
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -27,7 +29,7 @@ if ($action == "save" && isset($_POST['content']) && isset($_POST['name'])) {
     if (isset($_POST['description'])) {
         $temp['description'] = $_POST['description'];
     }	    
-    if (file_exists("/var/www/html/applications/Scores/data/".$user_name) != 1) {
+    if (file_exists($storelocation.$user_name) != 1) {
         mkdir("../data/".$user_name, 0777);
     }
     //May have problems for overwriting
@@ -39,7 +41,7 @@ if ($action == "save" && isset($_POST['content']) && isset($_POST['name'])) {
     shell_exec("Rscript /var/www/html/applications/Scores/R/transfer.R ". "../data/".$user_name."/".$_POST['name'].".raw");
     echo(json_encode($temp)); 
 } else if ($action == "load") {
-    $dirname = "/var/www/html/applications/Scores/data/".$user_name."/*.json";
+    $dirname = $storelocation.$user_name."/*.json";
 
     #if($user_name == "admin")
     #    $dirname = "/var/www/html/applications/Scores/data/*/*.json";
@@ -80,7 +82,7 @@ if ($action == "save" && isset($_POST['content']) && isset($_POST['name'])) {
     echo json_encode($rt);
 } else if ($action == "delete" && isset($_POST['name'])) {
     // syslog(LOG_EMERG,$action);
-    $dirname = "/var/www/html/applications/Scores/data/".$user_name."/".$_POST['name'].".*";
+    $dirname = $storelocation.$user_name."/".$_POST['name'].".*";
     $files = glob($dirname);
     //syslog(LOG_EMERG,$files);
     foreach($files as $file) {

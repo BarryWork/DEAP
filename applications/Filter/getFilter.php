@@ -9,7 +9,7 @@ if ($user_name == FALSE) {
   return;
 }
 
-$fn = "data/".$user_name.".json";
+$fn = "/var/www/html/data/ABCD/Filter/data/".$user_name.".json";
 #if (!is_readable($fn)) {
 #  echo "could not find ".$fn;
 #  return;
