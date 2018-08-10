@@ -87,7 +87,7 @@ echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; can_q
         </div>
       </div>
       <ol class="pagination">
-        <li><a href="/applications/Help/" title="Help with using DEAP">Getting Started...</a></li>
+        <li><a href="/applications/Help/" title="Help with using DEAP">Getting Started</a></li>
         <li><a href="/applications/Pre-Registration/" title="Pre-registration workflow">00 Plan</a></li>
         <li><a href="/applications/Ontology/hierarchy.php?entry=display" title="Ontology">01 Explore</a></li>
         <li><a href="/applications/Filter/index.php" title="Filter participants">02 Limit</a></li>
