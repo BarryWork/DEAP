@@ -31,10 +31,9 @@ A script is provided to launch the container, [run](https://github.com/ABCD-STUD
 
 Example
 ```
-mkdir -p assets/data_uncorrected
-mkdir -p assets/modelBuilder_data
-mkdir -p assets/recipes
-./run deap deap master 80 `pwd`/assets/data_uncorrected `pwd`/assets/data_uncorrected `pwd`/assets/modelBuilder_data `pwd`/assets/recipes `pwd`/assets/data_uncorrected
+mkdir -p assets
+cp <data nda17.Rds> assets/
+./run deap deap master 80 `pwd`/assets
 ```
 
 (RRID: SCR_016158)

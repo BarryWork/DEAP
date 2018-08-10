@@ -550,6 +550,35 @@ function parse() {
     });
 }
 
+var disableLocalStorage = false;
+
+// can we store data locally?
+function storageAvailable(type) {
+    if (disableLocalStorage)
+        return false;
+
+    try {
+        var storage = window[type],
+            x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    } catch(e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            storage.length !== 0;
+    }
+}
+
 // some variables are not measures (like "M"), only try to pull those once and remember them to be bad
 var noMeasureList = ["M", "F"];
 
@@ -563,6 +592,35 @@ function addOneMeasure( meas ) {
         return null; // nothing can be done, its a no-measure
     }
     
+    // maybe this measure can be copied from the localStorage? In that case we don't have to transfer it to the client a second time
+    if (storageAvailable('localStorage')) {
+        var dataFromStore = localStorage.getItem(meas);
+        if (dataFromStore) {
+            allMeasures[meas] = JSON.parse(dataFromStore);
+            if (header.indexOf(meas) === -1)
+                header.push(meas);
+
+            // make sure we have src_subject_id and eventname as well
+            if (Object.keys(allMeasures).indexOf('src_subject_id') == -1 || allMeasures['src_subject_id'].length == 0) {
+                var dataFromStore = localStorage.getItem('src_subject_id');
+                if (dataFromStore) {
+                    allMeasures['src_subject_id'] = JSON.parse(dataFromStore);
+                    if (header.indexOf('src_subject_id') === -1)
+                        header.push('src_subject_id');
+                }            
+            }
+            if (Object.keys(allMeasures).indexOf('eventname') == -1 || allMeasures['eventname'].length == 0) {
+                var dataFromStore = localStorage.getItem('eventname');
+                if (dataFromStore) {
+                    allMeasures['eventname'] = JSON.parse(dataFromStore);
+                    if (header.indexOf('eventname') === -1)
+                        header.push('eventname');
+                }
+            }
+            return Promise.resolve();
+        }
+    }
+
     // ask the system to return this measure and add it to allMeasures (if it does not exist already)
     return jQuery.getJSON('runR.php', { 'value': meas }, function(data) {
         // got the values, now add to allMeasures (merge with existing)
@@ -602,6 +660,14 @@ function addOneMeasure( meas ) {
                     allMeasures[k[j]] = None;
                 }
             }
+        }
+        // store this column in the localStorage
+        if (storageAvailable('localStorage')) {
+            if (typeof allMeasures['src_subject_id'] !== 'undefined')
+                localStorage.setItem('src_subject_id', JSON.stringify(allMeasures['src_subject_id']));
+            if (typeof allMeasures['eventname'] !== 'undefined')
+                localStorage.setItem('eventname', JSON.stringify(allMeasures['eventname']));
+            localStorage.setItem(meas, JSON.stringify(allMeasures[meas]));
         }
     });
 }

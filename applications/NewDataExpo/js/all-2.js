@@ -3054,8 +3054,19 @@ var timeout_check = true
 var random = ""
 var time_start = 0
 
+// prevent compute if DEAP is is restricted mode
+function computeWithCheck() {
+    jQuery.getJSON('/applications/Pre-Registration/modeChange.php', { 'action': 'read' }, function(data) {
+        if (data['mode'] == 'restricted') {
+            alert('Warning: you are trying to run this analysis in restricted mode (see Plan). This analysis will only be executed if you switch to the unrestricted mode.');
+        } else {
+            compute();
+        }
+    });
+}
+
 function compute() {
-    // a random number designed to be  unique for the model.
+    // a random number designed to be unique for the model.
     time_start = new Date().getTime()
     usercovArray()
     $(".model-definition").addClass("disabledbutton")

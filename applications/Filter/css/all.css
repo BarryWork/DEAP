@@ -192,3 +192,11 @@ body {
 input.inputmeasures {
     padding-top: 10px;
 }
+.btn:hover, .btn:focus {
+    color: #FFF;
+    text-decoration: none;
+}
+.btn {
+    color: #BBB;
+    text-decoration: none;
+}
