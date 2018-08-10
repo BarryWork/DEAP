@@ -364,8 +364,6 @@ function update(data, compute_block_id) {
     var vname          = compute_block_id;
     var table_location = jQuery(document.getElementById(vname+'-table'));
     var hist_location  = jQuery(document.getElementById(vname+'-hist'));
-    var output_vlist   = [];
-
 
     if (vname !== "" && vname) {
         var temp_json = {};
