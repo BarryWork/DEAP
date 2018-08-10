@@ -4,6 +4,8 @@
 
 Access ABCD study data with the guide of domain experts that created this resource. 
 
+![Web Interface](/images/frontpage.jpg "Web Interface")
+
 ## Getting Started
 
 ### Prerequisites
