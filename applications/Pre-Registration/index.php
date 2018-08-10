@@ -6,43 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    
     <!-- Le styles -->
-            <link href="css/bootstrap.min.css" rel="stylesheet">
-            <style>
-                      body {
-                          //padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-                           }
-                       #editor { 
-                              position: absolute;
-                              top: 0;
-                              right: 0;
-                              bottom: 0;
-                              left: 0;
-                       }
-                       .editor-wrapper {
-                              position: relative;
-                              height:350px;
-                              margin-top:10px;
-                       }
-                       .row-fluid{
-
-                              margin-top:10px;
-                              margin-left:5px;
-                              margin-right:5px;
-
-                      }
-              button.btn.active {
-                 background-color: lightgreen;
-              }
-              .list-unstyled {
-                 padding-left: 0;
-                 margin-left:0;
-                 list-style: none;
-              }
-                      label {
-                      line-height: 1.1em;
-                      }
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-toggle.min.css" rel="stylesheet">
+    <style>
+    body {
+    
+}
+#editor { 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.editor-wrapper {
+    position: relative;
+    height:350px;
+    margin-top:10px;
+}
+.row-fluid {    
+    margin-top:10px;
+    margin-left:5px;
+    margin-right:5px;
+    
+}
+button.btn.active {
+    background-color: lightgreen;
+}
+.list-unstyled {
+    padding-left: 0;
+    margin-left:0;
+    list-style: none;
+}
+label {
+    line-height: 1.1em;
+}
+.mode-button-area {
+    margin-top: 10px;
+}
+.mode-area {
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    background-color: #EEE;
+}
+.mode-title {
+    font-size: 36pt;
+}
             </style>
            <!--  <link href="/css/bootstrap-responsive.css" rel="stylesheet"> -->
             <link href="css/fontawesome-all.min.css" rel="stylesheet">                          
@@ -62,7 +73,6 @@
             <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/apple-touch-icon-72-precomposed.png">
             <link rel="apple-touch-icon-precomposed" href="/img/apple-touch-icon-57-precomposed.png">
             <link rel="shortcut icon" href="/img/favicon.png">
-            <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
             <link rel="stylesheet" href="css/style.css">
 
 <?php
@@ -127,12 +137,23 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
       </div>
       <div class="row col-md-12 tut-p">
 	<center>
-	  <div class="btn-group btn-group-toggle" data-toggle="buttons" id="mode-change">
+
+      <div class="mode-area">
+          <div class="mode-button-area">
+            <label>
+               <button id="toggle-mode" class="btn-primary btn">Switch Mode</button>
+            </label>
+          </div>
+          <div class="mode-title"></div>
+          <div class="mode-body"></div>
+      </div>
+    
+	 <!--  <div class="btn-group btn-group-toggle" data-toggle="buttons" id="mode-change">
 	    <label class="btn btn-primary active mode-buttons">
 	      <input type="radio" name="options" id="option1" autocomplete="off" checked>Restricted Mode I</br>Save for Pre-Registration</label>
 	    <label class="btn btn-primary mode-buttons">
 	      <input type="radio" name="options" id="option2" autocomplete="off">Unrestricted Mode II</br>Run hypothesis tests</label>
-	  </div>
+	  </div> -->
 	</center>
 
 
@@ -185,7 +206,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
 
 
   <h1>Analysis Scripts</h1>
-  <p>We strongly recommend making analysis scripts publicly available along with any published results. DEAP allows for downloading and sharing of R scripts used in analyses. Scripts can be included as Supplementary Materials in published results. We also recommend uploading scripts to ABCD's public source code repository (<a href="https://github.com/ABCD-STUDY/">https://github.com/ABCD-STUDY/</a>).</p>
+                                                                                                                                                                        <p>We strongly recommend making analysis scripts publicly available along with any published results. DEAP allows for downloading and sharing of R scripts used in analyses. Scripts can be included as Supplementary Materials in published results. We also recommend uploading scripts to a public source code repository such as ABCD&apos;s <a href="https://github.com/ABCD-STUDY/">https://github.com/ABCD-STUDY/</a>.</p>
 
   <h1>Hypothesis Registration</h1>
 
@@ -327,13 +348,46 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script>
+<script src="js/bootstrap-toggle.min.js"></script>
+<script type="application/javascript">
+    function updateModeInterface() {                                              
+        if (mode == "restricted") {
+            jQuery('.mode-title').text(restrictedModeTitle);
+            jQuery('.mode-body').html(restrictedModeBody);
+        } else {
+            jQuery('.mode-title').text(unrestrictedModeTitle);                
+            jQuery('.mode-body').html(unrestrictedModeBody);                
+        }
+    }
+  
+    var mode = "restricted";                                              
+                                             
+    var restrictedModeTitle = "Restricted Mode";
+    var unrestrictedModeTitle = "Unrestricted Mode";
+
+    var restrictedModeBody = "This mode help you prevents premature hypothesis tests in the <i>Analysis</i> application by disabling the submit button calculating the results. Hypothesis can still be saved and loaded.";
+    var unrestrictedModeBody = "You have enabled all features of the Data Exploration and Analysis Portal.";
+                                                                                          
     jQuery(document).ready(function() {
 	// read the current mode if it exists and set the initial value
-	
-	jQuery('#mode-change :input').change(function() {
-	    // store the mode change globally for the user and the project
-	    
-	});
+        jQuery.getJSON('modeChange.php', { 'action': 'read' }, function(data) {
+            mode = data['mode'];
+            // refresh the interface
+            updateModeInterface();
+        });        
+        
+        jQuery('#toggle-mode').on('click',function() {
+            // store the mode change globally for the user and the project
+            if (mode == "restricted") {
+                mode = "unrestricted";
+            } else {
+                mode = "restricted";
+            }
+            updateModeInterface();
+            jQuery.getJSON('modeChange.php', { 'action': 'save', 'mode': mode }, function(data) {
+                console.log(data);
+            });
+            
+        });
     });
 </script>
