@@ -318,12 +318,13 @@ jQuery(document).ready(function() {
 		    }
 		}
 		var sumstr = "<table><tbody style='font-size: 10pt; line-height: 1.1em;'>";
-		var obj = Object.keys(data['summary']);
+                var ds = data['summary'].filter(function(a) { if(a['transform'].length == 0) return a; });
+		var obj = Object.keys(ds[0]['summary']);
 		for (var i = 0; i < obj.length; i++) {
 		    // sanitize the text (remove html and ##)
 		    var str = obj[i]; //jQuery(obj[i]).text();
 		    str = str.replace("##en##","").replace("##/en##", "&nbsp;").replace("##es##","").replace("##/es##","");
-		    sumstr = sumstr + '<tr><td style="text-align: right;">' + (obj[i]==""?"''":str) +'</td><td style="text-align: left; padding-left:5px;">' + data['summary'][obj[i]].toLocaleString() + "</td></tr>";
+		    sumstr = sumstr + '<tr><td style="text-align: right;">' + (obj[i]==""?"''":str) +'</td><td style="text-align: left; padding-left:5px;">' + ds[0]['summary'][obj[i]].toLocaleString() + "</td></tr>";
 		}
 		sumstr = sumstr + "</tbody></table>";
 		
