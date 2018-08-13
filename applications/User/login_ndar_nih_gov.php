@@ -11,7 +11,7 @@ if (isset($_POST["ac"]) && $_POST["ac"]=="log") { /// do after login form is sub
     $pw = $_POST['pw'];
     $user = $_POST['username'];
     
-    $url = 'http://ec2-52-1-12-173.compute-1.amazonaws.com:32810/user/permissiongroup/Adolescent%20Brain%20Cognitive%20Development';
+    $url = 'https://deapauth.nimhda.org/user/permissiongroup/Adolescent%20Brain%20Cognitive%20Development';
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL,$url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
