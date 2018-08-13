@@ -20,12 +20,11 @@ if [ ! -d "${rootpath}/data/${project}" ]; then
     exit -1
 fi
 
-dataRds=`ls *.Rds | head -1`
+dataRds=`ls ${rootpath}/*.Rds | head -1`
 if [ -z "${dataRds}" ] && [ ! -f "${dataRds}" ]; then
     echo "Detected initial data Rds in project data directory, start setup..."
     mkdir -p "${rootpath}/data/${project}/data_uncorrected"
-    data=`ls ${rootpath}/*.Rds | head -1`
-    cp "${data}" "${rootpath}/data/${project}/data_uncorrected/"
+    cp "${dataRds}" "${rootpath}/data/${project}/data_uncorrected/"
     mkdir -p "${rootpath}/data/${project}/Ontology/searchServer/"
     cp "${rootpath}/applications/Ontology/teach.json" "${rootpath}/data/${project}/Ontology/"
     mkdir -p "${rootpath}/data/${project}/NewDataExpo/usercache/"
@@ -34,7 +33,7 @@ if [ -z "${dataRds}" ] && [ ! -f "${dataRds}" ]; then
     cp "${rootpath}/applications/ModelBuilder/viewer/recipes/GAMM4-FZ-CR.*" "${rootpath}/data/${project}/ModelBuilder/viewer/recipes/"
 
     mkdir -p "${rootpath}/data/${project}/Scores/data/admin"
-    cp -R "${rootpath}/applications/Scores/data/admin/*.json" "${rootpath}/data/${project}/Scores/data/admin"    
+    cp -R "${rootpath}/applications/Scores/data/admin/*.json" "${rootpath}/data/${project}/Scores/data/admin"
 
     mkdir -p "${rootpath}/data/${project}/Filter/data/"
     cp -R "${rootpath}/applications/Filter/data/admin.json" "${rootpath}/data/${project}/Filter/data"
