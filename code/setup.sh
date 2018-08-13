@@ -20,7 +20,7 @@ if [ ! -d "${rootpath}/data/${project}" ]; then
     exit -1
 fi
 
-dataRds=`ls ${rootpath}/*.Rds | head -1`
+dataRds=`ls ${rootpath}/data/*.Rds | head -1`
 if [ -z "${dataRds}" ] && [ ! -f "${dataRds}" ]; then
     echo "Detected initial data Rds in project data directory, start setup..."
     mkdir -p "${rootpath}/data/${project}/data_uncorrected"
