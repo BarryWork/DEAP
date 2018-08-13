@@ -95,7 +95,7 @@
             Plan
           </div>
           <div class="card-body">
-            <p>We support an hypothesis driven workflow on DEAP by providing material for registering your hypothesis using a sampling plan, design plan, analysis plan and analysis scripts. Please see the information in the <i>Plan</i> application.</p>
+            <p>We support a hypothesis driven workflow on DEAP by providing material for registering your hypothesis prior to the full analysis. This includes a sampling plan, design plan, analysis plan and analysis scripts. Please see our detailed information in the <i>Plan</i> application.</p>
           </div>
         </div>
 
@@ -134,7 +134,7 @@
             Extend
           </div>
           <div class="card-body">
-            <p>If you want to add measures to DEAP you can do this using the <i>Extend</i> application. It is not able to add your participants, but you can change and combine existing measures and use them during the analysis.</p>
+            <p>If you want to add measures to DEAP you can do this using the <i>Extend</i> application. It is not possible to add new participants, but you can change and combine existing measures and use them during the analysis.</p>
           </div>
         </div>
 
@@ -143,9 +143,22 @@
             How to cite DEAP
           </div>
           <div class="card-body">
-            <p>DEAP is a software provided by the Data Analysis and Informatics Center of ABCD located at UC San Diego under generous support by the National Institutes of Health and the Centers for Disease Control and Prevention under award number U24DA041123.</p>
-            <p>The DEAP project and its source code are available at <a href="https://scicrunch.org/resolver/SCR_016158">RRID: SCR_016158</a>.</p>
+            <p>DEAP is a software provided by the Data Analysis and Informatics Center of ABCD located at the UC San Diego with generous support by the National Institutes of Health and the Centers for Disease Control and Prevention under award number U24DA041123.</p>
+            <p>The DEAP project information and links to its source code are available under the resource identifier <a href="https://scicrunch.org/resolver/SCR_016158" title="resource identifier SCR_016158 link to scicrunch">RRID: SCR_016158</a>.</p>
             <p>The content is solely the responsibility of the authors and does not necessarily represent the official views of the National Data Archive or the National Institutes of Health.</p>
+          </div>
+        </div>
+        
+        <div class = "card">
+          <div class="card-header">
+            Housekeeping
+          </div>
+          <div class="card-body">
+            <p>DEAP uses a feature of your browser to cache ABCD data columns to speed up your analysis. You can delete this cache to get a fresh copy of the data to your browser.</br> 
+              <center>
+                <button class="btn btn-outline-primary btn-sm" title="Clear the local storage used to store measures between the different DEAP applications">Clear local storage</button>
+              </center>
+                                                                                                                                        </p>                                                                                                                          <p>DEAP server system status:<pre style="height: 150px; margin-top: -10px;"><code id="status-info"></code></pre></p>
           </div>
         </div>
         
@@ -158,5 +171,12 @@
   <script src="../../js/jquery-3.3.1.min.js"></script>
   <script src="../../js/bootstrap.min.js"></script>
   <script src="../../js/d3.v3.min.js"></script>
-
+  <script>
+    jQuery(document).ready(function() {
+        // add the status information
+        jQuery.getJSON('../Ontology/searchTerm2.php', { 'status': '1' }, function(data) {
+            jQuery('#status-info').text(JSON.stringify(data, null, ' '));
+        });
+    });
+  </script>
 </html>
