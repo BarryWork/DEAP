@@ -49,7 +49,11 @@ function populate_results(data) {
 
 function switchMode( name ) {
     mode = name; // set the global variable to remember what mode we are in
-    jQuery('#mod-name').text(name);
+    if (name == "Normal") {
+        jQuery('#mod-name').text("Compact Mode");
+    } else {
+        jQuery('#mod-name').text("Tutorial Mode");
+    }
     if (name == "Tutorial") {
         // move the tutorial-mode blocks to the correct location
         jQuery('.tutorial-mode').each(function(index, element) {

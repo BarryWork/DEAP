@@ -143,10 +143,10 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
                <a class="nav-link" href="/index.php">Home <span class="sr-only">(current)</span></a>
           </li>
 	  <li class="nav-item">
-               <a class="nav-link page-mode" href="/applications/Filter/index.php" target="_subsetting" title="Open the Subsetting application in another tab">Subsetting</a>
+               <a class="nav-link page-mode" href="/applications/Filter/index.php" target="_subsetting" title="Open the Subsetting application in another tab">Limit</a>
           </li>
           <li class="nav-item">
-               <a class="nav-link page-mode" href="#"> <span id="mod-name">Mode</span></a>
+               <a class="nav-link page-mode" href="#"> <span id="mod-name">Compact Mode</span></a>
           </li>
 
 <!--           <li class="nav-item dropdown">
