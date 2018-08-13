@@ -13,6 +13,8 @@ var async      = require('async');
 var synonyms   = require('synonyms');
 var stemmer    = require('stemmer');
 var stopword   = require('stopword');
+var os         = require('os');
+var moment     = require('moment');
 var addin_data = {};
 var addins     = require('path').dirname(require.main.filename) + "/../../data/ABCD/Ontology/teach.json";
 var local_data = {};
@@ -282,6 +284,28 @@ var server = http.createServer(function(req, res) {
 	    // The server is trying to send us an activity message
 	    var form = new formidable.IncomingForm();
 	    form.parse(req, function(err, fields, files) {
+                if (typeof fields['status'] !== 'undefined' && fields['status'] == "1") {
+                    var keys = Object.keys(instruments);
+                    var numItems = 0;
+                    for (var i = 0; i < keys.length; i++) {
+                        numItems = numItems + instruments[keys[i]].length;
+                    }
+                    const used = process.memoryUsage().heapUsed / 1024 / 1024;
+                    var result = {
+                        'instruments': instrument_names.length,
+                        'items': numItems,
+                        'load': os.loadavg(),
+                        'memory': Math.round(used * 100) / 100 + "MB",
+                        'cpus': os.cpus(),
+                        'totalmemory': os.totalmem(),
+                        'freememory': os.freemem(),
+                        'uptime': moment.duration(os.uptime(), 'seconds').humanize()
+                    };
+		    var aa = JSON.stringify(result);
+		    res.writeHead(200, [[ "Content-Type", "application/json"], ["Content-Length", Buffer.byteLength(aa) ]]);
+		    res.end(aa);
+                    return;
+                }                
 		if (typeof fields['search'] === 'undefined' || fields['search'] === null) {
 		    console.log("did not find fields['search']");
 		    return;
@@ -464,4 +488,3 @@ server.listen(8001).on('error', function(err) {
     process.exit(75); // EX_TEMPFAIL     75      /* temp failure; user is invited to retry */
 });
 var io = io.listen(server, { transports: ['websocket', 'flashsocket', 'xhr-polling'] });
-

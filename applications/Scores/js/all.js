@@ -534,7 +534,7 @@ function insert_recipe_block(input, top) {
 
     var div_operation = $("<div class = 'col-md-12'></div>").appendTo(div),
         del = $('<i style = "right:5px;top:5px;position:absolute;font-size:30px; margin:5px; color: white;" class="fas fa-times"></i>').appendTo(div),
-        maximize = $('<i class="far fa-window-maximize" style = "right:35px;top:5px;position:absolute;font-size:30px; margin:5px; color: white;"></i>').appendTo(div);
+        maximize = $('<i class="far fa-window-maximize" style = "right:45px;top:5px;position:absolute;font-size:30px; margin:5px; color: white;"></i>').appendTo(div);
     save = $('<button type="button" class="btn btn-primary save-button">Save</button>').appendTo(div_input),
         checkbox = $('<div class="checkbox pull-right" style="margin-top: 7px;"><label><input type="checkbox" class="private-public" value="private"' + ((input['permission']=="private")?"checked":"") + '> Save as private</label></div>').appendTo(div_input);       
 

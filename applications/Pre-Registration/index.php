@@ -50,6 +50,7 @@ label {
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
     background-color: #EEE;
+    margin-top: 20px;
 }
 .mode-title {
     font-size: 36pt;
@@ -121,7 +122,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
     <div class="container" style="margin-top: 40px;">
       <div class="row col-md-12 tut-p">
     In order to make hypothesis registration as easy as possible this platform supports the structured generation of hypothesis. This includes the definition of the hypothesis with variable selection and data transformations. Additionally, DEAP provides sample texts for the following sections that may be part of your hypothesis registration:
-    <ul>
+    <ul style="margin-top: 10px;">
       <li class="intext">Sampling Plan</li>
       <li class="intext">Design Plan</li>
       <li class="intext">Analysis Plan</li>
@@ -148,12 +149,6 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
           <div class="mode-body"></div>
       </div>
     
-	 <!--  <div class="btn-group btn-group-toggle" data-toggle="buttons" id="mode-change">
-	    <label class="btn btn-primary active mode-buttons">
-	      <input type="radio" name="options" id="option1" autocomplete="off" checked>Restricted Mode I</br>Save for Pre-Registration</label>
-	    <label class="btn btn-primary mode-buttons">
-	      <input type="radio" name="options" id="option2" autocomplete="off">Unrestricted Mode II</br>Run hypothesis tests</label>
-	  </div> -->
 	</center>
 
 

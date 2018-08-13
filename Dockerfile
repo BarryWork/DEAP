@@ -36,11 +36,13 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && cd /var/www/html \
     && cp /var/www/html/code/php/passwords.json_master /var/www/html/code/php/passwords.json \
     && chown www-data:www-data /var/www/html/code/php/passwords.json \
+    && cp /var/www/html/code/php/AC_ndar_nih_gov.php /var/www/html/code/php/AC.php \
+    && cp /var/www/html/applications/User/login_ndar_nih_gov.php /var/www/html/applications/User/login.php \
     && cd /var/www/html/applications/Ontology/searchServer \
     && npm install . \
     && cd /var/www/html/applications/ModelBuilder/runner \
     && npm install . \
-    && cd /var/www/html/applications/ModelBuilder/viewer/ \
+    && cd /var/www/html/applications/ModelBuilder/viewer \
     && chown -R www-data:www-data recipes \
     && groupadd processing -g 1000 \
     && useradd -ms /bin/bash processing -u 1000 -g 1000 -d /home/processing \
