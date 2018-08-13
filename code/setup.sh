@@ -44,7 +44,8 @@ elif [ -f "${rootpath}/data/${project}/data_uncorrected/nda17.Rds" ]; then
     echo "Setup found. Nothing needs to be done."
     exit
 else
-    echo "Error: Setup has not been done and no data file detected. DEAP project directory structure is not correctly setup."
+    echo "Error: Setup has not been done and no data file detected (${dataRds}). DEAP project directory structure is not correctly setup."
+    ls ${rootpath}/data/${project}/
     exit
 fi
 
