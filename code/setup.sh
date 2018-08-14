@@ -21,7 +21,7 @@ if [ ! -d "${rootpath}/data/${project}" ]; then
 fi
 
 dataRds=`ls ${rootpath}/data/${project}/*.Rds | head -1`
-if [ -z "${dataRds}" ] && [ ! -f "${dataRds}" ]; then
+if [ -z "${dataRds}" ] && [ -f "${dataRds}" ]; then
     echo "Detected initial data Rds in project data directory, start setup..."
     mkdir -p "${rootpath}/data/${project}/data_uncorrected"
     cp "${dataRds}" "${rootpath}/data/${project}/data_uncorrected/"
