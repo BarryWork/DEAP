@@ -65,8 +65,6 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo '  if [ "$1" == "start" ]; then' >> $ND_ENTRYPOINT \
          && echo '    echo "Start system services and apache...";' >> $ND_ENTRYPOINT \
          && echo '    mkdir -p /usr/local/;' >> $ND_ENTRYPOINT \
-         && echo '    echo "Copying existing Matlab (please be patient)...";' >> $ND_ENTRYPOINT \
-         && echo '    rsync -av --info=name0 --info=progress2 /matlab /usr/local/;' >> $ND_ENTRYPOINT \
          && echo '  else $*;' >> $ND_ENTRYPOINT \
          && echo '  fi' >> $ND_ENTRYPOINT \
          && echo 'fi' >> $ND_ENTRYPOINT \
@@ -74,8 +72,10 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo 'chmod a+w /var/www/html/applications/Ontology/searchServer/log.log' >> $ND_ENTRYPOINT \
          && echo 'alias deap="cd /var/www/html/" >> /root/.bashrc;' >> $ND_ENTRYPOINT \
          && echo 'cron' >> $ND_ENTRYPOINT \
-         && echo '/usr/bin/bash /var/www/html/code/setup.sh' >> $ND_ENTRYPOINT \
-         && echo 'if [ -d "/var/www/html/applications/NewDataExpo/variableInfo" ]; then /usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R &; fi' >> $ND_ENTRYPOINT \
+         && echo '/bin/bash /var/www/html/code/setup.sh;' >> $ND_ENTRYPOINT \
+         && echo 'if [ -d "/var/www/html/applications/NewDataExpo/variableInfo" ]; then' >> $ND_ENTRYPOINT \
+	 && echo '    /usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R &' >> $ND_ENTRYPOINT \
+	 && echo 'fi' >> $ND_ENTRYPOINT \
          && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
          && echo "ServerName localhost" >> /etc/apache2/apache2.conf; \
        fi \

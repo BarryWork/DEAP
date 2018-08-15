@@ -16,7 +16,7 @@ data_rds=$4
 # use different docker instance names for different ports
 USAGE="Usage: run <docker image> <docker instance name> <port> <data path>"
 
-if [[ $# -eq 8 ]]; then
+if [[ $# -eq 4 ]]; then
     docker run -d \
                --name ${container_name} \
                -p ${port}:80 \
