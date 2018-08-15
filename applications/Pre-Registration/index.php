@@ -131,10 +131,10 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
     We suggest to use the Open Science Foundation (<a href="https://osf.io">OSF</a>) framework to register hypothesis.
       </div>
       <div class="row col-md-12 tut-p">
-    The DEAP portal supports a two step approach for hypothesis pre-registration. In a restricted mode (I) users are able to explore the data and see the marginal data distributions across all data domains. This is sufficient to identify suitable data transformations and shows the effects of data transformation and censoring for each variable. It also allows users to specify a subset of the participants for the tested hypothesis. The users can specify the hypothesis for example in the generalized additive mixed model module by defining the dependent and independent variables and all covariates of non interest. In the restricted mode the actual hypothesis test cannot be performed as it would result in the display of scatter plots and the premature calculation of effect sizes and significance values. Users are able to save and bookmark their hypothesis together with the subsetting for later analysis.
+    The DEAP portal supports a two step approach for hypothesis pre-registration. In a restricted mode (I) users are able to explore the data and see the marginal data distributions across all data domains. This is sufficient to identify suitable data transformations and shows the effects of data transformation and censoring for each variable. It also allows users to specify a subset of the participants for the tested hypothesis. The users can specify the hypothesis for example in the generalized additive mixed model module by defining the dependent and independent variables and all covariates of non interest. In the restricted mode the actual hypothesis test cannot be performed as it would result in the display of scatter plots and the premature calculation of effect sizes and significance values. Users are able to save and bookmark their hypotheses together with the subsetting for later analysis.
       </div>
       <div class="row col-md-12 tut-p">
-    In the unrestricted mode (II) users have all the abilities of the restricted mode I as well as they are able to run their saved statistical analysis to test hypothesis.
+    In the unrestricted mode (II) users have all the abilities of the restricted mode I as well as they are able to run their saved statistical analysis to test hypotheses.
       </div>
       <div class="row col-md-12 tut-p">
 	<center>
@@ -221,7 +221,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
     <li>Description of essential elements (required)
         <ol>
             <li>Describe the hypotheses in terms of directional relationships between your measured variables.
-                                          <br>[<b>We hypothesize that dependent variable DV is negatively/positively related to independent variable IV after controlling for random effects of site and family nested within site, and for fixed effects of demographics (age, sex at birth, marital status of household, household income, highest household education, and race/ethnicity</b>]</li>
+                                          <br>[<b>We hypothesize that dependent variable DV is negatively/positively related to independent variable IV after controlling for random effects of site and family nested within site, and for fixed effects of demographics (age, sex at birth, marital status of household, household income, highest household education, and race/ethnicity)</b>]</li>
             <li>For interaction effects, describe the expected direction of the interactions.
                                           <br>[<b>We hypothesize that the effect of IV on DV is conditional on levels of IV2 after centering each of IV and IV2. Specifically, we expect….</b>]</li>
         </ol>
