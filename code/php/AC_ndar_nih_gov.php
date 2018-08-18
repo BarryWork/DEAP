@@ -58,5 +58,20 @@
      return $_SESSION["logged"];
   };
 
+  // list all users, secure function, returns nothing if user is not logged in or
+  // role is not admin
+  function list_permissions_for_user( $user_in ) {
+    global $_SESSION;
+
+    return array();
+  }
+
+  function check_role( $name ) {
+     return false;
+  }
+
+  function check_permission( $permission ) {
+    return true;
+  }
 
 ?>
