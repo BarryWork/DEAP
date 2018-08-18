@@ -18,6 +18,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
         cron \
         curl \
         ed \
+        vim \
         gfortran \
         git \
         libblas-dev \
