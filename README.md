@@ -6,8 +6,6 @@ Access ABCD study data with the guide of domain experts that created this resour
 
 ![Web Interface](/images/frontpage.jpg "Web Interface")
 
-## Getting Started
-
 ### Prerequisites
 Docker v17 is required to deploy this container.
 
@@ -29,7 +27,7 @@ docker build . -t deap
 
 A script is provided to launch the container, [run](https://github.com/ABCD-STUDY/DEAP/blob/master/run).  For usage instructions, run it with no arguments.
 
-Example
+Provide a directory that is outside of the docker container to store the volatile data (analysis scripts and new measures). At the first startup this directory should also contain a single Rds file which contains the data as processed by https://github.com/ABCD-STUDY/analysis-nda17.
 ```
 mkdir -p assets
 cp <data nda17.Rds> assets/
