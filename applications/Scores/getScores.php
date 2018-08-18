@@ -30,13 +30,13 @@ if ($action == "save" && isset($_POST['content']) && isset($_POST['name'])) {
         $temp['description'] = $_POST['description'];
     }	    
     if (file_exists($storelocation.$user_name) != 1) {
-        mkdir("../data/".$user_name, 0777);
+        mkdir("/var/www/html/data/ABCD/Scores/data/".$user_name, 0777);
     }
     //May have problems for overwriting
-    file_put_contents("../data/".$user_name."/".$_POST['name'].".json", json_encode($temp));
+    file_put_contents("/var/www/html/data/ABCD/Scores/data/".$user_name."/".$_POST['name'].".json", json_encode($temp));
     
     if (isset($_POST['data'])) {
-        file_put_contents("../data/".$user_name."/".$_POST['name'].".raw", $_POST['data']);   
+        file_put_contents("/var/www/html/data/ABCD/Scores/data/".$user_name."/".$_POST['name'].".raw", $_POST['data']);   
     }
     shell_exec("Rscript /var/www/html/applications/Scores/R/transfer.R ". "../data/".$user_name."/".$_POST['name'].".raw");
     echo(json_encode($temp)); 
@@ -60,10 +60,10 @@ if ($action == "save" && isset($_POST['content']) && isset($_POST['name'])) {
         $rt[] = $calculation;
     }
     // add public scores from other users
-    $users = glob("../data/*", GLOB_ONLYDIR);
+    $users = glob("/var/www/html/data/ABCD/Scores/data/*", GLOB_ONLYDIR);
     foreach($users as $userdir) {
         $user = basename($userdir);
-        $files = glob("../data/".$user."/*.json");
+        $files = glob("/var/www/html/data/ABCD/Scores/data/".$user."/*.json");
         foreach ($files as $file) {
             $calculation = json_decode(file_get_contents($file), true);
             if (isset($calculation['permission']) && $calculation["permission"] == "public") {

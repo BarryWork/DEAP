@@ -158,7 +158,7 @@
               <center>
                 <button class="btn btn-outline-primary btn-sm" title="Clear the local storage used to store measures between the different DEAP applications">Clear local storage</button>
               </center>
-                                                                                                                                        </p>                                                                                                                          <p>DEAP server system status:<pre style="height: 150px; margin-top: -10px;"><code id="status-info"></code></pre></p>
+                                                                                                                                        </p>                                                                                                                          <p>DEAP server system status:<pre style="height: 150px; margin-top: -10px; border: 1px solid #adb5bd;"><code id="status-info"></code></pre></p>
           </div>
         </div>
         
