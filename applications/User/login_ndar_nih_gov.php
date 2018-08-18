@@ -19,9 +19,10 @@ if (isset($_POST["ac"]) && $_POST["ac"]=="log") { /// do after login form is sub
     curl_setopt($ch, CURLOPT_USERPWD, "$user:$pw");
     $result = curl_exec($ch);
     curl_close($ch);
-    $res = json_decode($result);
+    $res = json_decode($result,true);
+
     // {"permissionGroupTitle":"Adolescent Brain Cognitive Development","hasPermission":true,"expirationDate":"2018-12-02","status":"Approved"}
-    if (isset($res['hasPermission']) && $res['hasPermission'] == true && $res['status'] == "Approved") {
+    if (isset($res['hasPermission']) && $res['hasPermission'] == "true" && $res['status'] == "Approved") {
         // ok, assume we have the permissions
         $_SESSION["logged"]=$user;        
     } else {
