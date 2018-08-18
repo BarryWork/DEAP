@@ -57,7 +57,7 @@
           </div>
           <div class="card-body">
             <p>Start to get familiar with the ABCD way of naming variables by using the Explore application. Use the hierarchical view to get an overview by domains and the search field for a free-text search. You will notice that the variable names usually start with the name of the instrument used to capture the values. Similar values can be found therefore by changing the end of the search term.</p>
-            <p>Next use the Analysis application and just press the "Submit" button. Click on "Normal" in the menu and read up on the generated graphs. Try to add your own variables as dependend or independent variables.</p>
+            <p>Next use the Analysis application and just press the "Submit" button. Click on "Normal" in the menu and read up on the generated graphs. Try to add your own variables as dependent or independent variables.</p>
             <p>Once you are familiar with this general workflow read up on the <i>Limit</i> and <i>Extend</i> applications to tailor your analysis.</p>
           </div>
         </div>
@@ -67,7 +67,7 @@
             About the Study
           </div>
           <div class="card-body">
-            <p>The Data Exploration and Analysis Portal (DEAP) provides advanced statistical analysis functions that are build to work with the Adolescent Brain Cognitive Development (ABCD) study - a long-term study of cognitive and brain development in children across the United States. From 2016-2018, children between the ages of 9-11 have been invited to join ABCD from 21 sites around the nation, with the intent to enroll and follow approximately 11,500 healthy children longitudinally for 10 years into young adulthood. </p>
+            <p>The Data Exploration and Analysis Portal (DEAP) provides advanced statistical analysis functions that are built to work with the Adolescent Brain Cognitive Development (ABCD) study - a long-term study of cognitive and brain development in children across the United States. From 2016-2018, children between the ages of 9-11 have been invited to join ABCD from 21 sites around the nation, with the intent to enroll and follow approximately 11,500 healthy children longitudinally for 10 years into young adulthood. </p>
           </div>
         </div>
         
@@ -86,7 +86,7 @@
             Overview
           </div>
           <div class="card-body">
-            <p>DEAP provides the means to find measures of interest from more than 40,000 shared observations available for each ABCD participant (see Explore). The user can select a sub-set of the participants for an hypothesis test using a multi-level regression model suitable for the ABCD study design (see Limit). Users are able to extend DEAP by their own measures (see Extend) and run novel multi-level statistical analysis directly from the DEAP interface (see Analyse).</p>
+            <p>DEAP provides the means to find measures of interest from more than 40,000 shared observations available for each ABCD participant (see Explore). The user can select a sub-set of the participants for a hypothesis test using a multi-level regression model suitable for the ABCD study design (see Limit). Users are able to extend DEAP by their own measures (see Extend) and run novel multi-level statistical analysis directly from the DEAP interface (see Analyse).</p>
           </div>
         </div>
 
@@ -104,7 +104,7 @@
             Explore
           </div>
           <div class="card-body">
-            <p>The <i>Explore</i> application provides an overview of the existing measures on DEAP. Two options for searching the data dictionaries of DEAP exist. Either a full-text search can be done given some keywords that can be in either the name or in the description of the measure. The second option is to use a graphical tree-view that lists the different domains. Click on a domain and sub-structures are displayed that end with a full list of the measure names.</p>
+            <p>The <i>Explore</i> application provides an overview of the existing measures on DEAP. Two options for searching the data dictionaries of DEAP exist. A full-text search can be done given some keywords that can be in either the name or in the description of the measure. The second option is to use a graphical tree-view that lists the different domains. Click on a domain and sub-structures are displayed that end with a full list of the measure names.</p>
           </div>
         </div>
 
@@ -113,7 +113,7 @@
             Analyze
           </div>
           <div class="card-body">
-            <p>The statistical analysis package used by DEAP is based on the R-package <a href="https://cran.r-project.org/web/packages/gamm4/"><i>gamm4</i></a> and implements a generalized additive mixel model that captures the degrees of freedom in a longitudinal multi-site study that includes a complex family structure. The user interface of the analysis application provides meaningful presets for covariates of no interest and in general the user is only required to change the variables of interest, the dependend the and independed variable to start the analysis.</p>
+            <p>The statistical analysis package used by DEAP is based on the R-package <a href="https://cran.r-project.org/web/packages/gamm4/"><i>gamm4</i></a> and implements a generalized additive mixel model that captures the degrees of freedom in a longitudinal multi-site study that includes a complex family structure. The user interface of the analysis application provides meaningful presets for covariates of no interest and in general the user is only required to change the variables of interest, the dependent and independent variable to start the analysis.</p>
             <p>Learn how to load and save a model (see the menu button on the top left).</p>
             <p>More extensive help is available in the application itself. The menu option <i>Normal</i> can be switched to <i>Tutorial</i> mode which shows text on how to interpret the generated graphs and tables.</p>
           </div>
@@ -143,7 +143,7 @@
             How to cite DEAP
           </div>
           <div class="card-body">
-            <p>DEAP is a software provided by the Data Analysis and Informatics Center of ABCD located at the UC San Diego with generous support by the National Institutes of Health and the Centers for Disease Control and Prevention under award number U24DA041123.</p>
+            <p>DEAP is a software provided by the Data Analysis and Informatics Center of ABCD located at the UC San Diego with generous support from the National Institutes of Health and the Centers for Disease Control and Prevention under award number U24DA041123.</p>
             <p>The DEAP project information and links to its source code are available under the resource identifier <a href="https://scicrunch.org/resolver/SCR_016158" title="resource identifier SCR_016158 link to scicrunch">RRID: SCR_016158</a>.</p>
             <p>The content is solely the responsibility of the authors and does not necessarily represent the official views of the National Data Archive or the National Institutes of Health.</p>
           </div>
