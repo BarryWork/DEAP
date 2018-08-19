@@ -38,6 +38,8 @@ if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
 
     mkdir -p "${rootpath}/data/${project}/Filter/data/"
     cp "${rootpath}/applications/Filter/data/admin.json" "${rootpath}/data/${project}/Filter/data"
+    mkdir -p "${rootpath}/logs"
+    chown -R www-data:www-data "${rootpath}/logs"
     
     # the owner of all of these should be the web-user (fixed user across all docker instances)
     chown -R www-data:www-data "${rootpath}/data/${project}/"
