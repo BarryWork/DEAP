@@ -18,6 +18,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
         cron \
         curl \
         ed \
+        vim \
         gfortran \
         git \
         libblas-dev \
@@ -25,8 +26,10 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
         locales \
         nodejs \
         npm \
-        php \
-        rsync \
+        php7.2 \
+        php7.2-curl \
+	libapache2-mod-php7.2 \
+	rsync \
         sudo \
         unzip \
     && apt-get clean \
