@@ -477,7 +477,7 @@ a:hover {
 	    </a>
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item" title="Back to report page">
-	         <a class="nav-link text-white" target="report" href="/index.php">Home</a>
+	         <a class="nav-link text-white" href="/index.php">Home</a>
 	      </li>
 	    </ul>
 
