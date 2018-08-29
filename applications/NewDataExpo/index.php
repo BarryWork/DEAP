@@ -86,8 +86,9 @@ div.col-sm-12.row.row-fluid.input-group {
 <!--         <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/start/jquery-ui.css" rel="stylesheet" type="text/css"/>-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css" integrity="sha384-exe4Ak6B0EoJI0ogGxjJ8rn+RN3ftPnEQrGwX59KTCl5ybGzvHGKjhPKk/KC3abb" crossorigin="anonymous">
         <link rel="stylesheet" href="all.css">
+        <link rel="stylesheet" href="css/all-surface.css">
         <link rel="stylesheet" href="css/style.css">
-
+	<link href="js/jquery.minicolors.css" rel="stylesheet" type="text/css"/> 
 <?php
 session_start();
 include("../../code/php/AC.php");
@@ -236,7 +237,7 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
 
     <div class="row tutorial-mode" tutafter=".formula-title" style="display: none;">
        <div class="col-md-12">
-    <p class="tut-p">The model formula (Fig. 4) is a short-hand description for the variables included in the model. It lists the dependent variable <i>tilde</i> (<i>~</i>) the independent variable as well as all the covariates, each identified by their variable name. The site and family variables are not listed but they are always included in the model as random effects.</p>
+    <p class="tut-p">The model formula (Fig. 4) is a short-hand description for the variables included in the model. It lists the dependent variable <i>tilde</i> (<i>~</i>) the independent variable as well as all the covariates, each identified by their variable name. The site and family variables if listed as "Random" are included in the model as random effects with a nesting of family inside site.</p>
        </div>
     </div>
 
@@ -252,21 +253,27 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
        </div>
     </div>
 
+    <div class="row tutorial-mode" tutbefore=".anova-table-title" style="display: none;">
+       <div class="col-md-12 tut-caption">
+    Table 2: Effect size (&Delta;R<sup>2</sup>) table.
+       </div>
+    </div>
+
     <div class="row tutorial-mode" tutbefore=".parameter-table-title" style="display: none;">
        <div class="col-md-12 tut-caption">
-    Table 2: Analysis of variance (type III ANOVA) table.
+    Table 3: Analysis of variance (type III ANOVA) table.
        </div>
     </div>
 
     <div class="row tutorial-mode" tutbefore=".random-effects-title" style="display: none;">
        <div class="col-md-12 tut-caption">
-    Table 3: Statistical parameter table.
+    Table 4: Statistical parameter table.
        </div>
     </div>
 
     <div class="row tutorial-mode" tutbefore=".other-statistics-title" style="display: none;">
        <div class="col-md-12 tut-caption">
-    Table 4: Random effects table.
+    Table 5: Random effects table.
        </div>
     </div>
 
@@ -288,9 +295,14 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
        </div>
     </div>
 
-    <div class="row tutorial-mode" tutafter=".other-statistics-title" style="display: none;">
+    <div class="row tutorial-mode" tutafter=".effect-size-table-title" style="display: none;">
        <div class="col-md-12">
          <p class="tut-p">The R-squared value describes the proportion of variance accounted for by the fitted model (for logistic regression, this is a little more involved but the idea is similar). A value close to 0 indicates that the model explains very little of the variation in the data, while a value close to 1 indicates that the model explains most of the variation of the data around its mean value. The &Delta;R-squared value is the percent R-squared accounted for by the independent and grouping variables after controlling for the effects of the covariates.</p>
+       </div>
+    </div>
+
+    <div class="row tutorial-mode" tutafter=".other-statistics-title" style="display: none;">
+       <div class="col-md-12">
          <p class="tut-p">As a way to compare models the R-squared value is of limited use, as adding additional variables to the model will always tend to increase the R-squared value. Alternative model comparison methods such as Akaike information criterion (<a href="https://en.wikipedia.org/wiki/Akaike_information_criterion">AIC</a>) or Bayesian information criterion (<a href="https://en.wikipedia.org/w\
 iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comparisons as they include penalties for the model degrees of freedom.
       </div>
@@ -304,7 +316,7 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 
     <div class="row tutorial-mode" tutafter=".anova-table-title" style="display: none;">
        <div class="col-md-12">
-        <p class="tut-p">The analysis of variance between groups table (Type III ANOVA, Table 2) can be used to test for the significance of one variable controlling for the other variables in the model. It includes the degrees of freedom for each of the variables. For categorical variables, this value is the number of categories for that variable minus 1.</p>
+        <p class="tut-p">The analysis of variance between groups table (Type III ANOVA, Table 3) can be used to test for the significance of one variable controlling for the other variables in the model. It includes the degrees of freedom for each of the variables. For categorical variables, this value is the number of categories for that variable minus 1.</p>
        </div>
     </div>
 
@@ -317,9 +329,17 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
     <div class="row">
         <div id="scatter" class="col-md-12" style="height: auto; min-height: 500px;"></div>
     </div>
+    <div class="row">
+        <div class="col-12">
+          <p align=center>
+           <?php include '/var/www/html/applications/SurfaceViewer/surfaceviewer.php' ; ?>
+           <div id="renderArea"></div>
+          </p>
+        </div>
+      </div>
 
   </div>
-    <div class="footer" style="margin-bottom: 20px;">
+          <div class="footer" style="margin-bottom: 20px;">
     <hr>
       <i style="margin-left: 20px; color: gray; font-weight: 200;">A service provided by the Data Analysis and Informatics Core of ABCD.</i>
     </div>
@@ -369,6 +389,24 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script src="./js/coeffient.js" charset="utf-8"></script>
 <script src="../Ontology/js/highlight-js.js" charset="utf-8"></script>
 
+<script src="js/three.min.js"></script> 
+<script src="js/ShaderExtras.js"></script> 
+
+<script src="js/postprocessing/EffectComposer.js"></script> 
+<script src="js/postprocessing/RenderPass.js"></script> 
+<script src="js/postprocessing/ShaderPass.js"></script> 
+<script src="js/postprocessing/MaskPass.js"></script> 
+<script src="js/postprocessing/BloomPass.js"></script> 
+<script src="js/postprocessing/FilmPass.js"></script> 
+
+<script src="js/loaders/VTKLoader.js"></script> 
+<script src="js/Detector.js"></script> 
+<script src="js/Tween.js"></script> 
+<script src="js/Threex.screenshot.js"></script>
+<script type="text/javascript" src="js/jquery.minicolors.js"></script>
+<script type="text/javascript" src="js/jquery.jeditable.js"></script>
+
+<script src="js/all-surface.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js" integrity="sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h" crossorigin="anonymous"></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>

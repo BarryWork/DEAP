@@ -62,12 +62,16 @@ function switchMode( name ) {
             var b = jQuery(element).attr('tutbefore');
             var show = false;
             if (a != undefined && jQuery(a).length > 0) {
-                jQuery(element).insertAfter(jQuery(a));
+                if (jQuery(a).next().filter(element).length === 0) {
+                    jQuery(element).insertAfter(jQuery(a));
+                }
                 show = true;
             }
             
             if (b != undefined && jQuery(b).length > 0) {
-                jQuery(element).insertBefore(jQuery(b));
+                if (jQuery(b).prev().filter(element).length === 0) {
+                    jQuery(element).insertBefore(jQuery(b));
+                }
                 show = true;
             }
             if (show)
