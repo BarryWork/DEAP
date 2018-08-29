@@ -77,6 +77,11 @@ function switchMode( name ) {
             if (show)
                 jQuery(element).fadeIn();
         });
+        // move table 1 up above model output
+        var caption = jQuery('.table1-section').next();
+        jQuery('.table1-section').insertBefore('.model-output');
+        caption.insertAfter('.table1-section');
+        
     } else if(name == "Normal") {
         jQuery('.tutorial-mode').fadeOut();
     } else if (name == "Expert") {

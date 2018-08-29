@@ -3251,7 +3251,7 @@ function clearDisplayCheck(time) {
                             //summary_text.html(JSON.parse(d).join("\n"));
                             if (JSON.parse(d)["formula"])
                                 summary_text.append(
-                                    "<h4 class='formula-title'>Formula</h4><p class='formula'>" +
+                                    "<h4 class='formula-title'>Model Formula</h4><p class='formula'>" +
                                     (Array.isArray(JSON.parse(d)["formula"])
                                         ? JSON.parse(d)["formula"].join("</n>")
                                         : JSON.parse(d)["formula"]) + 
@@ -3371,7 +3371,8 @@ function clearDisplayCheck(time) {
                         },
                         "text"
                     )
-                    jQuery("#scatter").append(summary_text)
+                    jQuery("#scatter").append(summary_text);
+                    
 
                     jQuery("#scatter").append(
                         "<h2 class='model-diagnostics'>Model Diagnostics</h2>"
@@ -3409,7 +3410,9 @@ function clearDisplayCheck(time) {
                         jQuery("#scatter").append(
                             "<h2 class='tut-data-display'>Data display and summaries</h2>"
                         )
-                        jQuery(".table1-section").insertAfter(jQuery("h2.tut-data-display"))
+                        // don't think this one is working
+                        jQuery(".table1-section").insertAfter(jQuery("h2.tut-data-display"));
+                        
                         data[3].type != "categorical"
                             ? hist(data[3], depvar, 3)
                             : hist_cata(data[3], depvar, 3)
@@ -3419,7 +3422,8 @@ function clearDisplayCheck(time) {
 
                         jQuery("#scatter").append(
                             "<h2 class='model-output'>Data Output</h2>"
-                        )
+                        );
+                        
                         //jQuery("#scatter").append("<h2>Data output</h2>")
 
                         //data[0]["eff.names"] ? coef(data[0],"coef"):
