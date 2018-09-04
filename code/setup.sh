@@ -26,6 +26,7 @@ if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
     echo "Detected initial data Rds in project data directory, start setup..."
     mkdir -p "${rootpath}/data/${project}/data_uncorrected"
     cp "${dataRds}" "${rootpath}/data/${project}/data_uncorrected/"
+    cp "${rootpath}/applications/Ontology/ABCD_datadictionary_rules.csv_master" "${rootpath}/data/${project}/data_uncorrected/ABCD_datadictionary_rules.csv"
     mkdir -p "${rootpath}/data/${project}/Ontology/searchServer/"
     cp "${rootpath}/applications/Ontology/teach.json" "${rootpath}/data/${project}/Ontology/"
     mkdir -p "${rootpath}/data/${project}/NewDataExpo/usercache/"

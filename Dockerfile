@@ -28,6 +28,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
         npm \
         php7.2 \
         php7.2-curl \
+	php7.2-mbstring \
 	libapache2-mod-php7.2 \
 	rsync \
         sudo \
