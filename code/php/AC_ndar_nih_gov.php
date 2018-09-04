@@ -36,13 +36,13 @@
      foreach($ss as $k) {
         audit("   Cookie: ".$k, " value: ".$_COOKIE[$k]);
      }
-     audit("check_logged Session variables: ", "print all of them");
+     /*audit("check_logged Session variables: ", "print all of them");
      if (isset($_SESSION)) {
        	foreach(array_keys($_SESSION) as $k) {
              audit("   Session: ".$k," value: ".$_SESSION[$k]);
         }
-     }
-     if (!isset($_SESSION["logged"]) || !array_key_exists($_SESSION["logged"],$USERS)) {
+        }*/
+     if (!isset($_SESSION["logged"])) {
       	$qs = $_SERVER['QUERY_STRING'];
         audit( "check_logged"," failed, key logged does not exist", "" );
         if ($qs != "")
@@ -51,8 +51,8 @@
            header("Location: /applications/User/login.php"."?url=".$_SERVER['PHP_SELF']);
         return -1; // not logged in
      };
-     // store that this user has logged in now
-     setUserVariable( $_SESSION["logged"], "lastTimeLoggedIn", date(DATE_RFC2822) );
+     // store that this user has logged in now (does not work on NDA)
+     // setUserVariable( $_SESSION["logged"], "lastTimeLoggedIn", date(DATE_RFC2822) );
 
      audit( "check_logged", " as user \"".$_SESSION["logged"]."\"" );
      return $_SESSION["logged"];
