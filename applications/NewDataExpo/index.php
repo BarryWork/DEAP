@@ -329,14 +329,6 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
     <div class="row">
         <div id="scatter" class="col-md-12" style="height: auto; min-height: 500px;"></div>
     </div>
-    <div class="row">
-        <div class="col-12">
-          <p align=center>
-           <?php include '/var/www/html/applications/SurfaceViewer/surfaceviewer.php' ; ?>
-           <div id="renderArea"></div>
-          </p>
-        </div>
-      </div>
 
   </div>
           <div class="footer" style="margin-bottom: 20px;">
@@ -389,24 +381,6 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script src="./js/coeffient.js" charset="utf-8"></script>
 <script src="../Ontology/js/highlight-js.js" charset="utf-8"></script>
 
-<script src="js/three.min.js"></script> 
-<script src="js/ShaderExtras.js"></script> 
-
-<script src="js/postprocessing/EffectComposer.js"></script> 
-<script src="js/postprocessing/RenderPass.js"></script> 
-<script src="js/postprocessing/ShaderPass.js"></script> 
-<script src="js/postprocessing/MaskPass.js"></script> 
-<script src="js/postprocessing/BloomPass.js"></script> 
-<script src="js/postprocessing/FilmPass.js"></script> 
-
-<script src="js/loaders/VTKLoader.js"></script> 
-<script src="js/Detector.js"></script> 
-<script src="js/Tween.js"></script> 
-<script src="js/Threex.screenshot.js"></script>
-<script type="text/javascript" src="js/jquery.minicolors.js"></script>
-<script type="text/javascript" src="js/jquery.jeditable.js"></script>
-
-<script src="js/all-surface.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js" integrity="sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h" crossorigin="anonymous"></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>
