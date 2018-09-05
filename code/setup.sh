@@ -30,6 +30,7 @@ if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
     mkdir -p "${rootpath}/data/${project}/Ontology/searchServer/"
     cp "${rootpath}/applications/Ontology/teach.json" "${rootpath}/data/${project}/Ontology/"
     mkdir -p "${rootpath}/data/${project}/NewDataExpo/usercache/"
+    mkdir -p "${rootpath}/applications/NewDataExpo/variableInfo/"
     mkdir -p "${rootpath}/data/${project}/Pre-Registration/"
     mkdir -p "${rootpath}/data/${project}/ModelBuilder/viewer/recipes/"
     cp "${rootpath}/applications/ModelBuilder/viewer/recipes/"GAMM4-FZ-CR.* "${rootpath}/data/${project}/ModelBuilder/viewer/recipes/"
