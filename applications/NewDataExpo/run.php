@@ -28,7 +28,7 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
     if(isset($_POST["rcode"])){
         $rcode = $_POST["rcode"];
         $code = $_POST["code"];
-        $dirname = "/var/www/html/applications/NewDataExpo/usercache/".$user_name."_".$code;
+        $dirname = "/var/www/html/data/".$project_name."/NewDataExpo/usercache/".$user_name."_".$code;
         if(!file_exists($dirname)){
             mkdir($dirname, 0777);
         } 
@@ -42,7 +42,7 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
         $code = $_POST["code"];
 
 
-        $dirname = "/var/www/html/applications/NewDataExpo/usercache/".$user_name."_".$code;
+        $dirname = "/var/www/html/data/".$project_name."/NewDataExpo/usercache/".$user_name."_".$code;
         if(!file_exists($dirname)){
             mkdir($dirname, 0777);
         }
@@ -61,7 +61,7 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
     if(isset($_POST["time"])){
         $time = $_POST["time"];
     }
-    $dirname = "/var/www/html/applications/NewDataExpo/usercache/*_".$code;
+    $dirname = "/var/www/html/data/".$project_name."/NewDataExpo/usercache/*_".$code;
     $files = glob($dirname, GLOB_ONLYDIR);
     $owner_id = explode("usercache", $files[0])[1];
     #when code is set up and glob find the directory
@@ -73,17 +73,17 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
         if(count($plot_scatter) > 0 and count($plot_statistics) > 0 and count($plot_lineplot)> 0){
             $ret = array();
             $paths = pathinfo($plot_scatter[0]);
-            $ret["scatter"] = "/applications/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];	
+            $ret["scatter"] = "/data/".$project_name."/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];	
             $paths = pathinfo($plot_statistics[0]);
-            $ret["statistics"] = "/applications/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];	
+            $ret["statistics"] = "/data/".$project_name."/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];	
             $paths = pathinfo($plot_lineplot[0]);
-            $ret["lineplot"] = "/applications/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];
+            $ret["lineplot"] = "/data/".$project_name."/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];
             echo(json_encode($ret));
 	
-	}else if($time > 120){
+	}else if($time > 220){
 	    for($ef = 0 ; $ef < count($plot_output); $ef++){
                 $paths = pathinfo($plot_output[$ef]);
-                $ret["error"][] = "/applications/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];
+                $ret["error"][] = "/data/".$project_name."/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];
             } 
             echo(json_encode($ret));
 	
@@ -116,11 +116,11 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
     // collect all the output files in the directory and returns them to the client for printing
     echo("{}");
 }else if ($action == "loadModelList") {
-    if(file_exists("/var/www/html/applications/NewDataExpo/usercache/saved_models.json")){
-        $saved_model_list = json_decode(file_get_contents("/var/www/html/applications/NewDataExpo/usercache/saved_models.json"),true);
+    if(file_exists("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json")){
+        $saved_model_list = json_decode(file_get_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json"),true);
     }
-    if(file_exists("/var/www/html/applications/NewDataExpo/usercache/public_models.json")){
-        $public_model_list = json_decode(file_get_contents("/var/www/html/applications/NewDataExpo/usercache/public_models.json"),true);
+    if(file_exists("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json")){
+        $public_model_list = json_decode(file_get_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json"),true);
     }
     echo json_encode((object) array_merge( (array) $public_model_list,(array) $saved_model_list));
 }else if ($action == "saveModel" && isset($_POST["nameTag"]) && isset($_POST["json_code"]) && isset($_POST["sharing_status"])) {
@@ -136,11 +136,11 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
     //syslog(LOG_EMERG,json_encode($new_model));
     $saved_model_list = array();
     $public_model_list = array();
-    if(file_exists("/var/www/html/applications/NewDataExpo/usercache/saved_models.json")){
-	$saved_model_list = json_decode(file_get_contents("/var/www/html/applications/NewDataExpo/usercache/saved_models.json"),true); 
+    if(file_exists("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json")){
+	$saved_model_list = json_decode(file_get_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json"),true); 
     }
-    if(file_exists("/var/www/html/applications/NewDataExpo/usercache/public_models.json")){
-	$public_model_list = json_decode(file_get_contents("/var/www/html/applications/NewDataExpo/usercache/public_models.json"),true); 
+    if(file_exists("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json")){
+	$public_model_list = json_decode(file_get_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json"),true); 
     }
     if($status == "private"){
 	$saved_model_list[$user_name.'-'.$name_tag] = $new_model; 
@@ -148,30 +148,30 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
     if($status == "public"){
 	$public_model_list['[Public]'.$user_name.'-'.$name_tag] = $new_model; 
     }
-    file_put_contents("/var/www/html/applications/NewDataExpo/usercache/saved_models.json",json_encode($saved_model_list));
-    file_put_contents("/var/www/html/applications/NewDataExpo/usercache/public_models.json",json_encode($public_model_list));
+    file_put_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json",json_encode($saved_model_list));
+    file_put_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json",json_encode($public_model_list));
     echo "success";
 } else if ($action == "deleteModel" && isset($_POST["nameTag"])) {
     $name_tag = $_POST["nameTag"];
-    if(file_exists("/var/www/html/applications/NewDataExpo/usercache/saved_models.json")){
-        $saved_model_list = json_decode(file_get_contents("/var/www/html/applications/NewDataExpo/usercache/saved_models.json"),true);
+    if(file_exists("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json")){
+        $saved_model_list = json_decode(file_get_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json"),true);
     }
-    if(file_exists("/var/www/html/applications/NewDataExpo/usercache/public_models.json")){
-        $public_model_list = json_decode(file_get_contents("/var/www/html/applications/NewDataExpo/usercache/public_models.json"),true);
+    if(file_exists("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json")){
+        $public_model_list = json_decode(file_get_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json"),true);
     }
     unset($saved_model_list[$name_tag]);
     unset($public_model_list[$name_tag]);
-    file_put_contents("/var/www/html/applications/NewDataExpo/usercache/saved_models.json",json_encode($saved_model_list));
-    file_put_contents("/var/www/html/applications/NewDataExpo/usercache/public_models.json",json_encode($public_model_list));
+    file_put_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json",json_encode($saved_model_list));
+    file_put_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json",json_encode($public_model_list));
     echo "deleted";
 }else if( $action == "saveResult" && isset($_POST["nameTag"]) && isset($_POST["code"] )){
     $name_tag = $_POST["nameTag"];
     $code = $_POST["code"];
-    if(file_exists("/var/www/html/applications/NewDataExpo/usercache/saved_models.json")){
-        $saved_model_list = json_decode(file_get_contents("/var/www/html/applications/NewDataExpo/usercache/saved_models.json"),true);
+    if(file_exists("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json")){
+        $saved_model_list = json_decode(file_get_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json"),true);
     }
-    if(file_exists("/var/www/html/applications/NewDataExpo/usercache/public_models.json")){
-        $public_model_list = json_decode(file_get_contents("/var/www/html/applications/NewDataExpo/usercache/public_models.json"),true);
+    if(file_exists("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json")){
+        $public_model_list = json_decode(file_get_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json"),true);
     }
 	 
     if(isset($saved_model_list[$name_tag])){
@@ -181,8 +181,8 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
     if(isset($public_model_list[$name_tag])){
 	$public_model_list[$name_tag]["result-code"] = $code;
     }
-    file_put_contents("/var/www/html/applications/NewDataExpo/usercache/saved_models.json",json_encode($saved_model_list));
-    file_put_contents("/var/www/html/applications/NewDataExpo/usercache/public_models.json",json_encode($public_model_list));
+    file_put_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json",json_encode($saved_model_list));
+    file_put_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json",json_encode($public_model_list));
     
     echo "result saved";
 }else if( $action == "getDownloadList" && isset($_POST["code"] )){
@@ -191,7 +191,7 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
     if(isset($_POST["code"])){
         $code = $_POST["code"];
     }
-    $dirname = "/var/www/html/applications/NewDataExpo/usercache/*_".$code;
+    $dirname = "/var/www/html/data/".$project_name."/NewDataExpo/usercache/*_".$code;
     $files = glob($dirname, GLOB_ONLYDIR);
     syslog(LOG_EMERG,json_encode($files));
     $owner_id = explode("usercache", $files[0])[1];
@@ -206,7 +206,7 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
             $ret = array();
 	    
             $paths = pathinfo($plot_data[0]);
-            $ret["data"] = "/applications/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];
+            $ret["data"] = "/data/".$project_name."/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];
 	    $size_table = array();
 	    foreach( $plot_rcode as $r){
 		$size_table[$r] = filesize($r);
@@ -221,7 +221,7 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
 		}
 	    }
 	    $paths = pathinfo($largest_file);
-	    $ret["r-code"] = "/applications/NewDataExpo/usercache".$owner_id."/".$paths['basename']; 
+	    $ret["r-code"] = "/data/".$project_name."/NewDataExpo/usercache".$owner_id."/".$paths['basename']; 
             echo(json_encode($ret));
         }
     }
