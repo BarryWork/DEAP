@@ -266,7 +266,9 @@ function load_interface_from_json(model_address) {
             }
         })
     })
+
 }
+
 
 function removeDuplicates(arr) {
     var unique_array = []
@@ -1640,6 +1642,20 @@ function insert_mutiple_input(item_input, isIndpv) {
                 if (!isIndpv) au.append("<span class='last-remove' readonly>+</span>")
             }
         }
+    div.on('paste', function(e) {
+    e.preventDefault();
+    var text = '';
+    if (e.clipboardData || e.originalEvent.clipboardData) {
+      text = (e.originalEvent || e).clipboardData.getData('text/plain');
+    } else if (window.clipboardData) {
+      text = window.clipboardData.getData('Text');
+    }
+    if (document.queryCommandSupported('insertText')) {
+      document.execCommand('insertText', false, text);
+    } else {
+      document.execCommand('paste', false, text);
+    }
+});
 }
 
 function pasteValParser() {
@@ -2596,9 +2612,9 @@ function creatVar(value, input_id) {
                     if (value.indexOf("Censor(") >= 0) {
                         transform.push("censor005")
                     }
-                    num_f = Object.keys(vinfo.factors).length
+                    num_f = vinfo.factors.Length
                     na = vinfo.factors["NA's"]
-                    if (num_f <= 10) {
+                    if (+num_f <= 10) {
                         type_g = "Factor"
                     } else {
                         type_g = "Numeric"
@@ -2798,6 +2814,20 @@ function insert_single_input(item_input) {
     d2.append(input)
     div.append(d2)
     jQuery(".content").append(div)
+    div.on('paste', function(e) {
+    e.preventDefault();
+    var text = '';
+    if (e.clipboardData || e.originalEvent.clipboardData) {
+      text = (e.originalEvent || e).clipboardData.getData('text/plain');
+    } else if (window.clipboardData) {
+      text = window.clipboardData.getData('Text');
+    }
+    if (document.queryCommandSupported('insertText')) {
+      document.execCommand('insertText', false, text);
+    } else {
+      document.execCommand('paste', false, text);
+    }
+});
 }
 
 function insert_checkbox(arr) {
