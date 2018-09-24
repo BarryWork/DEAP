@@ -31,7 +31,7 @@ Provide a directory that is outside of the docker container to store the volatil
 ```
 mkdir -p assets
 cp <data nda17.Rds> assets/
-./run deap deap master 80 `pwd`/assets
+./run deap deap 80 `pwd`/assets
 ```
 
 (RRID: SCR_016158)
