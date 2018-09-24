@@ -46,6 +46,8 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && npm install . \
     && cd /var/www/html/applications/ModelBuilder/runner \
     && npm install . \
+    && cd /var/www/html/applications/Filter \
+    && npm install . \
     && cd /var/www/html/applications/ModelBuilder/viewer \
     && chown -R www-data:www-data recipes \
     && groupadd processing -g 1000 \
