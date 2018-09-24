@@ -391,9 +391,11 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 
 jQuery(document).ready(function() {
     //if(user_name != "admin") jQuery("body").html("Deap is under construction, come back later. ");
+
     loadAnalysisNames();
     load_interface_from_json();
     jQuery("#conrol-pannel").show();
+
 });
 
 //hard coding, user cannot deselect the random effects.
