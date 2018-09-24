@@ -3206,18 +3206,32 @@ function clearDisplayCheck(time) {
         if (file_name_index == "error") {
             filename = display_file_list[file_name_index]
             console.log(filename[0])
+	    promises = [];
             for (var error_id = 0; error_id < filename.length; error_id++) {
-                console.log(error_id)
-                jQuery.get(filename[error_id], function(edata) {
-                    if (edata.indexOf("Error") >= 0)
+		console.log(filename[error_id]);
+                promises.push(jQuery.get(filename[error_id], function(edata) {
+		    console.log(edata)
+
+                    if ( edata != "" && !(edata.indexOf("Error: Dependent variable is empty.") >= 0)){
                         jQuery("#scatter").append(
                             jQuery("<pre>")
                             .css("margin-left", "15px")
                             .css("color", "red")
                             .html(edata.split("In addition:")[0])
                         )
-                })
+		    }
+                }));
             }
+	    
+	    Promise.all(promises).then(function(){
+	      if(jQuery("#scatter").find("pre").length == 0 && filename.length >= 4){
+		jQuery("#scatter").append(
+                            jQuery("<pre>")
+                            .css("margin-left", "15px")
+                            .css("color", "red")
+                            .html("Error: Dependent variable is empty.")
+                        )
+	    }});
         }
         if (file_name_index == "scatter") {
             filename = display_file_list[file_name_index]
@@ -3290,6 +3304,12 @@ function clearDisplayCheck(time) {
                                 )
                                 summary_text.append( "<p class='formula'>" +
                                     "\n Random: " + JSON.parse(d)["formula.random"] + "</p>");
+                            if (JSON.parse(d)["warning"])
+                                jQuery("#scatter").prepend(
+                                        jQuery("<p>").html(JSON.parse(d)
+                                        ["warning"]).addClass("warning-section")
+                                )
+ 
                             if (JSON.parse(d)["table1"])
                                 summary_text.append(
                                     jQuery(

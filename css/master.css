@@ -547,4 +547,15 @@ ol {
     }
 }
 
-    
+.dot{
+
+    color: white;
+    height: 25px;
+    width: 25px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+    position:fixed;
+    bottom:1px;
+    line-height: 1.8;
+}    

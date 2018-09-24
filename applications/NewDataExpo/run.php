@@ -80,15 +80,18 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
             $ret["lineplot"] = "/data/".$project_name."/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];
             echo(json_encode($ret));
 	
-	}else if($time > 220){
+	}else {
+	    $file_size = 0 ; 
 	    for($ef = 0 ; $ef < count($plot_output); $ef++){
                 $paths = pathinfo($plot_output[$ef]);
-                $ret["error"][] = "/data/".$project_name."/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];
+                $ret["error"][] = "/data/".$project_name."/NewDataExpo/usercache".$owner_id."/".$paths['basename'];
+		$file_size = $file_size + filesize("/var/www/html/data/".$project_name."/NewDataExpo/usercache".$owner_id."/".$paths['basename']);
             } 
-            echo(json_encode($ret));
-	
-	
-        }else{
+    	    if( $time > 30 || ($file_size > 108 and count($plot_output) == 4)){
+
+		echo(json_encode($ret));
+		return;
+	    }
             echo("Not found");
         }   
         return;

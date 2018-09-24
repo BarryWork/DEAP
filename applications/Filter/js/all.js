@@ -672,6 +672,10 @@ function addOneMeasure( meas ) {
     });
 }
 
+function toggleFamilyView() {
+    console.log('sort all entries into different sites/families/groups');
+}
+
 jQuery(document).ready(function() {
     jQuery('.project_name').text(project_name);
     createBlock('#start');
@@ -690,5 +694,9 @@ jQuery(document).ready(function() {
         }
         changeSearch();
     });
-    setTimeout(function() { addOneMeasure('age'); }, 0);
+    jQuery(document).on('click', '.datas', function() {
+        toggleFamilyView();
+    });
+    
+    setTimeout(function() { addOneMeasure('age'); addOneMeasure('rel_family_id'), addOneMeasure('rel_group_id'); addOneMeasure('abcd_site'); }, 0);
 });

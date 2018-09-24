@@ -52,6 +52,7 @@ echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; can_q
     <!-- ========== script ========== -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/check.js"></script>
   </head>
 
   <body>
