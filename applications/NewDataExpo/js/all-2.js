@@ -2594,7 +2594,7 @@ function creatVar(value, input_id) {
 
     //load variable info file
     jQuery
-        .get("/data/ABCD/variableInfo/" + act_v + ".json", function(vinfo, e) {
+        .get("/data/ABCD/NewDataExpo/variableInfo/" + act_v + ".json", function(vinfo, e) {
             console.log(e)
             jQuery.get(
                 "/applications/Ontology/searchTerm2.php",
@@ -2720,7 +2720,7 @@ function creatVar(value, input_id) {
 
 function vinfo_hist(act_v, act_name_tag, transform, input_id) {
     jQuery
-        .get("/data/ABCD/variableInfo/" + act_v + ".json", function(vinfo, e) {
+        .get("/data/ABCD/NewDataExpo/variableInfo/" + act_v + ".json", function(vinfo, e) {
             jQuery("." + act_name_tag + "-" + input_id + "-hist")
                 .find("svg")
                 .remove()
