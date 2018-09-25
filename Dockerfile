@@ -79,8 +79,8 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo 'alias deap="cd /var/www/html/" >> /root/.bashrc;' >> $ND_ENTRYPOINT \
          && echo 'cron' >> $ND_ENTRYPOINT \
          && echo '/bin/bash /var/www/html/code/setup.sh;' >> $ND_ENTRYPOINT \
-         && echo 'if [ -d "/var/www/html/applications/NewDataExpo/variableInfo" ]; then' >> $ND_ENTRYPOINT \
-	 && echo '    /usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R &' >> $ND_ENTRYPOINT \
+         && echo 'if [ -d "/usr/bin/Rscript /var/www/html/applications/NewDataExpo/" ]; then' >> $ND_ENTRYPOINT \
+	     && echo '/usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R &' >> $ND_ENTRYPOINT \
 	 && echo 'fi' >> $ND_ENTRYPOINT \
          && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
          && echo "ServerName localhost" >> /etc/apache2/apache2.conf; \
