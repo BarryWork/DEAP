@@ -7,7 +7,7 @@ if (isset($_GET['search'])) {
 if (isset($_GET['getComments'])) {
    $contents = file_get_contents("https://abcd-report.ucsd.edu/applications/link-ontology/getComments.php?item=" . $_GET['getComments']);
    // we can check for info from R as well here
-   $ff = glob('../NewDataExpo/variableInfo/' + $_GET['getComments'] + '*.json');
+   $ff = glob('/var/www/html/data/ABCD/NewDataExpo/variableInfo/' + $_GET['getComments'] + '*.json');
    if (count($ff) > 0) {
       $more = json_decode(file_get_contents($ff[0]),true);
       $content['stat'] = $more;
@@ -22,7 +22,7 @@ if (isset($_GET['getComments'])) {
 }
 if (isset($_GET['getStats'])) {
    $variable = $_GET['getStats'];
-   $content = file_get_contents("/var/www/html/applications/NewDataExpo/variableInfo/" . $variable . ".json");
+   $content = file_get_contents("/var/www/html/data/ABCD/NewDataExpo/variableInfo/" . $variable . ".json");
    echo($content);
    return;
 }
