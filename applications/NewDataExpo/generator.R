@@ -86,5 +86,5 @@ for(v in vlist){
 #    }
 
     s = list(summary = sm, factors = summary(fvar), histograms = hs);
-    write(toJSON(s),paste(sep = "", "/var/www/html/applications/NewDataExpo/variableInfo/",v,".json")) 
+    write(toJSON(s),paste(sep = "", "/var/www/html/data/ABCD/NewDataExpo/variableInfo/",v,".json")) 
 }
