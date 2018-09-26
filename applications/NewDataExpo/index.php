@@ -125,7 +125,7 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
           <div id = "editor"> #test al ot sav</div>
         </div>
     </div>
-    <div class = "floating-menu" id = "moveable">
+    <div class = "floating-menu" id = "moveable" style = "display:none">
       <div class="floating-header" id = "handle">Details (last used items)</div>
       <div id="floating-list">
         <ul style="margin-top:10px;" class="floating-entry list-unstyled"></ul>

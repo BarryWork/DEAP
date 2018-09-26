@@ -172,7 +172,11 @@ button.btn-sm.btn.btn-outline-secondary!important {
     right: 0px;
     border: 1px solid grey;
     border-radius: 3px;
-    max-height: 500px;
+    resize: both;
+    overflow: auto;
+    height: 500px;
+    min-width: 500px;
+    //max-height: 500px;
 }
 .floating-entry {
     margin-top: 5px;
@@ -184,9 +188,8 @@ button.btn-sm.btn.btn-outline-secondary!important {
     border-bottom: 1px solid grey;
 }
 #floating-list {
-    height: 460px;
-    overflow-y: scroll;
-    resize: vertical;
+    height: auto;
+    overflow-y: auto;
 }
 .transformation-group{
     padding-left:20px;
@@ -211,4 +214,23 @@ button.btn-sm.btn.btn-outline-secondary!important {
 .v-s-button,.v-log-button,.v-interaction-button,.v-square-button,.v-ws-button,.reset-button{
    font-size: 0.7rem; 
    margin-bottom:2px;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }

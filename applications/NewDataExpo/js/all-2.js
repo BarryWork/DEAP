@@ -2646,7 +2646,7 @@ function creatVar(value, input_id) {
                         )
                         .css("margin", "0px")
                         .appendTo($a)
-                    jQuery("<div class = 'col-sm-5' style = 'overflow-y:scroll; max-height: 220px; min-height: 200px;margin:0; font-size: 0.8 rem;line-height:20px; font-height: 2px;padding-left:0px;padding-right:0px;border:0px;'></div>")
+                    jQuery("<div class = 'col-sm-5' style = 'overflow-y:scroll; overflow-x:hidden; max-height: 220px; min-height: 200px;margin:0; font-size: 0.8 rem;line-height:20px; font-height: 2px;padding-left:0px;padding-right:0px;border:0px;'></div>")
                         .append($div_button)
                         .append(type_a_info) 
                         .appendTo($a);
