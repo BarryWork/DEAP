@@ -254,3 +254,13 @@ font: 10px sans-serif;
         color:white;
     }
 
+    .header-button {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        margin-top: 0px !important;
+        line-height: 1.1em;
+    }
+    .cm-comment {
+        font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+        font-size: 70%;
+    }

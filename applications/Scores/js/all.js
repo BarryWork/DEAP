@@ -26,8 +26,26 @@ function use(v) {
     }
 
     for ( m in itemsToUse ) {
-        promisses.push(addOneMeasure(itemsToUse[m], compute_block_id));
+        var p = addOneMeasure(itemsToUse[m], compute_block_id);
+        // lets add an error handler for this promisse
+        (function( measure ) {
+            p.then(function(ok) {
+                // check if we have the variable now
+                if (Object.keys(allMeasures).indexOf(measure) == -1) {
+                    // this promise did not result in the loaded measure, show error message to user
+                    var cons = jQuery('#sai_nmonth_me').parent().parent().find('.console'); 
+                    var before = jQuery(cons).html();
+                    var after = before + "Promise Error: unknown variable <span style='color:blue'>" + measure + "</span><br>";
+                    jQuery(cons).html(after);
+                    // stop the loader
+                    jQuery('.loader').hide();
+                }
+            });
+        })(itemsToUse[m]);
+        promisses.push(p);
     }
+    // lets add a handler for errors to our promises (copy error messages to screen)
+    
     return promisses;
 }
 
@@ -533,9 +551,9 @@ function insert_recipe_block(input, top) {
     var text_area_wrapper = $('<div class="col-md-12" style="display:none;padding-top:10px;border-top: 1px solid #CCC;"></div>').append(text_area).appendTo(div);
 
     var div_operation = $("<div class = 'col-md-12'></div>").appendTo(div),
-        del = $('<i style = "right:5px;top:5px;position:absolute;font-size:30px; margin:5px; color: white;" class="fas fa-times"></i>').appendTo(div),
-        maximize = $('<i class="far fa-window-maximize" style = "right:45px;top:5px;position:absolute;font-size:30px; margin:5px; color: white;"></i>').appendTo(div);
-    save = $('<button type="button" class="btn btn-primary save-button">Save</button>').appendTo(div_input),
+        del = $('<i style = "right:5px;top:5px;position:absolute;font-size:30px; margin:5px; color: white; display: none;" class="fas fa-times" title="Delete Score"></i>').appendTo(div),
+        maximize = $('<button class="btn btn-sm btn-primary header-button" style="right:45px;top:5px;position:absolute;font-size:30px; margin:5px;">open</button>').appendTo(div);
+        save     = $('<button type="button" class="btn btn-primary save-button">Save</button>').appendTo(div_input),
         checkbox = $('<div class="checkbox pull-right" style="margin-top: 7px;"><label><input type="checkbox" class="private-public" value="private"' + ((input['permission']=="private")?"checked":"") + '> Save as private</label></div>').appendTo(div_input);       
 
     //initialize md;
@@ -588,15 +606,18 @@ function insert_recipe_block(input, top) {
         });
     });
     var simplemde = null;
-    maximize.on("click", function(){
-        if(header.is(":visible")){
+    maximize.on("click", function() {
+        if (header.is(":visible")) {
             header.fadeOut();
             text_area_wrapper.fadeOut();
-        }
-        else{
+            jQuery(header).parent().find('i.fa-times').hide();
+            jQuery(header).parent().find('.header-button').text('open');
+        } else {
             header.show();
+            jQuery(header).parent().find('i.fa-times').show();
+            jQuery(header).parent().find('.header-button').text('close');
             text_area_wrapper.show();
-            if(simplemde) {
+            if (simplemde) {
                 div.find(".fold-recipe")[0].scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});  
                 return;
             }
