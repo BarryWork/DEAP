@@ -254,6 +254,7 @@ font: 10px sans-serif;
         color:white;
         white-space: nowrap;
         position: relative;
+        display: block;
     }
 
     .header-button {
@@ -271,6 +272,6 @@ font: 10px sans-serif;
         margin-left: 20px;
         margin-top: 10px;
         white-space: nowrap;
-        top: 30px;
+        display: inline-flex;
     }
     
