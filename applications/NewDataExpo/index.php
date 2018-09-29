@@ -86,7 +86,6 @@ div.col-sm-12.row.row-fluid.input-group {
 <!--         <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/start/jquery-ui.css" rel="stylesheet" type="text/css"/>-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css" integrity="sha384-exe4Ak6B0EoJI0ogGxjJ8rn+RN3ftPnEQrGwX59KTCl5ybGzvHGKjhPKk/KC3abb" crossorigin="anonymous">
         <link rel="stylesheet" href="all.css">
-        <link rel="stylesheet" href="css/all-surface.css">
         <link rel="stylesheet" href="css/style.css">
 	<link href="js/jquery.minicolors.css" rel="stylesheet" type="text/css"/> 
 <?php

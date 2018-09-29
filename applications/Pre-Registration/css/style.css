@@ -14,7 +14,7 @@ li.intext {
     font-weight: 400;
     font-style: normal;
     font-size: 21px;
-    line-height: 1.01;
+    line-height: 1.58;
     letter-spacing: -.003em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -26,6 +26,12 @@ li.intext {
     -webkit-text-size-adjust: 100%;
     word-break: break-word;
     word-wrap: break-word;
+}
+.reference {
+    padding-left: 20px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    font-size: 19px;
 }
 .tut-p {
     --x-height-multiplier: 0.375;
