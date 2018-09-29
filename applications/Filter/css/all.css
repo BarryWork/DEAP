@@ -38,8 +38,9 @@ body {
    font-weight: 200;
    font-size: 20px;
    padding-top: 9px;
-   padding-bottom: 0px;
+   padding-bottom: 9px;
    padding-right:10pt;
+   border-radius: 3px;
 }
 .select input {
    background-color: #222222;
@@ -191,12 +192,22 @@ body {
 }
 input.inputmeasures {
     padding-top: 10px;
+    padding-bottom: 10px;
 }
-.btn:hover, .btn:focus {
-    color: #FFF;
-    text-decoration: none;
+
+btn-outline-primary-inverse {
+    color: #fff;
+    background-image: none;
+    background-color: transparent;
+    border-color: #fff;
 }
-.btn {
-    color: #BBB;
-    text-decoration: none;
+.btn:hover {
+    color: #fff;
+    background-color: #0275d8;
+    border-color: #0275d8;
+}
+.btn:focus, .focus {
+    color: #fff;
+    background-color: #0275d8;
+    border-color: #0275d8;
 }

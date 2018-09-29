@@ -687,7 +687,7 @@ jQuery(document).ready(function() {
             changeSearch();
     });
     jQuery('#runFilter').on('click', function() {
-        var text = jQuery('.inputmeasures').text();
+        var text = jQuery('.inputmeasures').val();
         if (text == "") {
             alert("No filter selected. Start by either selecting a predefined filter from the drop-down, or by typing in a new filter.");
             return;
