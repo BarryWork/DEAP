@@ -28,20 +28,20 @@ function use(v) {
     for ( m in itemsToUse ) {
         var p = addOneMeasure(itemsToUse[m], compute_block_id);
         // lets add an error handler for this promisse
-        (function( measure ) {
+        (function( measure, compute_block_id ) {
             p.then(function(ok) {
                 // check if we have the variable now
                 if (Object.keys(allMeasures).indexOf(measure) == -1) {
                     // this promise did not result in the loaded measure, show error message to user
-                    var cons = jQuery('#sai_nmonth_me').parent().parent().find('.console'); 
+                    var cons = jQuery('#'+compute_block_id).parent().parent().find('.console'); 
                     var before = jQuery(cons).html();
                     var after = before + "Promise Error: unknown variable <span style='color:blue'>" + measure + "</span><br>";
                     jQuery(cons).html(after);
                     // stop the loader
-                    jQuery('.loader').hide();
+                    jQuery('#'+compute_block_id).parent().parent().find('.loader').remove();
                 }
             });
-        })(itemsToUse[m]);
+        })(itemsToUse[m], compute_block_id);
         promisses.push(p);
     }
     // lets add a handler for errors to our promises (copy error messages to screen)
