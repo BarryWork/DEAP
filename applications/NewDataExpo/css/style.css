@@ -160,6 +160,10 @@ button.btn-sm.btn.btn-outline-secondary!important {
 .btn-neutral:hover {
     background-color: #c8c9ca;
 }
+.loader {
+    margin-top: 0px;
+    margin-left: 45px;
+}
 .floating-menu {
     font-family: sans-serif;
     background-color: white;

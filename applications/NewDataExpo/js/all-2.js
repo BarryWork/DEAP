@@ -3531,7 +3531,7 @@ function clearDisplayCheck(time) {
             })
         }
     }
-    jQuery("#compute-button").html("Submit")
+    jQuery("#compute-button").html("submit")
     jQuery("#compute-button").removeAttr("disabled")
     jQuery("#load-list-pannel .list-group").removeClass("disabledbutton")
     jQuery(".model-definition").removeClass("disabledbutton")
