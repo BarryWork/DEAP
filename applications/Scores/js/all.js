@@ -364,7 +364,7 @@ function _update(text, table_location, vname, hist_location) {
     hist_location.html(""); // remove the timeout circle animation
     var hist_data = JSON.parse(data.toJSON())[vname];
     if (typeof hist_data === 'undefined')
-        hist_location.html("<div class='error'>Warning: " + vname + " is not yet defined by this calculation.</div>");
+        hist_location.html("<div class='error'>Warning: element name \"" + vname + "\" is not yet defined by this calculation.</div>");
     else
         histogram(hist_data,hist_location);
     //console.log("we found " + ar.length + " sections");
@@ -506,7 +506,12 @@ function insert_recipe_block(input, top) {
     var simplemd_initialize_text = input["content"] && JSON.parse(input["content"]) ? JSON.parse(input["content"]) : "### Describe the new item\nWhy should the reader be interested in this new item? Describe your rationale to provide it and explain your sources. Start the computation of the new item by listing required existing items, for example age here:\n```\nvar promises = use([\"age\"]);\n```\n\nAdd the calculation of the new measure in another section delimited by three tick marks:\n```\nPromise.all(promises).then( function() {\n  var data = new DataFrame(allMeasures);\n  data = data.map(row => row.set('age_years', row.get('age')/12));\n  update(data, 'age_years');\n});\n```\n";
     var div = $("<div class = 'recipe-block' tabindex='0' style = 'position:relative;'></div>");
     var fold_head = jQuery("<div class= 'fold-recipe row'></div>").appendTo(div);
-    fold_head.html( (typeof variable_name == "number" ? "New score calculation":variable_name) );
+    // if we have a description for this item already, show the description as well
+    var descr = "";
+    if (typeof input['description'] !== 'undefined') {
+        descr = "<div class='header-description'>" +  input['description'].slice(0, 85) + "...</div>";
+    }    
+    fold_head.html( (typeof variable_name == "number" ? "New score calculation":variable_name) + descr );
     if (typeof top !== 'undefined' && top) {
         div.insertAfter("#first-item");
     } else {

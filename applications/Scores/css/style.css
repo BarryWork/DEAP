@@ -252,6 +252,8 @@ font: 10px sans-serif;
         font-size: 30px;
         background-color: #007bff;
         color:white;
+        white-space: nowrap;
+        position: relative;
     }
 
     .header-button {
@@ -264,3 +266,11 @@ font: 10px sans-serif;
         font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
         font-size: 70%;
     }
+    .header-description {
+        font-size: 70%;
+        margin-left: 20px;
+        margin-top: 10px;
+        white-space: nowrap;
+        top: 30px;
+    }
+    
