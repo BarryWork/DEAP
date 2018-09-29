@@ -156,7 +156,7 @@
           <div class="card-body">
             <p>DEAP uses a feature of your browser to cache ABCD data columns to speed up your analysis. You can delete this cache to get a fresh copy of the data to your browser.</br> 
               <center>
-                <button class="btn btn-outline-primary btn-sm" title="Clear the local storage used to store measures between the different DEAP applications">Clear local storage</button>
+                <button class="btn btn-outline-primary btn-sm" onclick="window.localStorage.clear();" title="Clear the local storage used to store measures between the different DEAP applications">Clear local storage</button>
               </center>
                                                                                                                                         </p>                                                                                                                          <p>DEAP server system status:<pre style="height: 150px; margin-top: -10px; border: 1px solid #adb5bd;"><code id="status-info"></code></pre></p>
           </div>
