@@ -1428,7 +1428,7 @@ function insert_mutiple_input(item_input, isIndpv) {
     d2.append(input)
 
     var om_button = jQuery(
-        "<div class='input-group-append'><button class='btn-sm btn btn-outline-secondary' data-toggle='modal' data-target='#ontology-explore' type='button' style = {border-top-right-radius:3px !important; border-top-right-radius:3px !important}><i class='fas fa-plus' style='font-size: 1rem; padding-bottom: 0px; margin-bottom: 0px; transform: scale(1.5,1.5);'></i></button></div>"
+        "<div class='input-group-append'><button class='btn-sm btn btn-outline-secondary' data-toggle='modal' data-target='#ontology-explore' type='button' style = 'border-top-right-radius:3px !important; border-top-right-radius:3px !important;' title='Select an alternative variable'><i class='fas fa-plus' style='font-size: 1rem; padding-bottom: 0px; margin-bottom: 0px; transform: scale(1.5,1.5);'></i></button></div>"
     ).appendTo(d2)
     om_button.click(function() {
         jQuery(".explore-add").attr("data-go-to", class_type + "-" + id)

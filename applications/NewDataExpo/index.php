@@ -146,7 +146,7 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
                <a class="nav-link page-mode" href="/applications/Filter/index.php" target="_subsetting" title="Open the Subsetting application in another tab">Limit</a>
           </li>
           <li class="nav-item">
-               <a class="nav-link page-mode" href="#"> <span id="mod-name">Compact Mode</span></a>
+               <a class="nav-link page-mode" href="#" title="Toggle the display of the tutorial text"> <span id="mod-name">Compact Mode</span></a>
           </li>
 
 <!--           <li class="nav-item dropdown">
@@ -169,7 +169,7 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
           <div class="content"></div>
         </div>
         <div id = "conrol-pannel" class="col-md-1" style="display: none;">
-          <button type="button" id = "compute-button" class="btn btn-primary" onclick = "computeWithCheck()" style="margin-left: 10px;z-index:99999; margin-top: 25px; width:80px;height: 165px;font-size:0.8rem;">Submit</button>
+          <button type="button" id = "compute-button" class="btn btn-primary" onclick = "computeWithCheck()" style="margin-left: 10px;z-index:99999; margin-top: 25px; width:80px;height: 165px;font-size:0.8rem;" title="Start the computation of the currently defined analysis">Submit</button>
 
         </div>
       </div>
