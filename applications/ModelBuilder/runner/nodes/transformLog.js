@@ -37,26 +37,27 @@ function clone(obj) {
 
 
 TransformLog.prototype.work = function (inputs, outputs, state) {
-	//console.log("log-transform: calculate now: " + JSON.stringify(inputs));
-	if (typeof inputs['input'] === 'undefined')
-		return; // done
-
-	// ignore the state variable here, only used for the interface
-
-	// just transform the input with a log
-	outputs['output'] = clone(inputs['input']);
-	// this would be a json object with keys for columns
-	var keys = Object.keys(inputs['input']);
-	for (var i = 0; i < keys.length; i++) {
-		if (keys[i] === 'SubjID' || keys[i] === "VisitID") {
-			continue;
-		}
-		// everything else gets transformed
-		for (var j = 0; j < outputs['output'][keys[i]].length; j++) {
-			if (outputs['output'][keys[i]][j] !== "NA")
-				outputs['output'][keys[i]][j] = Math.log(outputs['output'][keys[i]][j]);
-		}
+    //console.log("log-transform: calculate now: " + JSON.stringify(inputs));
+    if (typeof inputs['input'] === 'undefined')
+	return; // done
+    
+    // ignore the state variable here, only used for the interface
+    
+    // just transform the input with a log
+    outputs['output'] = clone(inputs['input']);
+    // this would be a json object with keys for columns
+    var keys = Object.keys(inputs['input']);
+    for (var i = 0; i < keys.length; i++) {
+	//if (keys[i] === 'SubjID' || keys[i] === "VisitID") {
+        if (keys[i] === 'src_subject_id' || keys[i] === "eventname") {
+	    continue;
 	}
+	// everything else gets transformed
+	for (var j = 0; j < outputs['output'][keys[i]].length; j++) {
+	    if (outputs['output'][keys[i]][j] !== "NA")
+		outputs['output'][keys[i]][j] = Math.log(outputs['output'][keys[i]][j]);
+	}
+    }
 };
 
 module.exports = TransformLog;

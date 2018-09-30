@@ -102,7 +102,7 @@ DataNDA17.prototype.work = function (inputs, outputs, state) {
             entry = [ entry ]; // everything could be an array, so pretend its one
         }
         var columns = "";
-        var variables = [ "SubjID", "VisitID" ];
+        var variables = [ "src_subject_id", "eventname" ];
         for (var k = 0; k < entry.length; k++) {
             var e = entry[k];
             // an entry could be disabled by passing empty string 
@@ -128,7 +128,7 @@ DataNDA17.prototype.work = function (inputs, outputs, state) {
                 columns = columns + ",";
             }
         }
-        R = R + "o = data.frame(SubjID=data$SubjID,VisitID=data$VisitID," + columns + ")\n";
+        R = R + "o = data.frame(src_subject_id=data$src_subject_id,eventname=data$eventname," + columns + ")\n";
         results[outname] = this._path + "/temp_" + code + "_" + outname;
         if (RonlyMode) {
             results[outname] = { "type": "DataTransferFile", "value": results[outname] + ".RDS", "columns": variables };

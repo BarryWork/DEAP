@@ -34,7 +34,8 @@ GAMM4.prototype.work = function (inputs, outputs, state) {
             ks = Object.keys(inputs[keys[i]]);
         }
         for (var j = 0; j < ks.length; j++) {
-            if (ks[j] === "SubjID" || ks[j] === "VisitID") {
+            //if (ks[j] === "SubjID" || ks[j] === "VisitID") {
+            if (ks[j] === "src_subject_id" || ks[j] === "eventname") {
                 continue; // don't count these as duplicates
             }
             if (typeof uniques[ks[j]] === 'undefined' ) {
@@ -72,13 +73,15 @@ GAMM4.prototype.work = function (inputs, outputs, state) {
             else if (typeof inputs[x]['type'] !== 'undefined' && inputs[x]['type'] == "DataTransferFile") {
                 RonlyMode = true;
                 listvars = inputs[x]['columns'].filter(function(x) {
-                    if ( x !== 'SubjID' && x !== "VisitID" )
+                    //if ( x !== 'SubjID' && x !== "VisitID" )
+                    if ( x !== 'src_subject_id' && x !== "eventname" )
                         return true;
                     return false;                     
                 })
             } else {
                 listvars = Object.keys(inputs[x]).filter(function (x) {
-                    if (x !== 'SubjID' && x !== "VisitID")
+                    //if (x !== 'SubjID' && x !== "VisitID")
+                    if (x !== 'src_subject_id' && x !== "eventname")
                         return true;
                     return false;
                 })
