@@ -1,0 +1,154 @@
+[
+    {
+	"name": "anthro_bmi_calc",
+	"description": "Body Mass Index calculated as anthro_weight_calc / anthro_height_calc^2 * 703.",
+	"description_lower_case": "body mass index calculated as anthroweightcalc / anthroheightcalc^2 * 703.",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "sex",
+	"description": "Sex at birth.",
+	"description_lower_case": "sex at birth.",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "female",
+	"description": "Is the participant female?",
+	"description_lower_case": "is the participant female?",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "age",
+	"description": "Interview age in month.",
+	"description_lower_case": "interview age in month (same as interview_age).",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "subjectid",
+	"description": "Unique identifier of the participant",
+	"description_lower_case": "unique identifier of the participant",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "household.income",
+	"description": "Household income.",
+	"description_lower_case": "household income.",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "highest.education",
+	"description": "Highest level of parental education.",
+	"description_lower_case": "highest level of parental education.",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "high.educ",
+	"description": "Highest level of parental education (simplified).",
+	"description_lower_case": "highest level of parental education (simplified).",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "married",
+	"description": "Parent marital status.",
+	"description_lower_case": "parent marital status.",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "married.livingtogether",
+	"description": "Parents who married or just lived together.",
+	"description_lower_case": "parents who married or just lived together.",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "race.ethnicity",
+	"description": "Race/ethnicity of the participant.",
+	"description_lower_case": "race/ethnicity of the participant",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "race.eth",
+	"description": "Race/ethnicity of the participant (spedific).",
+	"description_lower_case": "race/ethnicity of the participant (specific).",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "demo_race_white",
+	"description": "Race/ethnicity of the participants who are white.",
+	"description_lower_case": "race/ethnicity of the participants who are white.",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "demo_race_hispanic",
+	"description": "Race/ethnicity of the participants who are Hispanic.",
+	"description_lower_case": "race/ethnicity of the participants who are Hispanic.",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "demo_race_black",
+	"description": "Race/ethnicity of the participants who are African American.",
+	"description_lower_case": "race/ethnicity of the participants who are African American.",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "demo_race_asian",
+	"description": "Race/ethnicity of the participants who are Asian.",
+	"description_lower_case": "race/ethnicity of the participants who are Asian",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "demo_race_nhpi",
+	"description": "Race/ethnicity of the participants who are Native Hawaiian Pacific Islander",
+	"description_lower_case": "race/ethnicity of the participants who are Native Hawaiian Pacific Islander",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "demo_race_other",
+	"description": "Race/ethnicity of the participants who are neither white, nor African American, nor Aisan, nor Hispanic, nor Native Hawaiian/Pacific Islander.",
+	"description_lower_case": "race/ethnicity of the participants who are neither white, nor african american, nor aisan, nor hispanic, nor native hawaiian/pacific islander.", 
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
+	"name": "demo_race_mixed",
+	"description": "Race/ethnicity of the participants who belong to more than one race ethnicity group",
+	"description_lower_case": "race/ethnicity of the participants who belong to more than one race ethnicity group",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    }
+]
