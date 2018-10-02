@@ -314,7 +314,7 @@ jQuery(document).ready(function() {
            jQuery('select.existingFilters').append(optGrp);
            for (var j = 0; j < filters[i]["rules"].length; j++) {
 		var mdcode = hex_md5(project_name + filters[i]["rules"][j]["func"].replace(/\s/g,'') + "YES").slice(-4);	       
-               jQuery(optGrp).append('<option value = "'+ '/var/www/html/applications/Filter/data/filterSets_'+project_name +'_'+ mdcode+'.json">' + filters[i]["rules"][j]["name"] + '</option>');     
+               jQuery(optGrp).append('<option value = "'+ '/var/www/html/data/ABCD/Filter/data/filterSets_'+project_name +'_'+ mdcode+'.json">' + filters[i]["rules"][j]["name"] + '</option>');     
            }
        }
        jQuery('select.existingFilters').val(default_value)
