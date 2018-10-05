@@ -157,6 +157,8 @@
 <!-- <script type="text/javascript" src="/js/highslide/highslide-full.min.js"></script>
 <script type="text/javascript" src="/js/highslide/highslide.config.js" charset="utf-8"></script> -->
 <script src="js/jquery.csv-0.71.min.js"></script>
+       
+<script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <!-- <script src="js/bootstrap.min.js"></script> -->
 <script src="js/bootstrap-select.min.js"></script>
