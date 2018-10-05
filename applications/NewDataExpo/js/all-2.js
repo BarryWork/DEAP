@@ -3293,17 +3293,21 @@ function clearDisplayCheck(time) {
                         function(d) {
                             statistics_output_json = d
                             //summary_text.html(JSON.parse(d).join("\n"));
-                            if (JSON.parse(d)["formula"])
-                                summary_text.append(
-                                    "<h4 class='formula-title'>Model Formula</h4><p class='formula'>" +
+                            if (JSON.parse(d)["formula"]){
+				formula_wrap = jQuery("<div class = 'formula'>");
+				summary_text.append(jQuery("<h4 class='formula-title'>Model Formula</h4>"))
+				summary_text.append(formula_wrap);
+                                formula_wrap.append(
+                                    "<p class='formula-main'>" +
                                     (Array.isArray(JSON.parse(d)["formula"])
                                         ? JSON.parse(d)["formula"].join("</n>")
                                         : JSON.parse(d)["formula"]) + 
                                         
                                     "</p>"
                                 )
-                                summary_text.append( "<p class='formula'>" +
+                                formula_wrap.append( "<p class='formula-main'>" +
                                     "\n Random: " + JSON.parse(d)["formula.random"] + "</p>");
+			    }
                             if (JSON.parse(d)["warning"])
                                 jQuery("#scatter").prepend(
                                         jQuery("<p>").html(JSON.parse(d)
@@ -3418,6 +3422,7 @@ function clearDisplayCheck(time) {
                                     )
                             })
                             summary_text.show()
+                    	    switchMode(mode)
                         },
                         "text"
                     )
