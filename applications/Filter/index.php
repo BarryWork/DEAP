@@ -26,7 +26,8 @@
     <link rel="apple-touch-icon-precomposed" href="/img/apple-touch-icon-57-precomposed.png">
     <link rel="shortcut icon" href="/img/favicon.png">
 
-    <link href="css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
+    <!-- <link href="css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/> -->
+    <link href="css/select2.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="css/all.css">
   </head>
   <body>
@@ -34,27 +35,20 @@
     <!-- http://mmil-dataportal.ucsd.edu:3000/applications/SurfaceViewerSS/index.php?subjid=Y0181,Y0368&visitid=Y0181,Y0368 -->
 
 
-<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Subsetting <span class="project_name"></span></a>
-    </div>
+    <a class="navbar-brand" href="#">Subsetting <span class="project_name"></span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/index.php">Home</a></li>
-        <li><a href="#help-info-box" data-toggle="modal">Help</a></li>
+      <ul class="mr-auto navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/index.php">Home</a></li>
+        <li class="nav-item"><a class="nav-link" data-target="#help-info-box" data-toggle="modal">Help</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
 </nav>
 
 
@@ -73,8 +67,8 @@
 
 
  <div class="container-fluid">
-     <div class="row-fluid">
-       <div id="start" class="col-xs-12"></div>
+     <div class="row">
+       <div id="start" class="col-12"></div>
      </div>
  </div>
 
@@ -100,12 +94,15 @@
                <dd>Returns true if age exists and is not empty or NA.</dd>
                <dt style="margin-top: 10px;">quantile(age,0.75)</dt>
                <dd>Returns a threshold value for a given variable. This can be used as in: <code>age>quantile(age,0.75)</code> to select participants with a age value below the 75 percentile.</dd>
+       <dt style="margin-top: 10px;">unique(rel_family_id)</dt>
+       <dd>Unique returns a single session (at random) for each value in the specified measure. Using it with rel_family_id it returns a single member of each family.</dd>
                <!--<dt>visit()</dt>
                <dd>Returns for each visit a number that indicates the order as defined by "StudyDate". For the oldest visit of a subject this value will be 0.</dd>
                <dt style="margin-top: 10px;">visit( measure )</dt>
                <dd>Returns the sorting order given the measure. For example visit ("StudyDate") will return 
                the sorting order based on the StudyDate column (same as calling visit()). If a variable other
                than "StudyDate" is defined the sorting will be done numerically or alphabetically.</dd> -->
+                   
             </dl>
           </p>
        </div>
@@ -161,7 +158,8 @@
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <!-- <script src="js/bootstrap.min.js"></script> -->
-<script src="js/bootstrap-select.min.js"></script>
+<!-- <script src="js/bootstrap-select.min.js"></script> -->
+<script src="js/select2.min.js"></script>
 <script src="js/peg.0.8.0.js"></script>
 <script src="/js/md5-min.js"></script>
 <script src="js/all.js"></script>

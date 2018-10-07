@@ -20,10 +20,10 @@
                jQuery(optGrp).append('<option>' + filters[i]["rules"][j]["name"] + '</option>');
            }
        }
-       jQuery('.selectpickerS').selectpicker({
+       /*jQuery('.selectpickerS').selectpicker({
            style: ''
        });
-       jQuery('.selectpickerS').selectpicker('refresh');
+       jQuery('.selectpickerS').selectpicker('refresh'); */
        if (selectThis !== undefined) {
            jQuery('.selectpickerS').val(selectThis);
            jQuery('.selectpickerS').selectpicker('render');
@@ -97,13 +97,13 @@ function highlight(where, what) {
 
    // add two rows, one for the data the other for the filter
    var d01 = document.createElement("div");
-   jQuery(d01).addClass("row-fluid").css('margin-top', '10px');
+     jQuery(d01).addClass("row").addClass('no-gutters').css('margin-top', '10px');
    var d02 = document.createElement("div");
-   jQuery(d02).addClass("row-fluid").css('margin-top', '10px');
+   jQuery(d02).addClass("row").css('margin-top', '10px');
    var d1 = document.createElement("div");
    var d2 = document.createElement("div");
-   jQuery(d1).addClass("col-xs-9");
-   jQuery(d2).addClass("col-xs-12");
+   jQuery(d1).addClass("col-9");
+   jQuery(d2).addClass("col-12");
    jQuery(d2).addClass("dataHere");
    jQuery(below).append("<div class=\"sectionTitle\" id=\"dataHereTitle\">All data points available in " + project_name + "</div>");
    jQuery(d02).append(d2);
@@ -113,7 +113,7 @@ function highlight(where, what) {
 
    var existingFilters = document.createElement("div");
    jQuery(existingFilters).addClass('existingFilterDiv');
-   jQuery(existingFilters).addClass('col-xs-3');
+   jQuery(existingFilters).addClass('col-3');
    var sel = document.createElement("select");
    jQuery(sel).addClass('selectpickerS');
    jQuery(sel).addClass('existingFilters');
@@ -128,7 +128,7 @@ function highlight(where, what) {
    //jQuery(d21).addClass("span12");
    jQuery(d21).addClass("select");
    jQuery(d1).append(d21);
-   jQuery(d21).append('<div class="input-group"><input class="inputmeasures form-control" type="text" placeholder="select a predefined filter or enter your own"/><span class="input-group-addon btn" id="runFilter">&nbsp;Run</span><span class="input-group-addon btn" id="saveNewFilter">&nbsp;Save</span></div>');
+   jQuery(d21).append('<div class="input-group"><input class="inputmeasures form-control" type="text" placeholder="select a predefined filter or enter your own">  <div class="input-group-append"><button class="btn-outline-secondary btn" id="runFilter" type="button">&nbsp;Run</button><button type="button" class="btn-outline-secondary btn" id="saveNewFilter">&nbsp;Save</span></div></div>');
    jQuery(d21).append('<div id="info"></div>')
    jQuery('#saveNewFilter').click(function() {
        var z = jQuery('.inputmeasures').val();
@@ -153,6 +153,7 @@ function highlight(where, what) {
  }
 
 function changeSearch() {
+    toggleFamilyViewOn = false;
     jQuery('.loading').show();
     // do a partial load of only the variables of interest (overwrite allMeasures)
     var requiredVariables = [ "gender", "src_subject_id", "eventname" ];
@@ -213,23 +214,23 @@ function changeSearch() {
         if (jQuery('#start div .dataHere').parent().next().next().children(':first').find('.yes').length == 0) {
             var newDParent = jQuery('#start div .dataHere').parent().parent();
             var newDiv = document.createElement("div");
-            jQuery(newDiv).addClass("row-fluid").css('margin-top', '-10px');
+            jQuery(newDiv).addClass("row").css('margin-top', '-10px');
             if (jQuery('.yes').length == 0) {
                 var yes = document.createElement("div");
-                jQuery(yes).addClass("col-xs-6");
+                jQuery(yes).addClass("col-6");
                 jQuery(yes).addClass("yes");
                 //createBlock(yes);
                 // fill this block
                 
                 jQuery(newDiv).append(yes);
                 var no = document.createElement("div");
-                jQuery(no).addClass("col-xs-6");
+                jQuery(no).addClass("col-6");
                  jQuery(no).addClass("no");
                 //createBlock(no);
                 // fill this block
                 
                 jQuery(newDiv).append(no);
-                jQuery(newDParent).append("<div class=\"row-fluid\"><div class=\"sectionTitle col-xs-12\">Result of the current restriction</div></div>");
+                jQuery(newDParent).append("<div class=\"row\"><div class=\"sectionTitle col-12\">Result of the current restriction</div></div>");
                 jQuery(newDParent).append(newDiv);
             }
         }
@@ -384,7 +385,7 @@ function parse() {
     // we will apply the rules to each data entry and generate an output array
     var searchTerm = jQuery('.inputmeasures').val();
     jQuery('.loading').show();
-    jQuery.get('js/grammar_vectorized.txt?_=113', function(data) {
+    jQuery.get('js/grammar_vectorized.txt?_=112', function(data) {
         var parser;
         try {
             parser = PEG.buildParser(data);
@@ -672,14 +673,89 @@ function addOneMeasure( meas ) {
     });
 }
 
+var toggleFamilyViewOn = false;
 function toggleFamilyView() {
+    if (toggleFamilyViewOn)
+        return; // only do this once
+    
+    toggleFamilyViewOn = true;
+    
     console.log('sort all entries into different sites/families/groups');
+    // use allMeasures['rel_family_id'] and allMeasures['rel_group_id']
+
+    // first group by first measure
+    firstMeasure = 'rel_family_id';
+
+    // secondarily transform by
+    secondMeasure = 'rel_group_id'; 
+
+    var pills = jQuery('div.yes div.data');
+
+    // create div's for the firstMeasure (sort by rel_family_id)
+    var pill_map = [];
+    for (var i = 0; i < pills.length; i++) {
+        var x = pills[i];
+        var pGUID = jQuery(x).attr('subjid');
+        var pos = allMeasures['src_subject_id'].indexOf(pGUID);
+        if (pos > -1) {
+            var key = allMeasures['rel_family_id'][pos];
+            var group = allMeasures['rel_group_id'][pos];
+            jQuery(x).attr('rel_group_id', group);
+            pill_map[key] = pill_map[key] || [];
+            pill_map[key][group] = pill_map[key][group] || [];
+            pill_map[key][group].push(x);
+        }
+    }
+
+    // use mansonry to map everything to .datas
+    for (var box in pill_map) {
+        // create a new div
+        var c = jQuery("<div class='masonry-layout__panel'></div>");
+        if (pill_map[box].length > 1) {
+            jQuery(c).addClass('link1');
+        }
+        jQuery(c).attr('rel_family_id', box);
+        // we should also group by group
+
+        numPills = 0;
+        for (var group in pill_map[box]) {
+            for (var pill in pill_map[box][group]) {
+                numPills++;
+            }
+        }
+        
+        for (var group in pill_map[box]) {
+            var d = jQuery('<div class="masonry-layout__group"></div>');
+            var numInGroup = Object.keys(pill_map[box][group]).length;
+            if (numInGroup > 1 /*&& numInGroup < numPills*/) {
+                jQuery(d).addClass('link'+(+group+1));
+            }
+            jQuery(d).attr('group', group);
+            var count = 0;
+            for (var pill in pill_map[box][group]) {
+                if (count < numInGroup)
+                    jQuery(pill_map[box][group][pill]).css('margin-right', '2px');
+                else
+                    jQuery(pill_map[box][group][pill]).css('margin-right', '0px');
+                d.append(pill_map[box][group][pill]);
+                count++;
+            }
+            jQuery(c).append(d);
+        }
+        if (numPills > 1)
+            jQuery('div.yes div.datas').append(c);
+        else
+            jQuery('div.yes div.datas').prepend(c);
+    }
+
+    
 }
 
 jQuery(document).ready(function() {
     jQuery('.project_name').text(project_name);
     createBlock('#start');
     getAllFilters();
+    jQuery('select.selectpickerS').select2({ width: '100%' }); 
     jQuery('#dataHereTitle').hide();
     // don't react to change, we will get a change on loosing focus, only react to hitting the enter key
     jQuery('.inputmeasures').on('keypress', function(e) {

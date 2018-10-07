@@ -75,6 +75,18 @@
         }
         return func(one);
     }
+    function vectorizeUnique( one ) {
+        var isOne = (one.constructor === Array);
+        if (isOne) {
+            var res = [];
+            for (var i = 0; i < one.length; i++) {
+                res.push(one.indexOf(one[i]) === i);
+            }
+            //console.log("got unique: " + JSON.stringify(res));
+            return res;
+        }
+        return one;
+    }
 }
 
 
@@ -155,6 +167,11 @@ primary
         if ((typeof variable === "undefined") || (variable === "") || (variable === "NA"))
            return false;
         return vectorizeOne(variable, function(a) { if (a === "" || a === "NA") return false; return true; });
+    }
+    / "unique" __ "(" __ variable:variable __ ")" {
+        if ((typeof variable === "undefined") || (variable === "") || (variable === "NA"))
+           return false;
+        return vectorizeUnique(variable);
     }
     / "quantile" __ "(" __ variable:variable __ "," __ number:number __ ")" {
         if ((typeof variable === "undefined") || (variable === "") || (variable === "NA") || (variable === null))
