@@ -47,6 +47,16 @@
       <ul class="mr-auto navbar-nav">
         <li class="nav-item"><a class="nav-link" href="/index.php">Home</a></li>
         <li class="nav-item"><a class="nav-link" data-target="#help-info-box" data-toggle="modal">Help</a></li>
+        <li class="nav-item dropdown">
+           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true">Zoom</a>
+           <div class="dropdown-menu">
+              <a class="dropdown-item" href="#" onclick="jQuery('.datas').css('zoom','100%');">Scale 100%</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#" onclick="jQuery('.datas').css('zoom','50%');">Scale 50%</a>
+              <a class="dropdown-item" href="#" onclick="jQuery('.datas').css('zoom','200%');">Scale 200%</a>
+              <a class="dropdown-item" href="#" onclick="jQuery('.datas').css('zoom','500%');">Scale 500%</a>
+           </div>
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
