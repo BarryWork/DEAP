@@ -157,7 +157,7 @@ jQuery(document).ready(function() {
 	var instrument = jQuery(this).attr('instrument');
 	var elem = jQuery(this);
 	if(jQuery(".ui-dialog-buttonpane").find("button").length <= 5){
-	    if(jQuery(".ui-dialog-buttonpane").find("button[value="+item+"]").length == 0){
+	    if(jQuery(".ui-dialog-buttonpane").find("button[value='"+item+"']").length == 0){
 	        jQuery(".ui-dialog-buttonpane").prepend(
 		    jQuery("<button>")
 		        .attr("class","variable-button-tag btn-sm btn btn-outline-secondary")
