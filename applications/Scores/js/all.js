@@ -502,7 +502,7 @@ function histogram(values, hist_location) {
    @Fangzhou: In order to add the new item to the Ontology use searchTerm2 and provide a GET variable scoresAdd with a uricomponet encoded json object that contains keys for name, description, notes, and aliases=[].
    */
 function insert_recipe_block(input, top) {
-    var variable_name = input["name"]? input["name"] : new Date().getTime();
+    var variable_name = (input["name"]? input["name"] : new Date().getTime());
     var simplemd_initialize_text = input["content"] && JSON.parse(input["content"]) ? JSON.parse(input["content"]) : "Start by entering a unique name as the Element Name of the score. Only lower-case characters, numbers and underscores are allowed. Add a short axis label suitable for a plot legend.\n### Describe the new item\nWhy should the reader be interested in this new item? Describe your rationale to provide it and explain your sources. Start the computation of the new item by listing required existing items, for example age here:\n```\nvar promises = use([\"age\"]);\n```\n\nAdd the calculation of the new measure in another section delimited by three tick marks:\n```\nPromise.all(promises).then( function() {\n  var data = new DataFrame(allMeasures);\n  data = data.map(row => row.set('age_years', row.get('age')/12));\n  update(data, 'age_years');\n});\n```\n";
     var div = $("<div class='recipe-block' tabindex='0' style = 'position:relative;'></div>");
     var fold_head = jQuery("<div class= 'fold-recipe row'></div>").appendTo(div);
@@ -514,7 +514,7 @@ function insert_recipe_block(input, top) {
             descr = descr + "...";
         }
     }    
-    fold_head.html( (typeof variable_name == "number" ? "New score calculation (unsaved)":variable_name) + descr );
+    fold_head.html( (typeof variable_name == "number" ? "New score calculation (unsaved)": "<span style='font-size: 70%;'>[" + input['user'] + "]</span> " + variable_name) + descr );
     if (typeof top !== 'undefined' && top) {
         div.insertAfter("#first-item");
     } else {
@@ -581,7 +581,12 @@ function insert_recipe_block(input, top) {
         parse(simplemde.value(),div_table,bootstrap_input_name.find("input").val(), div_hist);
     }),3500);
     */
-    save.on("click",function(){
+    save.on("click",function() {
+        jQuery(this).removeClass('btn-primary').addClass('btn-success').text('saved');
+        setTimeout( function() {
+            jQuery('button.save-button').removeClass('btn-success').addClass('btn-primary').text('save');
+        }, 1000);
+        
         temp = {};
         temp["name"]        = bootstrap_input_name.find("input").val();
         temp["description"] = bootstrap_texarea_description.find("input").val();
