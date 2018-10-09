@@ -29,6 +29,7 @@ function populate_results(data) {
     for (var i = 0; i < data.length; i++) {
         var d = data[i];
 	var no = d['notes'];
+	var alia = d['aliases'].length > 2 ? " [Alias: "+d['aliases'][2]+"]":"";
 	if (no === null || no === 'Required field') {
 	    no = "";
 	} else {
@@ -36,7 +37,7 @@ function populate_results(data) {
 	}
         jQuery('#results').append('<dt class="comment-slider" item="'+ d['name'] +'" instrument="'+d['instrument']+'"><span class="item-name">' + d['name'] + '</span> in ' + d['title'] + " / " + d['instrument'] +
 				  ' [' + d['categories'].join(",") + ']' +
-				  '</dt><dd>search term: ' + d['marker'][0] + (d['marker'].length > 1?(" - " + d['marker'][1]):"") + 
+				  '</dt><dd>search term: ' + d['marker'][0] + (d['marker'].length > 1?(" - " + d['marker'][1]):"")+alia+
 				  '<br/><span id="result-' + i + '">'+d['description'] + no + '</span></dd>');
 	if (typeof d['marker'] !== 'undefined' && d['marker'].length > 1 && d['marker'][0].length > 0) {
 	    console.log("marker is now: " + d['marker'][0]);

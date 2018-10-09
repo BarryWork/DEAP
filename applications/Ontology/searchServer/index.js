@@ -46,6 +46,7 @@ function search( what, longsearch ) {
 		entry['instrument'] = keys[i];
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
+		entry['aliases'] = instr[j]['aliases'];
 		results.push(entry);
 		found = true;
 	    }
@@ -56,6 +57,7 @@ function search( what, longsearch ) {
 		entry['instrument'] = keys[i];
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
+		entry['aliases'] = instr[j]['aliases'];
 		results.push(entry);
 		found = true;
 	    }	    
@@ -66,11 +68,12 @@ function search( what, longsearch ) {
 		entry['instrument'] = keys[i];
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
+		entry['aliases'] = instr[j]['aliases'];
 		results.push(entry);
 		found = true;
 	    }
 	    // look for aliases
-	    if (!found && typeof instr[j]['aliases'] !== 'undefined' && instr[j]['aliases'].length > 0) {
+	    if (!found &&  typeof instr[j]['aliases'] !== 'undefined' && instr[j]['aliases'].length > 0) {
 		for (var k = 0; k < instr[j]['aliases'].length; k++) {
 		    if (instr[j]['aliases'][k].indexOf(what) > -1) {
 			var entry = { name: instr[j]['name'], description: instr[j]['description'], notes: instr[j]['notes'] };
@@ -78,6 +81,7 @@ function search( what, longsearch ) {
 			entry['instrument'] = keys[i];
 			entry['title'] = instrumentTitles[keys[i]]['title'];
 			entry['categories'] = instrumentTitles[keys[i]]['categories'];
+			entry['aliases'] = instr[j]['aliases'];
 			results.push(entry);
 			found = true;
 			break; // one is sufficient
@@ -90,6 +94,7 @@ function search( what, longsearch ) {
 		entry['instrument'] = keys[i];
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
+		entry['aliases'] = instr[j]['aliases'];
 		results.push(entry);
 		found = true;
 	    }
@@ -101,6 +106,7 @@ function search( what, longsearch ) {
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['marker'] = [what,"matches notes"];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
+		entry['aliases'] = instr[j]['aliases'];
 		results.push(entry);
 		found = true;
 	    }
@@ -142,7 +148,6 @@ function searchSynonyms(result, what) {
 	    break;
 	}
     }; 
-
     return result;
 }
 
@@ -176,6 +181,7 @@ function searchRegExp(results, what) {
 		entry['instrument'] = keys[i];
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
+		entry['aliases'] = instr[j]['aliases'];
 		results.push(entry);
 		found = true;
 	    }
@@ -186,6 +192,7 @@ function searchRegExp(results, what) {
 		entry['instrument'] = keys[i];
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
+		entry['aliases'] = instr[j]['aliases'];
 		results.push(entry);
 		found = true;
 	    }	    
@@ -196,6 +203,7 @@ function searchRegExp(results, what) {
 		entry['instrument'] = keys[i];
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
+		entry['aliases'] = instr[j]['aliases'];
 		results.push(entry);
 		found = true;
 	    }
@@ -208,6 +216,7 @@ function searchRegExp(results, what) {
 			entry['instrument'] = keys[i];
 			entry['title'] = instrumentTitles[keys[i]]['title'];
 			entry['categories'] = instrumentTitles[keys[i]]['categories'];
+			entry['aliases'] = instr[j]['aliases'];
 			results.push(entry);
 			found = true;
 			break; // one is sufficient
@@ -220,6 +229,7 @@ function searchRegExp(results, what) {
 		entry['instrument'] = keys[i];
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
+		entry['aliases'] = instr[j]['aliases'];
 		results.push(entry);
 		found = true;
 	    }
@@ -230,6 +240,7 @@ function searchRegExp(results, what) {
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['marker'] = [what,"matches notes"];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
+		entry['aliases'] = instr[j]['aliases'];
 		results.push(entry);
 		found = true;
 	    }
@@ -261,11 +272,13 @@ function searchKeywords(result, what) {
 	    finds[uname].push(res2[j]);
 	}
     }
+    console.log(JSON.stringify(finds));
     // now sort the different measures by length (number of matching entries)
     var ks = Object.keys(finds);
     var sks = ks.sort(function(a,b) { return finds[b].length - finds[a].length; });
     for (var i = 0; i < sks.length; i++) {
 	// merge all the marker
+	
 	var marker = finds[sks[i]].reduce(function(a,b) { return a.concat(b['marker'][0]); },[]);
 	marker = marker.filter((v, i, a) => a.indexOf(v) === i); 
 	var dd = finds[sks[i]][0];
@@ -406,9 +419,10 @@ function getInstrumentList( names ) {
 		// lets check if the name should be changed to one of the alias names
 		var aname = data['dataElements'][i]['name'];
 		if (typeof alias_data[aname] !== 'undefined') {
+		    data['dataElements'][i]['aliases'].push(aname);
 		    aname = alias_data[aname]['abcd'];
+		    
 		}
-		
 		t.push( { name: aname,
 			  description: data['dataElements'][i]['description'],
 			  description_lower_case: (data['dataElements'][i]['description']!== null?data['dataElements'][i]['description'].toLowerCase():""),
