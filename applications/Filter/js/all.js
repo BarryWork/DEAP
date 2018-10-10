@@ -1,4 +1,4 @@
- var filters = null;
+var filters = null;
  var allMeasures = { "src_subject_id": [], "eventname": [] };
  var idxSubjID = 0;
  var idxVisitID = 1;
@@ -680,7 +680,7 @@ function toggleFamilyView() {
     
     toggleFamilyViewOn = true;
     
-    console.log('sort all entries into different sites/families/groups');
+    // console.log('sort all entries into different sites/families/groups');
     // use allMeasures['rel_family_id'] and allMeasures['rel_group_id']
 
     // first group by first measure
@@ -711,7 +711,7 @@ function toggleFamilyView() {
     for (var box in pill_map) {
         // create a new div
         var c = jQuery("<div class='masonry-layout__panel'></div>");
-        if (pill_map[box].length > 1) {
+        if (Object.keys(pill_map[box]).length > 1) {
             jQuery(c).addClass('link1');
         }
         jQuery(c).attr('rel_family_id', box);
