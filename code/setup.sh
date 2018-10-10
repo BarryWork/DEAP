@@ -24,6 +24,8 @@ dataRds=`ls ${rootpath}/data/${project}/*.Rds | head -1`
 dataRdsEnd="${rootpath}/data/${project}/data_uncorrected/nda17.Rds"
 if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
     echo "Detected initial data Rds in project data directory, start setup..."
+    mkdir -p "${rootpath}/data/${project}/logs/"
+    chown -R www-data:www-data "${rootpath}/data/${project}/logs"
     mkdir -p "${rootpath}/data/${project}/data_uncorrected"
     cp "${dataRds}" "${rootpath}/data/${project}/data_uncorrected/"
     cp "${rootpath}/applications/Ontology/ABCD_datadictionary_rules.csv_master" "${rootpath}/data/${project}/data_uncorrected/ABCD_datadictionary_rules.csv"
