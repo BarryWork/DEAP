@@ -709,14 +709,6 @@ function toggleFamilyView() {
 
     // use mansonry to map everything to .datas
     for (var box in pill_map) {
-        // create a new div
-        var c = jQuery("<div class='masonry-layout__panel'></div>");
-        if (Object.keys(pill_map[box]).length > 1) {
-            jQuery(c).addClass('link1');
-        }
-        jQuery(c).attr('rel_family_id', box);
-        // we should also group by group
-
         numPills = 0;
         for (var group in pill_map[box]) {
             for (var pill in pill_map[box][group]) {
@@ -724,6 +716,14 @@ function toggleFamilyView() {
             }
         }
         
+        // create a new div
+        var c = jQuery("<div class='masonry-layout__panel'></div>");
+        if (numPills > 1) {
+            jQuery(c).addClass('link1');
+        }
+        jQuery(c).attr('rel_family_id', box);
+        // we should also group by group
+
         for (var group in pill_map[box]) {
             var d = jQuery('<div class="masonry-layout__group"></div>');
             var numInGroup = Object.keys(pill_map[box][group]).length;
