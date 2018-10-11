@@ -6,7 +6,7 @@
     <meta name="description" content="Data Exploration and Analysis Portal">
     <meta name="keywords" content="ABCD">
      <meta name="theme-color" content="#4f4f4f">
-    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="shortcut icon" href="/imag/favicon.png">
     <!-- ========== ogp ========== -->
     <meta property="og:title" content="Data Explorationn and Analysis Portal">
     <meta property="og:url" content="http://relationdc.com">
