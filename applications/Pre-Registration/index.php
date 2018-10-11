@@ -166,7 +166,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
     <div class="reference">Garavan, H., et al. "Recruiting the ABCD sample: design considerations and procedures." Developmental cognitive neuroscience (2018).</div>
 
             <h1>Design Plan</h1>
-    <p>The ABCD study is a prospective longitudinal study with yearly assessments. The November 2017 public data release on the NIMH Data Archive (NDA) consists of baseline data from 4,524 children from 20 sites. Data collection efforts for ABCD are organized into several data categories. Overviews of neuroimaging data, neuropsychological measures, biospecimens, substance use assessments, and culture and environment are given in the citations below.</p>
+    <p>The ABCD study is a prospective longitudinal study with yearly assessments. The November 2017 public data release on the NIMH Data Archive (NDA) consists of baseline data from 4,521 children from 20 sites. Data collection efforts for ABCD are organized into several data categories. Overviews of neuroimaging data, neuropsychological measures, biospecimens, substance use assessments, and culture and environment are given in the citations below.</p>
 
     <div class="reference">Lisdahl, Krista M., et al. "Adolescent brain cognitive development (ABCD) study: Overview of substance use assessment methods." Developmental cognitive neuroscience (2018).</div>
 
@@ -256,12 +256,12 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
           <li>Planned Sample for Analyses
               <ol>                            
                  <li>Describe pre-selection rules for which subjects will be included in the analyses<br>
-                                          [<b>2017 NDA baseline ABCD data consist of 4,524 subjects. Data were missing on X1 subjects. We excluded X2 subjects from the analyses because of….</b>]
+                                 [<b>2017 NDA baseline ABCD data (release 1.1) consist of 4,521 subjects. Data were missing on X1 subjects. We excluded X2 subjects from the analyses because of….</b>]
                  </li>                         
                  <li>Justify planned sample size
                      <ol>                     
                         <li>If applicable, you can upload a file related to your power analysis here (e.g., power analyses from G*Power, a script, a screenshot, etc.).<br>
-                                          [<b>Data were collected on 4,524 subjects in the 2017 NDA Baseline ABCD data. With this sample size we have power to detect an effect size of X1 with 80% power.</b>]
+                                 [<b>Data were collected on 4,521 subjects in the 2017 NDA Baseline ABCD data (release 1.1). With this sample size we have power to detect an effect size of X1 with 80% power.</b>]
                         </li>
                      </ol>                     
                  </li>
