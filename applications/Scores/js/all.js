@@ -752,7 +752,7 @@ var simplemde;
 jQuery(document).ready(function() {
     $.post("getScores.php", {action : "load"}).done(function(data){
         recipes = JSON.parse(data);
-        console.log(recipes);
+        //console.log(recipes);
         for (recipe in recipes) {
             insert_recipe_block(recipes[recipe], false);
         }
@@ -807,7 +807,6 @@ function loadAnalysisNames() {
         "/data_uncorrected" +
         "/" +
         "ABCD" +
-        "../../data/" +
         "_datadictionary02.csv"
     jQuery.get(
         inputData,
