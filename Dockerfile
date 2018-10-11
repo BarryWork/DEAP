@@ -62,6 +62,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && chown root:crontab $ROOT_CRONTAB \
     && chmod 0600 $PROCESSING_CRONTAB \
     && chmod 0600 $ROOT_CRONTAB \
+    && sed -i '/session    required     pam_loginuid.so/c\#session    required   pam_loginuid.so' /etc/pam.d/cron \
     && localedef --force --inputfile=en_US --charmap=UTF-8 C.UTF-8
 
 RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
