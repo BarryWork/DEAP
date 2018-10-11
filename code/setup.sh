@@ -25,7 +25,6 @@ dataRdsEnd="${rootpath}/data/${project}/data_uncorrected/nda17.Rds"
 if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
     echo "Detected initial data Rds in project data directory, start setup..."
     mkdir -p "${rootpath}/data/${project}/logs/"
-    chown -R www-data:www-data "${rootpath}/data/${project}/logs"
     mkdir -p "${rootpath}/data/${project}/data_uncorrected"
     cp "${dataRds}" "${rootpath}/data/${project}/data_uncorrected/"
     cp "${rootpath}/applications/Ontology/ABCD_datadictionary_rules.csv_master" "${rootpath}/data/${project}/data_uncorrected/ABCD_datadictionary_rules.csv"
@@ -47,6 +46,8 @@ if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
     
     # the owner of all of these should be the web-user (fixed user across all docker instances)
     chown -R www-data:www-data "${rootpath}/data/${project}/"
+    chown -R processing:processing "${rootpath}/data/${project}/logs"
+    chmod gou+rw "${rootpath}/data/${project}/logs"
 elif [ -f "${rootpath}/data/${project}/data_uncorrected/nda17.Rds" ]; then
     echo "Setup found. Nothing needs to be done."
     exit
