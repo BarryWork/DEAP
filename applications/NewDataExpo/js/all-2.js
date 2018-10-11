@@ -2248,33 +2248,51 @@ function creatVar(value, input_id) {
         $div_button
     )
     */
-    if (input_id != "depvar")
+    if (input_id == "depvar"){
+	jQuery("<button class='v-s-button btn-sm btn-default btn col-md-12'></button>")
+            .text("Smooth transformation")
+            .css("background-color", "lightgrey")
+            .css("margin-left", "1px")
+	    .attr("disabled", "true")
+	    .attr("title", "Smooth does not apply on dependent variable.")
+	    .appendTo($div_button)
+    }else{
         jQuery("<button class='v-s-button btn-sm btn-default btn col-md-12'></button>")
             .text("Smooth transformation")
             .css("background-color", "lightgrey")
             .css("margin-left", "1px")
             .on("click", function() {
-                if(jQuery(this).parent().find("button").css("background-color") == "rgb(144, 238, 144)"){
-                    name.val(act_v)
-                    jQuery(this).parent().find("button").css("background-color", "lightgrey")
-                    jQuery("." + act_name_tag + "-" + input_id + "-tag").html(act_v)
-                    //enable the interaction after do the square transformation
+		trans_arr = [];
+                if(jQuery(this).parent().find(".v-s-button").css("background-color") == "rgb(144, 238, 144)"){
+                    clear_vname = jQuery("." + act_name_tag + "-" + input_id + "-tag").html().replace("s(","").replace(")","")
+		    name.val(clear_vname)
+                    jQuery(this).parent().find(".v-s-button").css("background-color", "lightgrey")
+                    jQuery("." + act_name_tag + "-" + input_id + "-tag").html(clear_vname)
                     jQuery(this).parent().find(".interaction-input").remove()
                     jQuery(this).parent().find(".v-interaction-button").css("background-color", "lightgrey")
                     jQuery(this).parent().find(".v-interaction-button").removeAttr("disabled")
                     jQuery(this).parent().find(".v-interaction-button").text("interaction")
+		    if(clear_vname.includes("Censor(")){
+			trans_arr.push("censor005")
+		    }  
                     usercovArray()
-                    vinfo_hist(act_v, act_name_tag, [], input_id)
+                    vinfo_hist(act_v, act_name_tag, trans_arr, input_id)
                     return
                 }
-                name.val("s(" + act_v + ")")
+		change_name = "s(" + act_v + ")";
+		current_name = jQuery("." + act_name_tag + "-" + input_id + "-tag").html();
+		if(current_name.includes("Censor(")){
+		    change_name = "s(Censor(" + act_v + "))";
+		    trans_arr.push("censor005")
+		}
+                name.val(change_name)
                 jQuery(this)
                     .parent()
-                    .find("button")
+                    .find("button:not(.v-ws-button)")
                     .css("background-color", "lightgrey")
                 jQuery(this).css("background-color", "lightgreen")
                 jQuery("." + act_name_tag + "-" + input_id + "-tag").html(
-                    "s(" + act_v + ")"
+                    change_name
                 )
                 jQuery(this)
                     .parent()
@@ -2291,20 +2309,45 @@ function creatVar(value, input_id) {
                     .find(".v-interaction-button")
                     .css("background-color", "lightgrey")
                 usercovArray(act_v)
-                vinfo_hist(act_v, act_name_tag, [], input_id)
+                vinfo_hist(act_v, act_name_tag, trans_arr, input_id)
             })
             .appendTo($div_button)
-
+	}
     // log transformation
     jQuery("<button class='v-log-button btn-sm btn-default btn col-md-12'></button>")
         .text("Log transformation")
         .css("margin-left", "1px")
-        .css("background-color", "lightgrey")
-        .on("click", function() {
-            name.val("log(" + act_v + ")")
+	.css("background-color", "lightgrey")
+	.on("click", function() {
+	    trans_arr = [];
+                if(jQuery(this).parent().find(".v-log-button").css("background-color") == "rgb(144, 238, 144)"){
+                    clear_vname = jQuery("." + act_name_tag + "-" + input_id + "-tag").html().replace("log(","").replace(")","")
+                    name.val(clear_vname)
+                    jQuery(this).parent().find(".v-log-button").css("background-color", "lightgrey")
+                    jQuery("." + act_name_tag + "-" + input_id + "-tag").html(clear_vname)
+                    jQuery(this).parent().find(".interaction-input").remove()
+                    jQuery(this).parent().find(".v-interaction-button").css("background-color", "lightgrey")
+                    jQuery(this).parent().find(".v-interaction-button").removeAttr("disabled")
+                    jQuery(this).parent().find(".v-interaction-button").text("Interaction")
+                    if(clear_vname.includes("Censor(")){
+                        trans_arr.push("censor005")
+                    }
+                    usercovArray()
+                    vinfo_hist(act_v, act_name_tag, trans_arr, input_id)
+                    return
+                }
+                trans_arr.push("log");
+		change_name = "log(" + act_v + ")";
+                current_name = jQuery("." + act_name_tag + "-" + input_id + "-tag").html();
+                if(current_name.includes("Censor(")){
+                    change_name = "log(Censor(" + act_v + "))";
+                    trans_arr.push("censor005")
+                }
+                name.val(change_name)
+ 
             jQuery(this)
                 .parent()
-                .find("button")
+                .find("button:not(.v-ws-button)")
                 .css("background-color", "lightgrey")
             if (
                 jQuery(this)
@@ -2315,7 +2358,7 @@ function creatVar(value, input_id) {
                 jQuery(this)
                     .parent()
                     .find(".v-interaction-button")
-                    .text("*")
+                    .text("Iteraction")
             //disable the interaction after do the log transformation
             jQuery(this)
                 .parent()
@@ -2331,10 +2374,10 @@ function creatVar(value, input_id) {
                 .css("background-color", "lightgrey")
             jQuery(this).css("background-color", "lightgreen")
             jQuery("." + act_name_tag + "-" + input_id + "-tag").html(
-                "log(" + act_v + ")"
-            )
+            	change_name
+	    )
             usercovArray()
-            vinfo_hist(act_v, act_name_tag, ["log"], input_id)
+            vinfo_hist(act_v, act_name_tag, trans_arr, input_id)
         })
         .appendTo($div_button)
 
@@ -2419,14 +2462,39 @@ function creatVar(value, input_id) {
     //square transformation
     if (input_id != "depvar")
         jQuery("<button class='v-square-button btn-sm btn-default btn col-md-12'></button>")
-            .text("square transformation")
+            .text("Square transformation")
             .css("margin-left", "1px")
             .css("background-color", "lightgrey")
             .on("click", function() {
-                name.val(act_v + "^2")
-                jQuery(this)
+		trans_arr = [];
+                if(jQuery(this).parent().find(".v-square-button").css("background-color") == "rgb(144, 238, 144)"){
+                    clear_vname = jQuery("." + act_name_tag + "-" + input_id + "-tag").html().replace("^2", "");
+                    name.val(clear_vname)
+                    jQuery(this).parent().find(".v-square-button").css("background-color", "lightgrey")
+                    jQuery("." + act_name_tag + "-" + input_id + "-tag").html(clear_vname)
+                    jQuery(this).parent().find(".interaction-input").remove()
+                    jQuery(this).parent().find(".v-interaction-button").css("background-color", "lightgrey")
+                    jQuery(this).parent().find(".v-interaction-button").removeAttr("disabled")
+                    jQuery(this).parent().find(".v-interaction-button").text("Interaction")
+                    if(clear_vname.includes("Censor(")){
+                        trans_arr.push("censor005")
+                    }
+                    usercovArray()
+                    vinfo_hist(act_v, act_name_tag, trans_arr, input_id)
+                    return
+                }
+                trans_arr.push("square");
+                change_name = act_v + "^2";
+                current_name = jQuery("." + act_name_tag + "-" + input_id + "-tag").html();
+                if(current_name.includes("Censor")){
+                    change_name = "Censor(" + act_v + ")^2";
+                    trans_arr.push("square")
+                }
+                name.val(change_name)
+                
+		jQuery(this)
                     .parent()
-                    .find("button")
+                    .find("button:not(.v-ws-button)")
                     .css("background-color", "lightgrey")
                 jQuery(this).css("background-color", "lightgreen")
                 jQuery("." + act_name_tag + "-" + input_id + "-tag").html(act_v + "^2")
@@ -2471,7 +2539,38 @@ function creatVar(value, input_id) {
         .css("margin-left", "1px")
         .css("background-color", "lightgrey")
         .on("click", function() {
+		trans_arr = [];
+                if(jQuery(this).parent().find(".v-ws-button").css("background-color") == "rgb(144, 238, 144)"){
+                    clear_vname = jQuery("." + act_name_tag + "-" + input_id + "-tag").html().replace("Censor(","").replace(")","")
+                    name.val(clear_vname)
+                    jQuery(this).parent().find(".v-ws-button").css("background-color", "lightgrey")
+                    jQuery("." + act_name_tag + "-" + input_id + "-tag").html(clear_vname)
+                    jQuery(this).parent().find(".interaction-input").remove()
+                    jQuery(this).parent().find(".v-interaction-button").css("background-color", "lightgrey")
+                    jQuery(this).parent().find(".v-interaction-button").removeAttr("disabled")
+                    jQuery(this).parent().find(".v-interaction-button").text("Interaction")
+                    if(clear_vname.includes("log(")){
+                        trans_arr.push("log")
+                    }
+                    usercovArray()
+                    vinfo_hist(act_v, act_name_tag, trans_arr, input_id)
+                    return
+                }
+                trans_arr.push("censor005");
+                change_name = "censor(" + act_v + ")";
+                current_name = jQuery("." + act_name_tag + "-" + input_id + "-tag").html();
+                if(current_name.includes("log(")){
+                    change_name = "log(Censor(" + act_v + "))";
+                    trans_arr.push("log")
+                }else if (current_name.includes("s(")){
+		    change_name = "s(Censor(" + act_v + "))";
+		}
+                name.val(change_name)
+
+
+
             //jQuery(this).parent().find("button").css("background-color","white");
+
             jQuery(this).css("background-color", "lightgreen")
             jQuery("." + act_name_tag + "-" + input_id + "-tag").attr("censor", "T")
             var temp = jQuery("." + act_name_tag + "-" + input_id + "-tag").html()
@@ -2495,6 +2594,9 @@ function creatVar(value, input_id) {
             vinfo_hist(act_v, act_name_tag, trans_arr, input_id)
         })
         .appendTo($div_button)
+
+    //replace reset button 
+    /*
     jQuery("<button class='reset-button btn-sm btn-default btn col-md-12'></button>")
         .text("reset")
         .css("margin-left", "1px")
@@ -2527,6 +2629,7 @@ function creatVar(value, input_id) {
             vinfo_hist(act_v, act_name_tag, [], input_id)
         })
         .appendTo($div_button)
+    */
     jQuery(
         "<a class = 'close-button btn-sm btn-default' aria-label='Close'><span class = 'fas fa-times' aria-hidden='true'></span></a>"
     )
