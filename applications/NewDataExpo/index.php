@@ -87,7 +87,6 @@ div.col-sm-12.row.row-fluid.input-group {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css" integrity="sha384-exe4Ak6B0EoJI0ogGxjJ8rn+RN3ftPnEQrGwX59KTCl5ybGzvHGKjhPKk/KC3abb" crossorigin="anonymous">
         <link rel="stylesheet" href="all.css">
         <link rel="stylesheet" href="css/style.css">
-	<link href="js/jquery.minicolors.css" rel="stylesheet" type="text/css"/> 
 <?php
 session_start();
 include("../../code/php/AC.php");
@@ -347,17 +346,6 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <!-- <script src="//code.jquery.com/ui/1.8.22/jquery-ui.min.js"></script> -->
 <script src="./js/saveSvgAsPng.js"></script>
 <script src="/js/md5-min.js"></script>
-<script type="text/javascript" src="/js/highslide/highslide-full.min.js"></script>
-<script type="text/javascript" src="/js/highslide/highslide.config.js" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="/js/highslide/highslide.css" />
-<script type="text/javascript" src="/js/HighChart414/js/highcharts.js"></script>
-<script type="text/javascript" src="/js/HighChart414/js/highcharts-more.js"></script>
-<script type="text/javascript" src="/js/HighChart414/js/modules/exporting.js"></script>
-<script type="text/javascript" src="/js/jquery.mousewheel.min.js"></script>
-<script type="text/javascript" src="/js/pixastic/pixastic.core.js"></script>
-<script type="text/javascript" src="/js/pixastic/pixastic.jquery.js"></script>
-<script type="text/javascript" src="/js/pixastic/actions/brightness.js"></script>
-<script type="text/javascript" src="/js/mpr.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 
 <script type="text/javascript" src="./js/select2.min.js"></script>

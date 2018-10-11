@@ -2254,6 +2254,19 @@ function creatVar(value, input_id) {
             .css("background-color", "lightgrey")
             .css("margin-left", "1px")
             .on("click", function() {
+                if(jQuery(this).parent().find("button").css("background-color") == "rgb(144, 238, 144)"){
+                    name.val(act_v)
+                    jQuery(this).parent().find("button").css("background-color", "lightgrey")
+                    jQuery("." + act_name_tag + "-" + input_id + "-tag").html(act_v)
+                    //enable the interaction after do the square transformation
+                    jQuery(this).parent().find(".interaction-input").remove()
+                    jQuery(this).parent().find(".v-interaction-button").css("background-color", "lightgrey")
+                    jQuery(this).parent().find(".v-interaction-button").removeAttr("disabled")
+                    jQuery(this).parent().find(".v-interaction-button").text("interaction")
+                    usercovArray()
+                    vinfo_hist(act_v, act_name_tag, [], input_id)
+                    return
+                }
                 name.val("s(" + act_v + ")")
                 jQuery(this)
                     .parent()
@@ -2533,7 +2546,7 @@ function creatVar(value, input_id) {
             console.log("." + act_name_tag + "-" + input_id + "-tag")
             jQuery("." + act_name_tag + "-" + input_id + "-tag").css(
                 "background-color",
-                "lightgrey"
+                "white"
             )
             usercovArray()
         })
@@ -2991,43 +3004,6 @@ function loadAnalysisNames() {
         }
     )
 
-    var inputData =
-        "../../data/" +
-        project_name +
-        "/data_uncorrected" +
-        version +
-        "/" +
-        project_name +
-        "_datadictionary02.csv"
-    jQuery.get(
-        inputData,
-        {
-            cache: true,
-        },
-        function(tsv) {
-            var lines = [],
-                listen = false
-
-            try {
-                tsv = tsv.split(/\r?\n/)
-                jQuery.each(tsv, function(i, line) {
-                    if (
-                        line == "" ||
-                        line.charAt(0) == "#" ||
-                        analysis_names.length == 0
-                    ) {
-                        listen = false
-                    }
-                    line = line.split(/,/)
-                    analysis_names.push(line[0])
-                })
-
-                dataBehaviorRead = true
-                //if (dataMRIRead && dataBehaviorRead)
-                //addToOntology(analysis_names);
-            } catch (err) {}
-        }
-    )
 }
 
 function yvalueChanged(item) {
