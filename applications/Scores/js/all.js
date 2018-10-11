@@ -225,6 +225,8 @@ function json_to_table(json,vname){
         }
     }
     data = [];
+
+
     for (index = 0; index < rows; index++){
         temp = {};
         for (var i = keys.length-1; i >= 0; i--) {
@@ -234,6 +236,54 @@ function json_to_table(json,vname){
         }
         if(!$.isEmptyObject(temp))data.push(temp);
     }
+    //numeric variable largetst 5 and smallest 5 includeing null #9 
+    temp_json = json;
+    temp_json["index"] = Array.apply(null, {length: json[keys[0]].length}).map(Number.call, Number)
+    temp_json["index"].sort(function(a,b){
+	return temp_json[keys[keys.length-1]][a] > temp_json[keys[keys.length-1]][b] ? 1:-1;
+    })
+    uniqueItems = Array.from(new Set(temp_json[keys[keys.length-1]]));
+    if(uniqueItems.length > 10){
+    	number_on_top = 5;
+    	for(index = 0; index < number_on_top || number_on_top>=temp_json["index"].length/2; index++){
+		temp = {};
+		rel_index = temp_json["index"][index];
+        	for (var i = keys.length-1; i >= 0; i--) {
+            	var k = keys[i];
+            	// for (keys in json) {
+            	temp[k] = temp_json[k][rel_index];
+        	}
+        	if(!$.isEmptyObject(temp))data.push(temp);
+    	}
+    	for(index = 0; index < number_on_top || number_on_top>=temp_json["index"].length/2; index++){
+        	temp = {};
+        	rel_index = temp_json["index"][temp_json["index"].length - number_on_top + index];
+        	for (var i = keys.length-1; i >= 0; i--) {
+            	var k = keys[i];
+            	// for (keys in json) {
+            	temp[k] = temp_json[k][rel_index];
+        	}
+        	if(!$.isEmptyObject(temp))data.push(temp);
+    	}
+    } else {
+		// catagorical cases 
+		item_list = []
+		for(uniq_item in uniqueItems){
+			 item_list.push(temp_json[keys[keys.length-1]].indexOf(uniqueItems[uniq_item]));
+		}
+		for(index = 0; index < item_list.length; index++){
+            temp = {};      
+            rel_index = item_list[index];
+            for (var i = keys.length-1; i >= 0; i--) {
+                var k = keys[i];    
+                // for (keys in json) {
+                temp[k] = temp_json[k][rel_index];
+            }               
+            if(!$.isEmptyObject(temp))data.push(temp);
+        }
+	}
+    
+
     //console.log(data);
     if (data.length == 0)
         return "";  
