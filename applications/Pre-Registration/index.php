@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="shortcut icon" href="/images/favicon.ico">
     
     <!-- Le styles -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -360,7 +361,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
     var restrictedModeTitle = "Restricted Mode";
     var unrestrictedModeTitle = "Unrestricted Mode";
 
-    var restrictedModeBody = "This mode help you prevents premature hypothesis tests in the <i>Analysis</i> application by disabling the submit button calculating the results. Hypothesis can still be saved and loaded.";
+    var restrictedModeBody = "This mode helps to prevent premature hypothesis tests during the pre-registration phase. In restricted mode the <i>Analysis</i> application does not allow to start an analysis. Hypothesis can still be saved and loaded.";
     var unrestrictedModeBody = "You have enabled all features of the Data Exploration and Analysis Portal.";
                                                                                           
     jQuery(document).ready(function() {
