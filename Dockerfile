@@ -55,9 +55,9 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && CRONTAB_DIR=/var/spool/cron/crontabs \
     && PROCESSING_CRONTAB=$CRONTAB_DIR/processing \
     && ROOT_CRONTAB=$CRONTAB_DIR/root \
-    && echo '*/1 * * * * /usr/bin/node /var/www/html/applications/Ontology/searchServer/index.js >> /var/www/html/applications/Ontology/searchServer/log.log 2>&1' > $PROCESSING_CRONTAB \
+    && echo '*/1 * * * * /usr/bin/node /var/www/html/applications/Ontology/searchServer/index.js >> /var/www/html/data/ABCD/logs/searchServer.log 2>&1' > $PROCESSING_CRONTAB \
     && echo '*/1 * * * * cd /var/www/html/applications/ModelBuilder/viewer/recipes; git add `ls *.json`; git commit -m "`date`"' >> $PROCESSING_CRONTAB \
-    && echo '*/5 * * * * /var/www/html/applications/ModelBuilder/Rserve/run_rserve.sh >> /var/www/html/applications/ModelBuilder/Rserve/log.log 2>&1' >> $ROOT_CRONTAB \
+    && echo '*/5 * * * * /var/www/html/applications/ModelBuilder/Rserve/run_rserve.sh >> /var/www/html/data/ABCD/logs/Rserve.log 2>&1' >> $ROOT_CRONTAB \
     && chown processing:crontab $PROCESSING_CRONTAB \
     && chown root:crontab $ROOT_CRONTAB \
     && chmod 0600 $PROCESSING_CRONTAB \
