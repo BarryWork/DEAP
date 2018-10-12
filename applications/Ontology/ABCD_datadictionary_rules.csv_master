@@ -1,5 +1,6 @@
-root,/(H_Suum|H_Biiospes|H_Cuultenv|H_Heealthmh|H_Suubst|H_Neeuro|H_Immaging|H_Deemo|H_Reeshis)/,"ABCD"
-H_Reeshis,/(H_geoaddr1|H_geoaddr2|H_geoaddr3|H_geoaddr4|H_geoaddr5)/i,"Residential History Derived Scores"
+root,/(H_Otther|H_Suum|H_Biiospes|H_Cuultenv|H_Heealthmh|H_Suubst|H_Neeuro|H_Immaging|H_Deemo|H_Reeshis)/,"ABCD"
+H_Otther,/(H_Sccreenr)/i,"Other"
+H_Reeshis,/(H_geoaddr1|H_geoaddr2|H_geoaddr3|H_geoaddr4|H_geoaddr5)/i,"Residential History Derived/Geolocation Scores"
 H_geoaddr1,/(^reshist_addr1)/i,"Address 1"
 H_geoaddr2,/(^reshist_addr2)/i,"Address 2"
 H_geoaddr3,/(^reshist_addr3)/i,"Address 3"
@@ -46,7 +47,6 @@ H_Kssads,/(^ksads_)/i,"KSADS"
 
 H_Liife,/(^ple_)/i,"Life Events"
 H_Geender,/(^gish_)/i,"Gender Identity"
-H_Deeliqc,/(^delq_)/i,"Deliquency Self Report"
 H_Meedicat,/(rx_med|prescribe_med_|prn_medicine_|number_prescribed_|units_prescription_|^strength_|^med|^otc_|^units_|^caff_ago|^caff_24)/i,"Medications"
 H_Faamhx,/(^famhx_|^q|fam_history_|^fhx_|^famhx)/i,"Family History"
 H_Deemogx,/(^demo_|fam_roster_)/i,"Demographics"
@@ -54,23 +54,21 @@ H_Deevhx,/(^devhx_)/i,"Developmental History"
 H_Meedhx,/(^medhx_)/i,"Medical History"
 H_Tbbisc,/(^tbi_)/i,"TBI Screen"
 H_Slleep,/(^sds_|^sleepdisturb)/i,"Sleep Disturbances"
-H_Spports,/(^sai_p_)/i,"Sports & Activities"
+H_Spports,/(^sai_p_|^sai_ss)/i,"Sports & Activities"
 H_Geenbhv,/(^pgbi_|gen_child_|^gbi_)/i,"General Behavior"
 H_Chhildbv,/(^cbcl_)/i,"Child Behavior Checklist"
 H_Addultraw,/(^asr_q)/i,"Adult Self Report (Raw Data)"
 H_Addultsc,/(^asr_scr)/i,"Adult Self Report (Scores)"
-H_Nuutr,/(^cna_)/i,"Nutrition Assessment"
+H_Nuutr,/(^cna_)/i,"tion Assessment"
 H_Accswt,/(^acs_wi_)/i,"ACS Post Stratification Weights"
-H_Suubst,/(H_TLLFB|H_Issip|H_Toobac|H_Maarij|H_Caaffn|H_Toolrns|H_Peerdev|H_Inntent|H_Haarm|H_AEEQ|H_Accute|H_Haangovr|H_RAAPI|H_ASSCQ|H_Toobacute|H_Deepnic|H_MEEEQ|H_Mjjacute|H_Maapi|H_Daapi|H_PLLUS|H_Paarntrul|H_Coomm|H_TLLFB)/i,"Substance Use"
+H_Suubst,/(H_TLLFB|H_Issip|H_Toobac|H_Maarij|H_Caaffn|H_Peerdev|H_Inntent|H_AEEQ|H_Accute|H_Haangovr|H_RAAPI|H_ASSCQ|H_Toobacute|H_Deepnic|H_MEEEQ|H_Mjjacute|H_Maapi|H_Daapi|H_PLLUS|H_Paarntrul|H_Coomm|H_TLLFB)/i,"Substance Use"
 H_TLLFB,/(^tlfb_)/i,"Timeline Follow-Back Survey"
 H_Issip,/(isip_)/i,"iSIP ll Q2 Sipping"
 H_Toobac,/(first_nicotine)/i,"Tobacco- Low level"
 H_Maarij,/(first_mj)/i,"Marijuana- Low level"
 H_Caaffn,/(^caff_intake_|^caff_max)/i,"Caffeine Intake"
-H_Toolrns,/(^ptu_)/i,"Tolerance of Use"
 H_Peerdev,/(^peer_deviance_)/i,"Peer Group Deviance"
 H_Inntent,/(^path_alc_|^intent_)/i,"Intention to Use"
-H_Haarm,/(phs_)/i,"Perceived Harm"
 H_Accute,/(subj_resp_alc_)/i,"Alcohol-Acute Subjective"
 H_Haangovr,/(^hangover)/i,"Hangover Symptoms Scale"
 H_RAAPI,/(rapi_section)/i,"RAPI"
@@ -85,12 +83,14 @@ H_Coomm,/(su_risk_)/i,"Community Risk & Protective Factors"
 H_Neeuro,/(H_Viision|H_Haand|H_Nccog|H_Niihtbx|H_RAAVLT|H_Caash|H_Liitle)/i,"Neurocognition"
 H_Viision,/(snellen_)/i,"Vision Screener"
 H_Haand,/(^ehi)/i,"Hand Dominance"
-H_Nccog,/(neurocog_intro|intro_neurocog_)/i,"Ncog Intro"
 H_Niihtbx,/(nihtbx)/i,"NIH Toolbox"
 H_RAAVLT,/(pea_)/i,"RAVLT + Matrix Reasoning"
 H_Caash,/(cash_choice_task)/i,"Cash Choice"
 H_Liitle,/(^lmt_)/i,"Little Man Task"
-H_Immaging,/(H_Prrescan|H_Poostscan|H_FSSQC|H_RAASCAN|H_Mrrif|H_prrocdti|^H_TASKMRI$|H_TTSST|H_TNBBACK|H_Beetagp|H_Nbback|H_Ssmri|H_Iqqcraw|H_Iqqcscr|H_Dtti|H_Beehsst|H_Beehnb|H_Beehmid|H_Beehrec|H_Reestriction|H_Miidbeta|H_Rssvar|H_MIIDts|H_RSSSFM)/i,"Imaging"
+H_Immaging,/(H_IMMQC|H_Diifmri|H_Prrescan|H_Poostscan|H_FSSQC|H_RAASCAN|H_Mrrif|^H_TASKMRI$|H_TTSST|H_TNBBACK|H_Beetagp|H_Nbback|H_Ssmri|H_Iqqcraw|H_Iqqcscr|H_Beehsst|H_Beehnb|H_Miidbeta|H_Rssvar|H_MIIDts|H_RSSSFM)/i,"Imaging"
+H_IMMQC,/(H_IMMQCT1w|H_IMMQCT2w)/i,"Imaging Quality Control (Summary)"
+H_IMMQCT1w,/(^fsqc_qc$)/i,"anatomical T1 weighted"
+H_IMMQCT2w,/(fsqc_qc|iqc_t2_ok_ser)/i,"anatomical T2 weighted"
 H_Ssmri,/(H_Sssmrthick|H_Ssmrsulc|H_Ssmrarea|H_Ssmrvol|H_Ssmrtone|H_Ssmrttwo)/i,"FreeSurfer metrics (sMRI)"
 H_Sssmrthick,/(H_Thhickrh|H_Thhicklh)/i,"Thickness"
 H_Thhickrh,/(^smri_thick.*rh$)/i,"Right Hemisphere"
@@ -115,13 +115,11 @@ H_Poostscan,/(^postscan)/i,"Post-Scan Questionnaire"
 H_FSSQC,/(^fsqc)/i,"FreeSurfer QC"
 H_RAASCAN,/(^ra_scan)/i,"RA Scanning Checklist and Notes"
 H_Mrrif,/(^mrif_)/i,"MR Findings"
-H_prrocdti,/(^dti_ad|^dti_fa|^dti_fiber^dtiaseg|^dg_)/i,"Processed DTI"
+
 H_Iqqcraw,/(^iqc_)/i,"Imaging Quality Control (Raw)"
-H_Dtti,/(^dmri_dti.)/i,"Diffusion Tensor Imaging (dMRI DTI)"
-H_Beehsst,/(^bs_|beh_sst)/i,"MRI Behavior SST"
-H_Beehnb,/(^bn_|beh_nback|^behnback)/i,"MRI Behavior nBACK"
-H_Beehmid,/(^midq_)/i,"MRI Behavior MID"
-H_Beehrec,/(^beh_rec)/i,"MRI Behavior REC"
+H_Diifmri,/(H_Dtti|H_Reestriction)/i,"Diffusion MRI"
+H_Dtti,/(^dmri_dti.)/i,"Diffusion Imaging (dMRI DTI)"
+H_Beehrec,/(^tfmri_rec_)/i,"Behavior REC"
 H_Rssvar,/(^rsfm)/i,"Resting-state fMRI (rsfMRI)" 
 H_Reestriction,/(H_Rssi|H_Mrrirsi|H_Rssimri|H_Rssssi|H_Rsssssi|H_Rssssssi)/i,"Restriction Spectrum Imaging (dMRI RSI)"
 H_Rssi,/(^dmri_rsi.n0.)/i,"dMRI RSI-Part 1"
@@ -133,92 +131,90 @@ H_Rssfm,/(rsfm_var)/i,"MRI Resting State Temporal Variance"
 
 
 
-H_Deemo,/(abcd_site|demo_gender_id_v2$|demo_sex_v2|^acs_wi_post$|^interview_age|rel_family_id|rel_group_id|rel_relationship|demo_prnt_marital_v2$|high.educ|^married$|^female$|race.ethnicity|household.income|dti_manufacturers_modelname)/i,"Demographic (Core)"
+H_Deemo,/(abcd_site|demo_gender_id_v2$|demo_sex_v2|^acs_wi_post$|^interview_age|rel_family_id|rel_group_id|rel_relationship|demo_prnt_marital_v2$|high.educ|^married$|^female$|^race.ethnicity|household.income|dti_manufacturers_modelname)/i,"Demographic (Core)"
 H_all,/.*/,"All Measures"
 
-H_TASKMRI,/(^H_TASKMID$|^H_TASKSST$|^H_TASKNBACK$)/,"Task MRI"
+H_TASKMRI,/(^H_TASKMID$|^H_TASKSST$|^H_TASKNBACK$|H_Beehrec)/,"Task MRI"
 
-H_TASKMID,/(H_MIDCOONAOL|H_MIDCOONAOR|H_MIDCOONAOLR|H_MIDCOONAOSR|H_MIDCONNLPNF|H_MIDCONNRPNF|^H_MIDCOONAOPRVSNF$|^H_MIDCOONAOPLVSNF$|^H_MIDCOONAOSRVSNF$|^H_MIDCOONAOLRVSSR$|^H_MIDCOONAOLLVSNC$|^H_MIDCOONAOSLVSNC$|^H_MIDCOONAOLVSSL$|^H_MIDCOONAOLVSNC$|^H_MIDCOONAOLRVSNC$|^H_MIDCOONAOSVSLL$)/,"Monetary Incentive Delay Task"
-H_MIDCOONAOL,/(^H_MIDCOONBAOL$|^H_MIDCOONTAOL$)/,"MID Anticipation of Loss"
-H_MIDCOONTAOL,/(^midanticlossvsnttst|^mdatclsvsnttstat|^midanticlsvsnttstat)/i,"T-Stats"
-H_MIDCOONBAOL,/(^midanticlossvsntbeta|^mdaclsvsntb)/i,"Beta weights"
+H_TASKMID,/(H_MIDCOONAOR|H_MIDCOONAOLR|H_MIDCOONAOSR|H_MIDCONNLPNF|H_MIDCONNRPNF|^H_MIDCOONAOPRVSNF$|^H_MIDCOONAOPLVSNF$|^H_MIDCOONAOSRVSNF$|^H_MIDCOONAOLRVSSR$|^H_MIDCOONAOLLVSNC$|^H_MIDCOONAOSLVSNC$|^H_MIDCOONAOLVSSL$|^H_MIDCOONAOLVSNC$|^H_MIDCOONAOLRVSNC$|^H_MIDCOONAOSVSLL$)/,"Monetary Incentive Delay Task"
 H_MIDCOONAOR,/(^H_MIDCOONTAOR$|^H_MIDCOONBAOR$)/i,"MID Anticipation of Reward vs. Neutral Contrast"
-H_MIDCOONTAOR,/(^midanticrwvsnttst|^mdatcrwvsnttstat)/i,"T-Stats"
-H_MIDCOONBAOR,/(^mdacrwvsntb(?!e)|^midanticrwvsntbeta)/i,"Beta weights"
+H_MIDCOONTAOR,/(^tfmri_mid_all_antic.reward.vs.neutral_sem|^tfmri_mid_run1_antic.reward.vs.neutral_sem|^tfmri_mid_run2_antic.reward.vs.neutral_sem)/i,"Standard Error of the Mean"
+H_MIDCOONBAOR,/(^tfmri_mid_all_antic.reward.vs.neutral_beta|^tfmri_mid_run1_antic.reward.vs.neutral_beta|^tfmri_mid_run2_antic.reward.vs.neutral_beta)/i,"Beta weights"
 
 H_MIDCOONAOPRVSNF,/(^H_MIDCOONTAOPRVSNF$|^H_MIDCOONBAOPRVSNF$)/i,"MID Anticipation of Positive Reward vs. Negative Feedback"
-H_MIDCOONTAOPRVSNF,/(^midrwpvnfkt|^midrwpvnfktstat|^midrwposvsnegfktstat)/i,"T-Stats"
-H_MIDCOONBAOPRVSNF,/(^midrwpvnfkb|^midrwposvsnegfkb)/i,"Beta weights"
+H_MIDCOONTAOPRVSNF,/(^tfmri_mid_all_reward.pos.vs.neg.feedback_sem)/i,"Standard Error of the Mean"
+H_MIDCOONBAOPRVSNF,/(^tfmri_mid_all_reward.pos.vs.neg.feedback_beta)/i,"Beta weights"
 H_MIDCOONAOPLVSNF,/(^H_MIDCOONTAOPLVSNF$|^H_MIDCOONBAOPLVSNF$)/i,"MID Anticipation of Positive Loss vs. Negative Feedback"
-H_MIDCOONTAOPLVSNF,/(^midlspvnfkt|^midlosspvnfktstat)/i,"T-Stats"
-H_MIDCOONBAOPLVSNF,/(^midlspvnfkb|^midlossposvsnegfkb)/i,"Beta weights"
+H_MIDCOONTAOPLVSNF,/(^tfmri_mid_all_loss.pos.vs.neg.feedback_sem)/i,"Standard Error of the Mean"
+H_MIDCOONBAOPLVSNF,/(^tfmri_mid_all_loss.pos.vs.neg.feedback_beta)/i,"Beta weights"
 H_MIDCOONAOSRVSNF,/(^H_MIDCOONTAOSRVSNF$|^H_MIDCOONBAOSRVSNF$)/i,"MID Anticipation of Small Reward vs. Neutral"
-H_MIDCOONTAOSRVSNF,/(^mdacslrwvsntt|^mdatcslrwvsnttstat)/i,"T-Stats"
-H_MIDCOONBAOSRVSNF,/(^mdacslrwvsntb|^midanticslrwvsntb)/i,"Beta weights"
+H_MIDCOONTAOSRVSNF,/(^tfmri_mid_all_antic.small.reward.vs.neutral_sem)/i,"Standard Error of the Mean"
+H_MIDCOONBAOSRVSNF,/(^tfmri_mid_all_antic.small.reward.vs.neutral_beta)/i,"Beta weights"
 
 H_MIDCOONAOLRVSSR,/(^H_MIDCOONTAOLRVSSR$|^H_MIDCOONBAOLRVSSR$)/i,"MID Anticipation of Large Reward vs. Small Reward"
-H_MIDCOONTAOLRVSSR,/(^mdatclgvsslrwtstat)/i,"T-Stats"
-H_MIDCOONBAOLRVSSR,/(^mdaclgvsslrwb|^midanticlgvsslrwb)/i,"Beta weights"
+H_MIDCOONTAOLRVSSR,/(^tfmri_mid_all_antic.large.vs.small.reward_sem)/i,"Standard Error of the Mean"
+H_MIDCOONBAOLRVSSR,/(^tfmri_mid_all_antic.large.vs.small.reward_beta)/i,"Beta weights"
 
 H_MIDCOONAOLLVSNC,/(^H_MIDCOONTAOLLVSNC$|^H_MIDCOONBAOLLVSNC$)/i,"MID Anticipation of Large Loss vs. Neutral"
-H_MIDCOONTAOLLVSNC,/(^mdatclglsvsnttstat)/i,"T-Stats"
-H_MIDCOONBAOLLVSNC,/(^mdaclglsvsntb|^midanticlglossvsntb)/i,"Beta weights"
+H_MIDCOONTAOLLVSNC,/(^tfmri_mid_all_antic.large.loss.vs.neutral_sem)/i,"Standard Error of the Mean"
+H_MIDCOONBAOLLVSNC,/(^tfmri_mid_all_antic.large.loss.vs.neutral_beta)/i,"Beta weights"  
 
 H_MIDCOONAOSLVSNC,/(^H_MIDCOONTAOSLVSNC$|^H_MIDCOONBAOSLVSNC$)/i,"MID Anticipation of Small Loss vs. Neutral"
-H_MIDCOONTAOSLVSNC,/(^mdatcsllsvsnttstat)/i,"T-Stats"
-H_MIDCOONBAOSLVSNC,/(^mdacsllsvsntb|^midanticsllossvsntb)/i,"Beta weights"
+H_MIDCOONTAOSLVSNC,/(^tfmri_mid_all_antic.small.loss.vs.neutral_sem)/i,"Standard Error of the Mean"
+H_MIDCOONBAOSLVSNC,/(^tfmri_mid_all_antic.small.loss.vs.neutral_beta)/i,"Beta weights"
 
 H_MIDCOONAOLVSSL,/(^H_MIDCOONTAOLVSSL$|^H_MIDCOONBAOLVSSL$)/i,"MID Anticipation of Large vs. Small Loss"
-H_MIDCOONTAOLVSSL,/(^mdatclgvssllststat)/i,"T-Stats"
-H_MIDCOONBAOLVSSL,/(^mdaclgvssllsb|^midanticlgvssllossb)/i,"Beta weights"
+H_MIDCOONTAOLVSSL,/(^tfmri_mid_all_antic.large.vs.small.reward_sem)/i,"Standard Error of the Mean"
+H_MIDCOONBAOLVSSL,/(^tfmri_mid_all_antic.large.vs.small.reward_beta)/i,"Beta weights"
 
 H_MIDCOONAOLVSNC,/(^H_MIDCOONTAOLVSNC$|^H_MIDCOONBAOLVSNC$)/i,"MID Anticipation of Loss vs. Neutral"
-H_MIDCOONTAOLVSNC,/(^mdatclsvsnttstat|^midanticlsvsnttstat)/i,"T-Stats"
-H_MIDCOONBAOLVSNC,/(^mdaclsvsntb|^midanticlossvsntb)/i,"Beta weights"
+H_MIDCOONTAOLVSNC,/(^tfmri_mid_all_antic.loss.vs.neutral_sem)/i,"Standard Error of Mean"
+H_MIDCOONBAOLVSNC,/(^tfmri_mid_all_antic.loss.vs.neutral_beta)/i,"Beta weights"
 
 H_MIDCOONAOLRVSNC,/(^H_MIDCOONTAOLRVSNC$|^H_MIDCOONBAOLRVSNC$)/i,"MID Anticipation of Large Reward vs. Neutral"
-H_MIDCOONTAOLRVSNC,/(^mdatclgrwvsnttstat)/i,"T-Stats"
-H_MIDCOONBAOLRVSNC,/(^mdaclgrwvsntb|^midanticlgrwvsntb)/i,"Beta weights"
+H_MIDCOONTAOLRVSNC,/(^tfmri_mid_all_antic.large.reward.vs.neutral_sem)/i,"Standard Error of the Mean"
+H_MIDCOONBAOLRVSNC,/(^tfmri_mid_all_antic.large.reward.vs.neutral_beta)/i,"Beta weights"
 
 
 
 
-H_TASKNBACK,/(^H_NBACKCOONEM$|^H_NBACKCOON2BVS0B$|^H_NBACKCOONEMVSNF$|^H_NBACKCOONNFVSNF$|^H_NBACKCOONPFVSNF$|^H_NBACKCOONFVSP$|^H_NBACKCOONPC$|^H_NBACKCOON2B$|^H_NBACKCOON0B$|^H_NBACKCOONNFVSPF)/,"N-Back Task"
+H_TASKNBACK,/(H_NBACKAVGSEM|^H_NBACKCOONEM$|^H_NBACKCOON2BVS0B$|^H_NBACKCOONEMVSNF$|^H_NBACKCOONNFVSNF$|^H_NBACKCOONPFVSNF$|^H_NBACKCOONFVSP$|^H_NBACKCOONPC$|^H_NBACKCOON2B$|^H_NBACKCOON0B$|^H_NBACKCOONNFVSPF)/,"N-Back Task"
 H_NBACKCOONEM,/(H_NBACKCOONBEM$|H_NBACKCOONTEM$)/,"N-BACK Emotion Condition"
-H_NBACKCOONTEM,/(^nbackemnts|^nback_emotion_tstat)/i,"T-Stats"
-H_NBACKCOONBEM,/(^nbackemnb|^nback_emotion_beta_)/i,"Beta weights"
+H_NBACKAVGSEM,/(H_NBACKASEMR1|H_NBACKASEMR2)/i,"Average Standard Error of the Mean"
+H_NBACKASEMR1,/(^tfmri_nback_r1sem)/i,"Average SEM- Run 1"
+H_NBACKASEMR2,/(^tfmri_nback_r2sem)/i,"Average SEM- Run 2"
+
+H_NBACKCOONBEM,/(^tfmri_nback_all_emotion_beta)/i,"Beta weights"
 
 H_NBACKCOON2BVS0B,/(H_NBACKCOONB2BVS0B|H_NBACKCOONT2BVS0B)/,"N-BACK 2-back vs. 0-back"
-H_NBACKCOONT2BVS0B,/(^nback2bvs0bt|^nback2bvs0btstat)/i,"T-Stats"
-H_NBACKCOONB2BVS0B,/(^nback2bvs0bb|^nback2backvs0backb)/i,"Beta weights"
+
+H_NBACKCOONB2BVS0B,/(^tfmri_nback_all_2.back.vs.0.back_beta)/i,"Beta weights"
 
 H_NBACKCOONEMVSNF,/(H_NBACKCOONBEMVSNF|H_NBACKCOONTEMVSNF)/,"N-BACK Emotion vs. Neutral Face"
-H_NBACKCOONTEMVSNF,/(^nbackemvsnfts|^nbackemfvsnftstat)/i,"T-Stats"
-H_NBACKCOONBEMVSNF,/(^nbackemnvsnfb|^nbackemotionvsneutfb)/i,"Beta weights"
+
+H_NBACKCOONBEMVSNF,/(^tfmri_nback_all_emotion.vs.neutface_beta)/i,"Beta weights"
 
 H_NBACKCOONNFVSNF,/(H_NBACKCOONBNFVSNF|H_NBACKCOONTNFVSNF)/,"N-BACK Negative Face vs. Neutral Face"
-H_NBACKCOONTNFVSNF,/(^nbacknfvsntfts|^nbackngfvsnftstat)/i,"T-Stats"
-H_NBACKCOONBNFVSNF,/(^nbacknfvsnfb|^nbacknegfacevsneutfb)/i,"Beta weights"
+
+H_NBACKCOONBNFVSNF,/(^tfmri_nback_all_negface.vs.neutface_beta)/i,"Beta weights"
 
 H_NBACKCOONPFVSNF,/(H_NBACKCOONBPFVSNF|H_NBACKCOONTPFVSNF)/,"N-BACK Positive Face vs. Neutral Face"
-H_NBACKCOONTPFVSNF,/(^nbackpfvsnfts|^nbackpfvsnftstat)/i,"T-Stats"
-H_NBACKCOONBPFVSNF,/(^nbackpfvsnfb|^nbackposfacevsneutfb)/i,"Beta weights"
+H_NBACKCOONBPFVSNF,/(^tfmri_nback_all_posface.vs.neutface)/i,"Beta weights"
 
 H_NBACKCOONFVSP,/(H_NBACKCOONBFVSP|H_NBACKCOONTFVSP)/,"N-BACK Face vs. Place Contrast"
-H_NBACKCOONTFVSP,/(^nbackfvspts|^nbackfvsptstat)/i,"T-Stats"
-H_NBACKCOONBFVSP,/(^nbackfacevspeb|^nbackfacevsplaceb)/i,"Beta weights"
+
+H_NBACKCOONBFVSP,/(^tfmri_nback_all_face.vs.place_beta)/i,"Beta weights"
 
 H_NBACKCOONPC,/(H_NBACKCOONBPC|H_NBACKCOONTPC)/,"N-BACK Place Condition"
-H_NBACKCOONTPC,/(^nbackpet|^nback_place_tstat)/i,"T-Stats"
-H_NBACKCOONBPC,/(^nbackpeb|^nback_place_beta)/i,"Beta weights"
+H_NBACKCOONBPC,/(^tfmri_nback_all_place_beta)/i,"Beta weights"
 
 H_NBACKCOON2B,/(^H_NBACKCOONB2B$|^H_NBACKCOONT2B$)/,"N-BACK 2-Back Condition"
-H_NBACKCOONT2B,/(^nback2backt|^nback_2_back_tstat)/i,"T-Stats"
-H_NBACKCOONB2B,/(^nback2bb|^nback_2_back_beta)/i,"Beta weights"
+
+H_NBACKCOONB2B,/(^tfmri_nback_all_2.back_beta)/i,"Beta weights"
 
 H_NBACKCOON0B,/(^H_NBACKCOONB0B$|^H_NBACKCOONT0B$)/,"N-BACK 0-Back Condition"
-H_NBACKCOONT0B,/(^nback0backt|^nback_0_back_tstat)/i,"T-Stats"
-H_NBACKCOONB0B,/(^nback0bb|^nback_0_back_beta_)/i,"Beta weights"
+
+H_NBACKCOONB0B,/(^tfmri_nback_all_0.back_beta|^tfmri_nback_run1_0.back_beta|^tfmri_nback_run2_0.back_beta)/i,"Beta weights"
 
 
 
@@ -226,32 +222,32 @@ H_NBACKCOONB0B,/(^nback0bb|^nback_0_back_beta_)/i,"Beta weights"
 H_TASKSST,/(^H_SSTCOONISVSCG$|^H_SSTCOONCSVSCG$|^H_SSTCOONCGVSF$|^H_SSTCOONASVSCG$|^H_SSTCOONCSVSIS$|^H_SSTCOONIGOVSIS$|^H_SSTCOONIGOVSCG$|^H_SSTCOONCGOVSF$)/,"Stop Signal Task"
 
 H_SSTCOONISVSCG,/(^H_SSTCOONTISVSCG$|^H_SSTCOONBISVSCG$)/,"SST Incorrect Stop vs. Correct Go"
-H_SSTCOONTISVSCG,/(^ssticsvscrgotst|^sstincstvscrgotstat)/i,"T-Stats"
-H_SSTCOONBISVSCG,/(^ssticrspvscrgob|^sstincstvscorgobeta|^sstincorstvscorgb)/i,"Beta weights"
+
+H_SSTCOONBISVSCG,/(^tfmri_sst_all_incorrect.stop.vs.correct.go_beta|^tfmri_sst_run1_incorrect.stop.vs.correct.go|^tfmri_sst_run2_incorrect.stop.vs.correct.go)/i,"Beta weights"
 
 H_SSTCOONCSVSCG,/(^H_SSTCOONTCSVSCG$|^H_SSTCOONBCSVSCG$)/,"SST Correct Stop vs. Correct Go"
-H_SSTCOONTCSVSCG,/(^sstcstvscrgotstat|^sstcrsvscrgotst)/i,"T-Stats"
-H_SSTCOONBCSVSCG,/(^sstcorstvscorgobeta|^sstcrspvscrgob)/i,"Beta weights"
+
+H_SSTCOONBCSVSCG,/(^tfmri_sst_all_correct.stop.vs.correct.go_beta|^tfmri_sst_run1_correct.stop.vs.correct.go_beta|^tfmri_sst_run2_correct.stop.vs.correct.go_beta)/i,"Beta weights"
 
 H_SSTCOONCGVSF,/(^H_SSTCOONTCGVSF$|^H_SSTCOONBCGVSF$)/,"SST Correct Go vs. Fixation"
-H_SSTCOONTCGVSF,/(^sstcrgovsfixtstat|^sstcrgovsfixtst)/i,"T-Stats"
-H_SSTCOONBCGVSF,/(^sstcrgovsfixb|^sstcorgovsfixbeta)/i,"Beta weights"
+
+H_SSTCOONBCGVSF,/(^tfmri_sst_all_correct.go.vs.fixation_beta|^tfmri_sst_run1_correct.go.vs.fixation_beta|^tfmri_sst_run2_correct.go.vs.fixation_beta)/i,"Beta weights"
 
 H_SSTCOONASVSCG,/(^H_SSTCOONTASVSCG$|^H_SSTCOONBASVSCG$)/,"SST Any Stop vs. Correct Go"
-H_SSTCOONTASVSCG,/(^sstanysvscrgotst)/i,"T-Stats"
-H_SSTCOONBASVSCG,/(^sstanyspvscrgob|^sstanystvscorgb)/i,"Beta weights"
+
+H_SSTCOONBASVSCG,/(^tfmri_sst_all_any.stop.vs.correct.go_beta|^tfmri_sst_run1_any.stop.vs.correct.go_beta|^tfmri_sst_run2_any.stop.vs.correct.go_beta)/i,"Beta weights"
 
 H_SSTCOONCSVSIS,/(^H_SSTCOONTCSVSIS$|^H_SSTCOONBCSVSIS$)/,"SST Correct Stop vs. Incorrect Stop"
-H_SSTCOONTCSVSIS,/(^sstcrsvsicstst)/i,"T-Stats"
-H_SSTCOONBCSVSIS,/(^sstcrspvsicrspb|^sstcorstvsincorstb)/i,"Beta weights"
+
+H_SSTCOONBCSVSIS,/(^tfmri_sst_all_correct.stop.vs.incorrect.stop_beta|^tfmri_sst_run1_correct.stop.vs.incorrect.stop_beta|^tfmri_sst_run2_correct.stop.vs.incorrect.stop_beta)/i,"Beta weights"
 
 H_SSTCOONIGOVSIS,/(^H_SSTCOONTIGOVSIS$|^H_SSTCOONBIGOVSIS$)/,"SST Incorrect Go vs. Incorrect Stop"
-H_SSTCOONTIGOVSIS,/(^ssticgovsicsts)/i,"T-Stats"
-H_SSTCOONBIGOVSIS,/(^ssticrgovsicrspb|^sstincorgovsincorsb)/i,"Beta weights"
+
+H_SSTCOONBIGOVSIS,/(^tfmri_sst_all_incorrect.go.vs.incorrect.stop_beta|^tfmri_sst_run1_incorrect.go.vs.incorrect.stop_beta|^tfmri_sst_run2_incorrect.go.vs.incorrect.stop_beta)/i,"Beta weights"
 
 H_SSTCOONIGOVSCG,/(^H_SSTCOONTIGOVSCG$|^H_SSTCOONBIGOVSCG$)/,"SST Incorrect Go vs. Correct Go"
-H_SSTCOONTIGOVSCG,/(^ssticgovscrgotst)/i,"T-Stats"
-H_SSTCOONBIGOVSCG,/(^ssticrgovscrgob|^sstincorgovscorgb|^sstincorgovscorgob)/i,"Beta weights"
+
+H_SSTCOONBIGOVSCG,/(^tfmri_sst_all_incorrect.go.vs.correct.go_beta|^tfmri_sst_run1_incorrect.go.vs.correct.go_beta|^tfmri_sst_run2_incorrect.go.vs.correct.go_beta)/i,"Beta weights"
 
 
 
