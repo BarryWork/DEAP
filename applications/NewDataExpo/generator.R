@@ -6,7 +6,7 @@ data.dic = data.frame(field_name = names(data),
                       field_shortname2 = names(data), 
                       field_shortname=names(data))
                       
-write.csv(data.dic,file = "/var/www/html/data/ABCD/data_uncorrected/ABCD_datadictionary01.csv",row.names = F);
+write.csv(data.dic[order(data.dic$field_name),],file = "/var/www/html/data/ABCD/data_uncorrected/ABCD_datadictionary01.csv",row.names = F);
 
 censor = function(x, fraction=.005) {
     if (length(fraction) != 1 || fraction < 0 || fraction > 1) {
