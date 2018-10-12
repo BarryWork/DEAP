@@ -92,7 +92,7 @@ echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; can_q
         <li><a href="/applications/Pre-Registration/" title="Pre-registration workflow">00 Plan</a></li>
         <li><a href="/applications/Ontology/hierarchy.php?entry=display" title="Ontology">01 Explore</a></li>
         <li><a href="/applications/Filter/index.php" title="Filter participants">02 Limit</a></li>
-        <li><a href="/applications/NewDataExpo/index.php?model=GAMM4-FZ-CR" title="Multi-level Model">03 Analyse</a></li>
+        <li><a href="/applications/NewDataExpo/index.php?model=GAMM4-FZ-CR" title="Multi-level Model">03 Analyze</a></li>
         <li><a href="/applications/Scores/" title="Calculate new scores">04 Extend</a></li>
         <!-- <li><a href="/applications/ModelBuilder" title="ModelBuilder">06 Model Zoo</a></li> -->
       </ol>
