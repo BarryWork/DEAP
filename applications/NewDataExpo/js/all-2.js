@@ -2738,10 +2738,7 @@ function creatVar(value, input_id) {
                     for (temp_hist in vinfo.summary) {
                         var th = vinfo["summary"][temp_hist]
                         if (is_transform(transform, th.transform)) {
-                            type_a_info =
-                                type_g == "Factor"
-                                ? summary_join(vinfo.factors)
-                                : summary_join(vinfo.summary[temp_hist].summary)
+                            type_a_info = summary_join(vinfo.summary[temp_hist].summary)
 
                         }
                     }
@@ -2793,7 +2790,7 @@ function creatVar(value, input_id) {
                     }
 
                     hist_cata(
-                        vinfo.summary,
+                        vinfo.summary[0].summary,
                         act_v,
                         act_v,
                         "." + act_name_tag + "-" + input_id + "-hist"
@@ -2856,7 +2853,7 @@ function vinfo_hist(act_v, act_name_tag, transform, input_id) {
             }
 
             hist_cata(
-                vinfo.summary,
+                vinfo.summary[0].summary,
                 act_v,
                 act_v,
                 "." + act_name_tag + "-" + input_id + "-hist"
