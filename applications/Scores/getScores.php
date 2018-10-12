@@ -63,13 +63,17 @@ if ($action == "save" && isset($_POST['content']) && isset($_POST['name'])) {
     $users = glob("/var/www/html/data/ABCD/Scores/data/*", GLOB_ONLYDIR);
     foreach($users as $userdir) {
         $user = basename($userdir);
+        // only add scores defined by the current user or by admin
+        if ($user != $user_name && $user != "admin")
+            continue;
+        
         $files = glob("/var/www/html/data/ABCD/Scores/data/".$user."/*.json");
         foreach ($files as $file) {
             $calculation = json_decode(file_get_contents($file), true);
             if (isset($calculation['permission']) && $calculation["permission"] == "public") {
                 // don't add if it already exists (this will not add the current user's calculations another time
                 if (!in_array($calculation['name'], $names)) {
-                    $calculation['user'] = $user;
+                    $calculation['user'] = ($user == "admin"?"public":$user);
                     if (!isset($calculation['permission'])) {
                         $calculation['permission'] = "public";
                     }
