@@ -3316,7 +3316,7 @@ function clearDisplayCheck(time) {
             filename = display_file_list[file_name_index]
             jQuery.get(filename, function(data) {
                 scatter_output_json = data
-		if(!data[0]["src_subject_id"]) return;
+		//if(!data[0]["src_subject_id"]) return;
                 jQuery.get(display_file_list["lineplot"], function(ldata) {
                     lineplot_data = ldata
                     line_output_json = ldata
