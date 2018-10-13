@@ -282,3 +282,9 @@ div.masonry-layout__group.link4::before {
     background-color: #222;
     opacity:  0.8;
 }
+@media (min-width: 768px) {
+    .modal-xl {
+        width: 90%;
+        max-width:1500px;
+    }
+}

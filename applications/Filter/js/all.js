@@ -230,7 +230,7 @@ function changeSearch() {
                 // fill this block
                 
                 jQuery(newDiv).append(no);
-                jQuery(newDParent).append("<div class=\"row\"><div class=\"sectionTitle col-12\">Result of the current restriction</div></div>");
+                jQuery(newDParent).append("<div class=\"row\"><div class=\"sectionTitle col-12\">Result of the current restriction<span id='fam-sort'></span></div></div>");
                 jQuery(newDParent).append(newDiv);
             }
         }
@@ -529,7 +529,7 @@ function parse() {
             }
         }
         
-        var languageKeywords = [ "has", "not", "and", "or", "visit", "numVisits" ];
+        var languageKeywords = [ "has", "not", "and", "or", "visit", "numVisits", "unique", "quantile" ];
         for (var i = 0; i < variables.length; i++) {
             var idx = languageKeywords.indexOf(variables[i]);
             if ( idx !== -1 || variables[i] == +variables[i]) {
@@ -547,7 +547,8 @@ function parse() {
         variables.forEach( function(v) { 
             highlight('.no', v);
         });
-        jQuery('.loading').hide();        
+        jQuery('.loading').hide();
+        setZoom(zoomFactor);
     });
 }
 
@@ -673,12 +674,20 @@ function addOneMeasure( meas ) {
     });
 }
 
+// todo: save the zoom factor in a session variable
+var zoomFactor = 100;
+function setZoom( factor ) {
+    jQuery('.datas').css('zoom', factor+"%");
+    zoomFactor = factor;
+}
+
 var toggleFamilyViewOn = false;
 function toggleFamilyView() {
     if (toggleFamilyViewOn)
         return; // only do this once
     
     toggleFamilyViewOn = true;
+    jQuery('#fam-sort').text(" (sorted by family)");
     
     // console.log('sort all entries into different sites/families/groups');
     // use allMeasures['rel_family_id'] and allMeasures['rel_group_id']

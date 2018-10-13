@@ -46,17 +46,17 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="mr-auto navbar-nav">
         <li class="nav-item"><a class="nav-link" href="/index.php">Home</a></li>
-        <li class="nav-item"><a class="nav-link" data-target="#help-info-box" data-toggle="modal">Help</a></li>
         <li class="nav-item dropdown">
            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true">Zoom</a>
            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#" onclick="jQuery('.datas').css('zoom','100%');">Scale 100%</a>
+              <a class="dropdown-item" href="#" onclick="setZoom(100);">Scale 100%</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#" onclick="jQuery('.datas').css('zoom','50%');">Scale 50%</a>
-              <a class="dropdown-item" href="#" onclick="jQuery('.datas').css('zoom','200%');">Scale 200%</a>
-              <a class="dropdown-item" href="#" onclick="jQuery('.datas').css('zoom','500%');">Scale 500%</a>
+              <a class="dropdown-item" href="#" onclick="setZoom(50);">Scale 50%</a>
+              <a class="dropdown-item" href="#" onclick="setZoom(200);">Scale 200%</a>
+              <a class="dropdown-item" href="#" onclick="setZoom(500);">Scale 500%</a>
            </div>
         </li>
+        <li class="nav-item"><a class="nav-link" data-target="#help-info-box" data-toggle="modal">Help</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
@@ -83,8 +83,14 @@
  </div>
 
  <div id="help-info-box" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-   <div class="modal-dialog">
+   <div class="modal-dialog modal-xl">
      <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title">Help</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
        <div class="modal-body">
           <p style="font-weight: 300;font-size: 14pt;line-height: 24px;">
             This application creates filters that can be used to identify a subset of sessions for analysis. 

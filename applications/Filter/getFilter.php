@@ -28,7 +28,7 @@ if ($action == "read") {
         $aruser[0]['name'] = $user_name;
     }
     
-    $fn = "data/public.json";
+    $fn = "/var/www/html/data/ABCD/Filter/data/public.json";
     if (is_readable($fn)) {
         $puuser = json_decode( file_get_contents($fn), TRUE);
         if ( !empty($aruser)) {
