@@ -81,9 +81,9 @@ function highlight(where, what) {
         //jQuery(this).children().remove();
         
         if (parseFloat(measure[sid][vid]) == measure[sid][vid]) {
-            jQuery('<div class="spot ' + "q" + col + "-9" + '" title="' + what + ' = ' + parseFloat(measure[sid][vid]).toFixed(2) + '"></div>').appendTo(this); // .hide().appendTo(this).fadeIn(1500);
+            jQuery('<div class="spot ' + "q" + col + "-9" + '" data-toggle="tooltip" title="' + what + ' = ' + parseFloat(measure[sid][vid]).toFixed(2) + '"></div>').appendTo(this); // .hide().appendTo(this).fadeIn(1500);
         } else {
-            jQuery('<div class="spot ' + "q" + col + "-9" + '" title="' + what + ' = ' + measure[sid][vid] + '"></div>').appendTo(this);
+            jQuery('<div class="spot ' + "q" + col + "-9" + '" data-toggle="tooltip" title="' + what + ' = ' + measure[sid][vid] + '"></div>').appendTo(this);
         }
         //jQuery(this).append('<div class="spot ' + "q" + col + "-9" + '" title="' + what + ' = ' + measure[sid][vid] + '"></div>');
     });
@@ -249,7 +249,7 @@ function displayData(data, where) {
      str = str + '<div class="data" SubjID="' + data[i][idxSubjID] + 
                  '" VisitID="' + data[i][idxVisitID] + 
                  '" StudyDate="' + data[i][idxStudyDate] + 
-           '" title="SubjID: ' + data[i][idxSubjID] + ', VisitID: ' + data[i][idxVisitID] + (typeof data[i][idxStudyDate]=='undefined'?"":', StudyDate: ' + data[i][idxStudyDate]) + '">' + "" + '</div>';
+           '" data-toggle="tooltip" title="SubjID: ' + data[i][idxSubjID] + ', VisitID: ' + data[i][idxVisitID] + (typeof data[i][idxStudyDate]=='undefined'?"":', StudyDate: ' + data[i][idxStudyDate]) + '">' + "" + '</div>';
    }
    str = str + '</div>';
    jQuery(where).append(str);
