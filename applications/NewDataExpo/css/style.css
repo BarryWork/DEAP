@@ -222,6 +222,7 @@ button.btn-sm.btn.btn-outline-secondary!important {
 /* width */
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 /* Track */
@@ -237,4 +238,21 @@ button.btn-sm.btn.btn-outline-secondary!important {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
+}
+.miniTag {
+    margin-left: 12px;
+    margin-top: 4px;
+    color: white;
+    background-color: #f0ad4e;
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+   float: right;
 }

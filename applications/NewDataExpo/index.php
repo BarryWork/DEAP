@@ -376,6 +376,15 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script src="./js/ace.js"></script>
 <script>
 
+function checkLogin() {
+    jQuery.getJSON('/code/php/loginCheck.php', function(data) {
+        //console.log(data);
+        if (data['login'] == 0) {
+            // logged out, go to login page with this page
+            window.location = "//" + window.location.host + "/applications/User/login.php?url=" + window.location.pathname;
+        }
+    });
+}                                                                                                                                                                                                                                                                        
 jQuery(document).ready(function() {
     //if(user_name != "admin") jQuery("body").html("Deap is under construction, come back later. ");
 

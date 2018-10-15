@@ -78,6 +78,8 @@ var statistics_output_json = ""
 
 var model = model_name
 var analysis_names = []
+var analysis_scores = []
+var analysis_scores_list = []
 var om = insert_ontology_modal()
 var window_width = jQuery(window).width()
 var predefined_gr_list = [
@@ -1538,7 +1540,12 @@ function insert_mutiple_input(item_input, isIndpv) {
         },
     })
     au.data("ui-autocomplete")._renderItem = function(ul, item) {
-        return $("<li></li>")
+        return analysis_scores_list.includes(item.label) ?
+	$("<li></li>")
+            .data("item.autocomplete", item)
+            .append("<div>" + item.label + "<span class = 'miniTag'>score</span></div>")
+            .appendTo(ul) 
+	:$("<li></li>")
             .data("item.autocomplete", item)
             .append("<div>" + item.label + "</div>")
             .appendTo(ul)
@@ -3063,9 +3070,12 @@ function insert_checkbox(arr) {
 
 function loadAnalysisNames() {
     analysis_names = []
+    analysis_scores = []
+    analysis_scores_list = []
     dataMRIRead = false // we have to read them and afterwards add the entries to the ontology field
     dataBehaviorRead = false
     version = ""
+    // nda varibales
     var inputData =
         "../../data/" +
         project_name +
@@ -3103,7 +3113,14 @@ function loadAnalysisNames() {
             } catch (err) {}
         }
     )
-
+    // scores
+    $.post("../../applications/Scores/getScores.php", {action : "load"}).done(function(data){
+        analysis_scores = JSON.parse(data);
+	for(score in analysis_scores){
+	    analysis_names.push(analysis_scores[score].name);
+	    analysis_scores_list.push(analysis_scores[score].name);
+	}
+    })
 }
 
 function yvalueChanged(item) {
