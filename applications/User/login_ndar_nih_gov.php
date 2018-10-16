@@ -78,7 +78,7 @@ if (isset($_SESSION["logged"])) {
        <h1>Data Analysis and Exploration Portal</h2>
        <center><i>A service provided by the <a href="https://abcd-workspace.ucsd.edu">Data Analysis and Informatics Core</a> of <a href="http://abcdstudy.org">ABCD</a></i></center>
        <p class="lead">
-         This page requires a login. Logins are provided by your system administration.
+    This page requires a login. Logins are provided by the National Data Archive (<a href="https://data-archive.nimh.nih.gov/abcd">data-archive.nimh.nih.gov</a>).
        </p>
      </div>
    </div>
