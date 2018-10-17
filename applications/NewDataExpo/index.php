@@ -168,7 +168,7 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
           <div class="content"></div>
         </div>
         <div id = "conrol-pannel" class="col-md-1" style="display: none;">
-          <button type="button" id = "compute-button" class="btn btn-primary" onclick = "computeWithCheck()" style="margin-left: -10px;z-index:99999; margin-top: 55px; width:165px;height: 80px;font-size:2rem; transform: rotate(90deg); font-weight: 100;" title="Start the computation of the currently defined analysis">submit</button>
+          <button type="button" id = "compute-button" class="btn btn-primary" onclick = "computeWithCheck()" style="margin-left: -10px; margin-top: 55px; width:165px;height: 80px;font-size:2rem; transform: rotate(90deg); font-weight: 100;" title="Start the computation of the currently defined analysis">submit</button>
 
         </div>
       </div>
