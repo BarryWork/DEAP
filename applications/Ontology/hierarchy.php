@@ -124,7 +124,7 @@ function php_json_encode($arr) {
   $row = 1;
   foreach (array_keys($dictionaries) as $u) {
     if (($handle = fopen($dictionaries[$u], "r")) !== FALSE) {
-      while (($data = fgetcsv($handle, 5000, ",")) !== FALSE) {
+      while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
         $num = count($data);
         $row++;
         if ($num == 2) {  
@@ -141,7 +141,7 @@ function php_json_encode($arr) {
   $row = 1;
   foreach (array_keys($rules_files) as $u) {
     if (($handle = fopen($rules_files[$u], "r")) !== FALSE) {
-      while (($data = fgetcsv($handle, 5000, ",")) !== FALSE) {
+      while (($data = fgetcsv($handle, 0 , ",")) !== FALSE) {
         $num = count($data);
         $row++;
         if ($num >= 3) {
@@ -206,6 +206,7 @@ function php_json_encode($arr) {
            "leaf" => "0", "key" => $key, "description" => $value[1] ) );
        }
      }
+     
      echo (php_json_encode( $result ));
      return false;
    } else if ( $entry == "display" ) {
@@ -613,9 +614,20 @@ a:hover {
     <script src="js/popper.min.js" crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
     
-   <script type="text/javascript">
-	   var editor = null;
+    <script type="text/javascript">
+       var editor = null;
        searchTerm = "$searchTerm";
+       
+       function checkLogin() {
+           jQuery.getJSON('/code/php/loginCheck.php', function(data) {
+               //console.log(data);
+               if (data['login'] == 0) {
+                   // logged out, go to login page with this page
+                   window.location = "//" + window.location.host + "/applications/User/login.php?url=" + window.location.pathname;
+               }
+           });
+       }
+       
        
        jQuery(document).ready(function() {
            // open modal if user wants to edit the model
@@ -656,15 +668,16 @@ a:hover {
 	    	   jQuery('#search').trigger(e);
                }, 1000);
 	   }
+           setInterval(function() { checkLogin(); }, 60000); // every 10 seconds
        });
        
        function overwriteRules() {
            jQuery.post('saveRules.php', { "project": "$project_name", "text": editor.getValue() }, function(data) {
-	   // ignore the output, its visible in firebug, that should be enough for debugging
-         });
-	 jQuery('#edit-window').modal('hide');
-      }
-
+	       // ignore the output, its visible in firebug, that should be enough for debugging
+           });
+	   jQuery('#edit-window').modal('hide');
+       }
+       
     </script>
 
     <script src="js/dnTree.js"></script>
