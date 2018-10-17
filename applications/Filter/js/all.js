@@ -737,7 +737,9 @@ function toggleFamilyView() {
             var d = jQuery('<div class="masonry-layout__group"></div>');
             var numInGroup = Object.keys(pill_map[box][group]).length;
             if (numInGroup > 1 /*&& numInGroup < numPills*/) {
-                jQuery(d).addClass('link'+(+group+1));
+                //jQuery(d).addClass('link'+(+group+1));
+                // might be ok to use link2 only
+                jQuery(d).addClass('link2');
             }
             jQuery(d).attr('group', group);
             var count = 0;
