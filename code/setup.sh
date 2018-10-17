@@ -40,7 +40,7 @@ if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
     cp "${rootpath}/applications/Scores/data/admin/"*.json "${rootpath}/data/${project}/Scores/data/admin"
 
     mkdir -p "${rootpath}/data/${project}/Filter/data/"
-    cp "${rootpath}/applications/Filter/data/admin.json" "${rootpath}/data/${project}/Filter/data"
+    cp "${rootpath}/applications/Filter/data/admin.json" "${rootpath}/data/${project}/Filter/data/public.json"
     mkdir -p "${rootpath}/logs"
     chown -R www-data:www-data "${rootpath}/logs"
     
