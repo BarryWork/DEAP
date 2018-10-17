@@ -319,7 +319,7 @@ jQuery(document).ready(function() {
            }
        }
        jQuery('select.existingFilters').val(default_value)
-       .select2({placeholder: "",  allowClear: false });
+       .select2({placeholder: "",  allowClear: true });
    });
  }
 

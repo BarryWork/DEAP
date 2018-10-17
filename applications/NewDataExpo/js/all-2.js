@@ -333,8 +333,11 @@ function insert_filter_select(item_input) {
             state = item_input.state[index]
             if (state.name == "value") {
                 state.value = v
-                console.log("JSON has been updated.")
-                console.log(state)
+                if (state.value === null) { // in case a filter is reset the value will be null, set to undefined instead
+                    state.value = undefined;
+                }
+                //console.log("JSON has been updated.");
+                //console.log(state);
                 jQuery("#formula").html(get_formula())
             }
         }
@@ -423,7 +426,7 @@ function insert_single_select(item_input) {
     //setTimeout(function() { jQuery('.dropdown-select').select2(); }, 200);
     jQuery(input).select2({
         placeholder: "",
-        allowClear: false,
+        allowClear: true,
     })
 }
 
@@ -637,7 +640,7 @@ function insert_model_load_pannel() {
                     .attr("value", JSON.stringify(d[list_key]))
                 )
         }
-        jQuery(".dropdown-select").select2()
+        jQuery(".dropdown-select").select2({ allowClear: true })
     })
     input.change(function() {
         console.log(jQuery(this).attr("value"))
@@ -3756,17 +3759,22 @@ function setVarByID(name, value) {
             })
         }
     })
-    if (rt_name != "") return rt_name
-    else return false
+    if (rt_name['value'] === null)
+        rt_name['value'] = undefined;
+    //console.log("rt_name: ", JSON.stringify(rt_name));
+    if (rt_name != "")
+        return rt_name
+    else
+        return false
 }
 
 function getVarNameByID(name, new_json) {
     if (new_json) {
         console.log("user defined model")
-        var json_in_use = new_json
+        var json_in_use = new_json;
     } else {
         console.log("loaded model")
-        var json_in_use = json
+        var json_in_use = json;
     }
     rt_name = "NULL"
     rt_name_list = []
@@ -3793,7 +3801,9 @@ function getVarNameByID(name, new_json) {
             })
         }
     })
-    if (rt_name != "NULL") return rt_name
+    if (rt_name != "NULL")
+        return rt_name
+    //console.log("rt_name_list: " + JSON.stringify(rt_name_list));
     return rt_name_list
 }
 
