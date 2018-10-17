@@ -56,8 +56,8 @@
             Getting Started
           </div>
           <div class="card-body">
-            <p>Start to get familiar with the ABCD way of naming variables by using the Explore application. Use the hierarchical view to get an overview by domains and the search field for a free-text search. You will notice that the variable names usually start with the name of the instrument used to capture the values. Similar values can be found therefore by changing the end of the search term.</p>
-            <p>Next use the Analysis application and just press the "Submit" button. Click on "Normal" in the menu and read up on the generated graphs. Try to add your own variables as dependent or independent variables.</p>
+            <p>Start to get familiar with the ABCD way of naming variables by using the Explore application. Use the hierarchical view to get an overview by domains and the search field for a free-text search. You will notice that the variable names usually start with the name of the instrument used to capture the values. You can find similar variables by changing the end of the search term.</p>
+      <p>Next use the Analysis application, press the "Submit" button. Click on "Compact Mode" in the menu and read up on the generated graphs. Try to add your own variables as dependent or independent variables.</p>
             <p>Once you are familiar with this general workflow read up on the <i>Limit</i> and <i>Extend</i> applications to tailor your analysis.</p>
           </div>
         </div>
@@ -67,7 +67,7 @@
             About the Study
           </div>
           <div class="card-body">
-            <p>The Data Exploration and Analysis Portal (DEAP) provides advanced statistical analysis functions that are built to work with the Adolescent Brain Cognitive Development (ABCD) study - a long-term study of cognitive and brain development in children across the United States. From 2016-2018, children between the ages of 9-11 have been invited to join ABCD from 21 sites around the nation, with the intent to enroll and follow approximately 11,500 healthy children longitudinally for 10 years into young adulthood. </p>
+            <p>The Data Exploration and Analysis Portal (DEAP) provides advanced statistical analysis functions that we built to work with the Adolescent Brain Cognitive Development (ABCD) Study - a long-term study of cognitive and brain development in children across the United States. From 2016-2018, we invited children between the ages of 9-11 to join ABCD from 20 sites around the nation, with the intent to enroll and follow 11,900 healthy children longitudinally for 10 years into young adulthood. </p>
           </div>
         </div>
         
