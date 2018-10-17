@@ -58,6 +58,29 @@
      return $_SESSION["logged"];
   };
 
+  // has to be logged in, forwards to login page if not
+  function check_logged_only() {
+      global $_SESSION, $USERS, $_SERVER;
+      
+      $ss = array_keys($_COOKIE);
+      audit("Session Cookies: ", "print out cookie values");
+      foreach($ss as $k) {
+          audit("   Cookie: ".$k, " value: ".$_COOKIE[$k]);
+      }
+      audit("check_logged Session variables: ", "print all of them");
+      foreach(array_keys($_SESSION) as $k) {
+          audit("   Session: ".$k," value: ".$_SESSION[$k]);
+      }
+      if (!array_key_exists($_SESSION["logged"],$USERS)) {
+          return FALSE;
+      };
+      // store that this user has logged in now
+      setUserVariable( $_SESSION["logged"], "lastTimeLoggedIn", date(DATE_RFC2822) );
+      
+      audit( "check_logged", " as user \"".$_SESSION["logged"]."\"" );
+      return TRUE;
+  };
+
   // list all users, secure function, returns nothing if user is not logged in or
   // role is not admin
   function list_permissions_for_user( $user_in ) {
