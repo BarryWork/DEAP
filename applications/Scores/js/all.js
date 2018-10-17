@@ -798,6 +798,16 @@ function insert_recipe_block(input, top) {
     }
 }
 
+function checkLogin() {
+    jQuery.getJSON('/code/php/loginCheck.php', function(data) {
+        //console.log(data);
+        if (data['login'] == 0) {
+            // logged out, go to login page with this page
+            window.location = "//" + window.location.host + "/applications/User/login.php?url=" + window.location.pathname;
+        }
+    });
+}
+
 var simplemde;
 jQuery(document).ready(function() {
     $.post("getScores.php", {action : "load"}).done(function(data){
@@ -808,6 +818,7 @@ jQuery(document).ready(function() {
         }
     });
     setTimeout(function() { addOneMeasure('age'); }, 0);
+    setInterval(function() { checkLogin(); }, 60000); // every 10 seconds
 });
 
 function loadAnalysisNames() {
