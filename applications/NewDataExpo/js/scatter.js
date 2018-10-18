@@ -311,7 +311,7 @@ function scatter(data, dep, ind, group,id,line_data,line_color_list){
                     "<br>Site : "+d["abcd_site"]+
                     "<br>Sex : "+d["sex"] + 
                     "<br>Race : "+d["race.ethnicity"]+
-                    "<br>Age : "+d["interview_age"]+
+                    "<br>Age : "+d["age"]+
                     "<br>Household Highest Education : "+d["high.educ"]+
                     "<br>Household Income : "+d["household.income"]+
                     "<br>"+dep+" : "+d[dep] +
@@ -322,7 +322,7 @@ function scatter(data, dep, ind, group,id,line_data,line_color_list){
                     "<br>Site : "+d["abcd_site"]+
                     "<br>Sex : "+d["sex"] +      
                     "<br>Race : "+d["race.ethnicity"]+
-                    "<br>Age : "+d["interview_age"]+
+                    "<br>Age : "+d["age"]+
                     "<br>Household Highest Education : "+d["high.educ"]+
                     "<br>Household Income : "+d["household.income"]+
                     "<br>res : " +d["res"]+
