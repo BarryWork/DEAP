@@ -27,9 +27,9 @@ if (isset($_POST["ac"]) && $_POST["ac"]=="log") { /// do after login form is sub
         $_SESSION["logged"]=$user;        
     } else {
         audit( "login", "incorrect password for ".$_POST["username"] );
-        $incorrect = 'Incorrect username/password. Please, try again.';
+        $incorrect = 'Incorrect username/password. Please, try again. If this error persists please make sure that you have access to the ABCD project data on the National Data Archive (NDA helpdesk at ndahelp@mail.nih.gov).';
     }
-    echo($result);
+    // echo($result);
 };
 if (isset($_SESSION["logged"])) {
     $l = strlen('/login.php');
@@ -112,7 +112,7 @@ if (isset($_SESSION["logged"])) {
             if (incorrect.length > 0) {
                 alert(incorrect);
             } else {
-                alert('Wrong user name or wrong password, please try again.');
+                alert('Wrong user name or wrong password, please try again. If this error persists please make sure that you have access to the ABCD project data on the National Data Archive (NDA helpdesk at ndahelp@mail.nih.gov).');
             }
         }
 
