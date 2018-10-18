@@ -487,7 +487,7 @@ function insert_load_list_pannel() {
                         .html(list_key)
                         .appendTo($title_wrap)
                     var $dates = jQuery("<small style = 'font-size:50%'>")
-                        .html(moment($value["last-edit-time"]).fromNow())
+                        .html(moment($value["last-edit-time"], "YYYY-MM-DD kk:mm:ss").fromNow())
                         .appendTo($title_wrap)
                     var $p = jQuery('<p class="mb-1" style="font-size:0.7rem">')
                         .html(
@@ -825,28 +825,28 @@ function insert_save_tabs() {
         .css("padding-left", 13)
         .css("padding-top", 5)
     $li_save = jQuery(
-        '<li role="presentation" class="active"><button type="button" class="btn btn-primary" ><i class="far fa-save"></i></button></li>'
+        '<li role="presentation" class="active"><button type="button" class="btn btn-primary" title="Save current model"><i class="far fa-save"></i></button></li>'
     )
         .css("margin", 2)
         .appendTo($ul)
     $li_download = jQuery(
-        '<li role="presentation" class="active"><button type="button" class="btn btn-success" ><i class="fas fa-download"></i></button></li>'
+        '<li role="presentation" class="active"><button type="button" class="btn btn-success" title="Download model"><i class="fas fa-download"></i></button></li>'
     )
         .css("margin", 2)
         .appendTo($ul)
-    $li_upload = jQuery(
-        '<li role="presentation" class="active"><button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="fas fa-upload"></i></button></li>'
+    /*$li_upload = jQuery(
+        '<li role="presentation" class="active"><button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg" title="Upload model"><i class="fas fa-upload"></i></button></li>'
     )
         .css("margin", 2)
-        .appendTo($ul)
+        .appendTo($ul) */
     $li_share = jQuery(
-        '<li role="presentation" class="active"><button type="button" class="btn btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg-share" ><i class="fas fa-share"></i></button></li>'
+        '<li role="presentation" class="active"><button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg-share" title="Share model"><i class="fas fa-share"></i></button></li>'
     )
         .css("margin", 2)
         .appendTo($ul)
     //$li_twitter = jQuery('<li role="presentation" class="active"><button type="button" class="btn btn-info" ><i class="fab fa-twitter-square"></i></button></li>').css("margin",2).appendTo($ul);
     $li_trash = jQuery(
-        '<li role="presentation" class="active"><button type="button" class="btn btn-danger" ><i class="fas fa-trash-alt"></i></button></li>'
+        '<li role="presentation" class="active"><button type="button" class="btn btn-danger" title="Delete model"><i class="fas fa-trash-alt"></i></button></li>'
     )
         .css("margin", 2)
         .appendTo($ul)
@@ -857,7 +857,7 @@ function insert_save_tabs() {
         '<div class="modal-dialog modal-lg">' +
         '<div class="modal-content">' +
         '<div class="modal-header">' +
-        '<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>' +
+        '<h5 class="modal-title" id="exampleModalLongTitle">???</h5>' +
         '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
         '<span aria-hidden="true">&times;</span>' +
         "</button>" +
@@ -1499,7 +1499,7 @@ function insert_mutiple_input(item_input, isIndpv) {
             jQuery(this).append(span_list)
             if (!isIndpv) {
                 jQuery(this).append(
-                    "<span class='last-remove' creatDeap = 'true'  readonly>+</span>"
+                    "<span class='last-remove' creatDeap = 'true' contenteditable='true'  readonly>+</span>"
                 )
                 //move the caret to the end of input
                 var el = input.last()[0]
@@ -1668,6 +1668,10 @@ function insert_mutiple_input(item_input, isIndpv) {
 });
 }
 
+/*
+ * imporve parser to take care empty span, andding +, delete + 
+ *
+ */
 function pasteValParser() {
     //covuser
     var indepvar_content = jQuery("#measure-all-multi-covuser").text()
@@ -1688,6 +1692,9 @@ function pasteValParser() {
                 jQuery("#measure-all-multi-covuser")
                     .find("[creatdeap!=true]")
                     .remove()
+		//actual content without considering any span;
+		content = jQuery("#measure-all-multi-covuser").text();
+		
                 var c_arr = content.split("+")
                 for (i in c_arr) {
                     var item = c_arr[i].trim()
@@ -2088,7 +2095,18 @@ function usercovArray() {
             )
         ) {
             rt.push(get_original(jQuery(ele).html()))
-        }
+        } else if ( jQuery(ele)
+                .html()
+                .indexOf("+") >= 0 
+		&& jQuery(ele)
+                .html()
+                .length > 1){
+	    rt.push(get_original(jQuery(ele).html().replace("+","")))
+	    //temp_value = jQuery(ele).html().replace("+","");
+	    //jQuery(ele).html("+")
+	    //jQuery("<span>"+temp_value+"</span>").insertAfter(jQuery(ele))
+	    
+	}
 
         if (
             jQuery(ele)
@@ -3751,7 +3769,7 @@ function setVarByID(name, value) {
                             if (json[n][m]["state"][sc]["name"] == "value") {
                                 json[n][m]["state"][sc]["value"] = value
                                 rt_name = json[n][m]["state"][sc]["value"]
-                                console.log(json[n][m]["state"])
+                                //console.log(json[n][m]["state"])
                             }
                         })
                     }
@@ -3770,10 +3788,10 @@ function setVarByID(name, value) {
 
 function getVarNameByID(name, new_json) {
     if (new_json) {
-        console.log("user defined model")
+        //console.log("user defined model")
         var json_in_use = new_json;
     } else {
-        console.log("loaded model")
+        //console.log("loaded model")
         var json_in_use = json;
     }
     rt_name = "NULL"
