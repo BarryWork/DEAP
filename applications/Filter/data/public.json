@@ -4,7 +4,7 @@
 	{ "name": "Females only", "func": "sex=\"F\"" }, 
 	{ "name": "10 year old (M)", "func": "(sex=\"M\")and(age>120)" },
 	{ "name": "Radiology Review Score &lt; 3", "func": "has(mrif_score)and(mrif_score>0)and(mrif_score<3)" },
-	{ "name": "Righthanded", "func": "ehi_y_ss_scoreb=1" },
+	{ "name": "Righthanded", "func": "ehi_ss_score=1" },
 	{ "name": "BMI small", "func": "has(anthro_bmi_calc)and(anthro_bmi_calc<quantile(anthro_bmi_calc,0.25))" },
 	{ "name": "Single", "func": "rel_relationship==\"single\"" },
 	{ "name": "Sibling, Twin, Triplet", "func": "rel_relationship<>\"single\"" },
