@@ -781,7 +781,7 @@ jQuery(document).ready(function() {
         }
         changeSearch();
     });
-    jQuery(document).on('click', '.datas', function() {
+    jQuery(document).on('click touchstart', '.datas', function() {
         toggleFamilyView();
     });
     
