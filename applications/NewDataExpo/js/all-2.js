@@ -1546,7 +1546,7 @@ function insert_mutiple_input(item_input, isIndpv) {
         return analysis_scores_list.includes(item.label) ?
 	$("<li></li>")
             .data("item.autocomplete", item)
-            .append("<div>" + item.label + "<span class = 'miniTag' title='This variable has been defined using the <i>Extend</i> application. It is not part of the ABCD data released.'>Extend</span></div>")
+            .append("<div>" + item.label + "<span class = 'miniTag' title='This variable has been defined using the Extend application. It is not part of the ABCD data released.'>Extend</span></div>")
             .appendTo(ul) 
 	:$("<li></li>")
             .data("item.autocomplete", item)
