@@ -34,5 +34,17 @@ cp <data nda17.Rds> assets/
 ./run deap deap 80 `pwd`/assets
 ```
 
+To visualize the development process of DEAP you can run gource:
+```
+gource --file-filter "MathJax-2.7.4" \
+       --file-filter "ModelBuilder/js" \
+       --file-filter "octicons" \
+       --file-filter "node_modules" \
+       --file-filter "ModelBuilder/css" \
+       --file-filter "ace/" \
+       --file-filter "pretty/" \
+       -a 1 
+```
+
 (RRID: SCR_016158)
 
