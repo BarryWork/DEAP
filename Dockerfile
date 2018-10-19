@@ -65,6 +65,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && sed -i '/session    required     pam_loginuid.so/c\#session    required   pam_loginuid.so' /etc/pam.d/cron \
     && sed -i '/post_max_size = 8M/cpost_max_size = 5000M' /etc/php/7.2/apache2/php.ini \
     && sed -i '/memory_limit = 128M/cmemory_limit = 1024M' /etc/php/7.2/apache2/php.ini \
+    && sed -i '/; max_input_vars = 1000/cmax_input_vars = 100000' /etc/php/7.2/apache2/php.ini \
     && localedef --force --inputfile=en_US --charmap=UTF-8 C.UTF-8
 
 RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
