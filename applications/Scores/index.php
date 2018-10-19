@@ -169,7 +169,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
         <div class="col-md-12">
     <p class="tut-p">This application allows the user to create and share new measures on DEAP. The computations are run in the web-browser and are written in the JavaScript language also called ES6. This could be as simple as a different quantization of an existing continuous variable or as complex as a new t-score table used to map values to some standard sample. DEAP will store the new measures, which makes them available to the statistical analysis packages on DEAP.</p>
           <div style = "z-index:9; margin-top: -20px; position: absolute; right: 10px;">
-             <button class="btn btn-light fa fa-plus-circle" onclick="add_new_recipe()" style="font-size:78px;color:red;margin:10px;cursor: pointer;" title="Create a new score"></button>
+             <button class="btn btn-light fa fa-plus-circle" onclick="add_new_recipe()" style="font-size:64px;color:green;margin:10px;cursor: pointer;" title="Create a new score"></button>
           </div>
           <div style="margin-top: 80px;">List of existing score calculations:</div>
         </div>
