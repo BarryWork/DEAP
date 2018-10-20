@@ -38,6 +38,8 @@ if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
 
     mkdir -p "${rootpath}/data/${project}/Scores/data/admin"
     cp "${rootpath}/applications/Scores/data/admin/"*.json "${rootpath}/data/${project}/Scores/data/admin"
+    cp "${rootpath}/applications/Scores/data/admin/"*.raw "${rootpath}/data/${project}/Scores/data/admin"
+    cp "${rootpath}/applications/Scores/data/admin/"*.rds "${rootpath}/data/${project}/Scores/data/admin"
 
     mkdir -p "${rootpath}/data/${project}/Filter/data/"
     cp "${rootpath}/applications/Filter/data/public.json" "${rootpath}/data/${project}/Filter/data/public.json"
