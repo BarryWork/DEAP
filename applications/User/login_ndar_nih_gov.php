@@ -27,7 +27,7 @@ if (isset($_POST["ac"]) && $_POST["ac"]=="log") { /// do after login form is sub
         $_SESSION["logged"]=$user;        
     } else {
         audit( "login", "incorrect password for ".$_POST["username"] );
-        $incorrect = 'Incorrect username/password. Please, try again. If this error persists please make sure that you have access to the ABCD project data on the National Data Archive (NDA helpdesk at ndahelp@mail.nih.gov). Make sure your account on NDA is current, permissions only last a year before a renewal is required. NDA error message: '.$res['error'].', '.$res['message'].'.'
+        $incorrect = 'Incorrect username/password. Please, try again. If this error persists please make sure that you have access to the ABCD project data on the National Data Archive (NDA helpdesk at ndahelp@mail.nih.gov). Make sure your account on NDA is current, permissions only last a year before a renewal is required. NDA error message: '.$res['error'].', '.$res['message'].'.';
     }
     // echo($result);
 };
