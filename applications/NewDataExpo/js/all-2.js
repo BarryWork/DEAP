@@ -2832,7 +2832,10 @@ function creatVar(value, input_id) {
                     description = JSON.parse(search_result)[0]? JSON.parse(search_result)[0].description:"";
 		    if(description == "" && analysis_scores_list.includes(act_v)){
 			for(score_iter in analysis_scores){
-			    if(analysis_scores[score_iter].name == act_v) description = analysis_scores[score_iter].description;
+			    if(analysis_scores[score_iter].name == act_v){
+				description = analysis_scores[score_iter].description;
+				description += "<span class = 'miniTag' title='This variable has been defined using the Extend application. It is not part of the ABCD data released.'>Extend</span>"; 
+			    }
 			}
 		    } 
 		    
