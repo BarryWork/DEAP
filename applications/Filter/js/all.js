@@ -26,7 +26,7 @@ var filters = null;
        jQuery('.selectpickerS').selectpicker('refresh'); */
        if (selectThis !== undefined) {
            jQuery('.selectpickerS').val(selectThis);
-           jQuery('.selectpickerS').selectpicker('render');
+           //jQuery('.selectpickerS').selectpicker('render');
        }
        jQuery('.selectpickerS').change(function() {
            for (var i = 0; i < filters.length; i++) {
@@ -781,7 +781,7 @@ jQuery(document).ready(function() {
         }
         changeSearch();
     });
-    jQuery(document).on('click', '.datas', function() {
+    jQuery(document).on('click touchstart', '.datas', function() {
         toggleFamilyView();
     });
     

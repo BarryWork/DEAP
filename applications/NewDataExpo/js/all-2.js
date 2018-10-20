@@ -1546,7 +1546,7 @@ function insert_mutiple_input(item_input, isIndpv) {
         return analysis_scores_list.includes(item.label) ?
 	$("<li></li>")
             .data("item.autocomplete", item)
-            .append("<div>" + item.label + "<span class = 'miniTag'>score</span></div>")
+            .append("<div>" + item.label + "<span class = 'miniTag' title='This variable has been defined using the Extend application. It is not part of the ABCD data released.'>Extend</span></div>")
             .appendTo(ul) 
 	:$("<li></li>")
             .data("item.autocomplete", item)
@@ -1557,7 +1557,7 @@ function insert_mutiple_input(item_input, isIndpv) {
     input.keyup(function() {
         usercovArray()
     })
-    input.on("focusout click", function() {
+    input.on("focusout", function() {
         pasteValParser()
         usercovArray()
     })
@@ -1712,9 +1712,12 @@ function pasteValParser() {
                     .find("[creatdeap!=true]")
                     .find("span")
                     .text()
-                jQuery("#measure-all-multi-covuser")
+                content += jQuery("#measure-all-multi-covuser")
+                    .find("[creatdeap!=true]").text()
+		jQuery("#measure-all-multi-covuser")
                     .find("[creatdeap!=true]")
                     .remove()
+		
                 var item = content
                 if (item.split("\n").length > 1)
                     item = item.split("\n")[item.split("\n").length - 1]
@@ -1745,6 +1748,60 @@ function pasteValParser() {
                 }
             }
         }
+
+	/* 
+	 * Loop through deap created spans to find out any name change: 
+	 *   1. Manually entered transforamtion, manually entered name change 
+	 *   2. Last-remove plus has more than (usually a var entered by user) a plus in it
+	 *   3. Check if plus inside span that we need to split spans
+	 *   4. Check of plus delete between spans that we need to do merge
+	 *
+	 */
+
+
+	 /*
+	 jQuery("#measure-all-multi-covuser")
+             .find("[creatdeap=true]")
+	     .each(function(index){
+		console.log("loop spans ", this);	
+	 	// 1. Manually entered transforamtion, manually entered name change 
+		var j_this = jQuery(this);
+		console.log(get_original(j_this.html()));
+		// a. remove the transformation block, or make it looks like a history item no long exist in the model.  
+	     });
+	*/
+
+	var content = jQuery("#measure-all-multi-covuser").text()	
+        jQuery("#measure-all-multi-covuser").html("")
+        var c_arr = content.split("+")
+        for (i in c_arr) {
+          var item = c_arr[i].trim()
+          if (item == "") continue
+          //jQuery("#measure-all-multi-covuser").append(add_span_list(item,jQuery("#measure-all-multi-covuser").parent().find("ul"),"covuser"));
+          jQuery("#measure-all-multi-covuser").append(
+              add_span_list(item, ul_list, "covuser")
+          )
+          jQuery("#measure-all-multi-covuser").append(
+              "<span class='last-remove' creatdeap='true' readonly>+</span>"
+          )
+
+	  // remove transformation entry 
+	  var original_id = get_original(item);
+	  var class_name_original_id = original_id.split(".").join("__DOT__");
+	  //jQuery(".covuser-"+class_name_original_id+"-wrapper").remove();
+        }
+	
+	
+
+	// simple cursor movemnet
+	var el = jQuery("#measure-all-multi-covuser").last()[0]
+        var range = document.createRange()
+        var sel = window.getSelection()
+        range.setStart(el.childNodes[el.childNodes.length - 1], 1)
+        range.collapse(true)
+        sel.removeAllRanges()
+        //sel.addRange(range)
+
     }
 
     //indepvar
@@ -1968,7 +2025,8 @@ function add_span_list(default_value, list, id) {
             if (!list.find("." + id + "-" + class_name_original_id).html()) {
                 list.append(creatVar(default_value, id), false)
             } else {
-                list.find("." + id + "-" + class_name_original_id + "-wrapper").show()
+                list.find("." + id + "-" + class_name_original_id + "-wrapper").remove()
+		list.append(creatVar(default_value, id), false)
                 list
                     .find("." + id + "-" + class_name_original_id + "-wrapper")
                     .attr("hiding-list", false)
@@ -2771,7 +2829,16 @@ function creatVar(value, input_id) {
                         }
                     }
 
-                    description = JSON.parse(search_result)[0].description
+                    description = JSON.parse(search_result)[0]? JSON.parse(search_result)[0].description:"";
+		    if(description == "" && analysis_scores_list.includes(act_v)){
+			for(score_iter in analysis_scores){
+			    if(analysis_scores[score_iter].name == act_v){
+				description = analysis_scores[score_iter].description;
+				description += "<span class = 'miniTag' title='This variable has been defined using the Extend application. It is not part of the ABCD data released.'>Extend</span>"; 
+			    }
+			}
+		    } 
+		    
                     //var pre_wrap = jQuery("<div class = 'row row-fluid'></div>").css("margin","0px")
 
                     jQuery(
