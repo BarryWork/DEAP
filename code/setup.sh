@@ -41,6 +41,7 @@ if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
 
     mkdir -p "${rootpath}/data/${project}/Filter/data/"
     cp "${rootpath}/applications/Filter/data/public.json" "${rootpath}/data/${project}/Filter/data/public.json"
+    cp "${rootpath}/applications/Filter/data/filterSets*.json" "${rootpath}/data/${project}/Filter/data/"
     mkdir -p "${rootpath}/logs"
     chown -R www-data:www-data "${rootpath}/logs"
     
