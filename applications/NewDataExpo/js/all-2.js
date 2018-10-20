@@ -2829,7 +2829,13 @@ function creatVar(value, input_id) {
                         }
                     }
 
-                    description = JSON.parse(search_result)[0].description
+                    description = JSON.parse(search_result)[0]? JSON.parse(search_result)[0].description:"";
+		    if(description == "" && analysis_scores_list.includes(act_v)){
+			for(score_iter in analysis_scores){
+			    if(analysis_scores[score_iter].name == act_v) description = analysis_scores[score_iter].description;
+			}
+		    } 
+		    
                     //var pre_wrap = jQuery("<div class = 'row row-fluid'></div>").css("margin","0px")
 
                     jQuery(
