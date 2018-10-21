@@ -2,7 +2,7 @@
 
 #########################################################################
 #
-# Create a directory tree that DEAP can use to store non-volotile data.
+# Create a directory tree that DEAP can use to store non-volatile data.
 #
 #########################################################################
 
@@ -29,21 +29,29 @@ if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
     cp "${dataRds}" "${rootpath}/data/${project}/data_uncorrected/"
     cp "${rootpath}/applications/Ontology/ABCD_datadictionary_rules.csv_master" "${rootpath}/data/${project}/data_uncorrected/ABCD_datadictionary_rules.csv"
     mkdir -p "${rootpath}/data/${project}/Ontology/searchServer/"
-    cp "${rootpath}/applications/Ontology/teach.json" "${rootpath}/data/${project}/Ontology/"
+    if [ ! -f "${rootpath}/data/${project}/Ontology/teach.json" ]; then
+        # lets keep this file if it exists already
+        cp "${rootpath}/applications/Ontology/teach.json" "${rootpath}/data/${project}/Ontology/"
+    fi
     mkdir -p "${rootpath}/data/${project}/NewDataExpo/usercache/"
     mkdir -p "${rootpath}/data/${project}/NewDataExpo/variableInfo/"
     mkdir -p "${rootpath}/data/${project}/Pre-Registration/"
     mkdir -p "${rootpath}/data/${project}/ModelBuilder/viewer/recipes/"
     cp "${rootpath}/applications/ModelBuilder/viewer/recipes/"GAMM4-FZ-CR.* "${rootpath}/data/${project}/ModelBuilder/viewer/recipes/"
 
-    mkdir -p "${rootpath}/data/${project}/Scores/data/admin"
-    cp "${rootpath}/applications/Scores/data/admin/"*.json "${rootpath}/data/${project}/Scores/data/admin"
-    cp "${rootpath}/applications/Scores/data/admin/"*.raw "${rootpath}/data/${project}/Scores/data/admin"
-    cp "${rootpath}/applications/Scores/data/admin/"*.rds "${rootpath}/data/${project}/Scores/data/admin"
+    if [ ! -d "${rootpath}/data/${project}/Scores/data/admin" ]; then
+        # if the directory exists already, don't copy default entries over the current fields
+        mkdir -p "${rootpath}/data/${project}/Scores/data/admin"
+        cp "${rootpath}/applications/Scores/data/admin/"*.json "${rootpath}/data/${project}/Scores/data/admin"
+        cp "${rootpath}/applications/Scores/data/admin/"*.raw "${rootpath}/data/${project}/Scores/data/admin"
+        cp "${rootpath}/applications/Scores/data/admin/"*.rds "${rootpath}/data/${project}/Scores/data/admin"
+    fi
 
-    mkdir -p "${rootpath}/data/${project}/Filter/data/"
-    cp "${rootpath}/applications/Filter/data/public.json" "${rootpath}/data/${project}/Filter/data/public.json"
-    cp "${rootpath}/applications/Filter/data/filterSets"*.json "${rootpath}/data/${project}/Filter/data/"
+    if [ ! -d "${rootpath}/data/${project}/Filter/data/" ]; then
+        mkdir -p "${rootpath}/data/${project}/Filter/data/"
+        cp "${rootpath}/applications/Filter/data/public.json" "${rootpath}/data/${project}/Filter/data/public.json"
+        cp "${rootpath}/applications/Filter/data/filterSets"*.json "${rootpath}/data/${project}/Filter/data/"
+    fi
     mkdir -p "${rootpath}/logs"
     chown -R www-data:www-data "${rootpath}/logs"
     
