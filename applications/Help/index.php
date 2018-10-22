@@ -96,6 +96,7 @@
           </div>
           <div class="card-body">
             <p>We support a hypothesis driven workflow on DEAP by providing material for registering your hypothesis prior to the full analysis. This includes a sampling plan, design plan, analysis plan and analysis scripts. Please see our detailed information in the <i>Plan</i> application.</p>
+            <button class="btn btn-light" video="https://youtu.be/VA76sx_uWYE">Video</button>
           </div>
         </div>
 
@@ -105,6 +106,7 @@
           </div>
           <div class="card-body">
             <p>The <i>Explore</i> application provides an overview of the existing measures on DEAP. Two options for searching the data dictionaries of DEAP exist. A full-text search can be done given some keywords that can be in either the name or in the description of the measure. The second option is to use a graphical tree-view that lists the different domains. Click on a domain and sub-structures are displayed that end with a full list of the measure names.</p>
+            <button class="btn btn-light" video="https://youtu.be/eTxW5ctb-vA">Video</button>
           </div>
         </div>
 
@@ -116,6 +118,7 @@
             <p>The statistical analysis package used by DEAP is based on the R-package <a href="https://cran.r-project.org/web/packages/gamm4/"><i>gamm4</i></a> and implements a generalized additive mixel model that captures the degrees of freedom in a longitudinal multi-site study that includes a complex family structure. The user interface of the analysis application provides meaningful presets for covariates of no interest and in general the user is only required to change the variables of interest, the dependent and independent variable to start the analysis.</p>
             <p>Learn how to load and save a model (see the menu button on the top left).</p>
             <p>More extensive help is available in the application itself. The menu option <i>Normal</i> can be switched to <i>Tutorial</i> mode which shows text on how to interpret the generated graphs and tables.</p>
+            <button class="btn btn-light" video="https://youtu.be/BXzuJ6OE0QA">Video</button>
           </div>
         </div>
 
@@ -126,6 +129,7 @@
           <div class="card-body">
             <p>The statistical analysis in the Analyze application by default applies to all participants with data. In order to limit the analysis to a subset of participants the <i>Limit</i> application is used to define the list of participants. These named lists are saved and can be selected in the Analysis application.</p>
             <p>Help on the syntax of the subsetting is available in the Limit application.</p>
+            <button class="btn btn-light" video="https://youtu.be/6Mle4STc3dU">Video</button>
           </div>
         </div>
 
@@ -135,6 +139,7 @@
           </div>
           <div class="card-body">
             <p>If you want to add measures to DEAP you can do this using the <i>Extend</i> application. It is not possible to add new participants, but you can change and combine existing measures and use them during the analysis.</p>
+            <button class="btn btn-light" video="https://youtu.be/EhjO3Zu2T9c">Video</button>
           </div>
         </div>
 
@@ -177,6 +182,10 @@
         jQuery.getJSON('../Ontology/searchTerm2.php', { 'status': '1' }, function(data) {
             jQuery('#status-info').text(JSON.stringify(data, null, ' '));
         });
+        jQuery('button').click(function() {
+            var loc = jQuery(this).attr('video');
+            window.open(loc, "_youtube");
+        });    
     });
   </script>
 </html>
