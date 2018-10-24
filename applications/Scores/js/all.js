@@ -810,6 +810,21 @@ function checkLogin() {
 
 var simplemde;
 jQuery(document).ready(function() {
+    jQuery('div.container-fluid').on('keyup', 'input.element-name', function (data) {
+        //console.log("typing in input" + jQuery(this).val());
+        // sanitize the entered string
+        var v = jQuery(this).val();
+        var posA = jQuery(this)[0].selectionStart;
+        var posZ = jQuery(this)[0].selectionEnd;
+        
+        // while typing we should allow some spaces
+        v = v.toLowerCase();
+        v = v.replace(/[^a-z0-9_]/g, "");
+        jQuery(this).val(v);
+        jQuery(this).prop('selectionStart', posA);
+        jQuery(this).prop('selectionEnd', posZ);
+    });
+    
     $.post("getScores.php", {action : "load"}).done(function(data){
         recipes = JSON.parse(data);
         //console.log(recipes);
@@ -818,7 +833,7 @@ jQuery(document).ready(function() {
         }
     });
     setTimeout(function() { addOneMeasure('age'); }, 0);
-    setInterval(function() { checkLogin(); }, 60000); // every 10 seconds
+    setInterval(function() { checkLogin(); }, 60000); // every minute
 });
 
 function loadAnalysisNames() {
