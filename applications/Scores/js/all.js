@@ -632,6 +632,7 @@ function insert_recipe_block(input, top) {
     }),3500);
     */
     save.on("click",function() {
+        // visualize the save action
         jQuery(this).removeClass('btn-primary').addClass('btn-success').text('saved');
         setTimeout( function() {
             jQuery('button.save-button').removeClass('btn-success').addClass('btn-primary').text('save');
@@ -650,10 +651,19 @@ function insert_recipe_block(input, top) {
         }
 
         temp_data = {};
-        //Missing the scores sit self;
-        $.post("getScores.php",temp).done(function(data) {
-            console.log(data)
-        });
+        //Missing the scores itself
+        (function(self) {
+            $.post("getScores.php",temp).done(function(data) {
+                // did this fail? If not update the title
+                data = JSON.parse(data);
+                console.log(JSON.stringify(data));
+                var user = jQuery(self).closest("div.recipe-block").find('div.fold-recipe span').text();
+                if (user == "") {
+                    user = "[" + user_name + "] ";
+                }
+                jQuery(self).closest("div.recipe-block").find('div.fold-recipe').html("<span style='font-size: 70%;'>" + user +"</span> " + temp["name"] + "<div class='header-description'>" + temp['description'] + "</div>");
+            });
+        })(this);
     });
     del.on("click",function() {
         if (!confirm("Are you sure you want to delete scores calculation for " + bootstrap_input_name.find("input").val() ))
