@@ -12,6 +12,7 @@
         { "name": "Scanner Model Known","func":"has(dti_manufacturers_modelname)"},
         { "name": "Recommended T1w","func":"fsqc_qc=\"pass\""},
         { "name": "Recommended T2w","func":"(fsqc_qc=\"pass\")and(iqc_t2_ok_ser>0)"},
+        { "name": "Recommended resting-state fMRI","func":"(fsqc_qc=\"pass\")and(rsfmri_cor_network.gordon_ntpoints>375)"},
         { "name": "Recommended dMRI","func":"(fsqc_qc=\"pass\")and(dmri_dti_postqc_qc=1)"},
         { "name": "Recommended task fMRI - MID","func":"(fsqc_qc=\"pass\")and(tfmri_mid_beh_perform.flag=1)and(tfmri_mid_all_beta_dof>200)and(tfmri_mid_all_sem_dof>200)"},
         { "name": "Recommended task fMRI - SST","func":"(fsqc_qc=\"pass\")and(tfmri_sst_beh_perform.flag=1)and(tfmri_sst_all_beta_dof>200)and(tfmri_sst_all_sem_dof>200)"},
