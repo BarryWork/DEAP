@@ -265,10 +265,10 @@ function load_interface_from_json(model_address) {
                             return total;
                         }
                     }, false);
-                    show_nothing = !anyvisible;
+                    showing_nothing = !anyvisible;
                     console.log("hide?" + anyvisible);
                 } else {
-                    show_nothing = true;
+                    showing_nothing = true;
                 }
                 
                 showing_nothing
