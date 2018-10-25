@@ -2961,11 +2961,14 @@ function vinfo_hist(act_v, act_name_tag, transform, input_id) {
             jQuery("." + act_name_tag + "-" + input_id + "-hist")
                 .find("svg")
                 .remove()
+
             //pre_wrap.appendTo($a)
 
             for (temp_hist in vinfo.histograms) {
                 var th = vinfo["histograms"][temp_hist]
                 if (is_transform(transform, th.transform)) {
+		    type_a_info = summary_join(vinfo.summary[temp_hist].summary)
+		    jQuery("." + act_name_tag + "-" + input_id + "-hist").parent().find('table').html(type_a_info)
                     hist(
                         th.histogram,
                         act_v,
