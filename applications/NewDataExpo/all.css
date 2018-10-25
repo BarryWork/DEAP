@@ -120,9 +120,9 @@ input[type="text"] {
 }
 .input-block-level {
   display: block;
-  width: 100%;
-  min-height: 28px;        // Make inputs at least the height of their button counterpart
-  .box-sizing(border-box); // Makes inputs behave like true block-level elements
+  min-height: 28px;     
+  height: auto;
+  .box-sizing(border-box); 
   border-color: #aaa;;
 }
 #covariates_system .btn-info:active,.btn-primary.active {

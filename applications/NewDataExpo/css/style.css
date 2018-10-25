@@ -256,3 +256,6 @@ button.btn-sm.btn.btn-outline-secondary!important {
     border-radius: .25em;
    float: right;
 }
+#control-panel {
+    height: 200px;
+}

@@ -291,6 +291,8 @@ function load_interface_from_json(model_address) {
                 //Enter key's keycode
                 return false
               }
+	    } else{
+	      jQuery('#measure-all-multi-covuser').css('height', 'auto' );
 	    }
         })
     })
@@ -1452,8 +1454,9 @@ function insert_mutiple_input(item_input, isIndpv) {
     input.attr("contenteditable", "true")
     input.attr(
         "style",
-        "width: 100%; background-color: rgb(255, 255, 255); border: 1px solid #aaa;;"
+        "background-color: rgb(255, 255, 255); border: 1px solid #aaa;;"
     )
+    input.css('height','')
     input.val(default_value)
 
     d2.append(input)
