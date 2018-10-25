@@ -65,6 +65,14 @@ function highlight(where, what) {
     }
     // come up with a color code for this measure, sort and use colormap
     valueAr = Object.keys(valueAr);
+    // how do we need to sort? alphabetic or by number?
+    function isNumber(n) {
+        return !isNaN(parseFloat(n)) && !isNaN(n - 0);
+    }
+    if (valueAr.length > 0 && isNumber(valueAr[0]))
+        valueAr.sort(function(a,b) { return a-b; });
+    else
+        valueAr.sort(); // use alphabetic sorting
     
     for (var i = 0; i < allMeasures['src_subject_id'].length; i++) {
         if (!measure.hasOwnProperty(allMeasures[header[idxSubjID]][i]))
@@ -92,65 +100,71 @@ function highlight(where, what) {
 
  // create one level of the filter
  // below - where one block should be
- function createBlock(below) {
-   // organization: #below div .dataHere
-
-   // add two rows, one for the data the other for the filter
-   var d01 = document.createElement("div");
-     jQuery(d01).addClass("row").addClass('no-gutters').css('margin-top', '10px');
-   var d02 = document.createElement("div");
-   jQuery(d02).addClass("row").css('margin-top', '10px');
-   var d1 = document.createElement("div");
-   var d2 = document.createElement("div");
-   jQuery(d1).addClass("col-9");
-   jQuery(d2).addClass("col-12");
-   jQuery(d2).addClass("dataHere");
-   jQuery(below).append("<div class=\"sectionTitle\" id=\"dataHereTitle\">All data points available in " + project_name + "</div>");
-   jQuery(d02).append(d2);
-   jQuery(below).append(d02);
-   jQuery(below).append(d01);
-   // now add a div for the data
-
-   var existingFilters = document.createElement("div");
-   jQuery(existingFilters).addClass('existingFilterDiv');
-   jQuery(existingFilters).addClass('col-3');
-   var sel = document.createElement("select");
-   jQuery(sel).addClass('selectpickerS');
-   jQuery(sel).addClass('existingFilters');
-   jQuery(sel).attr('data-live-search', 'true');
-   jQuery(sel).attr('data-size', '10');
-   jQuery(existingFilters).append(sel);
-   jQuery(d01).append(existingFilters);
-
-   jQuery(d01).append(d1);
-
-   var d21 = document.createElement("div");
-   //jQuery(d21).addClass("span12");
-   jQuery(d21).addClass("select");
-   jQuery(d1).append(d21);
-   jQuery(d21).append('<div class="input-group"><input class="inputmeasures form-control" type="text" placeholder="select a predefined filter or enter your own">  <div class="input-group-append"><button class="btn-outline-secondary btn" id="runFilter" type="button">&nbsp;Run</button><button type="button" class="btn-outline-secondary btn" id="saveNewFilter">&nbsp;Save</span></div></div>');
-   jQuery(d21).append('<div id="info"></div>')
-   jQuery('#saveNewFilter').click(function() {
-       var z = jQuery('.inputmeasures').val();
-       if(z == ""){
-         return; // nothing to do
-       }
-       jQuery('#save-filter-button').on('click', function() {
-           console.log("save the current filter " + jQuery('#new-filter-name').val() + " " + jQuery(this).attr('filter'));
-           jQuery.get('getFilter.php', { 'action': 'save', 'name': jQuery('#new-filter-name').val(),
-                                         'value': jQuery(this).attr('filter').replace(/\s/g,'') }, function(data) {
-               console.log(JSON.stringify(data));
-               getAllFilters( jQuery('#new-filter-name').val() );
-           });
-       });
-       
-       jQuery('#save-filter-box').modal('show');
-       jQuery('#save-filter-button').attr('filter', jQuery('.inputmeasures').val());
-       jQuery('#new-filter-name').val(jQuery('.selectpickerS').val());
-       
-       //alert('not implemented yet, would have to store this as a filter');  
-   });
- }
+function createBlock(below) {
+    // organization: #below div .dataHere
+    
+    // add two rows, one for the data the other for the filter
+    var d01 = document.createElement("div");
+    jQuery(d01).addClass("row").addClass('no-gutters').css('margin-top', '10px');
+    var d02 = document.createElement("div");
+    jQuery(d02).addClass("row").css('margin-top', '10px');
+    var d1 = document.createElement("div");
+    var d2 = document.createElement("div");
+    jQuery(d1).addClass("col-9");
+    jQuery(d2).addClass("col-12");
+    jQuery(d2).addClass("dataHere");
+    jQuery(below).append("<div class=\"sectionTitle\" id=\"dataHereTitle\">All data points available in " + project_name + "</div>");
+    jQuery(d02).append(d2);
+    jQuery(below).append(d02);
+    jQuery(below).append(d01);
+    // now add a div for the data
+    
+    var existingFilters = document.createElement("div");
+    jQuery(existingFilters).addClass('existingFilterDiv');
+    jQuery(existingFilters).addClass('col-3');
+    var sel = document.createElement("select");
+    jQuery(sel).addClass('selectpickerS');
+    jQuery(sel).addClass('existingFilters');
+    jQuery(sel).attr('data-live-search', 'true');
+    jQuery(sel).attr('data-size', '10');
+    jQuery(existingFilters).append(sel);
+    jQuery(d01).append(existingFilters);
+    
+    jQuery(d01).append(d1);
+    
+    var d21 = document.createElement("div");
+    //jQuery(d21).addClass("span12");
+    jQuery(d21).addClass("select");
+    jQuery(d1).append(d21);
+    jQuery(d21).append('<div class="input-group">' +
+                       '  <input class="inputmeasures form-control" type="text" placeholder="select a predefined filter or enter your own">  ' +
+                       '  <div class="input-group-append">' +
+                       '    <button class="btn-outline-secondary btn" id="runFilter" type="button">&nbsp;Run</button>' +
+                       '    <button type="button" class="btn-outline-secondary btn" id="saveNewFilter">&nbsp;Save</button>' +
+                       '  </div>' +
+                       '</div>');
+    jQuery(d21).append('<div id="info"></div>')
+    jQuery('#saveNewFilter').click(function() {
+        var z = jQuery('.inputmeasures').val();
+        if(z == ""){
+            return; // nothing to do
+        }
+        jQuery('#save-filter-button').on('click', function() {
+            console.log("save the current filter " + jQuery('#new-filter-name').val() + " " + jQuery(this).attr('filter'));
+            jQuery.get('getFilter.php', { 'action': 'save', 'name': jQuery('#new-filter-name').val(),
+                                          'value': jQuery(this).attr('filter').replace(/\s/g,'') }, function(data) {
+                                              console.log(JSON.stringify(data));
+                                              getAllFilters( jQuery('#new-filter-name').val() );
+                                          });
+        });
+        
+        jQuery('#save-filter-box').modal('show');
+        jQuery('#save-filter-button').attr('filter', jQuery('.inputmeasures').val());
+        jQuery('#new-filter-name').val(jQuery('.selectpickerS').val());
+        
+        //alert('not implemented yet, would have to store this as a filter');  
+    });
+}
 
 function changeSearch() {
     toggleFamilyViewOn = false;
@@ -371,7 +385,13 @@ function showInfoWindow(event, t) {
          min = parseFloat(min).toFixed(2);
          max = parseFloat(max).toFixed(2);
      }
-     infoStr = infoStr + "<div class=\"info\"><span>" + t + "</span> <span> " + min.toString() + "</span>...<span>" + max.toString() + "</span></div>";
+       sc_min = getColorForMeasure(t, min);
+       sc_max = getColorForMeasure(t, max);
+
+       infoStr = infoStr + "<div class=\"info\"><span class=\"var-name\">" + t + "</span>:" +
+           "<div class=\"spot " + sc_min + "\"></div><span> " + min.toString() + "</span>..." +
+           "<div class=\"spot " + sc_max + "\"></div><span>" + max.toString() + "</span>" +
+           "</div>";
    });
    jQuery('#info').html(infoStr);
  }
@@ -579,6 +599,37 @@ function storageAvailable(type) {
             // acknowledge QuotaExceededError only if there's something already stored
             storage.length !== 0;
     }
+}
+
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && !isNaN(n - 0);
+}
+
+function getColorForMeasure( what, value ) {
+    var valueAr = {}; // get the unique values from this array
+    if (isNumber(value)) {
+        for (var i = 0; i < allMeasures[what].length; i++) {
+            var k = parseFloat(allMeasures[what][i]).toFixed(2);
+            valueAr[k] = 1;
+        }
+    } else {
+        for (var i = 0; i < allMeasures[what].length; i++) {
+            var k = allMeasures[what][i];
+            valueAr[k] = 1;
+        }
+    }
+    // come up with a color code for this measure, sort and use colormap
+    valueAr = Object.keys(valueAr);
+
+    // how do we need to sort? alphabetic or by number?
+    if (valueAr.length > 0 && isNumber(valueAr[0]))
+        valueAr.sort(function(a,b) { return a-b; });
+    else
+        valueAr.sort(); // use alphabetic sorting
+
+    var v = valueAr.indexOf(""+value) / (valueAr.length - 1);
+    var col = parseInt(8 * v); // goes from 0 to valueAr.length
+    return "q" + col + "-9";
 }
 
 // some variables are not measures (like "M"), only try to pull those once and remember them to be bad

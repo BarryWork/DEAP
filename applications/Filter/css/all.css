@@ -289,3 +289,11 @@ div.masonry-layout__group.link4::before {
         max-width:1500px;
     }
 }
+.var-name {
+    color: lightgray;
+}
+div.info div.spot {
+    display: inline-flex;
+    border: 1px solid lightgray;
+    top: -2px;
+}
