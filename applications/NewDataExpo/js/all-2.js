@@ -281,11 +281,13 @@ function load_interface_from_json(model_address) {
             $(".floating-menu").height(+$("#floating-list").height() + 40)
         })
         $("div[contenteditable]").keypress(function(evt) {
-            var keycode = evt.charCode || evt.keyCode
-            if (keycode == 13) {
+	    if(jQuery(this).attr('id') != 'measure-all-multi-covuser'){
+              var keycode = evt.charCode || evt.keyCode
+              if (keycode == 13) {
                 //Enter key's keycode
                 return false
-            }
+              }
+	    }
         })
     })
 
