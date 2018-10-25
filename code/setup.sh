@@ -42,16 +42,16 @@ if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
     if [ ! -d "${rootpath}/data/${project}/Scores/data/admin" ]; then
         # if the directory exists already, don't copy default entries over the current fields
         mkdir -p "${rootpath}/data/${project}/Scores/data/admin"
-        cp "${rootpath}/applications/Scores/data/admin/"*.json "${rootpath}/data/${project}/Scores/data/admin"
-        cp "${rootpath}/applications/Scores/data/admin/"*.raw "${rootpath}/data/${project}/Scores/data/admin"
-        cp "${rootpath}/applications/Scores/data/admin/"*.rds "${rootpath}/data/${project}/Scores/data/admin"
     fi
+    cp "${rootpath}/applications/Scores/data/admin/"*.json "${rootpath}/data/${project}/Scores/data/admin"
+    cp "${rootpath}/applications/Scores/data/admin/"*.raw "${rootpath}/data/${project}/Scores/data/admin"
+    cp "${rootpath}/applications/Scores/data/admin/"*.rds "${rootpath}/data/${project}/Scores/data/admin"
 
     if [ ! -d "${rootpath}/data/${project}/Filter/data/" ]; then
         mkdir -p "${rootpath}/data/${project}/Filter/data/"
-        cp "${rootpath}/applications/Filter/data/public.json" "${rootpath}/data/${project}/Filter/data/public.json"
-        cp "${rootpath}/applications/Filter/data/filterSets"*.json "${rootpath}/data/${project}/Filter/data/"
     fi
+    cp "${rootpath}/applications/Filter/data/public.json" "${rootpath}/data/${project}/Filter/data/public.json"
+    cp "${rootpath}/applications/Filter/data/filterSets"*.json "${rootpath}/data/${project}/Filter/data/"
     mkdir -p "${rootpath}/logs"
     chown -R www-data:www-data "${rootpath}/logs"
     

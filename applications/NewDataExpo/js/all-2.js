@@ -235,6 +235,7 @@ function load_interface_from_json(model_address) {
         $(".floating-menu").bind("contentchanged", function() {
             // do something after the div content has changed
             setTimeout(function() {
+                // this does not work - showing nothing might be a local variable in each
                 showing_nothing = true
                 $.each($("#floating-list").find("ul"), function(i, d) {
                     if (!$(d).html() == "") {
@@ -247,10 +248,29 @@ function load_interface_from_json(model_address) {
                                 .find("div")
                                 .attr("hiding-list")
                             )
-                                showing_nothing = false
+                            showing_nothing = false
                         })
                     }
-                })
+                });
+                // better to do the visibility test seperately
+                var list_ar = jQuery('#floating-list ul.floating-entry li.list-entry').toArray();
+                if (list_ar.length > 0) {
+                    var anyvisible = list_ar.reduce(function(total, t) {
+                        if (jQuery(t).children().toArray().length > 0) { // do we have an element that could be visible
+                            var tt = jQuery(t).children().first().attr('hiding-list');
+                            if (typeof tt !== 'undefined' && tt == "true")
+                                return total || false;
+                            return true;
+                        } else {
+                            return total;
+                        }
+                    }, false);
+                    showing_nothing = !anyvisible;
+                    console.log("hide?" + anyvisible);
+                } else {
+                    showing_nothing = true;
+                }
+                
                 showing_nothing
                     ? $(".floating-menu").hide()
                     : $(".floating-menu").show()

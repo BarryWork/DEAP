@@ -5,15 +5,18 @@
 	{ "name": "10 year old (M)", "func": "(sex=\"M\")and(age>120)" },
 	{ "name": "Radiology Review Score &lt; 3", "func": "has(mrif_score)and(mrif_score>0)and(mrif_score<3)" },
 	{ "name": "Righthanded", "func": "ehi_ss_score=1" },
+	{ "name": "BMI large", "func": "has(anthro_bmi_calc)and(anthro_bmi_calc>quantile(anthro_bmi_calc,0.75))" },
 	{ "name": "BMI small", "func": "has(anthro_bmi_calc)and(anthro_bmi_calc<quantile(anthro_bmi_calc,0.25))" },
 	{ "name": "Single", "func": "rel_relationship==\"single\"" },
 	{ "name": "Sibling, Twin, Triplet", "func": "rel_relationship<>\"single\"" },
+        { "name": "Scanner Model Known","func":"has(dti_manufacturers_modelname)"},
         { "name": "Recommended T1w","func":"fsqc_qc=\"pass\""},
         { "name": "Recommended T2w","func":"(fsqc_qc=\"pass\")and(iqc_t2_ok_ser>0)"},
         { "name": "Recommended dMRI","func":"(fsqc_qc=\"pass\")and(dmri_dti_postqc_qc=1)"},
+        { "name": "Recommended resting-state fMRI","func":"(fsqc_qc=\"pass\")and(rsfmri_cor_network.gordon_ntpoints>375)"},
         { "name": "Recommended task fMRI - MID","func":"(fsqc_qc=\"pass\")and(tfmri_mid_beh_perform.flag=1)and(tfmri_mid_all_beta_dof>200)and(tfmri_mid_all_sem_dof>200)"},
         { "name": "Recommended task fMRI - SST","func":"(fsqc_qc=\"pass\")and(tfmri_sst_beh_perform.flag=1)and(tfmri_sst_all_beta_dof>200)and(tfmri_sst_all_sem_dof>200)"},
-        { "name": "Recommended task fMRI - nBack","func":"(fsqc_qc=\"pass\")and(tfmri_mid_beh_perform.flag=1)and(tfmri_sst_all_beta_dof>200)and(tfmri_sst_all_sem_dof>200)"}
+        { "name": "Recommended task fMRI - nBack","func":"(fsqc_qc=\"pass\")and(tfmri_nback_beh_perform.flag=1)and(tfmri_nback_all_beta_dof>200)and(tfmri_nback_all_sem_dof>200)"}        
     ]
   }
 ]

@@ -632,6 +632,7 @@ function insert_recipe_block(input, top) {
     }),3500);
     */
     save.on("click",function() {
+        // visualize the save action
         jQuery(this).removeClass('btn-primary').addClass('btn-success').text('saved');
         setTimeout( function() {
             jQuery('button.save-button').removeClass('btn-success').addClass('btn-primary').text('save');
@@ -650,10 +651,19 @@ function insert_recipe_block(input, top) {
         }
 
         temp_data = {};
-        //Missing the scores sit self;
-        $.post("getScores.php",temp).done(function(data) {
-            console.log(data)
-        });
+        //Missing the scores itself
+        (function(self) {
+            $.post("getScores.php",temp).done(function(data) {
+                // did this fail? If not update the title
+                data = JSON.parse(data);
+                console.log(JSON.stringify(data));
+                var user = jQuery(self).closest("div.recipe-block").find('div.fold-recipe span').text();
+                if (user == "") {
+                    user = "[" + user_name + "] ";
+                }
+                jQuery(self).closest("div.recipe-block").find('div.fold-recipe').html("<span style='font-size: 70%;'>" + user +"</span> " + temp["name"] + "<div class='header-description'>" + temp['description'] + "</div>");
+            });
+        })(this);
     });
     del.on("click",function() {
         if (!confirm("Are you sure you want to delete scores calculation for " + bootstrap_input_name.find("input").val() ))
@@ -810,6 +820,21 @@ function checkLogin() {
 
 var simplemde;
 jQuery(document).ready(function() {
+    jQuery('div.container-fluid').on('keyup', 'input.element-name', function (data) {
+        //console.log("typing in input" + jQuery(this).val());
+        // sanitize the entered string
+        var v = jQuery(this).val();
+        var posA = jQuery(this)[0].selectionStart;
+        var posZ = jQuery(this)[0].selectionEnd;
+        
+        // while typing we should allow some spaces
+        v = v.toLowerCase();
+        v = v.replace(/[^a-z0-9_]/g, "");
+        jQuery(this).val(v);
+        jQuery(this).prop('selectionStart', posA);
+        jQuery(this).prop('selectionEnd', posZ);
+    });
+    
     $.post("getScores.php", {action : "load"}).done(function(data){
         recipes = JSON.parse(data);
         //console.log(recipes);
@@ -818,7 +843,7 @@ jQuery(document).ready(function() {
         }
     });
     setTimeout(function() { addOneMeasure('age'); }, 0);
-    setInterval(function() { checkLogin(); }, 60000); // every 10 seconds
+    setInterval(function() { checkLogin(); }, 60000); // every minute
 });
 
 function loadAnalysisNames() {

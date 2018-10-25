@@ -85,6 +85,7 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo '/bin/bash /var/www/html/code/setup.sh;' >> $ND_ENTRYPOINT \
          && echo 'if [ -d "/var/www/html/data/ABCD/NewDataExpo/variableInfo" ]; then' >> $ND_ENTRYPOINT \
 	     && echo '/usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R &' >> $ND_ENTRYPOINT \
+	     && echo '/usr/bin/Rscript /var/www/html/applications/Scores/R/transfer.R &' >> $ND_ENTRYPOINT \
 	 && echo 'fi' >> $ND_ENTRYPOINT \
          && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
          && echo "ServerName localhost" >> /etc/apache2/apache2.conf; \

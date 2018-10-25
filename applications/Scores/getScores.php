@@ -39,7 +39,7 @@ if ($action == "save" && isset($_POST['content']) && isset($_POST['name'])) {
         file_put_contents("/var/www/html/data/ABCD/Scores/data/".$user_name."/".$_POST['name'].".raw", $_POST['data']);   
     }
     shell_exec("Rscript /var/www/html/applications/Scores/R/transfer.R ". "/var/www/html/data/ABCD/Scores/data/".$user_name."/".$_POST['name'].".raw");
-    echo(json_encode($temp)); 
+    echo(json_encode($temp));
 } else if ($action == "load") {
     $dirname = $storelocation.$user_name."/*.json";
 
