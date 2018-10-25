@@ -182,10 +182,10 @@
         jQuery.getJSON('../Ontology/searchTerm2.php', { 'status': '1' }, function(data) {
             jQuery('#status-info').text(JSON.stringify(data, null, ' '));
         });
-        jQuery('button').click(function() {
+        jQuery('button.btn-light').click(function() {
             var loc = jQuery(this).attr('video');
             window.open(loc, "_youtube");
-        });    
+        });
     });
   </script>
 </html>
