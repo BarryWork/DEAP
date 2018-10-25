@@ -150,7 +150,7 @@ function load_interface_from_json(model_address) {
                 arr_measure_fixed.push(node)
             }
             if (node.name == "Measure All (single)") {
-                arr_measure_all_single.push(node)
+                arr_measure_all.push(node)
             }
             if (node.name == "GAMM4" || node.name == "GAMM4-WD") {
                 editor = ace.edit("editor")
@@ -170,27 +170,31 @@ function load_interface_from_json(model_address) {
         }
 
         //insert_update_pannel();
+	INTERFACE_ORDER = ['depvar','indepvar','grvar','covuser','fl.var' ];
+	arr_measure_all.sort(function(a,b){
+	    index_a = INTERFACE_ORDER.indexOf(a.state[0].value); 
+	    index_b = INTERFACE_ORDER.indexOf(b.state[0].value);
+	    return index_a < index_b ? -1 : 1;
+	})
+
+
         //TODO: Order of the user interface should be defined in Model builder.
-        for (node in arr_measure_all_single) {
-            if (node == "shuffle") continue
-            if (
-                arr_measure_all_single[node].state[0].value == "indepvar" ||
-                arr_measure_all_single[node].state[0].value == "depvar"
-            ) {
-                insert_mutiple_input(arr_measure_all_single[node], true)
-            } else if (arr_measure_all_single[node].state[0].value == "grvar") {
-                insert_single_select(arr_measure_all_single[node])
-            } else if (
-                arr_measure_all_single[node]["state"][0]["value"] == "fl.var"
-            ) {
-                insert_filter_select(arr_measure_all_single[node])
-            } else {
-                insert_single_input(arr_measure_all_single[node])
-            }
-        }
         for (node in arr_measure_all) {
             if (node == "shuffle") continue
-            if (arr_measure_all[node]["state"][0]["value"] == "smo.var") {
+            if (
+                arr_measure_all[node].state[0].value == "indepvar" ||
+                arr_measure_all[node].state[0].value == "depvar"
+            ) {
+                insert_mutiple_input(arr_measure_all[node], true)
+            } else if (arr_measure_all[node].state[0].value == "grvar") {
+                insert_single_select(arr_measure_all[node])
+            } else if (
+                arr_measure_all[node]["state"][0]["value"] == "fl.var"
+            ) {
+                insert_filter_select(arr_measure_all[node])
+            //} else {
+                //insert_single_input(arr_measure_all_single[node])
+            } else if  (arr_measure_all[node]["state"][0]["value"] == "smo.var") {
                 //Stop using this old smooth term UI, enable again by uncomment
                 //insert_mutiple_input_smooth(arr_measure_all[node]);
             } else if (arr_measure_all[node]["state"][0]["value"] == "log.var") {
