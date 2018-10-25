@@ -87,8 +87,7 @@
           </div>
           <div class="card-body">
             <p>DEAP provides the means to find measures of interest from more than 40,000 shared observations available for each ABCD participant (see Explore). The user can select a sub-set of the participants for a hypothesis test using a multi-level regression model suitable for the ABCD study design (see Limit). Users are able to extend DEAP by their own measures (see Extend) and run novel multi-level statistical analysis directly from the DEAP interface (see Analyse).</p>
-            <p>Do you think you have found an error in DEAP? Help us to improve the software by reporting it on <a href="https://github.com/ABC\
-D-STUDY/DEAP/issues">https://github.com/ABCD-STUDY/DEAP/issues</a>. Let us know how we can reproduce your bug and share a screenshot.</p>
+            <p>Do you think you have found an error in DEAP? Help us to improve the software by reporting it on <a href="https://github.com/ABCD-STUDY/DEAP/issues">https://github.com/ABCD-STUDY/DEAP/issues</a>. Let us know how we can reproduce your bug and share a screenshot.</p>
           </div>
         </div>
 
