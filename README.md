@@ -34,5 +34,22 @@ cp <data nda17.Rds> assets/
 ./run deap deap 80 `pwd`/assets
 ```
 
+To visualize the development process of DEAP you can run gource:
+```
+gource --file-filter "MathJax-2.7.4" \
+       --file-filter "ModelBuilder/js" \
+       --file-filter "octicons" \
+       --file-filter "node_modules" \
+       --file-filter "ModelBuilder/css" \
+       --file-filter "ace/" \
+       --file-filter "pretty/" \
+       -a 1 -1280x720 \
+       --seconds-per-day 1 \
+       -o - | ffmpeg -y -r 60 -f image2pipe \
+       -vcodec ppm -i - -vcodec libx264 \
+       -preset ultrafast -pix_fmt yuv420p \
+       -crf 1 -threads 0 -bf 0 deap.mp4
+```
+
 (RRID: SCR_016158)
 
