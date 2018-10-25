@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Filter</title>
+    <title>Limit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -37,7 +37,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <a class="navbar-brand" href="#">Subsetting <span class="project_name"></span></a>
+    <a class="navbar-brand" href="#">Limit <span class="project_name"></span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
