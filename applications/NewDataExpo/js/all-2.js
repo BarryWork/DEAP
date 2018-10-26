@@ -3539,6 +3539,8 @@ function clearDisplayCheck(time) {
                                         ["table1"].join("")
                                         .split(",")
                                         .join("")
+					.split("( ")
+					.join("(")
                                     )
                                     .addClass("center")
                                     .addClass("table1-section")
