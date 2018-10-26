@@ -140,7 +140,7 @@ function createBlock(below) {
                        '  <input class="inputmeasures form-control" type="text" placeholder="select a predefined filter or enter your own">  ' +
                        '  <div class="input-group-append">' +
                        '    <button class="btn-outline-secondary btn" id="runFilter" type="button">&nbsp;Run</button>' +
-                       '    <button type="button" class="btn-outline-secondary btn" id="saveNewFilter">&nbsp;Save</button>' +
+                       '    <button type="button" class="btn-outline-secondary btn" id="saveNewFilter">&nbsp;Modify</button>' +
                        '  </div>' +
                        '</div>');
     jQuery(d21).append('<div id="info"></div>')
@@ -156,6 +156,15 @@ function createBlock(below) {
                                               console.log(JSON.stringify(data));
                                               getAllFilters( jQuery('#new-filter-name').val() );
                                           });
+        });
+        jQuery('#delete-filter-button').on('click', function() {
+            console.log("delete the current filter " + jQuery('#new-filter-name').val() + " " + jQuery(this).attr('filter'));
+            jQuery.getJSON('getFilter.php', { 'action': 'delete', 'name': jQuery('#new-filter-name').val() }, function(data) {
+                console.log("Delete the data " + JSON.stringify(data));
+                jQuery('input.inputmeasures').val("");
+                getAllFilters( "Predefined filters" );
+                // TODO: clear the Yeah and Nay 
+            });
         });
         
         jQuery('#save-filter-box').modal('show');
@@ -390,7 +399,7 @@ function showInfoWindow(event, t) {
 
        infoStr = infoStr + "<div class=\"info\"><span class=\"var-name\">" + t + "</span>:" +
            "<div class=\"spot " + sc_min + "\"></div><span> " + min.toString() + "</span>..." +
-           "<div class=\"spot " + sc_max + "\"></div><span>" + max.toString() + "</span>" +
+           "<span>" + max.toString() + "</span>" + " <div class=\"spot " + sc_max + "\"></div>" +
            "</div>";
    });
    jQuery('#info').html(infoStr);

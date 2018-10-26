@@ -133,7 +133,7 @@
    <div class="modal-dialog">
      <div class="modal-content">
        <div class="modal-header">
-          <h4>Save the current filter</h4>
+          <h4>Modify the current filter</h4>
        </div>
        <div class="modal-body">
          <form>
@@ -144,8 +144,9 @@
          </form>
        </div>
        <div class="modal-footer">
-           <button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
-           <button type="button" id="save-filter-button" data-dismiss="modal" class="btn btn-primary">Save</button
+           <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+           <button type="button" id="save-filter-button" data-dismiss="modal" class="btn btn-success">Save</button>
+           <button type="button" id="delete-filter-button" data-dismiss="modal" class="btn btn-warning">Delete</button
        </div>
      </div>
    </div>

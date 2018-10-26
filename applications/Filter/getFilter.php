@@ -64,6 +64,36 @@ if ($action == "read") {
         $aruser[0]['rules'][] = array("name" => $name, "func" => $value );
     }
     file_put_contents($fn, json_encode($aruser));
+} else if ($action == "delete") { // needs to be tested first
+    $name = "";
+    if (isset($_GET['name'])) {
+        $name = htmlspecialchars($_GET['name']);
+    }
+    // only delete if its for the current user - don't delete otherwise, produce error
+    
+    $aruser = array();
+    if (is_readable($fn)) {
+        $aruser = json_decode( file_get_contents($fn), TRUE);
+    } else {
+        echo("{ \"message\": \"Error: Could not read the file ".$fn."\"}");
+        return;
+    }
+    $found = false;
+    for ($i = 0; $i < count($aruser[0]['rules']); $i++) {
+        if ($aruser[0]['rules'][$i]['name'] == $name) {
+            $found = true;
+            // delete this entry now...
+            unset($aruser[0]['rules'][$i]);
+            $aruser[0]['rules'] = array_values($aruser[0]['rules']);
+            break;
+        }
+    }
+    if (!$found) {
+        echo("{ \"message\": \"Error: could not find that score as a user defined score.\" }");
+    } else { // save again
+        file_put_contents($fn, json_encode($aruser));
+        echo("{ \"message\": \"ok\" }");
+    }
 }
 
 ?>
