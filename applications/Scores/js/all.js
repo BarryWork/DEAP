@@ -99,7 +99,7 @@ function addOneMeasure( meas, vname ) {
 
     jQuery(document.getElementById(vname+'-table')).find(".loader").remove();
     if (jQuery(document.getElementById(vname+'-table')).find(".console").length == 0){
-        jQuery(document.getElementById(vname+'-table')).append($("<div class = 'console'>"))
+        jQuery(document.getElementById(vname+'-table')).html($("<div class = 'console'></div>"))
     }
     jQuery(document.getElementById(vname+'-table')).find(".console").append("loading variable: <span style='color:blue'>"+ meas +"</span><br>");
 
@@ -369,10 +369,12 @@ function _update(text, table_location, vname, hist_location) {
             console.log(vname);
             jQuery(document.getElementById(vname+'-table')).find(".loader").remove();
             jQuery(document.getElementById(vname+'-hist')).find(".loader").remove();
-            if (jQuery(document.getElementById(vname+'-table')).find(".console").length == 0){
-                jQuery(document.getElementById(vname+'-table')).append($("<div class = 'console'>"))
+            jQuery(document.getElementById(vname+'-table')).html("");
+            jQuery(document.getElementById(vname+'-hist')).html("");
+            if (jQuery(document.getElementById(vname+'-table')).find(".console-warning").length == 0){
+                jQuery(document.getElementById(vname+'-table')).append($("<div class = 'console-warning'>"))
             }
-            jQuery(document.getElementById(vname+'-table')).find(".console").append("<p style= 'color:red'>"+err+"</p>");
+            jQuery(document.getElementById(vname+'-table')).find(".console-warning").html("<p style= 'color:red'>"+err+"</p>");
         }
         //Update data
         var difference = new Set(data.listColumns());
