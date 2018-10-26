@@ -1,5 +1,13 @@
 [
     {
+	"name": "abcd_site",
+	"description": "Anonymized site name for the participant and visit.",
+	"description_lower_case": "anonynized site name for the participant and visit.",
+	"notes": "",
+	"notes_lower_case": "",
+	"aliases": []
+    },
+    {
 	"name": "anthro_bmi_calc",
 	"description": "Body Mass Index calculated as anthro_weight_calc / anthro_height_calc^2 * 703.",
 	"description_lower_case": "body mass index calculated as anthroweightcalc / anthroheightcalc^2 * 703.",
