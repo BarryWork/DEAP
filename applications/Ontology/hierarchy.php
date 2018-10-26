@@ -474,7 +474,7 @@ a:hover {
 	<div class="navbar navbar-dark bg-dark box-shadow">
 	  <div class="container-fluid d-flex justify-content-between">
 	    <a href="#" class="navbar-brand d-flex align-items-center">
-	      ABCD Explore
+	      Explore ABCD
 	    </a>
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item" title="Back to report page">

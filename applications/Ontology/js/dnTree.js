@@ -131,7 +131,8 @@ treeJSON = d3.json("/applications/Ontology/hierarchy.php?_v=&entry=root", functi
 
 
     // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
-    var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
+    var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 4]).on("zoom", zoom);
+    zoomListener.scale(2);
 
     function initiateDrag(d, domNode) {
 	draggingNode = d;
@@ -298,7 +299,7 @@ treeJSON = d3.json("/applications/Ontology/hierarchy.php?_v=&entry=root", functi
 	if (d.children) {
 	    d._children = d.children;
 	    d._children.forEach(collapse);
-	    d.children = null;
+	    delete d.children;
 	}
     }
 
@@ -306,7 +307,7 @@ treeJSON = d3.json("/applications/Ontology/hierarchy.php?_v=&entry=root", functi
 	if (d._children) {
 	    d.children = d._children;
 	    d.children.forEach(expand);
-	    d._children = null;
+	    delete d._children;
 	}
     }
 
@@ -373,35 +374,64 @@ treeJSON = d3.json("/applications/Ontology/hierarchy.php?_v=&entry=root", functi
 	update(lastOpen);
 	centerNode(lastOpen);
     });
-    
+
+    function toggleAll(d) {
+	if (d.children) {
+	    d.children.forEach(toggleAll);
+	    toggle(d);
+	}
+    }
     
     function toggleChildren(d) {
+        // the open flag seems to count what is visible, todo: how to toggle all off but the current one
+        if (typeof d.open == 'undefined')
+            d.open = true;
+        else
+            d.open = !d.open;
+        // try to figure out if we are on the first level, only open one of those
+        /*if (typeof d.parent !== 'undefined' && d.parent.name == "root") {
+            ro = d.parent;
+            for (var i = 0; i < ro.children.length; i++) {
+                // toggle off other open parts
+                if (ro.children[i] == d) // the current click branch is handeled below
+                    continue;
+                if (typeof ro.children[i].open !== 'undefined' && ro.children[i].open) {
+                    (function(l) {
+                        setTimeout(function() {
+                            if (typeof l !== 'undefined') {
+                                toggleChildren(l);
+                                update(l);
+                            }
+                        }, 10);
+                    })(ro.children[i]);
+                }
+            }
+        }*/
+        
 	//console.log("Toggle children: " + JSON.stringify(d.name));
 	if (d.children) {
 	    d._children = d.children;
-	    d.children = null;
+	    delete d.children;
 	} else {
 	    console.log('remember this lastOpen');
 	    lastOpen = d;
 	    if (typeof d._children === "undefined") {
-		d3.json("/applications/Ontology/hierarchy.php?_v=&entry="+d.key, function(json) {
-		    if (json === null || typeof json['children'] === 'undefined') {
-			return;
-		    }
-		    d.children = json.children;
-		    d._children = null;
-		    function toggleAll(d) {
-			if (d.children) {
-			    d.children.forEach(toggleAll);
-			    toggle(d);
-			}
-		    }
-		    update(root);
-		});
+                // if this takes too long d might be something else already
+                (function(d) {
+		    d3.json("/applications/Ontology/hierarchy.php?_v=&entry="+d.key, function(json) {
+		        if (json === null || typeof json['children'] === 'undefined') {
+			    return;
+		        }
+		        d.children = json.children;
+		        delete d._children;
+		        update(root);
+                        centerNode(d);
+		    });
+                })(d);
 	    }
 	    if (d._children) {
 		d.children = d._children;
-		d._children = null;
+		delete d._children;
 	    }
 	}
 	return d;
@@ -628,6 +658,7 @@ treeJSON = d3.json("/applications/Ontology/hierarchy.php?_v=&entry=root", functi
     // Layout the tree initially and center on the root node.
     redraw();
     update(root);
-    centerNode(root);
+    zoomIdx = Math.floor(0.3 * root.children.length);
+    centerNode(root.children[zoomIdx]);
 
 });
