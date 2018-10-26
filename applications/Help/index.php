@@ -116,7 +116,7 @@
             Analyze
           </div>
           <div class="card-body">
-            <p>The statistical analysis package used by DEAP is based on the R-package <a href="https://cran.r-project.org/web/packages/gamm4/"><i>gamm4</i></a> and implements a generalized additive mixel model that captures the degrees of freedom in a longitudinal multi-site study that includes a complex family structure. The user interface of the analysis application provides meaningful presets for covariates of no interest and in general the user is only required to change the variables of interest, the dependent and independent variable to start the analysis.</p>
+            <p>The statistical analysis package used by DEAP is based on the R-package <a href="https://cran.r-project.org/web/packages/gamm4/"><i>gamm4</i></a> and implements a generalized additive mixture model that captures the degrees of freedom in a longitudinal multi-site study that includes a complex family structure. The user interface of the analysis application provides meaningful presets for covariates of no interest and in general the user is only required to change the variables of interest, the dependent and independent variable to start the analysis.</p>
             <p>Learn how to load and save a model (see the menu button on the top left).</p>
             <p>More extensive help is available in the application itself. The menu option <i>Normal</i> can be switched to <i>Tutorial</i> mode which shows text on how to interpret the generated graphs and tables.</p>
             <button class="btn btn-light" video="https://youtu.be/BXzuJ6OE0QA">Video</button>
