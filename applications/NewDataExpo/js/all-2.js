@@ -3303,6 +3303,8 @@ function computeWithCheck() {
         if (data['mode'] == 'restricted') {
             alert('Warning: you are trying to run this analysis in restricted mode (see Plan). This analysis will only be executed if you switch to the unrestricted mode.');
         } else {
+	    jQuery(window).unbind("resize");
+	    jQuery('#scatter').html('') 
             compute();
         }
     });
@@ -3426,11 +3428,13 @@ function clearDisplayCheck(time) {
 		    console.log(edata)
 
                     if ( edata != "" && !(edata.indexOf("Error: Dependent variable is empty.") >= 0)){
-                        jQuery("#scatter").append(
+                        jQuery("#scatter")
+			.append(
+			    jQuery('<div class="alert alert-danger" role="alert">').append(
                             jQuery("<pre>")
-                            .css("margin-left", "15px")
                             .css("color", "red")
-                            .html(edata.split("In addition:")[0])
+                            .css("margin-bottom", "0")
+                            .html(edata.split("In addition:")[0]))
                         )
 		    }
                 }));
@@ -3439,10 +3443,11 @@ function clearDisplayCheck(time) {
 	    Promise.all(promises).then(function(){
 	      if(jQuery("#scatter").find("pre").length == 0 && filename.length >= 4){
 		jQuery("#scatter").append(
+			    jQuery('<div class="alert alert-danger" role="alert">').append(
                             jQuery("<pre>")
-                            .css("margin-left", "15px")
                             .css("color", "red")
-                            .html("Error: Dependent variable is empty.")
+                            .css("margin-bottom", "0")
+                            .html("Error: Dependent variable is empty."))
                         )
 	    }});
         }
@@ -3523,7 +3528,7 @@ function clearDisplayCheck(time) {
 			    }
                             if (JSON.parse(d)["warning"])
                                 jQuery("#scatter").prepend(
-                                        jQuery("<p>").html(JSON.parse(d)
+                                        jQuery("<div class='alert alert-warning' role=='alert'></div>").html(JSON.parse(d)
                                         ["warning"]).addClass("warning-section")
                                 )
  
@@ -3666,7 +3671,9 @@ function clearDisplayCheck(time) {
                         jQuery(".tutorial-mode")
                             .insertAfter("body")
                             .hide()
+			warning_message = jQuery("#scatter").find('.alert-danger,.alert-warning');
                         jQuery("#scatter").html("")
+		        jQuery("#scatter").append(warning_message)
                         indepvar = getVarNameByID("log.var").includes(
                             getVarNameByID("indepvar")
                         )
