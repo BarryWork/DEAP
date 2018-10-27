@@ -219,11 +219,10 @@ function php_json_encode($arr) {
 #    echo " .border-around dt { background-color: #131210; color: #AAAAAA;padding: .5em;font-weight: 500;text-align: left;text-transform: none;border-left: 1px solid #131210;border-right: 1px solid #131210;border-top: 1px solid #131210;}";
 #    echo " .border-around dd { margin: 0 0 1em 0;background: #DBD8D8;text-align: center;padding: 1em .5em;font-style: italic;border-left: 1px solid #131210;border-right: 1px solid #131210;border-bottom: 1px solid #131210; }";
     echo "   dl.event { margin: 2em 0; padding: 0; font-family: georgia, times, serif; }";
-    echo "   .event dt { position: relative;left: 0;top: 1.1em;width: 25em;font-weight: bold;}";
-    echo "   .event dd { border-left: 1px solid #000;margin: 0 0 0 26em;padding: 0 0 .5em .5em;}";
+    echo "   .event dt { position: relative;left: 0;top: 1.1em;width: 35em;font-weight: bold;}";
+    echo "   .event dd { border-left: 1px solid #000;margin: 0 0 0 36em;padding: 0 0 .5em .5em;}";
     echo "  </style>";
-    echo "  <link href=\"/css/bootstrap.css\" rel=\"stylesheet\">";
-    echo "  <link href=\"/css/bootstrap-responsive.css\" rel=\"stylesheet\">";
+    echo "  <link href=\"/css/bootstrap.min.css\" rel=\"stylesheet\">";
 
     echo "</head>";
     echo "<body>";
@@ -236,7 +235,7 @@ function php_json_encode($arr) {
     echo "        <span class=\"icon-bar\"></span>";
     echo "        <span class=\"icon-bar\"></span>";
     echo "      </a>";
-    echo "      <a class=\"brand\" href=\"#\">Data Portal Dictionary</a>";
+    echo "      <a class=\"brand\" href=\"#\">DEAP Data Dictionary for ABCD</a>";
     echo "      <div class=\"nav-collapse collapse\">";
     echo "        <ul class=\"nav\">";
     echo "          <li class=\"active\"><a href=\"/index.php\">Home</a></li>";
@@ -246,7 +245,8 @@ function php_json_encode($arr) {
     echo "  </div>";
     echo "</div>";
 
-    echo "<div class=\"container\">";
+    echo "<div class=\"container-fluid\">";
+    echo "<div class=\"row-fluid\">";
     echo "<p style=\"margin-top: 70px;\">This page contains RDFa labels in an effort to support the semantic web. Use an <a href=\"http://www.w3.org/2012/pyRdfa/#distill_by_upload\">RDFa 1.1 distiller</a> to extract this information.</p>";
     $count = 0;
     echo "<dl resource=\"http://www.w3.org/TR/2004/REC-rdf-syntax-grammar-20040210/\" about=\"".$_SERVER['REQUEST_URI']."\" class=\"event\">";
@@ -303,7 +303,9 @@ function php_json_encode($arr) {
       $count = $count + 1;
     }
     echo "</dl>";
-    echo "</container>";
+    echo "</div>";    
+    echo "</div>";
+    echo "<script src=\"/js/bootstrap.min.js\"></script>";
     echo "</body>";
     return;
   } else {
