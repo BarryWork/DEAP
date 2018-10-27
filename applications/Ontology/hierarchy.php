@@ -445,27 +445,27 @@ a:hover {
 	    <div class="row">
 	      <div class="col-sm-8 col-md-7 py-4">
 		<h4 class="text-white">About</h4>
-		<p class="text-white">Explore the data provided by the NIDA/NIH funded Adolescent Brain Cognitive Development (ABCD) study. Currently we are sharing 131 instruments with 44,852 individual measures.</p>
+		<p class="text-white">Explore the data provided by the NIDA/NIH funded Adolescent Brain Cognitive Development (ABCD) study. Currently we are sharing 127 instruments with 28,862 individual measures.</p>
 	      </div>
 	      <div class="col-sm-4 offset-md-1 py-4">
 		<h4 class="text-white">Contact</h4>
-		<p><a href="#" class="text-white">Data Analysis and Informatics Core of ABCD</a></p>
+		<p><a href="https://github.com/ABCD-STUDY/DEAP" class="text-white">Data Analysis and Informatics Core of ABCD issue tracking for DEAP</a></p>
 	      </div>
 	    </div>
 	    <div class="row">
 	      <div class="col-sm-4">
 	      	   <h4 class="text-white">Data Dictionary</h4>
-	      	   <p class="text-white">A plain list of the data dictionary.</p>
+	      	   <p class="text-white">A plain list of the data dictionary with RDFa labels.</p>
 		  <a style="margin-bottom: 10px;" class="btn btn-primary text-white" target="data_dictionary" href="/applications/Ontology/translate.php?query=display" title="List the entries of the data dictionary as a continous table.">Data Dictionary</a>
 		  </div>
 	      <div class="col-sm-4">
 	      	   <h4 class="text-white">Structures</h4>
-	      	   <p class="text-white">Change the structure displayed on the left.</p>
-		  <a style="margin-bottom: 10px;" class="btn text-white btn-primary" href="#" id="open-edit-window" title="Show the rules used to define the hierarchy displayed. These rules are used to group entries from the data dictionary.">Edit Graph</a><br/>
+	      	   <p class="text-white">See the hierarchy coding using regular expression matches on the field names.</p>
+		  <a style="margin-bottom: 10px;" class="btn text-white btn-primary" href="#" id="open-edit-window" title="Show the rules used to define the hierarchy displayed. These rules are used to group entries from the data dictionary.">Show Graph Specification</a><br/>
 	      </div>	    
 	      <div class="col-sm-4">
 	      	   <h4 class="text-white">Coverage</h4>
-	      	   <p class="text-white">Some measures might not be reached from the graph.</p>
+	      	   <p class="text-white">Some measures might not be reachable from the graph. We try to keep this list short.</p>
 		  <a style="margin-bottom: 10px;" class="btn text-white btn-primary" href="hierarchy.php?entry=coverage" title="Show items that cannot be reached from the graph.">Coverage</a><br/>
 	      </div>	    
 	    </div>	    
