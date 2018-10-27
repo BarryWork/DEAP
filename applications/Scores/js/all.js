@@ -614,7 +614,7 @@ function insert_recipe_block(input, top) {
         del = $('<i style = "right:5px;top:5px;position:absolute;font-size:30px; margin:5px; color: white; display: none;" class="fas fa-times" title="Delete Score"></i>').appendTo(div),
         maximize = $('<button class="btn btn-sm btn-primary header-button" style="right:45px;top:5px;position:absolute;font-size:30px; margin:5px;">open</button>').appendTo(div);
         save     = $('<button type="button" class="btn btn-primary save-button">Save</button>').appendTo(div_input),
-        checkbox = $('<div class="checkbox pull-right" style="margin-top: 7px;"><label><input type="checkbox" class="private-public" value="private"' + ((input['permission']=="private")?"checked":"") + '> Save as private</label></div>').appendTo(div_input);       
+        //checkbox = $('<div class="checkbox pull-right" style="margin-top: 7px;"><label><input type="checkbox" class="private-public" value="private"' + ((input['permission']=="private")?"checked":"") + '> Save as private</label></div>').appendTo(div_input);       
 
     //initialize md;
     // always ask for age first, that will fill in the participant names
