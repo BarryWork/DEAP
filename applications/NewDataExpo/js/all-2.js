@@ -157,8 +157,9 @@ function load_interface_from_json(model_address) {
                 editor.setOptions({
                     autoScrollEditorIntoView: true,
                 })
-                editor.setTheme("ace/theme/monokai")
-
+                //editor.setTheme("ace/theme/monokai")
+                editor.setTheme("ace/theme/chrome")
+                
                 editor.session.setMode("ace/mode/r")
                 editor.setOption("autoScrollEditorIntoView", true)
                 editor.setShowPrintMargin(false)
