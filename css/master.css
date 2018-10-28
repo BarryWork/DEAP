@@ -275,6 +275,31 @@ ul, ol, li {
 .pagination li a:hover::before {
     width: 25;
 }
+.pagination li.data_dict a:hover::after {
+    content: " the data dictionary";
+    color: lightgray;
+    font-size: 70%;
+}
+.pagination li.filter a:hover::after {
+    content: " participants";
+    color: lightgray;
+    font-size: 70%;
+}
+.pagination li.plan a:hover::after {
+    content: " your analysis";
+    color: lightgray;
+    font-size: 70%;
+}
+.pagination li.analyze a:hover::after {
+    content: " the data";
+    color: lightgray;
+    font-size: 70%;
+}
+.pagination li.extend a:hover::after {
+    content: " ABCD by adding variables";
+    color: lightgray;
+    font-size: 70%;
+}
 ol {
     display: block;
     list-style-type: decimal;
