@@ -167,7 +167,7 @@ echo('<script type="text/javascript"> get_value = \''.json_encode($_GET).'\'; </
         <div class="col-md-10">
           <div class="content"></div>
         </div>
-        <div id = "conrol-pannel" class="col-md-1" style="display: none;">
+        <div id = "control-panel" class="col-md-1" style="display: none;">
           <button type="button" id = "compute-button" class="btn btn-primary" onclick = "computeWithCheck()" style="margin-left: -10px; margin-top: 55px; width:165px;height: 80px;font-size:2rem; transform: rotate(90deg); font-weight: 100;" title="Start the computation of the currently defined analysis">submit</button>
 
         </div>
@@ -346,7 +346,7 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <!-- <script src="//code.jquery.com/ui/1.8.22/jquery-ui.min.js"></script> -->
 <script src="./js/saveSvgAsPng.js"></script>
 <script src="/js/md5-min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script> -->
 
 <script type="text/javascript" src="./js/select2.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script> -->
@@ -369,11 +369,14 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script src="../Ontology/js/highlight-js.js" charset="utf-8"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js" integrity="sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h" crossorigin="anonymous"></script>
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>
+<!-- <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> -->
+<script src="js/bootstrap-toggle.min.js"></script>
+                                                                                                                                                                                                                                                                         
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js" crossorigin="anonymous"></script>                                                                                                                                                                                                                                                                         
 
-<script src="./js/ace.js"></script>
+<script src="./js/ace-min-noconflict/ace.js"></script>
 <script>
 
 function checkLogin() {
@@ -390,7 +393,7 @@ jQuery(document).ready(function() {
 
     loadAnalysisNames();
     load_interface_from_json();
-    jQuery("#conrol-pannel").show();
+    jQuery("#control-panel").show();
 
 });
 
