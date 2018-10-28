@@ -3396,6 +3396,7 @@ function addCommas(x) {
     return parts.join(".")
 }
 
+var time_calculation_ends = 0;
 function clearDisplayCheck(time) {
     //clearInterval(checkDisplayInterval);
     //get the list of display output
@@ -3406,13 +3407,15 @@ function clearDisplayCheck(time) {
         .hide()
     jQuery("#scatter").html("")
 
-    if (0 != time_start)
+    if (0 != time_start) {
         jQuery("#scatter").prepend(
-            jQuery("<code>").html(
+            jQuery("<code></code>").html(
                 ((new Date().getTime() - time_start) / 1000.0).toFixed(2) +
                 "sec for calculation"
             )
         )
+        time_calculation_ends = new Date().getTime();
+    }
     time_start = 0
     //jQuery("textarea").hide();
     display_file_list = jQuery.parseJSON(display)
@@ -3653,6 +3656,15 @@ function clearDisplayCheck(time) {
                     jQuery("#scatter").append(
                         "<h2 class='model-diagnostics'>Model Diagnostics</h2>"
                     )
+    window.requestAnimationFrame(function () {
+        console.log("done with rendering");
+        jQuery("#scatter code:first-child").after(
+            jQuery("</br><code></code>").html(
+                ((new Date().getTime() - time_calculation_ends) / 1000.0).toFixed(2) +
+                "sec for transfer and rendering"
+            )
+        )
+    });
                     scatter(
                         parseDisplayData_simple(data[4]),
                         "res",
