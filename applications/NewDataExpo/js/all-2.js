@@ -122,7 +122,8 @@ function load_interface_from_json(model_address) {
             for (setter_it in setter) {
                 if (setter_it != "model") {
                     var setter_it_temp = setter_it.split("__DOT__").join(".")
-                    setVarByID(setter_it_temp, setter[setter_it])
+		    var setter_val_temp = setter[setter_it].split("%2B").join("+")
+                    setVarByID(setter_it_temp, setter_val_temp)
                 }
             }
         } else {
@@ -4029,7 +4030,8 @@ function generateQueryString(data) {
     var ret = []
     for (let d in data) {
         nd = d.split(".").join("__DOT__")
-        ret.push(encodeURIComponent(nd) + "=" + encodeURIComponent(data[d]))
+	temp = data[d].split("+").join("%2B"); 
+        ret.push(encodeURIComponent(nd) + "=" + encodeURIComponent(temp))
     }
     return ret.join("&")
 }
