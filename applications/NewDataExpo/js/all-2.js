@@ -1609,7 +1609,7 @@ function insert_mutiple_input(item_input, isIndpv) {
             function(key, value) {
                 console.log(jQuery(value).attr("value"))
                 var tag_id = jQuery(value).attr("value")
-                var span_list = add_span_list(tag_id, au_list, id)
+                var span_list = add_span_list(tag_id, au_list,au_id)
                 if (isIndpv) {
                     au.html("")
                 }
