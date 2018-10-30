@@ -3159,7 +3159,7 @@ function insert_checkbox(arr) {
             input.addClass("active")
         }
 	prepend_label = "<div class='overlay'>P</div>";
-	if(name == 'SEX' || name == 'Race/Ethnicity' || name == 'Age'){
+	if(name == 'SEX' || name == 'Race/Ethnicity' || name == 'AGE'){
 	    prepend_label = "<div class='overlay'>Y</div>";
 	} else if ( name == 'SITE' || name == 'FAMILY'){
 	    prepend_label = ""
