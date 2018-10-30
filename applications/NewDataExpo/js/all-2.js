@@ -1376,9 +1376,9 @@ function insert_expert_toggle() {
         if (jQuery("#scatter").html() != "") jQuery(window).trigger("resize")
     })
     jQuery("#editor-ace").on("mouseenter", function () {
-        $("body").addClass("modal-open");
+        $("body").addClass("noscroll");
     }).on("mouseleave", function () {
-        $("body").removeClass("modal-open")
+        $("body").removeClass("noscroll")
     });
 }
 
