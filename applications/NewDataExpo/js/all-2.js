@@ -3095,7 +3095,9 @@ function insert_checkbox(arr) {
     var div = jQuery("<div>")
     div.attr("class", "btn-group col-md-10 span7").css("margin-top", 0)
     div.attr("role", "group")
-    div.attr("data-toggle", "buttons").css("overflow-x", "auto")
+    div.attr("data-toggle", "buttons")
+       .css("overflow-x", "auto")
+       .css("overflow-y", "hidden")
 
     var div_random = jQuery("<div>")
     div_random.attr("class", "btn-group col-md-10 span7")
@@ -3139,7 +3141,8 @@ function insert_checkbox(arr) {
         input.attr("id", id + "-input")
 
         if ( id == "random-Family") {
-            input.attr("disabled", "disabled")
+            input.prop("disabled",true)
+		 .off('click');
         }
         //data-toggle="tooltip" data-placement="top" title="Tooltip on top"
         input
@@ -3148,12 +3151,20 @@ function insert_checkbox(arr) {
             .attr("data-placement", "top")
             .attr("title", default_value)
             .css("border", "1px solid #4CAF50")
+	    .css("position", "relative")
             .css("z-index", "0")
         input.attr("measure", default_value)
         input.attr("default", default_value)
         if (value == default_value) {
             input.addClass("active")
         }
+	prepend_label = "<div class='overlay'>P</div>";
+	if(name == 'SEX' || name == 'Race/Ethnicity' || name == 'Age'){
+	    prepend_label = "<div class='overlay'>Y</div>";
+	} else if ( name == 'SITE' || name == 'FAMILY'){
+	    prepend_label = ""
+	}
+	name = prepend_label +name;
         input.html(name)
         var test = (function(input, item) {
             input.click(function() {
