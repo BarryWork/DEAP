@@ -1375,6 +1375,11 @@ function insert_expert_toggle() {
 
         if (jQuery("#scatter").html() != "") jQuery(window).trigger("resize")
     })
+    jQuery("#editor-ace").on("mouseenter", function () {
+        $("body").addClass("modal-open");
+    }).on("mouseleave", function () {
+        $("body").removeClass("modal-open")
+    });
 }
 
 function remove_formula_part(part) {
@@ -3467,7 +3472,7 @@ function clearDisplayCheck(time) {
 
                     console.log(parseDisplyData(data))
                     display_data = removeDup(parseDisplyData(data[0]))
-                    display_data_corrected = removeDup(parseDisplyData(data[7]))
+                    display_data_corrected = data.length == 8 ? removeDup(parseDisplyData(data[7])) : null
                     //default here
                     indepvar = getVarNameByID("log.var").includes(
                         getVarNameByID("indepvar")
@@ -3506,6 +3511,13 @@ function clearDisplayCheck(time) {
                             "black",
                             "red",
                         ])
+			if(display_data_corrected) 
+			    scatter(display_data_corrected, depvar, indepvar, gp, 8, lineplot_data[0], [
+                                "red",
+                                "black",
+                                "red",
+                            ])
+			
                     }
                     //var summary_text = jQuery("<textarea class= 'summary-textarea' style='display:none;height: 400px; width: 100%; font-family: \'Lucida Console\', Monaco, monospace; font-size: 12px;'></textarea>");
                     var summary_text = jQuery("<div class = 'summary-textarea'></div>")
