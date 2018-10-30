@@ -2059,10 +2059,10 @@ function add_span_list(default_value, list, id) {
         if (span_list.css("background-color") != "rgb(144, 238, 144)") {
             span_list.css("background-color", "rgb(144, 238, 144)")
             if (!list.find("." + id + "-" + class_name_original_id).html()) {
-                list.append(creatVar(default_value, id), false)
+                list.append(creatVar(span_list.html(), id), false)
             } else {
                 list.find("." + id + "-" + class_name_original_id + "-wrapper").remove()
-		list.append(creatVar(default_value, id), false)
+		list.append(creatVar(span_list.html(), id), false)
                 list
                     .find("." + id + "-" + class_name_original_id + "-wrapper")
                     .attr("hiding-list", false)
@@ -2077,7 +2077,7 @@ function add_span_list(default_value, list, id) {
             }
         } else {
             span_list.css("background-color", "rgb(255,255,255)")
-            list.find("." + id + "-" + class_name_original_id + "-wrapper").fadeOut()
+            list.find("." + id + "-" + class_name_original_id + "-wrapper").remove()
             list
                 .find("." + id + "-" + class_name_original_id + "-wrapper")
                 .attr("hiding-list", true)
@@ -2946,13 +2946,13 @@ function creatVar(value, input_id) {
         })
 
     if (value.indexOf("s(") >= 0) {
-        $a.find(".v-s-button").css("background-color", "lightgreen")
+        $div_button.find(".v-s-button").trigger("click")
     } else if (value.indexOf("log(") >= 0) {
-        $a.find(".v-log-button").css("background-color", "lightgreen")
+        $div_button.find(".v-log-button").trigger("click")
     } else if (value.indexOf("*") >= 0) {
-        $a.find(".v-interaction-button").css("background-color", "lightgreen")
+        $div_button.find(".v-interaction-button").trigger("click")
     } else if (value.indexOf("^") >= 0) {
-        $a.find(".v-sq-button").css("background-color", "lightgreen")
+        $div_button.find(".v-sq-button").trigger("click")
     }
 
     if (value.indexOf("Censor(") >= 0) {
@@ -3145,11 +3145,17 @@ function insert_checkbox(arr) {
 		 .off('click');
         }
         //data-toggle="tooltip" data-placement="top" title="Tooltip on top"
+	prepend_label = "<div class='overlay'>Parent</div>";
+	if(name == 'SEX' || name == 'Race/Ethnicity' || name == 'AGE'){
+	    prepend_label = "<div class='overlay'>Youth</div>";
+	} else if ( name == 'SITE' || name == 'FAMILY'){
+	    prepend_label = ""
+	}
         input
             .attr("class", "btn btn-default btn-sm")
             .attr("data-toggle", "tooltip")
             .attr("data-placement", "top")
-            .attr("title", default_value)
+            .attr("title", prepend_label == '' ? default_value : jQuery(prepend_label).html()+" " + default_value)
             .css("border", "1px solid #4CAF50")
 	    .css("position", "relative")
             .css("z-index", "0")
@@ -3158,12 +3164,7 @@ function insert_checkbox(arr) {
         if (value == default_value) {
             input.addClass("active")
         }
-	prepend_label = "<div class='overlay'>P</div>";
-	if(name == 'SEX' || name == 'Race/Ethnicity' || name == 'AGE'){
-	    prepend_label = "<div class='overlay'>Y</div>";
-	} else if ( name == 'SITE' || name == 'FAMILY'){
-	    prepend_label = ""
-	}
+	
 	name = prepend_label +name;
         input.html(name)
         var test = (function(input, item) {
