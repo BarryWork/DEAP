@@ -309,22 +309,22 @@ function scatter(data, dep, ind, group,id,line_data,line_color_list){
             if(d["abcd_site"])
                 return "ID : "+d["src_subject_id"]+
                     "<br>Site : "+d["abcd_site"]+
-                    "<br>Sex : "+d["sex"] + 
-                    "<br>Race : "+d["race.ethnicity"]+
-                    "<br>Age : "+d["age"]+
-                    "<br>Household Highest Education : "+d["high.educ"]+
-                    "<br>Household Income : "+d["household.income"]+
+                    (d["sex"] ? "<br>Sex : "+d["sex"] : "" )+ 
+                    (d["race.ethnicity"] ? "<br>Race : "+d["race.ethnicity"] : "" )+
+                    (d["age"] ? "<br>Age : "+d["age"] : "" )+
+                    (d["high.educ"] ? "<br>Household Highest Education : "+d["high.educ"] : "" )+
+                    (d["household.income"] ? "<br>Household Income : "+d["household.income"] : "" )+
                     "<br>"+dep+" : "+d[dep] +
                     "<br>"+ind+" : "+d[ind];
 
             if(d["res"])
                 return "ID : "+d["src_subject_id"]+
                     "<br>Site : "+d["abcd_site"]+
-                    "<br>Sex : "+d["sex"] +      
-                    "<br>Race : "+d["race.ethnicity"]+
-                    "<br>Age : "+d["age"]+
-                    "<br>Household Highest Education : "+d["high.educ"]+
-                    "<br>Household Income : "+d["household.income"]+
+                    (d["sex"] ? "<br>Sex : "+d["sex"] : "" )+ 
+                    (d["race.ethnicity"] ? "<br>Race : "+d["race.ethnicity"] : "")+
+                    (d["age"] ? "<br>Age : "+d["age"] : "")+
+                    (d["high.educ"] ? "<br>Household Highest Education : "+d["high.educ"] : "")+
+                    (d["household.income"] ? "<br>Household Income : "+d["household.income"] : "")+
                     "<br>res : " +d["res"]+
                     "<br>fitted : "+d["fitted"]; 
         });
