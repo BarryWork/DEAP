@@ -3155,7 +3155,7 @@ function insert_checkbox(arr) {
             .attr("class", "btn btn-default btn-sm")
             .attr("data-toggle", "tooltip")
             .attr("data-placement", "top")
-            .attr("title", prepend_label == '' ? default_value : jQuery(prepend_label).html()+" " + default_value)
+            .attr("title", prepend_label == '' ? default_value :  default_value + " ("+jQuery(prepend_label).text().toLowerCase()+")" )
             .css("border", "1px solid #4CAF50")
 	    .css("position", "relative")
             .css("z-index", "0")
@@ -3683,12 +3683,15 @@ function clearDisplayCheck(time) {
                     )
     window.requestAnimationFrame(function () {
         console.log("done with rendering");
+	if (time_calculation_ends == 0)
+	    return;
         jQuery("#scatter code:first-child").after(
             jQuery("</br><code></code>").html(
                 ((new Date().getTime() - time_calculation_ends) / 1000.0).toFixed(2) +
                 "sec for transfer and rendering"
             )
         )
+	time_calculation_ends = 0;
     });
                     scatter(
                         parseDisplayData_simple(data[4]),
