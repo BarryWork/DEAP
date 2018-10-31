@@ -499,8 +499,9 @@ function insert_load_list_pannel() {
         for (list_key in d) {
             if (
                 user_name == "admin" ||
-                list_key.includes("[Public]") ||
-                list_key.includes(user_name)
+            //  list_key.includes("[Public]") ||
+                d[list_key].status == 'public' ||
+                list_key.includes(user_name) 
             ) {
                 var $value = IsJsonString(d[list_key])
                     ? JSON.parse(d[list_key])
