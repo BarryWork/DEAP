@@ -1523,6 +1523,7 @@ function insert_mutiple_input(item_input, isIndpv) {
             ) {
                 jQuery(this)
                     .find(".last-remove")
+		    .last()
                     .remove()
                 if (!isIndpv) {
                     jQuery(this).append("+")
@@ -1951,7 +1952,7 @@ function add_span_list(default_value, list, id) {
     var class_name_original_id = original_id.split(".").join("__DOT__")
     if (id == "depvar") {
         if (getVarNameByID("ws.var")) {
-            if (getVarNameByID("ws.var").includes(original_id)) {
+            if (getVarNameByID("ws.var").includes(original_id) && !default_value.includes("Censor(")) {
                 default_value
                     ? (default_value = default_value.replace(
                         original_id,
@@ -1977,7 +1978,7 @@ function add_span_list(default_value, list, id) {
         }
 
         if (getVarNameByID("ws.var")) {
-            if (getVarNameByID("ws.var").includes(original_id)) {
+            if (getVarNameByID("ws.var").includes(original_id) && !default_value.includes("Censor(") ) {
                 default_value
                     ? (default_value = default_value.replace(
                         original_id,
@@ -2022,7 +2023,7 @@ function add_span_list(default_value, list, id) {
                 }
             }
         } else if (getVarNameByID("int.var")) {
-            if (getVarNameByID("int.var").includes(original_id)) {
+            if (getVarNameByID("int.var").includes(original_id) ) {
                 for (var smo_v in getVarNameByID("int.var").split("+")) {
                     if (
                         getVarNameByID("int.var")
@@ -2034,7 +2035,7 @@ function add_span_list(default_value, list, id) {
             }
         }
         if (getVarNameByID("ws.var")) {
-            if (getVarNameByID("ws.var").includes(original_id)) {
+            if (getVarNameByID("ws.var").includes(original_id) && !default_value.includes("Censor(") ) {
                 default_value
                     ? (default_value = default_value.replace(
                         original_id,
