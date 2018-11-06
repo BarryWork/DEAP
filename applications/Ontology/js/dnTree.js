@@ -527,7 +527,7 @@ treeJSON = d3.json("/applications/Ontology/hierarchy.php?_v=&entry=root", functi
 	    //.style("fill-opacity", 0);
 
 	// phantom node to give us mouseover in a radius around it
-	nodeEnter.append("circle")
+	/*nodeEnter.append("circle")
 	    .attr('class', 'ghostCircle')
 	    .attr("r", 30)
 	    .attr("opacity", 0) // change this to zero to hide the target area
@@ -538,7 +538,23 @@ treeJSON = d3.json("/applications/Ontology/hierarchy.php?_v=&entry=root", functi
 	    })
 	    .on("mouseout", function(node) {
 		outCircle(node);
+	    }); */
+
+	nodeEnter.append("rect")
+	    .attr('class', 'clickRect')
+	    .attr("opacity", 0) // change this to zero to hide the target area
+	    .style("fill", "red")
+	    .style("width", "40px")
+	    .style("height", "20px")
+	    .attr("transform", "translate(-20,-10)")
+	    .attr('pointer-events', 'mouseover')
+	    .on("mouseover", function(node) {
+		overCircle(node);
+	    })
+	    .on("mouseout", function(node) {
+		outCircle(node);
 	    });
+	
 
 	// Update the text to reflect whether node has children or not.
 	node.select('text')
