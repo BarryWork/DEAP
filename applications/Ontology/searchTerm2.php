@@ -24,6 +24,9 @@ if (isset($_GET['getStats'])) {
    $variable = $_GET['getStats'];
    $content = file_get_contents("/var/www/html/data/ABCD/NewDataExpo/variableInfo/" . $variable . ".json");
    echo($content);
+   if ($content == "") {
+      echo("{ \"message\": \"No statistical information found for ".$variable.". Variable might not exist or contain only NA values.\" }");
+   }
    return;
 }
 

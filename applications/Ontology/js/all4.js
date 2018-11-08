@@ -8,7 +8,7 @@ function search( t ) {
     // time the search
     startTime = performance.now();
     jQuery.get('/applications/Ontology/searchTerm2.php', { 'search': t }, function(data) {
-	//console.log("got data back from search");
+	// console.log("got data back from search");
 	endTime = performance.now();
 	populate_results(JSON.parse(data));
 	lastSearch = t;
@@ -131,6 +131,9 @@ jQuery(document).ready(function() {
 	});
 	jQuery.when(step1, step2).done(function() {
 	    jQuery.getJSON("/applications/Ontology/searchTerm2.php?getStats=" + item, function(data) {
+		if (typeof data['message'] !== 'undefined') {
+		    jQuery('#stats').append(data['message']);
+		}
 		// add stats to #entries
 		var d = [];
                 var obj = [];
