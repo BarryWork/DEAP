@@ -297,3 +297,35 @@ div.info div.spot {
     border: 1px solid lightgray;
     top: -2px;
 }
+
+div.yes {
+    transform-style: preserve-3d;
+    transition: all 1.0s linear;
+    position: relative;
+}
+
+.face {
+    position: absolute;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+}
+.face.back {
+    position: absolute;
+    display: block;
+    transform: rotateY(180deg);
+    box-sizing: border-box;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
