@@ -89,8 +89,8 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo 'fi' >> $ND_ENTRYPOINT \
          && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
          && echo "ServerName localhost" >> /etc/apache2/apache2.conf \
-         && echo -e "<Directory /var/www/html/>\n    Options -Indexes +FollowSymLinks\n    AllowOverride None\n    Require all granted\n</Directory>" >> /etc/apache2/apache2.conf \
-         && echo -e "<FilesMatch \"\\.Rds\$\">\n    Require all denied\n</FilesMatch>" >> /etc/apache2/apache2.conf; \
+         && echo "<Directory /var/www/html/>\n    Options -Indexes +FollowSymLinks\n    AllowOverride None\n    Require all granted\n</Directory>" >> /etc/apache2/apache2.conf \
+         && echo "<FilesMatch \"\\.Rds\$\">\n    Require all denied\n</FilesMatch>" >> /etc/apache2/apache2.conf; \
        fi \
     && chmod -R 777 /deap-startup.sh
 
