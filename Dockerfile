@@ -84,13 +84,13 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo 'cron' >> $ND_ENTRYPOINT \
          && echo '/bin/bash /var/www/html/code/setup.sh;' >> $ND_ENTRYPOINT \
          && echo 'if [ -d "/var/www/html/data/ABCD/NewDataExpo/variableInfo" ]; then' >> $ND_ENTRYPOINT \
-	     && echo '/usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R &' >> $ND_ENTRYPOINT \
-	     && echo '/usr/bin/Rscript /var/www/html/applications/Scores/R/transfer.R &' >> $ND_ENTRYPOINT \
-	 && echo 'fi' >> $ND_ENTRYPOINT \
+         && echo '/usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R &' >> $ND_ENTRYPOINT \
+         && echo '/usr/bin/Rscript /var/www/html/applications/Scores/R/transfer.R &' >> $ND_ENTRYPOINT \
+         && echo 'fi' >> $ND_ENTRYPOINT \
          && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
          && echo "ServerName localhost" >> /etc/apache2/apache2.conf; \
-	 && echo -e "<Directory /var/www/html/>\n    Options -Indexes +FollowSymLinks\n    AllowOverride None\n    Require all granted\n</Directory>" >> /etc/apache2/apache2.conf; \
-	 && echo -e "<FilesMatch \"\\.Rds\$\">\n    Require all denied\n</FilesMatch>" >> /etc/apache2/apache2.conf; \
+         && echo -e "<Directory /var/www/html/>\n    Options -Indexes +FollowSymLinks\n    AllowOverride None\n    Require all granted\n</Directory>" >> /etc/apache2/apache2.conf; \
+         && echo -e "<FilesMatch \"\\.Rds\$\">\n    Require all denied\n</FilesMatch>" >> /etc/apache2/apache2.conf; \
        fi \
     && chmod -R 777 /deap-startup.sh
 
