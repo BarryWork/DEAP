@@ -313,7 +313,8 @@ var server = http.createServer(function(req, res) {
                         'totalmemory': os.totalmem(),
                         'freememory': os.freemem(),
                         'server_uptime': moment.duration(os.uptime(), 'seconds').humanize(),
-                        'search_engine_uptime': moment.duration(startTime.diff(moment())).humanize()
+                        'search_engine_uptime': moment.duration(startTime.diff(moment())).humanize(),
+			'container_name': os.hostname()
                     };
 		    var aa = JSON.stringify(result);
 		    res.writeHead(200, [[ "Content-Type", "application/json"], ["Content-Length", Buffer.byteLength(aa) ]]);

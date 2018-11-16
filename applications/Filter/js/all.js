@@ -253,7 +253,7 @@ function changeSearch() {
                 // fill this block
                 
                 jQuery(newDiv).append(no);
-                jQuery(newDParent).append("<div class=\"row\"><div class=\"sectionTitle col-12\">Result of the current restriction<span id='fam-sort'></span></div></div>");
+                jQuery(newDParent).append("<div class=\"row\"><div class=\"sectionTitle col-12\">Result of the current restriction<span id='fam-sort'></span><div class=\"float-right\" style=\"margin-top: -5px;\"><button class=\"toggle-stats btn btn-sm btn-dark\">Table 1</button></div></div></div>");
                 jQuery(newDParent).append(newDiv);
             }
         }
@@ -267,14 +267,15 @@ function changeSearch() {
 // array of array in data
 function displayData(data, where) {
    jQuery(where).children().remove();
-   str = '<div class="datas">';
+   str = '<div class="datas front face">';
    for (var i = 0; i < data.length; i++) {
      str = str + '<div class="data" SubjID="' + data[i][idxSubjID] + 
                  '" VisitID="' + data[i][idxVisitID] + 
                  '" StudyDate="' + data[i][idxStudyDate] + 
            '" data-toggle="tooltip" title="SubjID: ' + data[i][idxSubjID] + ', VisitID: ' + data[i][idxVisitID] + (typeof data[i][idxStudyDate]=='undefined'?"":', StudyDate: ' + data[i][idxStudyDate]) + '">' + "" + '</div>';
    }
-   str = str + '</div>';
+    str = str + '</div>';
+    str = str + '<div class="back face center"></div>';
    jQuery(where).append(str);
    //jQuery(where).on('click', '.data', function(event) {
    //   showInfoWindow(event, this);
@@ -843,6 +844,46 @@ jQuery(document).ready(function() {
     });
     jQuery(document).on('click touchstart', '.datas', function() {
         toggleFamilyView();
+    });
+
+    jQuery('#start').on('click', 'button.toggle-stats', function() {
+	// rotate the div to show the back
+	var t = jQuery('div.yes');
+	if (t.css('transform') != "none") {
+	    console.log("delete animation again");
+	    t.css('transform', '');
+	    t.find('div.datas').show();
+	    t.find('div.Yea').show();
+	    return;
+	}
+	console.log("set animation");
+	// apply rotate css code
+	jQuery('div.yes').parent().css('perspective', '10000px');
+	jQuery('div.yes').parent().css('perspective-origin', '50% 50%');
+	jQuery('div.yes .face.back').css('width', jQuery('div.yes div.datas').width());
+	jQuery('div.yes .face.back').css('height', jQuery('div.yes div.datas').height());
+	jQuery('div.yes .face.back').css('zoom', jQuery('div.yes div.datas').css('zoom'));
+	setTimeout(function() {
+	    t.find('div.datas').hide();
+	    t.find('div.Yea').hide();
+	}, 500);
+	t.css('transform', 'rotateY(180deg)');
+	var uniqueIDY = hex_md5(project_name + jQuery('.inputmeasures').val().replace(/\s/g,'') + "YES").slice(-4);
+	var okKeys = Object.keys(allMeasures).filter(function(a) {
+	    if (a !== "src_subject_id" && a !== "abcd_site" && a != "rel_family_id" && a != 'rel_group_id' && a != "gender")
+		return a;
+	});
+	jQuery.getJSON('getTable1.php', { 'value': okKeys.join(","),
+					  'file': 'filterSets_' + project_name +'_'+ uniqueIDY + '.json' }, function(data) {
+	    jQuery('div.yes .face.back').html(data.join("").split("( ").join("("));
+	    jQuery('div.yes .face.back').find('table').css('margin-left', 'auto');
+	    jQuery('div.yes .face.back').find('table').css('margin-right', 'auto');
+	    jQuery('div.yes .face.back').find('table').css('font-size', '1rem');
+	    jQuery('div.yes .face.back').find('table').css('line-height', '1.5');
+	    
+	    jQuery('div.yes .face.back').find('td').css('border-bottom-color', 'white');
+	});
+	
     });
     
     setTimeout(function() { addOneMeasure('age'); addOneMeasure('rel_family_id'), addOneMeasure('rel_group_id'); addOneMeasure('abcd_site'); }, 0);

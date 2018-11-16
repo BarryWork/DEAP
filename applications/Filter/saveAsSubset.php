@@ -49,15 +49,19 @@
  if (is_readable($fn)) {
    $data = json_decode(file_get_contents($fn), TRUE);
  }
-
+ $found = false;
  foreach ($data as &$s) {
    if ($key === $s['key']) {
-     // don't save this again - this should never happen
-     echo ("Error: attempted to create duplicate array key");
-     return;
+     $s['sets'] = $set;
+     $s['code'] = $code;
+     $s['which'] = $which;
+     $found = true;
+     break;
    }
  }
- $data[] = array( "key" => $key, "set" => $set, "code" => $code, "which" => $which);
+ if ($found == false) {
+    $data[] = array( "key" => $key, "set" => $set, "code" => $code, "which" => $which);
+ }
  if (file_put_contents($fn, json_encode( $data )) === FALSE) {
    echo("\nsaving data failed\n");
  };

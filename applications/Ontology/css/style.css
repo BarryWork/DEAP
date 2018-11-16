@@ -102,38 +102,102 @@ a:hover {
  font-size: 12px;
  color: #999;
 }
+    .node circle {
+      cursor: pointer;
+      fill: #fff;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+    .node text {
+      font-size: 11px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    .node:hover text {
+       font-weight: bold;
+    }
+    path.link {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 1.5px;
+    }
+    
+    #body {
+    //margin-top: 50px;
+    }
+    
+    .highlight { background-color: yellow }
+    dt {
+	color: #337ab7;
+	font-weight: 400;
+	font-size: 1.2em;
+    }
+    dd { margin-bottom: 10px; }
+    #search-summary {
+	color: gray;
+	font-size: 10pt;
+	font-weight: 200;
+	margin-bottom: 10px;
+    }
+    .search-results {
+	padding-bottom: 20px;
+    }
+    .item-name {
+	font-weight: 600;
+    }
+    #entries {
+	border: 1px solid lightgrey;
+	border-radius: 5px;
+	margin-left: 20px;
+	padding: 5px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+    }
+    .entry {
+	color: black;
+    }
 
-.node circle {
-  cursor: pointer;
-  fill: #fff;
-  stroke: steelblue;
-    stroke-width: 1.5px;
-}
-.node text {
-    font-siz font-size:10px;
-    font-family:sans-serif;
-}
 
-.link {
-  fill: none;
-  stroke: #ccc;
-    stroke-width: 1.5px;
- }
 
-.templink {
-  fill: none;
-  stroke: red;
-    stroke-width: 3px;
- }
+    .node {
+        cursor: pointer;
+	  }
 
-.ghostCircle.show{
-  display:block;
- }
+  .overlay{
+        //background-color:#FFF;
+	  }
 
-.ghostCircle, .activeDrag .ghostCircle{
-  display: none;
- }
+  .node circle {
+      fill: #fff;
+          stroke: steelblue;
+	      stroke-width: 1.5px;
+	        }
 
+  .node text {
+      font-size:10px;
+          font-family:sans-serif;
+	    }
+
+  .link {
+      fill: none;
+          stroke: #ccc;
+	      stroke-width: 1.5px;
+	        }
+
+  .templink {
+      fill: none;
+          stroke: red;
+	      stroke-width: 3px;
+	        }
+
+  .ghostCircle.show{
+        display:block;
+	  }
+
+  .ghostCircle, .activeDrag .ghostCircle{
+         display: none;
+	   }
+	   
 /*! Color themes for Google Code Prettify | MIT License | github.com/jmblog/color-themes-for-google-code-prettify */
 .prettyprint{background:#efecf4;font-family:Menlo,Bitstream Vera Sans Mono,DejaVu Sans Mono,Monaco,Consolas,monospace;border:0!important}.pln{color:#19171c}ol.linenums{margin-top:0;margin-bottom:0;color:#7e7887}li.L0,li.L1,li.L2,li.L3,li.L4,li.L5,li.L6,li.L7,li.L8,li.L9{padding-left:1em;background-color:#efecf4;list-style-type:decimal}@media screen{.str{color:#2a9292}.kwd{color:#955ae7}.com{color:#7e7887}.typ{color:#576ddb}.lit{color:#aa573c}.pun{color:#19171c}.opn{color:#19171c}.clo{color:#19171c}.tag{color:#be4678}.atn{color:#aa573c}.atv{color:#398bc6}.dec{color:#aa573c}.var{color:#be4678}.fun{color:#576ddb}}
 

@@ -499,8 +499,9 @@ function insert_load_list_pannel() {
         for (list_key in d) {
             if (
                 user_name == "admin" ||
-                list_key.includes("[Public]") ||
-                list_key.includes(user_name)
+            //  list_key.includes("[Public]") ||
+                d[list_key].status == 'public' ||
+                list_key.includes(user_name) 
             ) {
                 var $value = IsJsonString(d[list_key])
                     ? JSON.parse(d[list_key])
@@ -1522,6 +1523,7 @@ function insert_mutiple_input(item_input, isIndpv) {
             ) {
                 jQuery(this)
                     .find(".last-remove")
+		    .last()
                     .remove()
                 if (!isIndpv) {
                     jQuery(this).append("+")
@@ -1950,7 +1952,7 @@ function add_span_list(default_value, list, id) {
     var class_name_original_id = original_id.split(".").join("__DOT__")
     if (id == "depvar") {
         if (getVarNameByID("ws.var")) {
-            if (getVarNameByID("ws.var").includes(original_id)) {
+            if (getVarNameByID("ws.var").includes(original_id) && !default_value.includes("Censor(")) {
                 default_value
                     ? (default_value = default_value.replace(
                         original_id,
@@ -1976,7 +1978,7 @@ function add_span_list(default_value, list, id) {
         }
 
         if (getVarNameByID("ws.var")) {
-            if (getVarNameByID("ws.var").includes(original_id)) {
+            if (getVarNameByID("ws.var").includes(original_id) && !default_value.includes("Censor(") ) {
                 default_value
                     ? (default_value = default_value.replace(
                         original_id,
@@ -2021,7 +2023,7 @@ function add_span_list(default_value, list, id) {
                 }
             }
         } else if (getVarNameByID("int.var")) {
-            if (getVarNameByID("int.var").includes(original_id)) {
+            if (getVarNameByID("int.var").includes(original_id) ) {
                 for (var smo_v in getVarNameByID("int.var").split("+")) {
                     if (
                         getVarNameByID("int.var")
@@ -2033,7 +2035,7 @@ function add_span_list(default_value, list, id) {
             }
         }
         if (getVarNameByID("ws.var")) {
-            if (getVarNameByID("ws.var").includes(original_id)) {
+            if (getVarNameByID("ws.var").includes(original_id) && !default_value.includes("Censor(") ) {
                 default_value
                     ? (default_value = default_value.replace(
                         original_id,
@@ -2946,13 +2948,13 @@ function creatVar(value, input_id) {
         })
 
     if (value.indexOf("s(") >= 0) {
-        $a.find(".v-s-button").css("background-color", "lightgreen")
+        $div_button.find(".v-s-button").trigger("click")
     } else if (value.indexOf("log(") >= 0) {
-        $a.find(".v-log-button").css("background-color", "lightgreen")
+        $div_button.find(".v-log-button").trigger("click")
     } else if (value.indexOf("*") >= 0) {
-        $a.find(".v-interaction-button").css("background-color", "lightgreen")
+        $div_button.find(".v-interaction-button").trigger("click")
     } else if (value.indexOf("^") >= 0) {
-        $a.find(".v-sq-button").css("background-color", "lightgreen")
+        $div_button.find(".v-sq-button").trigger("click")
     }
 
     if (value.indexOf("Censor(") >= 0) {
@@ -3145,11 +3147,17 @@ function insert_checkbox(arr) {
 		 .off('click');
         }
         //data-toggle="tooltip" data-placement="top" title="Tooltip on top"
+	prepend_label = "<div class='overlay'>Parent</div>";
+	if(name == 'SEX' || name == 'Race/Ethnicity' || name == 'AGE'){
+	    prepend_label = "<div class='overlay'>Youth</div>";
+	} else if ( name == 'SITE' || name == 'FAMILY'){
+	    prepend_label = ""
+	}
         input
             .attr("class", "btn btn-default btn-sm")
             .attr("data-toggle", "tooltip")
             .attr("data-placement", "top")
-            .attr("title", default_value)
+            .attr("title", prepend_label == '' ? default_value :  default_value + " ("+jQuery(prepend_label).text().toLowerCase()+")" )
             .css("border", "1px solid #4CAF50")
 	    .css("position", "relative")
             .css("z-index", "0")
@@ -3158,12 +3166,7 @@ function insert_checkbox(arr) {
         if (value == default_value) {
             input.addClass("active")
         }
-	prepend_label = "<div class='overlay'>P</div>";
-	if(name == 'SEX' || name == 'Race/Ethnicity' || name == 'AGE'){
-	    prepend_label = "<div class='overlay'>Y</div>";
-	} else if ( name == 'SITE' || name == 'FAMILY'){
-	    prepend_label = ""
-	}
+	
 	name = prepend_label +name;
         input.html(name)
         var test = (function(input, item) {
@@ -3682,12 +3685,15 @@ function clearDisplayCheck(time) {
                     )
     window.requestAnimationFrame(function () {
         console.log("done with rendering");
+	if (time_calculation_ends == 0)
+	    return;
         jQuery("#scatter code:first-child").after(
             jQuery("</br><code></code>").html(
                 ((new Date().getTime() - time_calculation_ends) / 1000.0).toFixed(2) +
                 "sec for transfer and rendering"
             )
         )
+	time_calculation_ends = 0;
     });
                     scatter(
                         parseDisplayData_simple(data[4]),
