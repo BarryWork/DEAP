@@ -2059,10 +2059,10 @@ function add_span_list(default_value, list, id) {
         if (span_list.css("background-color") != "rgb(144, 238, 144)") {
             span_list.css("background-color", "rgb(144, 238, 144)")
             if (!list.find("." + id + "-" + class_name_original_id).html()) {
-                list.append(creatVar(default_value, id), false)
+                list.append(creatVar(span_list.html(), id), false)
             } else {
                 list.find("." + id + "-" + class_name_original_id + "-wrapper").remove()
-		list.append(creatVar(default_value, id), false)
+		list.append(creatVar(span_list.html(), id), false)
                 list
                     .find("." + id + "-" + class_name_original_id + "-wrapper")
                     .attr("hiding-list", false)
@@ -2077,7 +2077,7 @@ function add_span_list(default_value, list, id) {
             }
         } else {
             span_list.css("background-color", "rgb(255,255,255)")
-            list.find("." + id + "-" + class_name_original_id + "-wrapper").fadeOut()
+            list.find("." + id + "-" + class_name_original_id + "-wrapper").remove()
             list
                 .find("." + id + "-" + class_name_original_id + "-wrapper")
                 .attr("hiding-list", true)
