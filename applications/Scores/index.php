@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Score Calculation</title>
+    <title>Extend ABCD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -150,7 +150,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
   <body spellcheck="false">
 
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
-      <a class="navbar-brand" href="#">Score Calculation</a>
+      <a class="navbar-brand" href="#">Extend ABCD</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
