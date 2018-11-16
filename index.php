@@ -91,8 +91,8 @@ echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; can_q
         <li><a href="/applications/Help/" title="Help with using DEAP">Getting Started</a></li>
         <li class="plan"><a href="/applications/Pre-Registration/" title="Pre-registration workflow">00 Plan</a></li>
         <li class="data_dict"><a href="/applications/Ontology/hierarchy.php?entry=display" title="Ontology">01 Explore</a></li>
-        <li class="filter"><a href="/applications/Filter/index.php" title="Filter participants">02 Limit</a></li>
-        <li class="analyze"><a href="/applications/NewDataExpo/index.php?model=GAMM4-FZ-CR" title="Multi-level Model">03 Analyze</a></li>
+        <li class="analyze"><a href="/applications/NewDataExpo/index.php?model=GAMM4-FZ-CR" title="Multi-level Model">02 Analyze</a></li>
+        <li class="filter"><a href="/applications/Filter/index.php" title="Filter participants">03 Limit</a></li>
         <li class="extend"><a href="/applications/Scores/" title="Calculate new scores">04 Extend</a></li>
         <!-- <li><a href="/applications/ModelBuilder" title="ModelBuilder">06 Model Zoo</a></li> -->
       </ol>
