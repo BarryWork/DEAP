@@ -23,6 +23,8 @@ Then build the container:
 docker build . -t deap
 ```
 
+Instead of building the docker container manually, you can also use the CI build on https://hub.docker.com/r/haukebartsch/deap/.
+
 ## Running the container
 
 A script is provided to launch the container, [run](https://github.com/ABCD-STUDY/DEAP/blob/master/run).  For usage instructions, run it with no arguments.
