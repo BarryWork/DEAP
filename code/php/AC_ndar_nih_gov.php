@@ -28,6 +28,7 @@
   }
 
   // has to be logged in, forwards to login page if not
+  // make sure to check with != -1
   function check_logged() {
      global $_SESSION, $USERS, $_SERVER;
 
@@ -49,6 +50,7 @@
            header("Location: /applications/User/login.php?".$_SERVER['QUERY_STRING']."&url=".$_SERVER['PHP_SELF']);
         else
            header("Location: /applications/User/login.php"."?url=".$_SERVER['PHP_SELF']);
+
         return -1; // not logged in
      };
      // store that this user has logged in now (does not work on NDA)

@@ -13,9 +13,9 @@
   }
   include("AC.php");
   $user_name = check_logged(); /// function checks if visitor is logged.
-  if (!$user_name)
+  if (!$user_name || $user_name == "-1")
      return; // nothing
-
+  //syslog(LOG_EMERG, "user name: ".$user_name);
   $attachment_location = $_SERVER["DOCUMENT_ROOT"] . "/data/ABCD/data_uncorrected/nda17.Rds";
   if (file_exists($attachment_location)) {
       header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");

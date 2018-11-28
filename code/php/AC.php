@@ -553,6 +553,7 @@ syslog(LOG_EMERG, 'try to remove permission '.$name.' ('.$id.') from '.$role['na
            header("Location: /applications/User/login.php?".$_SERVER['QUERY_STRING']."&url=".$_SERVER['PHP_SELF']);
         else
            header("Location: /applications/User/login.php"."?url=".$_SERVER['PHP_SELF']);
+        // in some cases the redirect will not be fast enough... instead the calling script will see the -1 - test the output of check_logged for != -1 to prevent accidential access
         return -1; // not logged in
      };
      // store that this user has logged in now
