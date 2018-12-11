@@ -175,6 +175,33 @@ function createBlock(below) {
     });
 }
 
+function getVariablesFromSearch( search ) {
+    var searchTerms = [];
+    try {
+        searchTerms = search.match(/[\"$]*[A-Za-z0-9_\.]+[\"\ ]*?/g).map(function(v){ return v.replace(/[\"\$]/g,''); });
+    } catch(e) {};
+    // create unique list of variables
+    searchTerms = searchTerms.sort();
+    for (var i = 1; i < searchTerms.length; i++) {
+        if (searchTerms[i] == searchTerms[i-1]) {
+            searchTerms.splice(i,1);
+            i--;
+        }
+    }
+    
+    var languageKeywords = [ "has", "not", "and", "or", "visit", "numVisits" ];
+    for (var i = 0; i < searchTerms.length; i++) {
+        var idx = languageKeywords.indexOf(searchTerms[i]);
+        if ( idx !== -1 || searchTerms[i] == +searchTerms[i] ) {
+            searchTerms.splice(i, 1);
+            i--; // check same position again because we removed one entry
+        }
+    }
+    
+    searchTermsAll = searchTerms.slice(0);
+    return searchTermsAll;
+}
+
 function changeSearch() {
     toggleFamilyViewOn = false;
     jQuery('.loading').show();
@@ -869,7 +896,9 @@ jQuery(document).ready(function() {
 	}, 500);
 	t.css('transform', 'rotateY(180deg)');
 	var uniqueIDY = hex_md5(project_name + jQuery('.inputmeasures').val().replace(/\s/g,'') + "YES").slice(-4);
-	var okKeys = Object.keys(allMeasures).filter(function(a) {
+        // here we cannot use allMeasures because that contains measures from runs before
+        var usedMeasures = getVariablesFromSearch( jQuery('.inputmeasures').val() );
+	var okKeys = usedMeasures.filter(function(a) {
 	    if (a !== "src_subject_id" && a !== "abcd_site" && a != "rel_family_id" && a != 'rel_group_id' && a != "gender")
 		return a;
 	});
