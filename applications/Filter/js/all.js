@@ -519,7 +519,7 @@ function parse() {
                 which: 'yes'
             }
         }).done(function(msg) {
-            // alert(msg);
+            //alert(msg);
             console.log("after store this subset Yes");
         }).fail(function(msg) {
             alert('error');
