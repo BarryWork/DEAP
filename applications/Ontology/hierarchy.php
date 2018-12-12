@@ -337,7 +337,7 @@ function php_json_encode($arr) {
 	    <div id="body">
 	      <div id="footer">	
 		<span id="project_name">ABCD</span> Ontology
-		<div class="hint">click to expand or collapse, drag to pan, scroll-wheel to zoom</div>
+          <div class="hint">click to expand or collapse, drag to pan, scroll-wheel to zoom, press u to undo</div>
 	      </div>
 	    </div>
 	    <div id="tree-container" style="background-color: #FFF;"></div>
