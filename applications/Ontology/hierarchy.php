@@ -169,27 +169,38 @@ function php_json_encode($arr) {
       $allItems = array_keys($d);
       $doneItems = array();
       $testThese = array("root");
+      $globalCount = 0;
       while(count($testThese) > 0) {
           $entry = array_shift($testThese);
           if (in_array($entry, $doneItems)) {
               continue;
           }
+          if ($globalCount > 500) {
+              // give up
+              break;
+          }
+          
           // ok, now us this to get what is underneath
-          foreach ($d as $key => $value) {
-              $prm = preg_match($rules[$entry][0], $key);
-              if ($prm === FALSE) {
-                  //syslog(LOG_EMERG, "Error in preg_match on rules:".$rules[$entry][0]." ".$entry);
+          try {
+              foreach ($d as $key => $value) {
+                  $prm = preg_match($rules[$entry][0], $key);
+                  if ($prm === FALSE) {
+                      //syslog(LOG_EMERG, "Error in preg_match on rules:".$rules[$entry][0]." ".$entry);
+                  }
+                  if (strlen($rules[$entry][0]) > 0 && preg_match($rules[$entry][0], $key)) {
+                      // don't add leafs, only add more branches
+                      $doneItems[] = $key;
+                  }
               }
-              if (strlen($rules[$entry][0]) > 0 && preg_match($rules[$entry][0], $key)) {
-                  // don't add leafs, only add more branches
-                  $doneItems[] = $key;
+              foreach ($rules as $key => $value) { // try once to look into the rules as well
+                  if (isset($rules[$entry]) && strlen($rules[$entry][0]) > 0 && preg_match($rules[$entry][0], $key)) {
+                      $testThese[] = $key;
+                  }
               }
+          } catch (Exception $exception ) {
+              syslog(LOG_EMERG, "error: regular expression ".$rules[$entry][0]." invalid");
           }
-          foreach ($rules as $key => $value) { // try once to look into the rules as well
-              if (isset($rules[$entry]) && strlen($rules[$entry][0]) > 0 && preg_match($rules[$entry][0], $key)) {
-                  $testThese[] = $key;
-              }
-          }
+          $globalCount = $globalCount + 1;
       }
       // hopefully we will end up here
       $dif = array_diff($allItems, $doneItems);
