@@ -280,7 +280,7 @@ function changeSearch() {
                 // fill this block
                 
                 jQuery(newDiv).append(no);
-                jQuery(newDParent).append("<div class=\"row\"><div class=\"sectionTitle col-12\">Result of the current restriction<span id='fam-sort'></span><div class=\"float-right\" style=\"margin-top: -5px;\"><button class=\"toggle-stats btn btn-sm btn-dark\">Table 1</button></div></div></div>");
+                jQuery(newDParent).append("<div class=\"row\"><div class=\"sectionTitle col-12\">Result of the current restriction<span id='fam-sort'></span><div class=\"float-right\" style=\"margin-top: -5px;\">" + " <button class=\"toggle-stats btn btn-sm btn-dark\" title=\"Toggle view of Table 1.\">Table 1</button>" + "</div></div></div>");
                 jQuery(newDParent).append(newDiv);
             }
         }
@@ -294,7 +294,8 @@ function changeSearch() {
 // array of array in data
 function displayData(data, where) {
    jQuery(where).children().remove();
-   str = '<div class="datas front face">';
+    str = '<div class="datas front face">';
+    //str += '<button class=\"btn-toggle-stats toggle-stats btn btn-sm btn-dark\">Table 1</button>';
    for (var i = 0; i < data.length; i++) {
      str = str + '<div class="data" SubjID="' + data[i][idxSubjID] + 
                  '" VisitID="' + data[i][idxVisitID] + 
@@ -303,6 +304,7 @@ function displayData(data, where) {
    }
     str = str + '</div>';
     str = str + '<div class="back face center"></div>';
+    // str = str + '<button class=\"btn-toggle-stats toggle-stats btn btn-sm btn-dark\">Table 1</button>';
    jQuery(where).append(str);
    //jQuery(where).on('click', '.data', function(event) {
    //   showInfoWindow(event, this);
