@@ -2,8 +2,9 @@
 library("rjson");
 
 transfer_file = function (rawfile){	
+ 
+  print(rawfile)
   d = fromJSON(file = rawfile);
-
   for (varname in names(d)){
     for (i in 1:length(d[[varname]])) { 
       if(length(d[[varname]][[i]]) == 0) { 
@@ -102,7 +103,9 @@ transfer_file = function (rawfile){
 
 
   s = list(summary = sm, factors = summary(fvar), histograms = hs);
+  print(v)
   write(toJSON(s),paste(sep = "", "/var/www/html/data/ABCD/NewDataExpo/variableInfo/",v,".json")) 
+  print("finished writing varinfo")
 }
 
 rawfile <- commandArgs(trailingOnly=TRUE);
@@ -111,10 +114,14 @@ if( length(print(rawfile)) > 0 ){
 } else{
   li = list.files("/var/www/html/data/ABCD/Scores/data/")
   for ( user in 1:length(li)){
+    print(li[user])
     user_li = list.files(path = paste0("/var/www/html/data/ABCD/Scores/data/", li[user]), pattern = '*.raw')
+    if(length(user_li) == 0) next
     for (scores_item in 1:length(user_li)){
-	transfer_file(paste0("/var/www/html/data/ABCD/Scores/data/",li[user],"/",user_li[scores_item]))
+	
+      transfer_file(paste0("/var/www/html/data/ABCD/Scores/data/",li[user],"/",user_li[scores_item]))
     }
+    print(li[user])
   }	  
 }
 
