@@ -15,6 +15,9 @@ if ($action == "save" && isset($_POST['content']) && isset($_POST['name'])) {
     $temp = array();
     $temp["content"] = $_POST['content'];
     $permission = "public";
+    if(isset($_POST['source'])){
+        $temp["source"] = $_POST['source'];
+    }
     if (isset($_POST['permission'])) {
         $permission = $_POST['permission'];
     }
@@ -37,8 +40,8 @@ if ($action == "save" && isset($_POST['content']) && isset($_POST['name'])) {
     
     if (isset($_POST['data'])) {
         file_put_contents("/var/www/html/data/ABCD/Scores/data/".$user_name."/".$_POST['name'].".raw", $_POST['data']);   
+        shell_exec("Rscript /var/www/html/applications/Scores/R/transfer.R ". "/var/www/html/data/ABCD/Scores/data/".$user_name."/".$_POST['name'].".raw");
     }
-    shell_exec("Rscript /var/www/html/applications/Scores/R/transfer.R ". "/var/www/html/data/ABCD/Scores/data/".$user_name."/".$_POST['name'].".raw");
     echo(json_encode($temp));
 } else if ($action == "load") {
     $dirname = $storelocation.$user_name."/*.json";
@@ -93,6 +96,12 @@ if ($action == "save" && isset($_POST['content']) && isset($_POST['name'])) {
         unlink($file);
     }
     echo "success";
+} else if ($action == "read-spreadsheet" && isset($_POST['name'])) {
+  $dirname = $storelocation.$user_name."/".$_POST['name'].".raw";
+  $files = glob($dirname);
+  foreach($files as $file) {
+    echo (file_get_contents($file));
+  }
 }
 
 ?>
