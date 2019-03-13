@@ -376,7 +376,7 @@ function getInstrumentNames() {
 
     request({
 	method: 'get',
-	url: 'https://ndar.nih.gov/api/datadictionary/v2/datastructure?source=ABCD%20Release%201.1',
+	url: 'https://ndar.nih.gov/api/datadictionary/v2/datastructure?source=ABCD%20Release%202.0',
 	headers: {
 	    "content-type": "application/json"
 	},
