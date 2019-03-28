@@ -75,12 +75,18 @@ if (isset($_SESSION["logged"])) {
   <div class="container">
    <div class="row">
      <div class="hero-unit">
-       <h1>Data Analysis and Exploration Portal</h2>
-       <center><i>A service provided by the <a href="https://abcd-workspace.ucsd.edu">Data Analysis and Informatics Core</a> of <a href="http://abcdstudy.org">ABCD</a></i></center>
-       <p class="lead">
-    This page requires a login. Logins are provided by the National Data Archive (<a href="https://data-archive.nimh.nih.gov/abcd">data-archive.nimh.nih.gov</a>).
-       </p>
+       <h1>Data Analysis and Exploration Portal (DEAP)</h2>
+       <center><i>DEAP software was developed by the <a href="https://abcd-workspace.ucsd.edu">Data Analysis and Informatics Core</a> of the <a href="http://abcdstudy.org">ABCD Study</a></i></center>
+
      </div>
+       <div class = span-1></div>
+       <div class = "span-10"><p class="lead">
+DEAP provides advanced statistical analysis functions to work with the most recent 2.0 data release from the Adolescent Brain Cognitive Development (ABCD) Study - a long-term study of cognitive and brain development in children across the United States.
+DEAP access is available to users with current access to the ABCD Study.  ABCD Study data are housed at the <a href="https://data-archive.nimh.nih.gov/abcd">NIMH Data Archive</a>. Use your NDA credentials to log in and being exploring the data.
+
+       </p></div>
+       <div class = span-1></div>
+
    </div>
    <div class="row">
     <div class="span4"> </div>
@@ -98,8 +104,28 @@ if (isset($_SESSION["logged"])) {
       </div>
     </div>
    </div>
-  </div>
-  
+   <div class="row">
+    <br>
+    <div class="span2"></div>
+     <div class="span7"><center><i>
+        If you do not have access, <a href="https://nda.nih.gov/abcd/request-access">request an NDA account</a> to begin the data access request process. 
+     </center></i></div>
+         </div>
+
+
+   </div> <!--container-->
+  <div class= "container" style="padding-top:15%">
+    <div class = "row" >
+      <div class = "span-1" style = "position:relative" ></div>
+       <div class = "span-8" style = "position:relative">
+        <p>
+          DEAP and ABCD data are housed in the NIMH Data Archive, a US government cloud computing system.  All users are expected to adhere to responsible data use behavior as outlined in the NIMH Data Archive <a href="https://ndar.nih.gov/ndarpublicweb/Documents/NDAR+Data+Access+Request+DUC+FINAL.pdf">Data Use Certification agreement</a>.  Violation of these terms and conditions could result in revoked access or other actions.
+        </p>
+       </div>
+      <div class = "span-1"></div>
+    </div>
+  </div> 
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
   <!-- create an md5sum version of the password before sending it -->
