@@ -1,5 +1,5 @@
 library(rjson)
-data = readRDS("/var/www/html/data/ABCD/data_uncorrected/nda17.Rds");
+data = readRDS("/var/www/html/data/ABCD/data_uncorrected/nda18.Rds");
 
 data.dic = data.frame(field_name = names(data), 
                       class = as.character(unlist(lapply(data, class))),  
