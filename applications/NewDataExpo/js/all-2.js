@@ -2869,6 +2869,12 @@ jQuery(
           }
 
           description = JSON.parse(search_result)[0]? JSON.parse(search_result)[0].description:"";
+	
+          for(eve in vinfo["event_summary"]){
+		if(vinfo["event_summary"][eve] > 0){
+			description += '&nbsp<span class="badge badge-secondary">'+eve+'</span>'
+		}
+	  }
           if(description == "" && analysis_scores_list.includes(act_v)){
             for(score_iter in analysis_scores){
               if(analysis_scores[score_iter].name == act_v){
@@ -2876,7 +2882,8 @@ jQuery(
                 description += "<span class = 'miniTag' title='This variable has been defined using the Extend application. It is not part of the ABCD data released.'>Extend</span>"; 
               }
             }
-          } 
+          }
+
 
           //var pre_wrap = jQuery("<div class = 'row row-fluid'></div>").css("margin","0px")
 
@@ -3714,7 +3721,7 @@ function clearDisplayCheck(time) {
           //hard coding make random effect a seperate input
           if(data[5]["breaks"] != "NA") hist(data[5], "site", 5)
           hist(data[6], "Family", 6)
-          if(data[7]) hist(data[7], "Family", 8)
+          if(data[7]["breaks"] != "NA") hist(data[7], "Subject", 8)
           qqplot(data[1], 1, lineplot_data[1], "red")
           switchMode(mode)
           //resize window

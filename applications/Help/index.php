@@ -70,16 +70,17 @@
             <p>The Data Exploration and Analysis Portal (DEAP) provides advanced statistical analysis functions that we built to work with the Adolescent Brain Cognitive Development (ABCD) Study - a long-term study of cognitive and brain development in children across the United States. From 2016-2018, we invited children between the ages of 9-11 to join ABCD from 20 sites around the nation, with the intent to enroll and follow 11,900 healthy children longitudinally for 10 years into young adulthood. </p>
           </div>
         </div>
-        
+       
         <div class = "card">
           <div class="card-header">
             About the Data
           </div>
           <div class="card-body">
-            <p>The data available on DEAP is a copy of the published data of the ABCD study on the National Data Archive (NDA). The data is pre-processed and merged into a single large database that is easiest understood as a spreadsheet. This process is documented on a public repository at <a href="https://github.com/ABCD-STUDY/analysis-nda17">github.com/ABCD-STUDY/analysis-nda17</a>. The current version of DEAP is based on the <i>ABCD Release 1.1</i> package under the doi: 10.15154/1460410.</p>
+            <p>The data available on DEAP is a copy of the published data of the ABCD study on the National Data Archive (NDA). The data is pre-processed and merged into a single large database that is easiest understood as a spreadsheet. This process is documented on a public repository at <a href="https://github.com/ABCD-STUDY/analysis-nda17">github.com/ABCD-STUDY/analysis-nda17</a>. The current version of DEAP is based on the <i>ABCD Release 2.0</i> package under the doi: 10.15154/1503209. Check the <a href="https://ndar.nih.gov/study.html?id=634" >ABCD Release 2.0 Notes</a> for more detail. </p> 
             <p>Access to DEAP is only available to users with an existing NDA data use certification (<a href="https://data-archive.nimh.nih.gov/abcd">apply here</a>).</p>
           </div>
         </div>
+          
         
         <div class = "card">
           <div class="card-header">

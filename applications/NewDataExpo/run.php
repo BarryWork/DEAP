@@ -87,7 +87,7 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
                 $ret["error"][] = "/data/".$project_name."/NewDataExpo/usercache".$owner_id."/".$paths['basename'];
 		$file_size = $file_size + filesize("/var/www/html/data/".$project_name."/NewDataExpo/usercache".$owner_id."/".$paths['basename']);
             } 
-    	    if( $time > 75 || ($file_size > 108 and count($plot_output) == 4)){
+    	    if( $time > 120 || ($file_size > 108 and count($plot_output) == 4)){
 
 		echo(json_encode($ret));
 		return;

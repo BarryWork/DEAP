@@ -35,10 +35,11 @@ GAMM4.prototype.work = function (inputs, outputs, state) {
         }
         for (var j = 0; j < ks.length; j++) {
             //if (ks[j] === "SubjID" || ks[j] === "VisitID") {
-            if (ks[j] === "src_subject_id" || ks[j] === "eventname") {
+            console.log("!!!!!!!!!!!!!!"+ks[j])
+            if ( ks[j] == "src_subject_id" || ks[j] === "eventname") {
                 continue; // don't count these as duplicates
             }
-            if (typeof uniques[ks[j]] === 'undefined' ) {
+            if (typeof uniques[ks[j]] === 'undefined') {
                 uniques[ks[j]] = 1;
             } else {
                 removes[ks[j]] = keys[i];
@@ -71,16 +72,59 @@ GAMM4.prototype.work = function (inputs, outputs, state) {
             }
             // if we don't have real data we will just find a filename here and the list of variables in columns
             else if (typeof inputs[x]['type'] !== 'undefined' && inputs[x]['type'] == "DataTransferFile") {
+                console.log(inputs[x]['columns'])
+                var src_subject_id_count = 0
+                var eventname_count =0 
                 RonlyMode = true;
                 listvars = inputs[x]['columns'].filter(function(x) {
                     //if ( x !== 'SubjID' && x !== "VisitID" )
+                    //count subject id if it appear only the second time 
+                  console.log("top")
+                  console.log(x)
+                  console.log(src_subject_id_count)
+
+                  if ( x == 'src_subject_id' && src_subject_id_count == 0){
+                    src_subject_id_count++
+                  } else if (x == 'src_subject_id' && src_subject_id_count == 1){
+                    src_subject_id_count++
+                    return true
+                  }
+
+                  if ( x == 'eventname' && eventname_count == 0){
+                    eventname_count++
+                  } else if (x == 'eventname' && eventname_count == 1){
+                    eventname_count++
+                    return true
+                  }
+
                     if ( x !== 'src_subject_id' && x !== "eventname" )
                         return true;
                     return false;                     
                 })
             } else {
+                console.log(inputs[x])
+                var src_subject_id_count = 0
+                var eventname_count = 0 
                 listvars = Object.keys(inputs[x]).filter(function (x) {
+                    console.log("bottom")
+                    console.log(x)
+                    console.log(src_subject_id_count)
                     //if (x !== 'SubjID' && x !== "VisitID")
+
+                    if ( x == 'src_subject_id' && src_subject_id_count == 0){
+                        src_subject_id_count++
+                    } else if ( x == 'src_subject_id' && src_subject_id_count == 1){
+                        src_subject_id_count++
+                        return true 
+                    }
+                                      
+                    if ( x == 'eventname' && eventname_count == 0){
+                        eventname_count++
+                    } else if ( x == 'eventname' && eventname_count == 1){
+                        eventname_count++
+                        return true 
+                    }
+ 
                     if (x !== 'src_subject_id' && x !== "eventname")
                         return true;
                     return false;
