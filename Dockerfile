@@ -36,7 +36,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && rm /var/www/html/index.html \
-    && git clone https://github.com/ABCD-STUDY/DEAP.git /var/www/html \
+    && git clone -b release2 https://github.com/ABCD-STUDY/DEAP.git /var/www/html \
     && cd /var/www/html \
     && cp /var/www/html/code/php/passwords.json_master /var/www/html/code/php/passwords.json \
     && chown www-data:www-data /var/www/html/code/php/passwords.json \
