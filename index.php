@@ -94,7 +94,7 @@ echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; can_q
         <li class="analyze"><a href="/applications/NewDataExpo/index.php?model=GAMM4-FZ-CR-longitudinal" title="Multi-level Model">02 Analyze</a></li>
         <li class="filter"><a href="/applications/Filter/index.php" title="Filter participants">03 Limit</a></li>
         <li class="extend"><a href="/applications/Scores/" title="Calculate new scores">04 Extend</a></li>
-        <li><a href="/applications/ModelBuilder" title="ModelBuilder">06 Model Zoo</a></li>
+        <!--<li><a href="/applications/ModelBuilder" title="ModelBuilder">06 Model Zoo</a></li>--!>
       </ol>
     </div>
      <div class="bline bline1"></div>

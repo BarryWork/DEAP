@@ -232,7 +232,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
             </button>
           </div>
           <div class="modal-body row card-list">
-            <p class="card-text" style="margin-left: 20px;">Select either option A) or B) to extend DEAP with new measures. The measures will only be visible for your user account. Other users need to repeat this setup to gain access.</p>
+            <p class="card-text" style="margin-left: 20px;">Select  option A) to extend DEAP with new measures. The measures will only be visible for your user account. Other users need to repeat this setup to gain access.</p>
             <div class="card text-white bg-primary card-option-add-score mb-1" style="width: 100%; min-width: 15rem">
             <!--<img class="card-img-top" src="..." alt="Card image cap">--!>
               <div class="card-body">
@@ -240,9 +240,8 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
                 <p class="card-text">This option uses a notebook to document derived variables. Sharing the text of the notebook is sufficient to allow other users to replicate your measures.</p>
               </div>
             </div>
-
+<!--
             <div class="card card-option-upload-spreadsheet" style="width: 100%; min-width: 15rem">
-            <!--<img class="card-img-top" src="..." alt="Card image cap">--!>
               <div class="card-body mb-1">
                 <h5 class="card-title">B) Upload variables created outside DEAP</h5>
 <p class="card-text">Upload the spreadsheet of precalculated features. Start by <a href="/applications/Scores/R/Template.csv">downloading the template</a>. Append your scores as additional columns. Do not change the names of the predefined columns (src_subject_id, eventname). This feature cannot be used to add new participants (rows) to the template. The maximum file size accepted is 10 megabyte.</p>
@@ -253,7 +252,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
                   </div>
                 </form>
               </div>
-            </div>
+            </div>--!>
           </div>
           <div class="modal-footer">
             <a href="#" class="btn btn-primary" onclick="add_new_recipe()" data-dismiss="modal" >Add</a>
