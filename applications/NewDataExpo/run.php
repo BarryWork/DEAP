@@ -120,7 +120,15 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
     echo("{}");
 }else if ($action == "loadModelList") {
     if(file_exists("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json")){
-        $saved_model_list = json_decode(file_get_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json"),true);
+	$saved_model_list = json_decode(file_get_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/saved_models.json"),true);
+	$temp_out_save = array();
+	foreach($saved_model_list as $name => $item){
+		if ( $user_name == "admin" || $item["author"] == $user_name){
+			$temp_out_save[$name] = $item; 
+		}
+
+	}
+	$saved_model_list = $temp_out_save;
     }
     if(file_exists("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json")){
         $public_model_list = json_decode(file_get_contents("/var/www/html/data/".$project_name."/NewDataExpo/usercache/public_models.json"),true);

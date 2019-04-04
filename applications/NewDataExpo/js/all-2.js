@@ -83,12 +83,12 @@ var analysis_scores_list = []
 var om = insert_ontology_modal()
 var window_width = jQuery(window).width()
 var predefined_gr_list = [
-  "race.ethnicity",
+  "race.ethnicity.5level",
   "sex",
-  "high.educ",
-  "household.income",
-  "married",
-  "interview_age",
+  "high.educ.bl",
+  "household.income.bl",
+  "married.bl",
+  "age",
 ]
 
 var agreenment_text =
@@ -3334,6 +3334,12 @@ var time_start = 0
 
 // prevent compute if DEAP is is restricted mode
 function computeWithCheck() {
+  $(".model-definition").addClass("disabledbutton")
+  jQuery("#formula").html(get_formula())
+  jQuery("#compute-button").html("<div class = 'loader'></div>")
+  jQuery("#compute-button").attr("disabled", "on")
+
+
   jQuery.getJSON('/applications/Pre-Registration/modeChange.php', { 'action': 'read' }, function(data) {
     if (data['mode'] == 'restricted') {
       alert('Warning: you are trying to run this analysis in restricted mode (see Plan). This analysis will only be executed if you switch to the unrestricted mode.');
@@ -3349,11 +3355,6 @@ function compute() {
   // a random number designed to be unique for the model.
   time_start = new Date().getTime()
   usercovArray()
-  $(".model-definition").addClass("disabledbutton")
-  jQuery("#formula").html(get_formula())
-  jQuery("#compute-button").html("<div class = 'loader'></div>")
-  jQuery("#compute-button").attr("disabled", "on")
-
   random = Math.round(Math.random() * 1000000)
   timeout_check = true
 
