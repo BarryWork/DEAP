@@ -9,9 +9,6 @@ $( document ).ready(function() {
 		window.localStorage.clear();
 	     }
        }
-       else{
-	     window.localStorage.clear();
-       }
     })    
 });
 
