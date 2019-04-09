@@ -21,6 +21,14 @@ censor = function(x, fraction=.005) {
 
 #data = data[which(data$eventname == "baseline_year_1_arm_1"),]
 vlist = names(data)
+
+
+if(length(list.files("/var/www/html/data/ABCD/NewDataExpo/variableInfo/")) > 0){
+    #variable info already loaded, don't need to run again
+    q()
+}
+
+
 for(v in vlist){
     cat(v);
     temp = data[,c("eventname", v)]
