@@ -111,7 +111,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     && Rscript -e 'install.packages("Rserve", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("foreach", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("doParallel", repos="https://cran.rstudio.com")' \
-    && Rscript -e 'install.packages("tableone", repos="https://cran.rstudio.com")' \
+    && Rscript -e 'install.packages("tableone", repos="https://cran.rstudio.com")' 
 
 EXPOSE 80
 ENTRYPOINT ["/deap-startup.sh"]
