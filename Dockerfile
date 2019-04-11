@@ -42,6 +42,8 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && chown www-data:www-data /var/www/html/code/php/passwords.json \
     && cp /var/www/html/code/php/AC_ndar_nih_gov.php /var/www/html/code/php/AC.php \
     && cp /var/www/html/applications/User/login_ndar_nih_gov.php /var/www/html/applications/User/login.php \
+    && cd /var/www/html/code/js \
+    && npm install . \
     && cd /var/www/html/applications/Ontology/searchServer \
     && npm install . \
     && cd /var/www/html/applications/ModelBuilder/runner \
