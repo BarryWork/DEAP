@@ -267,7 +267,7 @@ text{
 
   <script src="js/highlight.min.js"></script>
   <script src="js/simplemde.min.js"></script>
-  <script type="text/javascript" src="js/MathJax-2.7.4/MathJax.js?config=TeX-AMS-MML_SVG-full"></script>
+  <script type="text/javascript" src="js/MathJax-2.7.4/MathJax.js?config=TeX-AMS-MML_SVG"></script>
   <script src="../../js/jquery-3.3.1.min.js"></script>
   <!-- <script src="js/popper.min.js"></script> -->
   <script src="../../js/bootstrap.min.js"></script>
