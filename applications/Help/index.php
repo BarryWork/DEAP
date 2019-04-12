@@ -183,7 +183,14 @@
         // add the status information
         jQuery.getJSON('../Ontology/searchTerm2.php', { 'status': '1' }, function(data) {
             jQuery('#status-info').text(JSON.stringify(data, null, ' '));
+	    jQuery.get("../../code/php/getServiceStatus.php",function(data){
+                data = JSON.parse(data);
+		jQuery('#status-info').text(jQuery('#status-info').text+"\n"+JSON.stringify(data, null, ' '));
+            });
         });
+
+	
+
         jQuery('button.btn-light').click(function() {
             var loc = jQuery(this).attr('video');
             window.open(loc, "_youtube");
