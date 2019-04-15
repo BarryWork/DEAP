@@ -435,27 +435,38 @@ function insert_single_select(item_input) {
     }
   )
 
-  input.append(jQuery("<optgroup>").attr("class","other-group").attr("label","Other Catagorical Features").text("")) 
+
+  jQuery.get("../../data/ABCD/data_uncorrected/catagorical_variables.json",{cache:true}, function(data){
+    for(d in data){
+      add_gr_list.push(data[d]);
+    }
+  levels = Array.from(new Set(add_gr_list.map(function(item){return item["n.uniques"]}))).map(function(item){return parseInt(item)}).sort(function(a, b){return a-b})
+  for (let lev =0 ; lev < levels.length ;lev++){
+	  ll = levels[lev]
+  input.append(jQuery("<optgroup>").attr("class","other-group-"+ll).attr("label",ll +" levels").text("")) 
   jQuery.each(
-    removeDuplicates(add_gr_list)
+    removeDuplicates(add_gr_list.filter(function(item){return item["n.uniques"]==ll}).map(function(item){return item["variable"]}))
     .filter(function(value) {
       return value != "" && value != "Site" && value != "FamilyID" && value
     })
     .sort(),
     function(index, value) {
       if (value != "interview_age")
-        input.find(".other-group").append(
+        input.find(".other-group-"+ll).append(
           jQuery("<option>")
           .html(value)
           .attr("value", value)
         )
     }
   )
+  }
   input.append(
     jQuery("<option>")
     .html("No Grouping")
     .attr("value", "No Grouping")
   )
+  })
+
   input.val(default_value)
 
   input.change(function() {
@@ -3264,6 +3275,7 @@ function loadAnalysisNames() {
       cache: true,
     },
     function(tsv) {
+
       var lines = [],
         listen = false
 
