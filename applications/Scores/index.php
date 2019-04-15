@@ -1,5 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<?php
+session_start();
+include("../../code/php/AC.php");
+$user_name = check_logged();
+if (isset($_SESSION['project_name']))
+    $project_name = $_SESSION['project_name'];
+else {
+    $projs = json_decode(file_get_contents('/var/www/html/code/php/getProjectInfo.php'),TRUE);
+    if ($projs)
+        $project_name = $projs[0]['name'];
+    else
+        $project_name = "Project01";
+}
+
+$model = "";
+if (isset($_GET['model'])){
+    $model = $_GET['model'];
+}
+
+echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = "'.$model.'"; project_name = "'.$project_name.'"; </script>');
+
+?>
+
+
   <head>
     <meta charset="utf-8">
     <title>Extend ABCD</title>
@@ -165,30 +190,6 @@ text{
     <!-- <link href="css/jquery-ui.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="css/style.css">
 
-<?php
-session_start();
-include("../../code/php/AC.php");
-$user_name = check_logged();
-if (isset($_SESSION['project_name']))
-    $project_name = $_SESSION['project_name'];
-else {
-    $projs = json_decode(file_get_contents('/var/www/html/code/php/getProjectInfo.php'),TRUE);
-    if ($projs)
-        $project_name = $projs[0]['name'];
-    else
-        $project_name = "Project01";
-}
-
-$model = "";
-if (isset($_GET['model'])){
-    $model = $_GET['model'];
-}
-
-echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = "'.$model.'"; project_name = "'.$project_name.'"; </script>');
-
-?>
-
-
   </head>
 
   <body spellcheck="false">
@@ -266,7 +267,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
 
   <script src="js/highlight.min.js"></script>
   <script src="js/simplemde.min.js"></script>
-  <script type="text/javascript" src="js/MathJax-2.7.4/MathJax.js?config=TeX-AMS-MML_SVG-full"></script>
+  <script type="text/javascript" src="js/MathJax-2.7.4/MathJax.js?config=TeX-AMS-MML_SVG"></script>
   <script src="../../js/jquery-3.3.1.min.js"></script>
   <!-- <script src="js/popper.min.js"></script> -->
   <script src="../../js/bootstrap.min.js"></script>

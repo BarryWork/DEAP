@@ -91,6 +91,8 @@ var predefined_gr_list = [
   "age",
 ]
 
+
+var add_gr_list = []
 var agreenment_text =
   "Access to data is granted under the ABCD/NDA Data Use Agreement. For more information please consult abcdstudy.org and https://data-archive.nimh.nih.gov/abcd."
 
@@ -416,6 +418,7 @@ function insert_single_select(item_input) {
   temp_val = input.val()
   input.html("")
   input.append(jQuery("<option>").text("")) // default empty option
+  input.append(jQuery("<optgroup>").attr("class","demo-group").attr("label","Demographic Features").text("")) 
   jQuery.each(
     removeDuplicates(predefined_gr_list)
     .filter(function(value) {
@@ -424,18 +427,46 @@ function insert_single_select(item_input) {
     .sort(),
     function(index, value) {
       if (value != "interview_age")
-        input.append(
+        input.find(".demo-group").append(
           jQuery("<option>")
           .html(value)
           .attr("value", value)
         )
     }
   )
+
+
+  jQuery.get("../../data/ABCD/data_uncorrected/catagorical_variables.json",{cache:true}, function(data){
+    for(d in data){
+      add_gr_list.push(data[d]);
+    }
+  levels = Array.from(new Set(add_gr_list.map(function(item){return item["n.uniques"]}))).map(function(item){return parseInt(item)}).sort(function(a, b){return a-b})
+  for (let lev =0 ; lev < levels.length ;lev++){
+	  ll = levels[lev]
+  input.append(jQuery("<optgroup>").attr("class","other-group-"+ll).attr("label",ll +" levels").text("")) 
+  jQuery.each(
+    removeDuplicates(add_gr_list.filter(function(item){return item["n.uniques"]==ll}).map(function(item){return item["variable"]}))
+    .filter(function(value) {
+      return value != "" && value != "Site" && value != "FamilyID" && value
+    })
+    .sort(),
+    function(index, value) {
+      if (value != "interview_age")
+        input.find(".other-group-"+ll).append(
+          jQuery("<option>")
+          .html(value)
+          .attr("value", value)
+        )
+    }
+  )
+  }
   input.append(
     jQuery("<option>")
     .html("No Grouping")
     .attr("value", "No Grouping")
   )
+  })
+
   input.val(default_value)
 
   input.change(function() {
@@ -458,6 +489,11 @@ function insert_single_select(item_input) {
   jQuery(input).select2({
     placeholder: "",
     allowClear: true,
+  })
+
+  $("body").on('click', '.select2-results__group', function() {
+
+  	$(this).siblings().toggle();
   })
 }
 
@@ -3239,6 +3275,7 @@ function loadAnalysisNames() {
       cache: true,
     },
     function(tsv) {
+
       var lines = [],
         listen = false
 
@@ -3273,7 +3310,7 @@ function loadAnalysisNames() {
 
   jQuery.get("../../data/ABCD/data_uncorrected/catagorical_variables.json",{cache:true}, function(data){
     for(d in data){
-      predefined_gr_list.push(data[d]);
+      add_gr_list.push(data[d]);
     }
   })
 }
