@@ -109,6 +109,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     && Rscript -e 'install.packages("OpenMx", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("knitr", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("MuMIn", repos="https://cran.rstudio.com")' \
+    && Rscript -e 'install.packages("https://cran.r-project.org/bin/macosx/el-capitan/contrib/3.4/MuMIn_1.42.1.tgz", repos=NULL, type="source")' \
     && Rscript -e 'install.packages("R.matlab", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("Rserve", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("foreach", repos="https://cran.rstudio.com")' \
