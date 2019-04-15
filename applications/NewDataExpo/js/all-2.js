@@ -91,6 +91,8 @@ var predefined_gr_list = [
   "age",
 ]
 
+
+var add_gr_list = []
 var agreenment_text =
   "Access to data is granted under the ABCD/NDA Data Use Agreement. For more information please consult abcdstudy.org and https://data-archive.nimh.nih.gov/abcd."
 
@@ -416,6 +418,7 @@ function insert_single_select(item_input) {
   temp_val = input.val()
   input.html("")
   input.append(jQuery("<option>").text("")) // default empty option
+  input.append(jQuery("<optgroup>").attr("class","demo-group").attr("label","Demographic Features").text("")) 
   jQuery.each(
     removeDuplicates(predefined_gr_list)
     .filter(function(value) {
@@ -424,7 +427,24 @@ function insert_single_select(item_input) {
     .sort(),
     function(index, value) {
       if (value != "interview_age")
-        input.append(
+        input.find(".demo-group").append(
+          jQuery("<option>")
+          .html(value)
+          .attr("value", value)
+        )
+    }
+  )
+
+  input.append(jQuery("<optgroup>").attr("class","other-group").attr("label","Other Catagorical Features").text("")) 
+  jQuery.each(
+    removeDuplicates(add_gr_list)
+    .filter(function(value) {
+      return value != "" && value != "Site" && value != "FamilyID" && value
+    })
+    .sort(),
+    function(index, value) {
+      if (value != "interview_age")
+        input.find(".other-group").append(
           jQuery("<option>")
           .html(value)
           .attr("value", value)
@@ -458,6 +478,11 @@ function insert_single_select(item_input) {
   jQuery(input).select2({
     placeholder: "",
     allowClear: true,
+  })
+
+  $("body").on('click', '.select2-results__group', function() {
+
+  	$(this).siblings().toggle();
   })
 }
 
@@ -3273,7 +3298,7 @@ function loadAnalysisNames() {
 
   jQuery.get("../../data/ABCD/data_uncorrected/catagorical_variables.json",{cache:true}, function(data){
     for(d in data){
-      predefined_gr_list.push(data[d]);
+      add_gr_list.push(data[d]);
     }
   })
 }
