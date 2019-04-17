@@ -185,7 +185,7 @@
             jQuery('#status-info').text(JSON.stringify(data, null, ' '));
 	    jQuery.get("../../code/php/getServiceStatus.php",function(data){
                 data = JSON.parse(data);
-		jQuery('#status-info').text(jQuery('#status-info').text+"\n"+JSON.stringify(data, null, ' '));
+		jQuery('#status-info').text(jQuery('#status-info').text()+"\n"+JSON.stringify(data, null, ' '));
             });
         });
 

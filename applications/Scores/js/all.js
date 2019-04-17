@@ -858,9 +858,7 @@ function insert_recipe_block(input, top) {
       temp["content"]     = JSON.stringify(simplemde.value());
       temp["action"]      = "save";
       if(temp["source"] != "spreadsheet" ){
-	  temp_data = {}
-  	  temp_data[bootstrap_input_name.find("input").val()] = output_vlist[bootstrap_input_name.find("input").val()];
-          temp["data"] = JSON.stringify(temp_data);
+  	  temp["data"] = JSON.stringify(output_vlist[bootstrap_input_name.find("input").val()]);
       }  
       priv = jQuery(this).parent().find('.private-public').is(':checked');
       if (priv) {
