@@ -3228,6 +3228,14 @@ function insert_checkbox(arr) {
         } else {
           //input.addClass("active")
           console.log(input.attr("id"))
+	  if( input.attr("id") == "random-SITE-input"){
+	    if(jQuery("#random-DEVICE-input").hasClass("active"))
+	      jQuery("#random-DEVICE-input").trigger("click");
+	  }
+	  if( input.attr("id") == "random-DEVICE-input"){
+	      if(jQuery("#random-SITE-input").hasClass("active"))
+		jQuery("#random-SITE-input").trigger("click");
+	  }
           for (index in item.state) {
             state = item.state[index]
             if (state.name == "value") {
