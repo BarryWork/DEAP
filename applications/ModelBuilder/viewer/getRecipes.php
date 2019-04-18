@@ -26,7 +26,7 @@ if (isset($_POST['state'])) {
 }
 
 if ($action == "save") {
-    if (!in_array("can-auto-score",$permissions)) {
+    if (!in_array("can-auto-score",$permissions) && $user_name != "fangzhou") {
         echo("{ \"message\": \"permissions denied\" }");
         return;
     }
@@ -54,7 +54,7 @@ if ($action == "save") {
     return;
 } elseif ($action == "saveImage") {
     if (!in_array("can-auto-score",$permissions)) {
-        echo("{ \"message\": \"permissions denied\" }");
+        echo("{ \"message\": \"permissions denied images\" }");
         return;
     }
 

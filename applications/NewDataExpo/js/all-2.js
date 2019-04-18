@@ -3194,7 +3194,7 @@ function insert_checkbox(arr) {
     prepend_label = "<div class='overlay'>Parent</div>";
     if(name == 'SEX' || name == 'Race/Ethnicity' || name == 'AGE'){
       prepend_label = "<div class='overlay'>Youth</div>";
-    } else if ( name == 'SITE' || name == 'SUBJECT' || name == 'FAMILY'){
+    } else if ( name == 'SITE' || name == 'SUBJECT' || name == 'FAMILY' || name == 'DEVICE'){
       prepend_label = ""
     }
     input
@@ -3240,7 +3240,7 @@ function insert_checkbox(arr) {
       })
     })(input, item)
 
-    if (id == "random-SITE" || id == "random-Family" || id == "random-SUBJECT") {
+    if (id == "random-SITE" || id == "random-Family" || id == "random-SUBJECT" || id == "random-DEVICE") {
       div_random.append(input)
     } else {
       div.append(input)
@@ -3538,7 +3538,7 @@ function clearDisplayCheck(time) {
 
           console.log(parseDisplyData(data))
           display_data = removeDup(parseDisplyData(data[0]))
-          display_data_corrected = data.length > 8 ? removeDup(parseDisplyData(data[8])) : null
+          display_data_corrected = data.length > 9 ? removeDup(parseDisplyData(data[9])) : null
           //default here
           indepvar = getVarNameByID("log.var").includes(
             getVarNameByID("indepvar")
@@ -3760,6 +3760,7 @@ function clearDisplayCheck(time) {
           if(data[5]["breaks"] != "NA") hist(data[5], "site", 5)
           hist(data[6], "Family", 6)
           if(data[7]["breaks"] != "NA") hist(data[7], "Subject", 8)
+          if(data[8]["breaks"] != "NA") hist(data[8], "Device", 9)
           qqplot(data[1], 1, lineplot_data[1], "red")
           switchMode(mode)
           //resize window

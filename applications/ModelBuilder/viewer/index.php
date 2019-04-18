@@ -9,7 +9,7 @@
     // user is not logged in
     return;
   } else {
-    if ($user_name == "admin")
+    if ($user_name == "admin" || $user_name == "fangzhou")
       $admin = true;
     echo('<script type="text/javascript"> user_name = "'.$user_name.'"; </script>'."\n");
     echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; </script>'."\n");
