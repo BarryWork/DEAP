@@ -128,25 +128,44 @@
      </div>
    </div>
  </div>
-
+       
  <div id="save-filter-box" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
    <div class="modal-dialog">
      <div class="modal-content">
        <div class="modal-header">
-          <h4>Modify the current filter</h4>
+         <h4>Modify the current filter</h4>
        </div>
        <div class="modal-body">
          <form>
-            <div class="form-group">
-               <label for="#new-filter-name">Filter name</label>
-	           <input id="new-filter-name" class="form-control" type="text"/>
-            </div>
+           <div class="form-group">
+             <label for="#new-filter-name">Filter name</label>
+             <input id="new-filter-name" class="form-control" type="text"/>
+           </div>
          </form>
        </div>
        <div class="modal-footer">
+         <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+         <button type="button" id="save-filter-button" data-dismiss="modal" class="btn btn-success">Save</button>
+         <button type="button" id="delete-filter-button" data-dismiss="modal" class="btn btn-warning">Delete</button>
+       </div>
+     </div>
+   </div>
+ </div>
+ 
+ 
+ <div id="table-1-box" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+   <div class="modal-dialog modal-xl">
+     <div class="modal-content">
+       <div class="modal-header">
+          <h4>Table 1</h4>
+       </div>
+       <div class="modal-body">
+         <div id="table-1-place">
+           
+         </div>
+       </div>
+       <div class="modal-footer">
            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-           <button type="button" id="save-filter-button" data-dismiss="modal" class="btn btn-success">Save</button>
-           <button type="button" id="delete-filter-button" data-dismiss="modal" class="btn btn-warning">Delete</button
        </div>
      </div>
    </div>
