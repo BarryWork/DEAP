@@ -88,7 +88,6 @@ var predefined_gr_list = [
   "high.educ.bl",
   "household.income.bl",
   "married.bl",
-  "age",
 ]
 
 
