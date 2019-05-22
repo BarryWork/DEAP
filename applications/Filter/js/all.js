@@ -140,7 +140,7 @@ function createBlock(below) {
                        '  <input class="inputmeasures form-control" type="text" placeholder="select a predefined filter or enter your own">  ' +
                        '  <div class="input-group-append">' +
                        '    <button class="btn-outline-secondary btn" id="runFilter" type="button">&nbsp;Run</button>' +
-                       '    <button type="button" class="btn-outline-secondary btn" id="saveNewFilter">&nbsp;Modify</button>' +
+                       '    <button type="button" class="btn-outline-secondary btn" id="saveNewFilter">&nbsp;Save/Delete</button>' +
                        '  </div>' +
                        '</div>');
     jQuery(d21).append('<div id="info"></div>')
@@ -280,7 +280,7 @@ function changeSearch() {
                 // fill this block
                 
                 jQuery(newDiv).append(no);
-                jQuery(newDParent).append("<div class=\"row\"><div class=\"sectionTitle col-12\">Result of the current restriction<span id='fam-sort'></span><div class=\"float-right\" style=\"margin-top: -5px;\">" + " <button class=\"toggle-stats btn btn-sm btn-dark\" title=\"Toggle view of Table 1.\">Table 1</button>" + "</div></div></div>");
+                jQuery(newDParent).append("<div class=\"row\"><div class=\"sectionTitle col-12\">Result of the current restriction<span id='fam-sort'></span><div class=\"float-right\" style=\"margin-top: -5px;\">" + " <button class=\"toggle-stats btn btn-sm btn-dark\" title=\"Toggle view of Table 1.\" data-target=\"#table-1-box\" data-toggle=\"modal\">Table 1</button>" + "</div></div></div>");
                 jQuery(newDParent).append(newDiv);
             }
         }
@@ -876,8 +876,10 @@ jQuery(document).ready(function() {
     });
 
     jQuery('#start').on('click', 'button.toggle-stats', function() {
+        jQuery('.loading').show();
+        jQuery('#table-1-place').children().remove();
 	// rotate the div to show the back
-	var t = jQuery('div.yes');
+	/* var t = jQuery('div.yes');
 	if (t.css('transform') != "none") {
 	    console.log("delete animation again");
 	    t.css('transform', '');
@@ -896,7 +898,7 @@ jQuery(document).ready(function() {
 	    t.find('div.datas').hide();
 	    t.find('div.Yea').hide();
 	}, 500);
-	t.css('transform', 'rotateY(180deg)');
+	t.css('transform', 'rotateY(180deg)'); */
 	var uniqueIDY = hex_md5(project_name + jQuery('.inputmeasures').val().replace(/\s/g,'') + "YES").slice(-4);
         // here we cannot use allMeasures because that contains measures from runs before
         var usedMeasures = getVariablesFromSearch( jQuery('.inputmeasures').val() );
@@ -906,13 +908,22 @@ jQuery(document).ready(function() {
 	});
 	jQuery.getJSON('getTable1.php', { 'value': okKeys.join(","),
 					  'file': 'filterSets_' + project_name +'_'+ uniqueIDY + '.json' }, function(data) {
-	    jQuery('div.yes .face.back').html(data.join("").split("( ").join("("));
+          jQuery('#table-1-place').html(data.join("").split("( ").join("("));
+          jQuery('#table-1-place').find('table').css('margin-left', 'auto');
+	  jQuery('#table-1-place').find('table').css('margin-right', 'auto');
+	  jQuery('#table-1-place').find('table').css('font-size', '1rem');
+	  jQuery('#table-1-place').find('table').css('line-height', '1.5');
+	    
+	  jQuery('#table-1-place').find('td').css('border-bottom-color', 'white');
+          jQuery('.loading').hide();
+                                              
+          /*jQuery('div.yes .face.back').html(data.join("").split("( ").join("("));
 	    jQuery('div.yes .face.back').find('table').css('margin-left', 'auto');
 	    jQuery('div.yes .face.back').find('table').css('margin-right', 'auto');
 	    jQuery('div.yes .face.back').find('table').css('font-size', '1rem');
 	    jQuery('div.yes .face.back').find('table').css('line-height', '1.5');
 	    
-	    jQuery('div.yes .face.back').find('td').css('border-bottom-color', 'white');
+	    jQuery('div.yes .face.back').find('td').css('border-bottom-color', 'white'); */
 	});
 	
     });
