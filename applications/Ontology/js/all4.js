@@ -113,7 +113,11 @@ jQuery(document).ready(function() {
 		str = str + '<div class="entry"><p><b>' + keys[i] + ':</b> ' + data[keys[i]] + '</p>'+
 		    '</div>';
 	    }
-	    str = str + '<div id="stats"></div><div style="text-align: right;"><a href="https://ndar.nih.gov/data_structure.html?short_name=' + instrument + '" target="_NDA">[Open NDA for ' + instrument+ ' (new tab)]</a></div></div>';
+	    if(instrument != "DEAP"){
+	        str = str + '<div id="stats"></div><div style="text-align: right;"><a href="https://ndar.nih.gov/data_structure.html?short_name=' + instrument + '" target="_NDA">[Open NDA for ' + instrument+ ' (new tab)]</a></div></div>';
+	    } else{
+		str = str + '<div id="stats"></div>'
+	    }
 	    if (jQuery('#entries').length == 0) {
    		jQuery(elem).after(str);
 		step2.resolve("done");

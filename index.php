@@ -78,7 +78,7 @@ echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; can_q
               <br> </p>
             <div class="message__image" style="transform: translateY(0px);"></div>
             <p class="current">
-              <span class="current__counter">2018</span> NDA17
+              <span class="current__counter">2018</span> NDA18
             </p>
             <p class="login">
               Username:
@@ -89,6 +89,7 @@ echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; can_q
       </div>
       <ol class="pagination">
         <li><a href="/applications/Help/" title="Help with using DEAP">Getting Started</a></li>
+        <li><a title="Updates happened on DEAP" onclick = "show_updates()">Recent Updates</a></li>
         <li class="plan"><a href="/applications/Pre-Registration/" title="Pre-registration workflow">00 Plan</a></li>
         <li class="data_dict"><a href="/applications/Ontology/hierarchy.php?entry=display" title="Ontology">01 Explore</a></li>
         <li class="analyze"><a href="/applications/NewDataExpo/index.php?model=GAMM4-FZ-CR-longitudinal" title="Multi-level Model">02 Analyze</a></li>
@@ -106,5 +107,6 @@ echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; can_q
         <div class="starter-text">Data Exploration and Analysis Portal</div>
         <div class="starter-subtext">Loading <span>.</span><span>.</span><span>.</span></div>
     </div>
+    <div class = "news-updates" style='display:none'></div>
   </body>
 </html>

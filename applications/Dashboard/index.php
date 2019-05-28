@@ -74,7 +74,7 @@
 
    include("../../code/php/AC.php");
    $user_name = check_logged(); /// function checks if visitor is logged.
-   $allowed = false;
+   $allowed = true;
    if (check_role( "admin" )) {
      echo('<script type="text/javascript"> role = "admin"; </script>'."\n");    
      $allowed = true;

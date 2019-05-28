@@ -83,6 +83,8 @@ function highlight(where, what) {
     jQuery(where + " .data").each(function(dat) {
         var sid = jQuery(this).attr('subjid');
         var vid = jQuery(this).attr('visitid');
+        var need_light = jQuery(this).attr('light');
+	if(need_light == "on") return
         var v = valueAr.indexOf(""+measure[sid][vid]) / (valueAr.length - 1);
         var col = parseInt(8 * v); // goes from 0 to valueAr.length
         // console.log("highlight: "+dat + " " + sid + " " + vid + " " + measure[sid][vid] + " val: .q" + col + "-9");
@@ -94,6 +96,7 @@ function highlight(where, what) {
             jQuery('<div class="spot ' + "q" + col + "-9" + '" data-toggle="tooltip" title="' + what + ' = ' + measure[sid][vid] + '"></div>').appendTo(this);
         }
         //jQuery(this).append('<div class="spot ' + "q" + col + "-9" + '" title="' + what + ' = ' + measure[sid][vid] + '"></div>');
+	jQuery(this).attr('light', "on");
     });
     
 }
@@ -293,23 +296,48 @@ function changeSearch() {
 
 // array of array in data
 function displayData(data, where) {
-   jQuery(where).children().remove();
-    str = '<div class="datas front face">';
-    //str += '<button class=\"btn-toggle-stats toggle-stats btn btn-sm btn-dark\">Table 1</button>';
-   for (var i = 0; i < data.length; i++) {
-     str = str + '<div class="data" SubjID="' + data[i][idxSubjID] + 
-                 '" VisitID="' + data[i][idxVisitID] + 
-                 '" StudyDate="' + data[i][idxStudyDate] + 
-           '" data-toggle="tooltip" title="SubjID: ' + data[i][idxSubjID] + ', VisitID: ' + data[i][idxVisitID] + (typeof data[i][idxStudyDate]=='undefined'?"":', StudyDate: ' + data[i][idxStudyDate]) + '">' + "" + '</div>';
-   }
-    str = str + '</div>';
-    str = str + '<div class="back face center"></div>';
-    // str = str + '<button class=\"btn-toggle-stats toggle-stats btn btn-sm btn-dark\">Table 1</button>';
-   jQuery(where).append(str);
-   //jQuery(where).on('click', '.data', function(event) {
-   //   showInfoWindow(event, this);
-   //});
- }
+	jQuery(where).children().remove();
+	str = '<div class="datas front face">';
+	let str_later = '';
+	//str += '<button class=\"btn-toggle-stats toggle-stats btn btn-sm btn-dark\">Table 1</button>';
+	max_per_page = 1500
+	hide_elements = 0
+	if(data.length < max_per_page){
+		max = 0
+	}else{
+		max = Math.ceil(data.length / max_per_page) 
+	}
+	for (var i = 0; i < data.length; i++) {
+		if(Math.floor(Math.random() * Math.floor(max)) == 0){
+			str = str + '<div class="data" SubjID="' + data[i][idxSubjID] + 
+				'" light ="' + "off" +
+				'" VisitID="' + data[i][idxVisitID] + 
+				'" StudyDate="' + data[i][idxStudyDate] + 
+				'" data-toggle="tooltip" title="SubjID: ' + data[i][idxSubjID] + ', VisitID: ' + data[i][idxVisitID] + (typeof data[i][idxStudyDate]=='undefined'?"":', StudyDate: ' + data[i][idxStudyDate]) + '">' + "" + '</div>';
+		} else {
+			str_later = str_later + '<div class="data" SubjID="' + data[i][idxSubjID] +
+				'" light ="' + "off" +
+                                '" VisitID="' + data[i][idxVisitID] +
+                                '" StudyDate="' + data[i][idxStudyDate] +
+                                '" data-toggle="tooltip" title="SubjID: ' + data[i][idxSubjID] + ', VisitID: ' + data[i][idxVisitID] + (typeof data[i][idxStudyDate]=='undefined'?"":', StudyDate: ' + data[i][idxStudyDate]) + '">' + "" + '</div>';
+			hide_elements += 1
+		}
+	}
+	str = str + '</div>';
+	str = str + '<div class="back face center"></div>';
+	// str = str + '<button class=\"btn-toggle-stats toggle-stats btn btn-sm btn-dark\">Table 1</button>';
+	jQuery(where).append(str);
+	jQuery(where).find(".front").append("<br><button class='btn btn-sm btn-primary'>Show the rest "+ hide_elements +" items</button>");
+	jQuery(where).find(".front").find("button").on("click",function(){
+		jQuery(where).find(".front").find("button").remove()
+		jQuery(where).find(".front").find("br").remove()
+		jQuery(where).find(".front").append(str_later)
+		zoomCalculate()
+	})
+	//jQuery(where).on('click', '.data', function(event) {
+	//   showInfoWindow(event, this);
+	//});
+}
 
 function showInfoWindow(event, t) {
   var subjid = jQuery(t).attr('SubjID');
@@ -499,23 +527,38 @@ function parse() {
         }
         
         var yesSubjects = [];
+	var yesDictEvents = {}
         for(var i = 0; i < yes.length; i++) {
             if (VisitIDIDX > -1) {
                 yesSubjects.push([ yes[i][SubjIDIDX], yes[i][VisitIDIDX] ]); // append the SubjID and the VisitID
             } else {
                 yesSubjects.push( yes[i][SubjIDIDX] ); 
             }
+	    if (no[i][VisitIDIDX]){ 
+	    	if(!yesDictEvents[yes[i][VisitIDIDX]]){
+	    		yesDictEvents[yes[i][VisitIDIDX]] = 0
+	    	}
+	    	yesDictEvents[yes[i][VisitIDIDX]] += 1
+	    }
         }
         yesSubjects = jQuery.unique(yesSubjects);
-        var numYesSubjects = jQuery.unique(yesSubjects.map(function(e) { if (e.length == 2) return e[0]; else return e; })).length;
+        
+	var numYesSubjects = jQuery.unique(yesSubjects.map(function(e) { if (e.length == 2) return e[0]; else return e; })).length;
         
         var noSubjects = new Array();
+	var noDictEvents = {};
         for(var i = 0; i < no.length; i++) {
             if (VisitIDIDX > -1) {
                 noSubjects.push([ no[i][SubjIDIDX], no[i][VisitIDIDX] ]);
             } else {
                 noSubjects.push( no[i][SubjIDIDX] );
             }
+	    if (no[i][VisitIDIDX]){
+	    	if(!noDictEvents[no[i][VisitIDIDX]]){
+	    		noDictEvents[no[i][VisitIDIDX]] = 0
+	    	}
+	    	noDictEvents[no[i][VisitIDIDX]] += 1
+	    }
         }
         noSubjects = jQuery.unique(noSubjects); // we can have the same subject with multiple VisitIDs, but together they should be unique
         var numNoSubjects = jQuery.unique(noSubjects.map(function(e) { if (e.length == 2) return e[0]; else return e; })).length;
@@ -527,13 +570,75 @@ function parse() {
         var uniqueIDN = hex_md5(project_name + jQuery('.inputmeasures').val().replace(/\s/g,'') + "NO").slice(-4);
         //var uniqueIDN = ("0000" + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4);
 
+	var yesEvents = "<p><br>";
+	var yesDictList = []
+	for (var event_it in yesDictEvents){
+	    yesDictList.push(event_it)
+	}
+	yesDictList.sort(function(a,b){ 
+	    if(a.indexOf("baseline") > -1){
+		return -1
+	    }
+	    if(b.indexOf("baseline") > -1){
+                return 1
+            }
+	    a_score =  +a.split("_")[0];
+	    b_score =  +b.split("_")[0];
+	    if(a.indexOf("year") > -1){
+		a_score = 12 * a.split("_")[0]
+	    }
+	    if(b.indexOf("year") > -1){
+                b_score = 12 * b.split("_")[0]
+            }
+	    return a_score - b_score
+	})
+
+ 	for (var event_it_id in yesDictList){	
+	    event_it = yesDictList[event_it_id]
+	    yesEvents += event_it + " : " + yesDictEvents[event_it].toString().padStart(6, " ") + "<br>"
+	}
+	yesEvents += "</p>"
         if (yes.length > 0) {
             jQuery('.Yea').html("Yea: " + yes.length.toLocaleString() + "<br/><small title=\"Use this key to reference the set of subjects for which the filter is true.\">key: #" +
                                 uniqueIDY + "</small>").attr('title', yes.length.toLocaleString() + ' sessions for which the filter "' + uniqueIDY + '" is true (#subjects: '+ numYesSubjects+')');
+	    
+	    jQuery('.Yea').append(yesEvents)
+	    
             jQuery('.Yea').draggable();
         }
+	    
+	var noEvents = "<p><br>";
+	var noDictList = []
+	for (var event_it in noDictEvents){
+	    noDictList.push(event_it)
+	}
+	noDictList.sort(function(a,b){ 
+	    if(a.indexOf("baseline") > -1){
+		return -1
+	    }
+	    if(b.indexOf("baseline") > -1){
+                return 1
+            }
+	    a_score =  +a.split("_")[0];
+	    b_score =  +b.split("_")[0];
+	    if(a.indexOf("year") > -1){
+		a_score = 12 * a.split("_")[0]
+	    }
+	    if(b.indexOf("year") > -1){
+                b_score = 12 * b.split("_")[0]
+            }
+	    return a_score - b_score
+	})
+
+ 	for (var event_it_id in noDictList){	
+	    event_it = noDictList[event_it_id]
+	    noEvents += event_it + " : " + noDictEvents[event_it].toString().padStart(6, " ") + "<br>"
+	}
+	noEvents += "</p>"
+
         if (no.length > 0) {
             jQuery('.Nay').html("Nay: " + no.length.toLocaleString()).attr('title', no.length.toLocaleString() + ' sessions for which the filter "' + uniqueIDN + '" is false (#subjects: '+ numNoSubjects+')');
+	    jQuery('.Nay').append(noEvents)
             jQuery('.Nay').draggable();
         }
         // store this as subset
@@ -919,3 +1024,44 @@ jQuery(document).ready(function() {
     
     setTimeout(function() { addOneMeasure('age'); addOneMeasure('rel_family_id'), addOneMeasure('rel_group_id'); addOneMeasure('abcd_site'); }, 0);
 });
+
+
+function zoomCalculate(){
+        
+        var search = jQuery('.inputmeasures').val();
+        var variables = [];
+        try {
+            variables = search.match(/[\"\$]*[A-Za-z0-9_\.]+[\"\ ]*?/g).map(function(v){ return v.replace(/[\"\$]/g,''); });
+        } catch(e) {};
+        
+        // create unique list of variables
+        variables = variables.sort();
+        for (var i = 1; i < variables.length; i++) {
+            if (variables[i] == variables[i-1]) {
+                variables.splice(i,1);
+                i--;
+            }
+        }
+        
+        var languageKeywords = [ "has", "not", "and", "or", "visit", "numVisits", "unique", "quantile" ];
+        for (var i = 0; i < variables.length; i++) {
+            var idx = languageKeywords.indexOf(variables[i]);
+            if ( idx !== -1 || variables[i] == +variables[i]) {
+                variables.splice(i, 1);
+                i--; // check same position again because we removed an entry
+            }
+        }
+        
+        if (variables.length == 0) {
+            variables.push("src_subject_id");
+        }
+        variables.forEach( function(v) { 
+            highlight('.yes', v);
+        });
+        variables.forEach( function(v) { 
+            highlight('.no', v);
+        });
+        jQuery('.loading').hide();
+        setZoom(zoomFactor);
+
+}

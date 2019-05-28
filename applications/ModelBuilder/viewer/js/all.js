@@ -1262,7 +1262,7 @@ jQuery(document).ready(function() {
 			data: { 'state': JSON.stringify(state) },
 			dataType: 'json',
 			method: 'POST'
-		});
+		}).done(function(data){console.log(data)});
 		// create a screenshot of this recipe and save as well
 		createScreenshot();
 
