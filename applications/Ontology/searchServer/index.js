@@ -507,3 +507,12 @@ server.listen(8001).on('error', function(err) {
     process.exit(75); // EX_TEMPFAIL     75      /* temp failure; user is invited to retry */
 });
 var io = io.listen(server, { transports: ['websocket', 'flashsocket', 'xhr-polling'] });
+
+// compare results items 
+function cmp_results(a,b) {
+            if (a.name < b.name)
+                return -1;
+            if (a.name > b.name)
+                return 1;
+            return 0;
+        });
