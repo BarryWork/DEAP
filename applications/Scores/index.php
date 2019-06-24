@@ -6,18 +6,18 @@ session_start();
 include("../../code/php/AC.php");
 $user_name = check_logged();
 if (isset($_SESSION['project_name']))
-    $project_name = $_SESSION['project_name'];
+	$project_name = $_SESSION['project_name'];
 else {
-    $projs = json_decode(file_get_contents('/var/www/html/code/php/getProjectInfo.php'),TRUE);
-    if ($projs)
-        $project_name = $projs[0]['name'];
-    else
-        $project_name = "Project01";
+	$projs = json_decode(file_get_contents('/var/www/html/code/php/getProjectInfo.php'),TRUE);
+	if ($projs)
+		$project_name = $projs[0]['name'];
+	else
+		$project_name = "Project01";
 }
 
 $model = "";
 if (isset($_GET['model'])){
-    $model = $_GET['model'];
+	$model = $_GET['model'];
 }
 
 echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = "'.$model.'"; project_name = "'.$project_name.'"; </script>');
@@ -177,8 +177,8 @@ text{
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
@@ -197,27 +197,27 @@ text{
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
       <a class="navbar-brand" href="#">Extend ABCD</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+	<span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/index.php">Home <span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
+	<ul class="navbar-nav mr-auto">
+	  <li class="nav-item active">
+	    <a class="nav-link" href="/index.php">Home <span class="sr-only">(current)</span></a>
+	  </li>
+	</ul>
       </div>
     </nav>
 
 
     <div class="container-fluid" style="margin-top: 10px; margin-bottom: 20px;">
       <div class="row" id="first-item">
-        <div class="col-md-12">
+	<div class="col-md-12">
     <p class="tut-p">This application allows the user to create and share new measures on DEAP. The computations are run in the web-browser and are written in the JavaScript language also called ES6. This could be as simple as a different quantization of an existing continuous variable or as complex as a new t-score table used to map values to some standard sample. DEAP will store the new measures, which makes them available to the statistical analysis packages on DEAP. Scores marked as "public" can be used in Analyze after they have been saved.</p>
-          <div style = "z-index:9; margin-top: -20px; position: absolute; right: 10px;">
-             <button class="btn btn-light fa fa-plus-circle" data-target="#exampleModal" data-toggle="modal"  style="font-size:64px;color:green;margin:10px;cursor: pointer;" title="Create a new score"></button>
-          </div>
-          <div style="margin-top: 80px;">List of existing score calculations:</div>
-        </div>
+	  <div style = "z-index:9; margin-top: -20px; position: absolute; right: 10px;">
+	     <button class="btn btn-light fa fa-plus-circle" data-target="#exampleModal" data-toggle="modal"  style="font-size:64px;color:green;margin:10px;cursor: pointer;" title="Create a new score"></button>
+	  </div>
+	  <div style="margin-top: 80px;">List of existing score calculations:</div>
+	</div>
       </div>
     </div>
 
@@ -225,41 +225,49 @@ text{
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create a new score</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body row card-list">
-            <p class="card-text" style="margin-left: 20px;">Select  option A) to extend DEAP with new measures. The measures will only be visible for your user account. Other users need to repeat this setup to gain access.</p>
-            <div class="card text-white bg-primary card-option-add-score mb-1" style="width: 100%; min-width: 15rem">
-            <!--<img class="card-img-top" src="..." alt="Card image cap">--!>
-              <div class="card-body">
-                <h5 class="card-title">A) Add a new score based on existing values</h5>
-                <p class="card-text">This option uses a notebook to document derived variables. Sharing the text of the notebook is sufficient to allow other users to replicate your measures.</p>
+	<div class="modal-content">
+	  <div class="modal-header">
+	    <h5 class="modal-title" id="exampleModalLabel">Create a new score</h5>
+	    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	      <span aria-hidden="true">&times;</span>
+	    </button>
+	  </div>
+	  <div class="modal-body row card-list">
+<p class="card-text" style="margin-left: 20px;">Select any of the options to extend DEAP with new measures. The measures will only be visible for your user account. Other users need to repeat this setup to gain access.</p>
+	    <div class="card text-white bg-primary card-option-add-score mb-1" style="width: 100%; min-width: 15rem">
+	    <!--<img class="card-img-top" src="..." alt="Card image cap">--!>
+	      <div class="card-body">
+		<h5 class="card-title">A) Add a new score based on existing values</h5>
+		<p class="card-text">This option uses a notebook to document derived variables. Sharing the text of the notebook is sufficient to allow other users to replicate your measures.</p>
+	      </div>
+	    </div>
+
+	    <div class="card card-option-upload-spreadsheet" style="width: 100%; min-width: 15rem">
+	      <div class="card-body mb-1">
+		<h5 class="card-title">B) Add new variables created outside DEAP</h5>
+<p class="card-text">Upload the spreadsheet of precalculated features. Start by <a href="/applications/Scores/R/Template.csv">downloading the template</a>. Append your scores as additional columns. Do not change the names of the predefined columns (src_subject_id, eventname). This feature cannot be used to add new participants (rows) to the template. The maximum file size accepted is 10 megabyte.</p>
+		<form class="input-group"  method="post" id="uploading-form" enctype="multipart/form-data">
+		  <div class="custom-file">
+		    <input type="file" accept=".csv"  class="custom-file-input" id="inputGroupFile01" onClick="this.form.reset()" aria-describedby="inputGroupFileAddon01">
+		    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+		  </div>
+		</form>
+	      </div>
+	    </div>
+
+            <div class="card card-option-medication-use" style="width: 100%; min-width: 15rem; margin-top: 4px;">
+              <div class="card-body mb-1">
+                <h5 class="card-title">C) Add a new score based on medication use information</h5>
+                <p class="card-text">Opens the medication use (medUse) application.</p>
               </div>
             </div>
-<!--
-            <div class="card card-option-upload-spreadsheet" style="width: 100%; min-width: 15rem">
-              <div class="card-body mb-1">
-                <h5 class="card-title">B) Upload variables created outside DEAP</h5>
-<p class="card-text">Upload the spreadsheet of precalculated features. Start by <a href="/applications/Scores/R/Template.csv">downloading the template</a>. Append your scores as additional columns. Do not change the names of the predefined columns (src_subject_id, eventname). This feature cannot be used to add new participants (rows) to the template. The maximum file size accepted is 10 megabyte.</p>
-                <form class="input-group"  method="post" id="uploading-form" enctype="multipart/form-data">
-                  <div class="custom-file">
-                    <input type="file" accept=".csv"  class="custom-file-input" id="inputGroupFile01" onClick="this.form.reset()" aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                  </div>
-                </form>
-              </div>
-            </div>--!>
-          </div>
-          <div class="modal-footer">
-            <a href="#" class="btn btn-primary" onclick="add_new_recipe()" data-dismiss="modal" >Add</a>
-            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          </div>
-        </div>
+           </div>
+
+	  <div class="modal-footer">
+	    <a href="#" class="btn btn-primary" onclick="add_new_recipe()" data-dismiss="modal" >Add</a>
+	    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+	  </div>
+	</div>
       </div>
     </div>
 
