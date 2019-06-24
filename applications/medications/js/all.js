@@ -99,7 +99,11 @@ function startQueue() {
             }
             classesForDrugs[medNumber] = data;
             if (typeof(Storage) !== "undefined") { // keep this around for later
-                window.localStorage.setItem(medNumber, JSON.stringify(data));
+		try {
+                    window.localStorage.setItem(medNumber, JSON.stringify(data));
+		} catch (e) {
+		    // we will fill up the localStorage with ABCD, in that case don't try to store but continue to load the data
+		}
             }
             return true;
         });
