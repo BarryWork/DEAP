@@ -461,12 +461,12 @@ function json_to_table(json,vname){
 }
 
 function add_new_recipe() {
-  if($(".card-option-upload-spreadsheet").hasClass("bg-primary")){
-    if($(".code-output").html().indexOf("ERROR")>=0){
+  if ($(".card-option-upload-spreadsheet").hasClass("bg-primary")){
+    if ($(".code-output").html().indexOf("ERROR")>=0){
       return;
     }
-    for(key in upload_spreadsheet_obj){
-      if(key != "src_subject_id" && key != "eventname"){
+    for (key in upload_spreadsheet_obj){
+      if (key != "src_subject_id" && key != "eventname"){
         announce_spreadsheet(key,upload_spreadsheet_obj);
       }
     }
@@ -474,7 +474,8 @@ function add_new_recipe() {
   } else if (jQuery(".card-option-medication-use").hasClass("bg-primary")) {
       // open the medication use browser
       window.open("/applications/medications/", "_medications");
-  } else{
+
+  } else {
     insert_recipe_block( { "user": user_name, "permission": "public" }, true );
   }
 }
@@ -504,11 +505,11 @@ function announce(vname,label,data){
   //temp["description"] = bootstrap_texarea_description.find("input").val();
   temp["description"] = "";
   temp["permission"]  = "public";
-  temp["content"] = "";
+  temp["content"]     = "";
   //temp["content"]     = JSON.stringify(simplemde.value());
   temp["action"]      = "save";
   if (data.listColumns().indexOf(vname) > -1) {
-    temp["data"]        = data.select("src_subject_id", "eventname", vname).toJSON();
+    temp["data"]      = data.select("src_subject_id", "eventname", vname).toJSON();
   } else {
     alert("cannot find: " + vname);
     return;
@@ -647,31 +648,33 @@ function update(data, compute_block_id) {
     output_vlist[vname] = temp_json;
   }
   //In case data source is spreadsheet  
-  if(element_type == "spreadsheet"){
-    temp = {}
-    temp["name"] = vname;
-    temp["action"] = "read-spreadsheet";
-    $.post("getScores.php",temp).done(function(data_rt) {
-      table_location.html("");
-      hist_location.html(""); 
-      jQuery(json_to_table(JSON.parse(data_rt),vname)).appendTo(table_location);
-      
-      histogram(JSON.parse(data_rt)[vname].filter(function(item){ return !isNaN(item)}),hist_location);
-    }) 
-    return 
-  } else if (element_type == "medications") {
-    temp = {}
-    temp["name"] = vname;
-    temp["action"] = "read-spreadsheet";
-    $.post("getScores.php",temp).done(function(data_rt) {
-      table_location.html("");
-      hist_location.html(""); 
-      jQuery(json_to_table(JSON.parse(data_rt),vname)).appendTo(table_location);
 
-      histogram(JSON.parse(data_rt)[vname].filter(function(item){ return !isNaN(item)}),hist_location);
-    });
-    return;      
-  }
+    if (element_type == "spreadsheet") {
+        temp = {}
+        temp["name"] = vname;
+        temp["action"] = "read-spreadsheet";
+        $.post("getScores.php",temp).done(function(data_rt) {
+            table_location.html("");
+            hist_location.html(""); 
+            jQuery(json_to_table(JSON.parse(data_rt),vname)).appendTo(table_location);
+            
+            histogram(JSON.parse(data_rt)[vname].filter(function(item){ return !isNaN(item)}),hist_location);
+        }); 
+        return; 
+    } else if (element_type == "medications") {
+        temp = {}
+        temp["name"] = vname;
+        temp["action"] = "read-spreadsheet";
+        $.post("getScores.php",temp).done(function(data_rt) {
+            table_location.html("");
+            hist_location.html(""); 
+            jQuery(json_to_table(JSON.parse(data_rt),vname)).appendTo(table_location);
+            
+            histogram(JSON.parse(data_rt)[vname].filter(function(item){ return !isNaN(item)}),hist_location);
+        });
+        return;      
+    }
+    
 
   if (table_location.html() != "")
     table_location.height( table_location.height() );
@@ -692,18 +695,21 @@ function update(data, compute_block_id) {
 
 var wto = {};
 function parse( text, table_location, vname, hist_location) {
-  if (wto[vname])
-    clearTimeout(wto[vname]);
-  wto[vname] = setTimeout( function() {
 
-    if(jQuery("input[value='"+ vname +"']").attr("element-type") == "spreadsheet"){
-       update(null, vname) 
-    } else if (type == "medications") {
-       update(null, vname);
-    } else {
-        _update(text, table_location, vname, hist_location);
-    }
-  },3000);
+    if (wto[vname])
+        clearTimeout(wto[vname]);
+    wto[vname] = setTimeout( function() {
+        
+        var type = jQuery("input[value='"+ vname +"']").attr("element-type");
+        if (type == "spreadsheet"){
+            update(null, vname);
+        } else if (type == "medications") {
+            update(null, vname);
+        } else {
+            _update(text, table_location, vname, hist_location);
+        }
+    },3000);
+
 }
 
 function histogram(values, hist_location) {
@@ -780,7 +786,9 @@ function histogram(values, hist_location) {
    @Fangzhou: In order to add the new item to the Ontology use searchTerm2 and provide a GET variable scoresAdd with a uricomponet encoded json object that contains keys for name, description, notes, and aliases=[].
    */
 function insert_recipe_block(input, top) {
-  var variable_name = (input["name"]? input["name"] : new Date().getTime());
+
+    var variable_name = (input["name"]? input["name"] : new Date().getTime());
+
     // sanitize the input in case its not json
     try {
         JSON.parse(input["content"]);
@@ -881,9 +889,11 @@ function insert_recipe_block(input, top) {
       temp["permission"]  = "public";
       temp["content"]     = JSON.stringify(simplemde.value());
       temp["action"]      = "save";
-      if(temp["source"] != "spreadsheet" ){
-  	  temp["data"] = JSON.stringify(output_vlist[bootstrap_input_name.find("input").val()]);
-      }  
+
+      if(temp["source"] == "spreadsheet" ){
+        temp["data"]        = JSON.stringify(output_vlist[bootstrap_input_name.find("input").val()]);
+      }
+
       priv = jQuery(this).parent().find('.private-public').is(':checked');
       if (priv) {
         temp['permission'] = "private";
