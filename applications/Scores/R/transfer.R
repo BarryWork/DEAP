@@ -4,7 +4,7 @@ library("rjson");
 transfer_file = function (rawfile){	
  
   print(rawfile)
-  d = fromJSON(file = rawfile);
+  d = rjson::fromJSON(file = rawfile);
   for (varname in names(d)){
     for (i in 1:length(d[[varname]])) { 
       if(length(d[[varname]][[i]]) == 0) { 

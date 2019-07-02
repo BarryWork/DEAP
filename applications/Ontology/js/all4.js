@@ -9,8 +9,18 @@ function search( t ) {
     startTime = performance.now();
     jQuery.get('/applications/Ontology/searchTerm2.php', { 'search': t }, function(data) {
 	// console.log("got data back from search");
+	parsedData = JSON.parse(data);
+	if(t.split(" ").length == 1){
+	  parsedData.sort(function compare(a,b) {
+	    if (a.name < b.name)
+	 	return -1;
+	    if (a.name > b.name)
+		return 1;
+	    return 0;
+	  });
+	}
 	endTime = performance.now();
-	populate_results(JSON.parse(data));
+	populate_results(parsedData);
 	lastSearch = t;
     });
 }
@@ -54,7 +64,7 @@ jQuery(document).ready(function() {
     });
     
     jQuery('#search').focus();
-    jQuery('#search').on('keyup', function(event) {
+    jQuery('#search').on('keyup', delay(function(event) {
 	var t = jQuery('#search').val();
 	//jQuery('#results').children().remove();
 	if (event.keyCode === 13) {
@@ -95,7 +105,7 @@ jQuery(document).ready(function() {
 	    
 	}	
 	search(t);
-    });
+    }, 500));
 
     jQuery('#results').on('click', '.comment-slider', function() {
 	var item = jQuery(this).attr('item');
@@ -113,7 +123,11 @@ jQuery(document).ready(function() {
 		str = str + '<div class="entry"><p><b>' + keys[i] + ':</b> ' + data[keys[i]] + '</p>'+
 		    '</div>';
 	    }
-	    str = str + '<div id="stats"></div><div style="text-align: right;"><a href="https://ndar.nih.gov/data_structure.html?short_name=' + instrument + '" target="_NDA">[Open NDA for ' + instrument+ ' (new tab)]</a></div></div>';
+	    if(instrument != "DEAP"){
+	        str = str + '<div id="stats"></div><div style="text-align: right;"><a href="https://ndar.nih.gov/data_structure.html?short_name=' + instrument + '" target="_NDA">[Open NDA for ' + instrument+ ' (new tab)]</a></div></div>';
+	    } else{
+		str = str + '<div id="stats"></div>'
+	    }
 	    if (jQuery('#entries').length == 0) {
    		jQuery(elem).after(str);
 		step2.resolve("done");
@@ -244,3 +258,20 @@ jQuery(document).ready(function() {
 	});
     });
 });
+
+/*
+ * delay keyup event
+ *
+ */
+function delay(callback, ms) {
+  var timer = 0;
+  return function() {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      callback.apply(context, args);
+    }, ms || 0);
+  };
+}
+
+

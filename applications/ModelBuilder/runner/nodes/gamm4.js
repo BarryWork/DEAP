@@ -35,10 +35,11 @@ GAMM4.prototype.work = function (inputs, outputs, state) {
         }
         for (var j = 0; j < ks.length; j++) {
             //if (ks[j] === "SubjID" || ks[j] === "VisitID") {
-            if (ks[j] === "src_subject_id" || ks[j] === "eventname") {
+            console.log("!!!!!!!!!!!!!!"+ks[j])
+            if ( ks[j] == "src_subject_id" || ks[j] === "eventname") {
                 continue; // don't count these as duplicates
             }
-            if (typeof uniques[ks[j]] === 'undefined' ) {
+            if (typeof uniques[ks[j]] === 'undefined') {
                 uniques[ks[j]] = 1;
             } else {
                 removes[ks[j]] = keys[i];
@@ -71,16 +72,59 @@ GAMM4.prototype.work = function (inputs, outputs, state) {
             }
             // if we don't have real data we will just find a filename here and the list of variables in columns
             else if (typeof inputs[x]['type'] !== 'undefined' && inputs[x]['type'] == "DataTransferFile") {
+                console.log(inputs[x]['columns'])
+                var src_subject_id_count = 0
+                var eventname_count =0 
                 RonlyMode = true;
                 listvars = inputs[x]['columns'].filter(function(x) {
                     //if ( x !== 'SubjID' && x !== "VisitID" )
+                    //count subject id if it appear only the second time 
+                  console.log("top")
+                  console.log(x)
+                  console.log(src_subject_id_count)
+
+                  if ( x == 'src_subject_id' && src_subject_id_count == 0){
+                    src_subject_id_count++
+                  } else if (x == 'src_subject_id' && src_subject_id_count == 1){
+                    src_subject_id_count++
+                    return true
+                  }
+
+                  if ( x == 'eventname' && eventname_count == 0){
+                    eventname_count++
+                  } else if (x == 'eventname' && eventname_count == 1){
+                    eventname_count++
+                    return true
+                  }
+
                     if ( x !== 'src_subject_id' && x !== "eventname" )
                         return true;
                     return false;                     
                 })
             } else {
+                console.log(inputs[x])
+                var src_subject_id_count = 0
+                var eventname_count = 0 
                 listvars = Object.keys(inputs[x]).filter(function (x) {
+                    console.log("bottom")
+                    console.log(x)
+                    console.log(src_subject_id_count)
                     //if (x !== 'SubjID' && x !== "VisitID")
+
+                    if ( x == 'src_subject_id' && src_subject_id_count == 0){
+                        src_subject_id_count++
+                    } else if ( x == 'src_subject_id' && src_subject_id_count == 1){
+                        src_subject_id_count++
+                        return true 
+                    }
+                                      
+                    if ( x == 'eventname' && eventname_count == 0){
+                        eventname_count++
+                    } else if ( x == 'eventname' && eventname_count == 1){
+                        eventname_count++
+                        return true 
+                    }
+ 
                     if (x !== 'src_subject_id' && x !== "eventname")
                         return true;
                     return false;
@@ -130,13 +174,13 @@ GAMM4.prototype.work = function (inputs, outputs, state) {
     R = R + "\n# export scatter now\n";
     //R = R + "user_name = \"" + this._path.split("usercache\/")[1].split("_")[0]+"\"\n";
     var fname_scatter = this._path + "/" + code + "_scatter.json";
-    R = R + "if (exists(\"scatter\")) write(toJSON(scatter),file=\"" + fname_scatter + "\")\n";
+    R = R + "if (exists(\"scatter\")) write(rjson::toJSON(scatter),file=\"" + fname_scatter + "\")\n";
     var fname_lineplot = this._path + "/" + code + "_lineplot.json";
-    R = R + "if (exists(\"lineplot\")) write(toJSON(lineplot),file=\"" + fname_lineplot + "\")\n";
+    R = R + "if (exists(\"lineplot\")) write(rjson::toJSON(lineplot),file=\"" + fname_lineplot + "\")\n";
     var fname_tunnel = this._path + "/" + code + "_tunnel.json";
-    R = R + "if (exists(\"tunnel\")) write(toJSON(tunnel),file=\"" + fname_tunnel + "\")\n";
+    R = R + "if (exists(\"tunnel\")) write(rjson::toJSON(tunnel),file=\"" + fname_tunnel + "\")\n";
     var fname_statistics = this._path + "/" + code + "_statistics.json";
-    R = R + "if (exists(\"statistics\")) write(toJSON(statistics),file=\"" + fname_statistics + "\")\n";
+    R = R + "if (exists(\"statistics\")) write(rjson::toJSON(statistics),file=\"" + fname_statistics + "\")\n";
 
     R = R + "sink(type = \"message\")\n";
     R = R + "close(output_file)\n"; 

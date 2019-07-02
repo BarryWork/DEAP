@@ -1,5 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<?php
+session_start();
+include("../../code/php/AC.php");
+$user_name = check_logged();
+if (isset($_SESSION['project_name']))
+	$project_name = $_SESSION['project_name'];
+else {
+	$projs = json_decode(file_get_contents('/var/www/html/code/php/getProjectInfo.php'),TRUE);
+	if ($projs)
+		$project_name = $projs[0]['name'];
+	else
+		$project_name = "Project01";
+}
+
+$model = "";
+if (isset($_GET['model'])){
+	$model = $_GET['model'];
+}
+
+echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = "'.$model.'"; project_name = "'.$project_name.'"; </script>');
+
+?>
+
+
   <head>
     <meta charset="utf-8">
     <title>Extend ABCD</title>
@@ -152,8 +177,8 @@ text{
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
@@ -165,30 +190,6 @@ text{
     <!-- <link href="css/jquery-ui.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="css/style.css">
 
-<?php
-session_start();
-include("../../code/php/AC.php");
-$user_name = check_logged();
-if (isset($_SESSION['project_name']))
-    $project_name = $_SESSION['project_name'];
-else {
-    $projs = json_decode(file_get_contents('/var/www/html/code/php/getProjectInfo.php'),TRUE);
-    if ($projs)
-        $project_name = $projs[0]['name'];
-    else
-        $project_name = "Project01";
-}
-
-$model = "";
-if (isset($_GET['model'])){
-    $model = $_GET['model'];
-}
-
-echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = "'.$model.'"; project_name = "'.$project_name.'"; </script>');
-
-?>
-
-
   </head>
 
   <body spellcheck="false">
@@ -196,27 +197,27 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
       <a class="navbar-brand" href="#">Extend ABCD</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+	<span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/index.php">Home <span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
+	<ul class="navbar-nav mr-auto">
+	  <li class="nav-item active">
+	    <a class="nav-link" href="/index.php">Home <span class="sr-only">(current)</span></a>
+	  </li>
+	</ul>
       </div>
     </nav>
 
 
     <div class="container-fluid" style="margin-top: 10px; margin-bottom: 20px;">
       <div class="row" id="first-item">
-        <div class="col-md-12">
+	<div class="col-md-12">
     <p class="tut-p">This application allows the user to create and share new measures on DEAP. The computations are run in the web-browser and are written in the JavaScript language also called ES6. This could be as simple as a different quantization of an existing continuous variable or as complex as a new t-score table used to map values to some standard sample. DEAP will store the new measures, which makes them available to the statistical analysis packages on DEAP. Scores marked as "public" can be used in Analyze after they have been saved.</p>
-          <div style = "z-index:9; margin-top: -20px; position: absolute; right: 10px;">
-             <button class="btn btn-light fa fa-plus-circle" data-target="#exampleModal" data-toggle="modal"  style="font-size:64px;color:green;margin:10px;cursor: pointer;" title="Create a new score"></button>
-          </div>
-          <div style="margin-top: 80px;">List of existing score calculations:</div>
-        </div>
+	  <div style = "z-index:9; margin-top: -20px; position: absolute; right: 10px;">
+	     <button class="btn btn-light fa fa-plus-circle" data-target="#exampleModal" data-toggle="modal"  style="font-size:64px;color:green;margin:10px;cursor: pointer;" title="Create a new score"></button>
+	  </div>
+	  <div style="margin-top: 80px;">List of existing score calculations:</div>
+	</div>
       </div>
     </div>
 
@@ -224,6 +225,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
+
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Create a new score</h5>
@@ -268,6 +270,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
             <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -275,7 +278,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
 
   <script src="js/highlight.min.js"></script>
   <script src="js/simplemde.min.js"></script>
-  <script type="text/javascript" src="js/MathJax-2.7.4/MathJax.js?config=TeX-AMS-MML_SVG-full"></script>
+  <script type="text/javascript" src="js/MathJax-2.7.4/MathJax.js?config=TeX-AMS-MML_SVG"></script>
   <script src="../../js/jquery-3.3.1.min.js"></script>
   <!-- <script src="js/popper.min.js"></script> -->
   <script src="../../js/bootstrap.min.js"></script>
