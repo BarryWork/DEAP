@@ -515,4 +515,4 @@ function cmp_results(a,b) {
             if (a.name > b.name)
                 return 1;
             return 0;
-        });
+        };
