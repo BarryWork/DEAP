@@ -123,7 +123,7 @@
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand" href="/applications/enroll/tableview.php">View Contacts</a>
+        <a class="brand" href="/index.php">Home</a>
         <a class="brand" href="/code/php/logout.php">Logout</a>
       </div>
     </div>
