@@ -37,10 +37,10 @@
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 
-	<link href="/css/bootstrap.css" rel="stylesheet">
-	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link href="./css/font-awesome.min.css" rel="stylesheet">
-	<link href="/css/bootswatch.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/bootswatch.css" rel="stylesheet">
 
   <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/start/jquery-ui.css" rel="stylesheet" type="text/css"/>
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
