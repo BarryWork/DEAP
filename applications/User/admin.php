@@ -110,8 +110,8 @@
   <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
   <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="//code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="/js/tmpl.min.js?_=2345"></script>
-  <script type="text/javascript" src="/js/md5-min.js"></script>
+  <script type="text/javascript" src="js/tmpl.min.js?_=2345"></script>
+  <script type="text/javascript" src="js/md5-min.js"></script>
   <!-- <script type="text/javascript" src="/js/picnet.table.filter.min.js"></script> -->
 
   <script src="/js/bootstrap.min.js"></script>
