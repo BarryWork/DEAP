@@ -175,11 +175,12 @@ function php_json_encode($arr) {
           if (in_array($entry, $doneItems)) {
               continue;
           }
-          if ($globalCount > 500) {
+	  /*
+          if ($globalCount > 1500) {
               // give up
               break;
           }
-          
+	   */
           // ok, now us this to get what is underneath
           try {
               foreach ($d as $key => $value) {
@@ -482,6 +483,7 @@ function php_json_encode($arr) {
        
        function overwriteRules() {
            jQuery.post('saveRules.php', { "project": "$project_name", "text": editor.getValue() }, function(data) {
+		alert(data)
 	       // ignore the output, its visible in firebug, that should be enough for debugging
            });
 	   jQuery('#edit-window').modal('hide');
