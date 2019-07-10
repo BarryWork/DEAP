@@ -330,7 +330,8 @@ function displayData(data, where) {
 	str = str + '<div class="back face center"></div>';
 	// str = str + '<button class=\"btn-toggle-stats toggle-stats btn btn-sm btn-dark\">Table 1</button>';
 	jQuery(where).append(str);
-	jQuery(where).find(".front").append("<br><button class='btn btn-sm btn-primary'>Show the rest "+ hide_elements +" items</button>");
+	if (hide_elements > 0)
+	  jQuery(where).find(".front").append("<br><button class='btn btn-sm btn-primary'>Show all "+ hide_elements.toLocaleString() +" items</button>");
 	jQuery(where).find(".front").find("button").on("click",function(){
 		jQuery(where).find(".front").find("button").remove()
 		jQuery(where).find(".front").find("br").remove()
@@ -537,7 +538,7 @@ function parse() {
             } else {
                 yesSubjects.push( yes[i][SubjIDIDX] ); 
             }
-	    if (no[i][VisitIDIDX]){ 
+	    if (typeof no[i] !== 'undefined' && typeof no[i][VisitIDIDX] !== 'undefined' && no[i][VisitIDIDX]){ 
 	    	if(!yesDictEvents[yes[i][VisitIDIDX]]){
 	    		yesDictEvents[yes[i][VisitIDIDX]] = 0
 	    	}
@@ -556,7 +557,7 @@ function parse() {
             } else {
                 noSubjects.push( no[i][SubjIDIDX] );
             }
-	    if (no[i][VisitIDIDX]){
+	    if (typeof no[i] !== 'undefined' && typeof no[i][VisitIDIDX] !== 'undefined' && no[i][VisitIDIDX]){
 	    	if(!noDictEvents[no[i][VisitIDIDX]]){
 	    		noDictEvents[no[i][VisitIDIDX]] = 0
 	    	}
@@ -573,7 +574,7 @@ function parse() {
         var uniqueIDN = hex_md5(project_name + jQuery('.inputmeasures').val().replace(/\s/g,'') + "NO").slice(-4);
         //var uniqueIDN = ("0000" + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4);
 
-	var yesEvents = "<p><br>";
+	var yesEvents = "<hr style=\"border-top-color: white; margin-top: 0.5rem; margin-bottom: 0.2rem;\">"; // "<p><br>";
 	var yesDictList = []
 	for (var event_it in yesDictEvents){
 	    yesDictList.push(event_it)
@@ -598,9 +599,9 @@ function parse() {
 
  	for (var event_it_id in yesDictList){	
 	    event_it = yesDictList[event_it_id]
-	    yesEvents += event_it + " : " + yesDictEvents[event_it].toString().padStart(6, " ") + "<br>"
+	    yesEvents += "<small style=\"display: block;\"><span class=\"name\">" + event_it.replace("_arm_1","") + ":</span><span class=\"number\">" + yesDictEvents[event_it].toLocaleString() + "</span></small>"
 	}
-	yesEvents += "</p>"
+	yesEvents += ""; // "</p>"
         if (yes.length > 0) {
             jQuery('.Yea').html("Yea: " + yes.length.toLocaleString() + "<br/><small title=\"Use this key to reference the set of subjects for which the filter is true.\">key: #" +
                                 uniqueIDY + "</small>").attr('title', yes.length.toLocaleString() + ' sessions for which the filter "' + uniqueIDY + '" is true (#subjects: '+ numYesSubjects+')');
@@ -610,7 +611,7 @@ function parse() {
             jQuery('.Yea').draggable();
         }
 	    
-	var noEvents = "<p><br>";
+	var noEvents = "<hr style=\"border-top-color: white; margin-top: 0.5rem; margin-bottom: 0.2rem;\">";
 	var noDictList = []
 	for (var event_it in noDictEvents){
 	    noDictList.push(event_it)
@@ -634,10 +635,10 @@ function parse() {
 	})
 
  	for (var event_it_id in noDictList){	
-	    event_it = noDictList[event_it_id]
-	    noEvents += event_it + " : " + noDictEvents[event_it].toString().padStart(6, " ") + "<br>"
+	    event_it = noDictList[event_it_id];
+	    noEvents += "<small style=\"display: block;\"><span class=\"name\">" + event_it.replace("_arm_1","") + ":</span><span class=\"number\">" + noDictEvents[event_it].toLocaleString() + "</span></small>"
 	}
-	noEvents += "</p>"
+	noEvents += ""; //"</p>"
 
         if (no.length > 0) {
             jQuery('.Nay').html("Nay: " + no.length.toLocaleString()).attr('title', no.length.toLocaleString() + ' sessions for which the filter "' + uniqueIDN + '" is false (#subjects: '+ numNoSubjects+')');
