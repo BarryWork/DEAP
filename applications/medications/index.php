@@ -183,6 +183,7 @@ Your user account will be able to use this score for further statistical analysi
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="/js/md5-min.js"></script>
 <script src="js/dnTree.js?_=77759"></script>
+<script src="js/lz-string.min.js"></script>          
 <script src="js/all.js?_=7769"></script>
 
 </body>
