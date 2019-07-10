@@ -335,3 +335,14 @@ button.toggle-stats {
     font-weight: 100 !important;
     font-size: 10pt;
 }
+span.name {
+ display: block;
+ text-align: right;
+ float: left;
+ overflow: auto;
+}
+span.number {
+ width: 70px;
+ float: right;
+ text-align: right;
+}
