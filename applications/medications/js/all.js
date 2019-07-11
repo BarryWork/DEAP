@@ -100,7 +100,7 @@ function startQueue() {
             classesForDrugs[medNumber] = data;
             if (typeof(Storage) !== "undefined") { // keep this around for later
 		try {
-                    window.localStorage.setItem(medNumber, LZString.compress(JSON.stringify(data)));
+                    window.localStorage.setItem("medNumber_" + medNumber, LZString.compress(JSON.stringify(data)));
 		} catch (e) {
 		    // we will fill up the localStorage with ABCD, in that case don't try to store but continue to load the data
 		}
@@ -118,7 +118,7 @@ function startQueue() {
                 if (typeof requestQueue[0]['medNumber'] == 'undefined')
                     continue; // the deferred promise
                 medNumber = requestQueue[0]['medNumber'];
-                var data = LZString.decompress(window.localStorage.getItem(medNumber));
+                var data = LZString.decompress(window.localStorage.getItem("medNumber_" + medNumber));
                 if (typeof data !== 'undefined' && data != "" && data !== null) {
                     classesForDrugs[medNumber] = JSON.parse(data);
                     not_needed_anymore = requestQueue.shift();
