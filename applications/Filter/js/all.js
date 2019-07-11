@@ -329,6 +329,7 @@ function displayData(data, where) {
 	str = str + '</div>';
 	str = str + '<div class="back face center"></div>';
 	// str = str + '<button class=\"btn-toggle-stats toggle-stats btn btn-sm btn-dark\">Table 1</button>';
+
         jQuery(where).append(str);
         if (hide_elements > 0)
            jQuery(where).find(".front").append("<br><button class='btn btn-sm btn-primary'>Show all "+ hide_elements.toLocaleString() +" items</button>");
@@ -574,6 +575,7 @@ function parse() {
         var uniqueIDN = hex_md5(project_name + jQuery('.inputmeasures').val().replace(/\s/g,'') + "NO").slice(-4);
         //var uniqueIDN = ("0000" + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4);
 
+
 	var yesEvents = "<hr style=\"border-top-color: white; margin-top: 0.5rem; margin-bottom: 0.2rem;\">";
 	var yesDictList = []
 	for (var event_it in yesDictEvents){
@@ -611,7 +613,7 @@ function parse() {
             jQuery('.Yea').draggable();
         }
 	    
-	var noEvents = "<p><br>";
+	var noEvents = "<hr style=\"border-top-color: white; margin-top: 0.5rem; margin-bottom: 0.2rem;\">";
 	var noDictList = []
 	for (var event_it in noDictEvents){
 	    noDictList.push(event_it)

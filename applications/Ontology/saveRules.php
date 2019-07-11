@@ -14,8 +14,9 @@
      echo (json_encode ( array( "message" => "No project name in this session" ) ) );
      return; // no project name nothing to do
   }
-  if (!check_permission_pair( "can-admin", $project_name )) {
-     echo (json_encode ( array( "message" => "user has no permission for can-admin for this project (same role restriction)" ) ) );
+  if ($user_name != "admin") {
+	  echo (json_encode ( array( "message" => "user has no permission for can-admin for this project (same role restriction)", 
+	 			     "user" => $user_name ) ) );
      return;
   }
 
