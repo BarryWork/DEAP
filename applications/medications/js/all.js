@@ -119,7 +119,7 @@ function startQueue() {
                     continue; // the deferred promise
                 medNumber = requestQueue[0]['medNumber'];
                 var data = LZString.decompress(window.localStorage.getItem(medNumber));
-                if (typeof data !== 'undefined' && data !== null) {
+                if (typeof data !== 'undefined' && data != "" && data !== null) {
                     classesForDrugs[medNumber] = JSON.parse(data);
                     not_needed_anymore = requestQueue.shift();
                 } else {
