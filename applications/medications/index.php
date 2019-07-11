@@ -168,19 +168,19 @@ Your user account will be able to use this score for further statistical analysi
 <div id="place-for-popups"></div>
 
 <script src="js/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.compatibility.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.easing.compatibility.min.js"></script>
 <!-- <script type="text/javascript" src="/js/highslide/highslide-full.min.js"></script>
 <script type="text/javascript" src="/js/highslide/highslide.config.js" charset="utf-8"></script> -->
 <!-- <script src="js/jquery.csv-0.71.min.js"></script> -->
 <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="js/popper.min.js" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="js/select2.min.js"></script>
 
 <!-- <script src="js/bootstrap.min.js"></script> -->
 <!-- <script src="js/bootstrap-select.min.js"></script> -->
-<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="js/d3.v3.min.js"></script>
 <script src="/js/md5-min.js"></script>
 <script src="js/dnTree.js?_=77759"></script>
 <script src="js/lz-string.min.js"></script>          
