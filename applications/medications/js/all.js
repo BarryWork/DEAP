@@ -91,7 +91,7 @@ function startQueue() {
     num = requestQueue[0]['num'];
     var promise = ((function(medNumber, medName, num) {
         return jQuery.getJSON('https://rxnav.nlm.nih.gov/REST/rxclass/class/byRxcui?rxcui='+medNumber+'&relaSource=ATC', function(data) {
-            jQuery('.spinner-text').html("retrieve class by rxcui: " + medNumber);
+            jQuery('.spinner-text').html("retrieve class by rxcui: " + medNumber + " (" + requestQueue.length + ")");
             data['ABCDNum'] = num;
             data['MedName'] = medName;
             if (medNumber == 'NA') {
