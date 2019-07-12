@@ -8,6 +8,6 @@ if (isset($_GET['value'])) {
     return; // nothing to do
 }
 $output = array();
-exec("cd /var/www/html/applications/Filter/; /usr/bin/nodejs ./runR.js ".$value, $output);
+exec("cd /var/www/html/applications/medications/; /usr/bin/nodejs ./runR.js ".$value, $output);
 echo(implode(" ",$output));
 ?>

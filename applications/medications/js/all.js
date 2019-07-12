@@ -68,7 +68,7 @@ function addOneMeasure( meas ) {
                 allMeasures['eventname'][lastidx]      = event[i];
                 allMeasures[meas][lastidx]             = v[i];
                 for (var j = 0; j < k.length; j++) {
-                    allMeasures[k[j]] = None;
+                    allMeasures[k[j]][lastidx] = null;
                 }
             }
         }
@@ -164,7 +164,9 @@ function pullRXNORM() {
         return jQuery.getJSON('https://rxnav.nlm.nih.gov/REST/rxclass/classTree.json?classId=' + classid, function(data) {
             tree = data;
             return true;
-        });
+        }).fail(function(a) {
+	    console.log("pulling one class id failed!");
+	});
     })(0));
     
     var ancestorGraphs = {};
@@ -586,6 +588,10 @@ function init( s ) {
             if (meas[i] == "src_subject_id" || meas[i] == "eventname") {
                 continue;
             }
+	    if (typeof allMeasures[meas[i]] == 'undefined' || allMeasures[meas[i]] == null) {
+                console.log("error in reading " + meas[i] + " data in cache...");
+                continue;
+            }
             for (var j = 0; j < allMeasures[meas[i]].length; j++) {
                 if (allMeasures[meas[i]][j] == "" || allMeasures[meas[i]][j] == "NA" || allMeasures[meas[i]][j] == "Don't know")
                     continue;
@@ -669,12 +675,12 @@ jQuery(document).ready(function() {
             return;
         }
         var data = getPGUIDEvent( nodes[0] );
-        // ok, that data contains all the pGUID and events that have this medication, set them to value = 1
+        // ok, that data contains all the pGUID and events that have this medication, set them to value = 1/use
         data[vname_orig] = [];
         for (var i = 0; i < data['src_subject_id'].length; i++) {
             data[vname_orig].push("use");
         }
-        // add the other participants with a value of 0 (but only for events that have been returned)
+        // add the other participants with a value of 0/no-use (but only for events that have been returned)
         var eventList = {};
         eventList = data['eventname'].reduce( function (eventlist, a) { eventList[a] = 1; return eventList; } );
         eventList = Object.keys(eventList);
@@ -707,12 +713,12 @@ jQuery(document).ready(function() {
         temp["description"] = "Medication category: " + vname_orig;
         temp["permission"]  = "private";
         temp["content"]     = "<p>This score has been created using the medUse application. To edit this score " +
-                                             "open the <a href='/applications/medications/'>medUse</a> again.</p>";
+                                             "open the <a href='/applications/medications/'>medUse</a> application.</p>";
         if (typeof nodes[0]['classId'] !== 'undefined') {
-            temp["content"] = temp['content'] + "<p>The score has been derived from the ATC classification <i>" + nodes[0]['name'] + "</i> (" + nodes[0]['classId'] + ") and codes all participants with 1 that have at least one reported medication use in this category.</p>";
+            temp["content"] = temp['content'] + "<p>The score has been derived from the ATC classification <i>" + nodes[0]['name'] + "</i> (" + nodes[0]['classId'] + ") and codes all participants with \"use\" that have at least one reported medication use in this category and \"no-use\" otherwise.</p>";
         }
         if (typeof nodes[0]['rxcui'] !== 'undefined') {
-            temp["content"] = temp['content'] + "<p>The score has been derived from the RxNorm classification <i>" + nodes[0]['name'] + "</i> (" + nodes[0]['rxcui'] + ") and codes all participants with 1 that have at least one reported medication use in this category.</p>";
+            temp["content"] = temp['content'] + "<p>The score has been derived from the RxNorm classification <i>" + nodes[0]['name'] + "</i> (" + nodes[0]['rxcui'] + ") and codes all participants with \"use\" that have at least one reported medication use in this category and \"no-use\" otherwise.</p>";
         }
         temp["content"] = JSON.stringify(temp["content"]);
         
