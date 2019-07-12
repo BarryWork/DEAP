@@ -274,7 +274,7 @@ function pullRXNORM() {
             var sumBelow = 0;
             if (typeof tree['rxclassMinConceptItem'] !== 'undefined') {
                 if (typeof tree['rxclassMinConceptItem']['ABCDNum'] !== 'undefined')
-                    sumBelow = tree['rxclassMinConceptItem']['ABCDNum'];
+                    return /* sumBelow = */ tree['rxclassMinConceptItem']['ABCDNum'];
             }
             if (typeof tree['rxclassTree'] !== 'undefined') {
                 // down the hole
@@ -287,7 +287,7 @@ function pullRXNORM() {
             }
             return sumBelow;
         }
-        moveABCDNumUp(tree, 0);
+        moveABCDNumUp(tree);
         jQuery('.spinner-text').html("Build tree...");
         
         // now we are ready to look at tree and create the children graph from it
@@ -353,10 +353,10 @@ function pullRXNORM() {
                     var found = false;
                     var subj = allMeasures['src_subject_id'][i];
                     var event = allMeasures['eventname'][i];
-                    for (var i = 0; i < pGUIDsPerMed[v].length; i++) {
-                        if (pGUIDsPerMed[v][i][0] == subj && pGUIDsPerMed[v][i][1] == event) {
+                    for (var j = 0; j < pGUIDsPerMed[v].length; j++) {
+                        if (pGUIDsPerMed[v][j][0] == subj && pGUIDsPerMed[v][j][1] == event) {
                             found = true;
-                            pGUIDsPerMed[v][i][2] = pGUIDsPerMed[v][i][2] + 1; // remember that we have this one again, not used for now
+                            pGUIDsPerMed[v][j][2] = pGUIDsPerMed[v][j][2] + 1; // remember that we have this one again, not used for now
                             break;
                         }                        
                     }
