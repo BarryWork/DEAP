@@ -345,7 +345,7 @@ function pullRXNORM() {
         var ks = Object.keys(allMeasures).filter(function(a) { if (a !== "src_subject_id" && a !== "eventname") return true; return false; });
         for (var i = 0; i < ks.length; i++) { // for each measure create an array of pGUIDs that have that medication listed
             allMeasures[ks[i]].map(function(v,i) {
-                if (v !== "") {
+                if (v !== "" && v !== null) {
                     // store src_subject_id and eventname
                     if (typeof pGUIDsPerMed[v] == 'undefined') {
                         pGUIDsPerMed[v] = [];
