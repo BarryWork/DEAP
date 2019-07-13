@@ -114,7 +114,7 @@ if ($action == "get") {
     $id = uniqid($project);
     $name = "";
     if(isset($_GET['name'])) {
-        $name = $_GET['name'];
+        $name = htmlspecialchars($_GET['name']);
     }
     $variables = array();
     if(isset($_GET['variables'])) {
