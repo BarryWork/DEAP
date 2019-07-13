@@ -9,6 +9,10 @@ function displaySet( s ) {
 function update( id ) {
     // get the values for this card and update the display
     jQuery.getJSON('getSets.php', { "action": "get", "id": id }, function(data) {
+	if (typeof data == 'undefined') {
+	    console.log("Error: could not get a set with this id...");
+	    return;
+	}
         data = data[0];
         console.log(JSON.stringify(data));
         // in case we don't have this id yet, create a new one
