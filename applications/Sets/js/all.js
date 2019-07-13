@@ -30,15 +30,13 @@ function update( id ) {
 
 function getSets() {
     jQuery.getJSON('getSets.php', function(data) {
+        jQuery('.num-sets').text("no sets");
 	if (data == null)
 	    return;
-	if (data.length == 0)
-	    jQuery('.num-sets').text("no sets");
+	if (data.length == 1)
+	    jQuery('.num-sets').text(data.length + " set");
 	else {
-	    if (data.length == 1)
-		jQuery('.num-sets').text(data.length + " set");
-	    else
-		jQuery('.num-sets').text(data.length + " sets");
+	    jQuery('.num-sets').text(data.length + " sets");
 	}
 	for (var i = 0; i < data.length; i++) {
 	    displaySet(data[i]);
