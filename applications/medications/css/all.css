@@ -1,0 +1,734 @@
+
+body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        background-color: white !important;
+	color: black;
+        line-height: 14px !important;
+        font-size: 14px !important;
+        font-weight: 200 !important;
+}
+
+.datas {
+   background-color: white;
+   display: inline;
+   position: relative;
+}
+.data {
+   background-color: #888888;
+   border: 1px solid #666666;
+   border-radius: 3px;
+   min-width: 7px;
+   min-height: 7px;
+   margin-top: 2px;
+   margin-right: 4px;
+   display: inline-block;
+   position: relative;
+}
+#all {
+   margin-top: 15px;   
+}
+.select {
+   position: relative;
+   //top: -50px;
+   background-color: #222222;
+   opacity: 0.8;
+   //line-height: 50px;
+   color: white;
+   padding-left: 10px;
+   font-weight: 200;
+   font-size: 20px;
+   padding-top: 9px;
+   padding-bottom: 0px;
+   padding-right:10pt;
+}
+.select input {
+   background-color: #222222;
+   color: #FFFFFF;
+   margin-left: 10px;
+   margin-right: 10px;
+   font-weight: 200;
+   font-size: 20px;
+   padding-top: 2px;
+}
+
+/* Animation keyframes - you need to add prefixes */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+ 
+/* Loading animation container */
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28px;
+    height: 28px;
+    margin: -14px 0 0 -14px;
+}
+ 
+/* Spinning circle (inner circle) */
+.loading .maskedCircle {
+    width: 20px;
+    height: 20px;
+    border-radius: 12px;
+    border: 3px solid gray;
+}
+ 
+/* Spinning circle mask */
+.loading .mask {
+    width: 12px;
+    height: 12px;
+    overflow: hidden;
+}
+ 
+/* Spinner */
+.loading .spinner {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    width: 26px;
+    height: 26px;
+    animation: spin 1s infinite linear;
+}
+.spinner-text {
+    color: gray;
+    width: 500px;
+    text-align: left;
+    top: 50px;
+    left: -30px;
+}
+.q0-9 { background-color:rgb(247,251,255); }
+.q1-9 { background-color:rgb(222,235,247); }
+.q2-9 { background-color:rgb(198,219,239); }
+.q3-9 { background-color:rgb(158,202,225); }
+.q4-9 { background-color:rgb(107,174,214); }
+.q5-9 { background-color:rgb(66,146,198); }
+.q6-9 { background-color:rgb(33,113,181); }
+.q7-9 { background-color:rgb(8,81,156); }
+.q8-9 { background-color:rgb(8,48,107); }
+.spot {
+   //background-color: #AAAAAA;
+   //border: 1px solid #666666;
+   width: 7px;
+   height: 7px;
+   //display: inline-flex;
+   position: relative;
+   border-radius: 3px;
+   margin-bottom: 2px;
+}
+.ui-autocomplete {
+   height: 250px;
+   overflow-y: auto;
+}
+[draggable=true] {
+  cursor: move;
+}
+.info {
+  font-size: small;
+  display: inline;
+  margin-right: 10px;
+  color: grey;
+}
+#info {
+  margin-bottom: -4px;
+  padding-bottom: 4px;
+}
+.existingFilters {
+  margin-top: 10px;
+}
+.sectionTitle {
+  color: white;
+  font-size: small;
+  font-weight: 200;
+  margin-bottom: 5px;
+  line-height: 12pt;
+}
+#saveNewFilter {
+  background-color: #222222;
+  color: #808080;
+  font-weight: 200;
+  font-size: 14pt;
+}
+.selectpicker {
+  //height: 32px;
+  //font-weight: 200 !important;
+}
+.highslide-body {
+  line-height: 20px;
+}
+#start {
+    margin-bottom: 20px;
+}
+    .node {
+        cursor: pointer;
+	  }
+
+  .overlay{
+        //background-color:#FFF;
+	  }
+
+  .node circle {
+      fill: #fff;
+          stroke: steelblue;
+	      stroke-width: 1.5px;
+	        }
+
+  .node text {
+      font-size:9px;
+      font-family: "Verdana";
+      fill: black;
+      font-weight: 200;
+  }
+  
+  .node text.nodeTextDrug {
+      font-size:9px;
+      font-family: "Verdana";
+      fill: red !important;
+      font-weight: 200;
+  }
+
+  .node text.nodeTextDrugAlternates {
+      font-size:9px;
+      font-family: "Verdana";
+      fill: orange !important;
+      font-weight: 200;
+  }
+
+  .node text.nodeTextActive {
+      font-size: 12px;
+      font-family: "Verdana";
+      fill: blue !important;
+      font-weight: 200;
+  }
+
+  .link {
+      fill: none;
+      stroke: #222;
+      stroke-width: 1.5px;
+  }
+
+  .templink {
+      fill: none;
+          stroke: red;
+	      stroke-width: 3px;
+	        }
+
+  .ghostCircle.show{
+        display:block;
+	  }
+
+  .ghostCircle, .activeDrag .ghostCircle{
+         display: none;
+	   }
+  .text-white {
+      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-weight: 200;
+      font-size: 9pt;
+      letter-spacing: 0.1em;
+      color: black;
+      line-height: 1.3em;
+  }
+line {
+ stroke: #000;
+  stroke-width: 1.5px;
+}
+.string, .regexp {
+ color: #f39;
+}
+.keyword {
+ color: #00c;
+}
+.comment {
+ color: #777;
+  font-style: oblique;
+}
+.number {
+ color: #369;
+}
+.class, .special {
+ color: #1181B8;
+}
+a:link, a:visited {
+ color: #000;
+  text-decoration: none;
+}
+a:hover {
+ color: #666;
+}
+.hint {
+ position: absolute;
+    left: 0;
+    top: 45px;
+ width: 240px;
+ font-size: 12px;
+ color: #999;
+}
+
+.link {
+ float: right;
+ margin: 10px;
+ font-size: 12px;
+ color: #999;
+}
+.node circle {
+    cursor: pointer;
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+path.link {
+    fill: none;
+    stroke: gray;
+    stroke-width: 1.5px;
+}
+div.pill-navigation {
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    font-size: 34px;
+    width: 100%;
+    height: 100px;
+    background-color: rgba(255,255,255,0.8);
+    margin-top: 20px;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+div.size-estimator {
+    position: absolute;
+    left: 5px;
+    top: 125px;
+    width: 42px;
+    height: 42px;
+    display: inline-block;
+    overflow: auto;
+    line-height: 10px;
+    transform: scale(-1,-1);
+}
+div.size-box {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    margin-left: 1px;
+    margin-top: 1px;
+    display: inline-block;
+}
+div.level0 {
+    background-color: #B6B6B6;
+}
+div.level1 {
+    background-color: #a6cee3;
+}
+div.level2 {
+    background-color: #1f78b4;
+}
+div.level3 {
+    background-color: #b2df8a;
+}
+div.level4 {
+    background-color: rgb(51,160,44);
+}
+div.level5 {
+    background-color: rgb(251,154,153);
+}
+
+div.pill-nav {
+    margin-left: 50px;
+    margin-top: 20px;
+}
+div.pill-nav-2 {
+    margin-left: 50px;
+    margin-top: 20px;
+    font-size: 20px;
+    line-height: 1em;
+}
+
+:focus {
+    outline: none;
+}
+
+:disabled {
+    background-color: transparent;
+}
+
+/**
+ * Multiple Select2
+ */
+.select2-container--material {
+    width: 100% !important;
+    min-width: 300px;
+    font-size: 34px;
+
+      /**
+   * Textbox
+   */
+      /**
+   * Dropdown
+   */
+      /**
+   * Options
+   */
+      /**
+   * Focused textbox
+   */
+      /**
+   * Disabled textbox
+   */
+}
+.select2-container--material ::-webkit-input-placeholder {
+    color: inherit;
+}
+.select2-container--material :-ms-input-placeholder {
+    color: inherit;
+}
+.select2-container--material ::-ms-input-placeholder {
+    color: inherit;
+}
+.select2-container--material ::placeholder {
+    color: inherit;
+}
+.select2-container--material .select2-selection {
+    /* @extend input */
+    overflow: visible;
+    font: inherit;
+    touch-action: manipulation;
+    margin: 0;
+    line-height: inherit;
+    border-radius: 0;
+    box-sizing: inherit;
+    /* @extend .form-control */
+    display: block;
+    width: 100%;
+    color: #666a6d;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 0.5rem 0 0.6rem;
+//    font-size: 1rem;
+    line-height: 1.5;
+    background-color: transparent;
+    background-image: none;
+    border-radius: 0;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+    /* @extend input[type=text] */
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    outline: 0;
+    width: 100%;
+    font-size: 2rem;
+    box-shadow: none;
+    transition: all 0.3s;
+    min-height: 3.2rem;
+}
+.select2-container--material .select2-selection .select2-selection__rendered {
+    padding-left: 0;
+}
+.select2-container--material .select2-selection--single .select2-selection__rendered {
+    float: left;
+}
+.select2-container--material .select2-selection--single .select2-selection__arrow {
+    float: right;
+}
+.select2-container--material .select2-selection--multiple {
+      /**
+   * Multiple selected options
+   */
+      /**
+   * Multiple selected option clear button
+   */
+}
+.select2-container--material .select2-selection--multiple .select2-selection__rendered {
+    width: 100%;
+}
+.select2-container--material .select2-selection--multiple .select2-selection__rendered li {
+    list-style: none;
+}
+.select2-container--material .select2-selection--multiple .select2-selection__choice {
+    /* @extend .mdl-chip */
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 16px;
+    background-color: #dedede;
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.87);
+    margin: 2px 0;
+    font-size: 0;
+    white-space: nowrap;
+    /* @extend .mdl-chip__text */
+    font-size: 13px;
+    vertical-align: middle;
+    display: inline-block;
+    float: left;
+    margin-right: 8px;
+    margin-bottom: 4px;
+}
+.select2-container--material .select2-selection--multiple .select2-selection__choice__remove {
+    /* Hide default content */
+    font-size: 0;
+    opacity: 0.38;
+    cursor: pointer;
+    float: right;
+    margin-top: 4px;
+    margin-right: -6px;
+    margin-left: 6px;
+    transition: opacity;
+}
+.select2-container--material .select2-selection--multiple .select2-selection__choice__remove::before {
+    content: "cancel";
+    /* @extend .material-icons */
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+    color: #000;
+}
+.select2-container--material .select2-selection--multiple .select2-selection__choice__remove:hover {
+    opacity: 0.54;
+}
+.select2-container--material .select2-search--inline .select2-search__field {
+    width: 100%;
+    margin-top: 0;
+    /* Match input[type=text] */
+    height: 34px;
+    line-height: 1;
+}
+.select2-container--material .select2-dropdown {
+    border: 0;
+}
+.select2-container--material .select2-dropdown .select2-search__field {
+    min-height: 2.1rem;
+    margin-bottom: 16px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    transition: all 0.3s;
+    margin-top: -20px;
+    font-weight: 200;
+}
+.select2-container--material .select2-dropdown .select2-search__field:focus {
+    border-bottom: 1px solid #4285f4;
+    box-shadow: 0 1px 0 0 #4585f4;
+}
+.select2-container--material .select2-results__options {
+    /* @extend .zf-shadow-depth* */
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    /* @extend .dropdown-content */
+    background-color: #fff;
+    margin: 0;
+    min-width: 100px;
+    max-height: 650px;
+    overflow-y: auto;
+    z-index: 999;
+    will-change: width, height;
+    /* @extend .dropdown-content inline styles */
+}
+.select2-container--material .select2-results__option {
+    /* @extend .dropdown-content li */
+    cursor: pointer;
+    clear: both;
+    color: rgba(0, 0, 0, 0.87);
+    line-height: 1.5rem;
+    text-align: left;
+    text-transform: none;
+    /* @extend .dropdown-content li>a, .dropdown-content li>span */
+    font-size: 1.2rem;
+    display: block;
+    padding: 1rem;
+      /**
+   * Disabled options
+   */
+      /**
+   * Selected option
+   */
+      /**
+   * Active/hovered option
+   */
+}
+.select2-container--material .select2-results__option[aria-disabled="true"] {
+    /* @extend .select-dropdown li.disabled */
+    color: rgba(0, 0, 0, 0.3);
+    background-color: transparent !important;
+    cursor: context-menu;
+    /* @extend .disabled */
+    cursor: not-allowed;
+}
+.select2-container--material .select2-results__option[aria-selected="true"] {
+    /* @extend .dropdown-content li:active, .dropdow-content li:hover */
+    color: #4285f4;
+    background-color: #eee;
+}
+.select2-container--material .select2-results__option--highlighted[aria-selected] {
+    background-color: #ddd;
+}
+.select2-container--material.select2-container--focus .select2-selection {
+    /* @extend input[type=text]:focus */
+    border-bottom: 1px solid #4285f4;
+    box-shadow: 0 1px 0 0 #4585f4;
+}
+.select2-container--material .select2-selection:hover {
+    /* @extend input[type=text]:focus */
+    border-bottom: 1px solid #4285f4;
+    box-shadow: 0 1px 0 0 #4585f4;
+}
+.select2-container--material.select2-container--disabled .select2-selection {
+    /* @extend .select-wrapper input.select-dropdown:disabled */
+    color: rgba(0, 0, 0, 0.3);
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.select2-container--material.select2-container--disabled.select2-container--focus .select2-selection {
+    box-shadow: none;
+}
+
+.control-area {
+    position: absolute;
+    top: 90px;
+    right: 50px;
+    height: 160px;
+    width: 160px;
+}
+.control-up {
+    top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50px;
+    height: 50px;
+    border: 1px solid gray;
+    border-radius: 50px;
+    background-color: rgba(255,255,255,0.6);
+}
+.control-up::after {
+    content: '';
+    background-image: url(../fingerprint_48px.svg);
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    line-height: 50px;
+    font-size: 24px;
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    background-position: 35% 40%;    
+}
+.control-up:hover {
+    border: 2px solid #4285f4;
+}
+.control-down {
+    width: 50px;
+    height: 50px;
+    border: 1px solid gray;
+    border-radius: 50px;
+    top: 110px;
+    left: 55px;
+    position: absolute;
+    background-color: rgba(255,255,255,0.6);
+}
+.control-down:hover {
+    border: 2px solid #4285f4;
+}
+.control-down::after {
+    content: '';
+    background-image: url(../fingerprint_48px.svg);
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    line-height: 50px;
+    font-size: 24px;
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    background-position: 35% 40%;    
+}
+
+.control-left {
+    top: 55px;
+    left: 0px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid gray;
+    border-radius: 50px;
+    background-color: rgba(255,255,255,0.6);
+    vertical-align: middle;
+    position: absolute;
+}
+.control-left:hover {
+    border: 2px solid #4285f4;
+}
+.control-left::after {
+    content: '';
+    background-image: url(../fingerprint_48px.svg);
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    line-height: 50px;
+    font-size: 24px;
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+    -webkit-transform: scale(-1,1);
+    transform: scale(-1,1);
+    display: inline-block;
+}
+.control-right {
+    right: 0px;
+    width: 60px;
+    height: 60px;
+    border: 1px solid gray;
+    border-radius: 50px;
+    background-color: rgba(255,255,255,0.6);
+    vertical-align: middle;
+    position: absolute;
+    top: 50px;
+}
+.control-right:hover {
+    border: 2px solid #4285f4;
+}
+.control-right::after {
+    content: '';
+    background-image: url(../fingerprint_48px.svg);
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    line-height: 60px;
+    font-size: 26px;
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    background-position: 35% 40%;    
+}
+
+#focusLineX {
+    stroke: rgba(28,28,28,0.1);
+    stroke-width: 12px;
+}
+#focusLineY {
+    stroke: rgba(28,28,28,0.1);
+    stroke-width: 12px;
+}
+.select-alternates {
+    display: inline;
+}
+#select-alternates .dropdown-toggle:hover {
+    border-bottom: 1px solid #4285f4;
+    box-shadow: 1 1px 0 0 #4285f4;
+}
+#select-alternates .dropdown-toggle {
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    box-shadow: 1 1px 0 0 rgba(0,0,0,0.15);
+}
+#select-alternates .dropdown-toggle::after {
+    display: none;
+}

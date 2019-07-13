@@ -21,7 +21,7 @@ if [ ! -d "${rootpath}/data/${project}" ]; then
 fi
 
 dataRds=`ls ${rootpath}/data/${project}/*.Rds | head -1`
-dataRdsEnd="${rootpath}/data/${project}/data_uncorrected/nda17.Rds"
+dataRdsEnd="${rootpath}/data/${project}/data_uncorrected/nda18.Rds"
 if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
     echo "Detected initial data Rds in project data directory, start setup..."
     mkdir -p "${rootpath}/data/${project}/logs/"
@@ -59,7 +59,7 @@ if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
     chown -R www-data:www-data "${rootpath}/data/${project}/"
     chown -R processing:processing "${rootpath}/data/${project}/logs"
     chmod gou+rw "${rootpath}/data/${project}/logs"
-elif [ -f "${rootpath}/data/${project}/data_uncorrected/nda17.Rds" ]; then
+elif [ -f "${rootpath}/data/${project}/data_uncorrected/nda18.Rds" ]; then
     echo "Setup found. Nothing needs to be done."
     exit
 else

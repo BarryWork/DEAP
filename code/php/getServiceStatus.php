@@ -5,6 +5,7 @@
     $vinfo_status = shell_exec("node /var/www/html/code/js/getVinfoStatus.js ". json_decode($rserve_status)[1]);
     $output["Vinfo-status"] = json_decode($vinfo_status);
     $output["Ontology-status"] = json_decode(shell_exec("node /var/www/html/code/js/getOntologyServerStatus.js"));
+    $output["ip-address"] = $_SERVER['REMOTE_ADDR'];
 
     echo json_encode($output);
     return json_encode($output);

@@ -42,6 +42,8 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && chown www-data:www-data /var/www/html/code/php/passwords.json \
     && cp /var/www/html/code/php/AC_ndar_nih_gov.php /var/www/html/code/php/AC.php \
     && cp /var/www/html/applications/User/login_ndar_nih_gov.php /var/www/html/applications/User/login.php \
+    && cd /var/www/html/code/js \
+    && npm install . \
     && cd /var/www/html/applications/Ontology/searchServer \
     && npm install . \
     && cd /var/www/html/applications/ModelBuilder/runner \
@@ -57,7 +59,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && ROOT_CRONTAB=$CRONTAB_DIR/root \
     && echo '*/1 * * * * /usr/bin/node /var/www/html/applications/Ontology/searchServer/index.js >> /var/www/html/data/ABCD/logs/searchServer.log 2>&1' > $PROCESSING_CRONTAB \
     && echo '*/1 * * * * cd /var/www/html/applications/ModelBuilder/viewer/recipes; git add `ls *.json`; git commit -m "`date`"' >> $PROCESSING_CRONTAB \
-    && echo '*/5 * * * * /var/www/html/applications/ModelBuilder/Rserve/run_rserve.sh >> /var/www/html/data/ABCD/logs/Rserve.log 2>&1' >> $ROOT_CRONTAB \
+    && echo '*/15 * * * * /var/www/html/applications/ModelBuilder/Rserve/run_rserve.sh >> /var/www/html/data/ABCD/logs/Rserve.log 2>&1' >> $ROOT_CRONTAB \
     && chown processing:crontab $PROCESSING_CRONTAB \
     && chown root:crontab $ROOT_CRONTAB \
     && chmod 0600 $PROCESSING_CRONTAB \
@@ -85,7 +87,7 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo '/bin/bash /var/www/html/code/setup.sh;' >> $ND_ENTRYPOINT \
          && echo 'if [ -d "/var/www/html/data/ABCD/NewDataExpo/variableInfo" ]; then' >> $ND_ENTRYPOINT \
          && echo '/usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R &' >> $ND_ENTRYPOINT \
-         && echo '/usr/bin/Rscript /var/www/html/applications/Scores/R/transfer.R &' >> $ND_ENTRYPOINT \
+         && echo 'sudu -u www-data /usr/bin/Rscript /var/www/html/applications/Scores/R/transfer.R &' >> $ND_ENTRYPOINT \
          && echo 'fi' >> $ND_ENTRYPOINT \
          && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
          && echo "ServerName localhost" >> /etc/apache2/apache2.conf \
@@ -99,7 +101,7 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     r-cran-rserve \
     zlib1g-dev \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && rm -rf /var/lib/apt/lists/* /var/tmp/* \
     && Rscript -e 'install.packages("gamm4", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("rjson", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("stargazer", repos="https://cran.rstudio.com")' \
@@ -107,9 +109,13 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     && Rscript -e 'install.packages("OpenMx", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("knitr", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("MuMIn", repos="https://cran.rstudio.com")' \
+    && Rscript -e 'install.packages("https://cran.r-project.org/bin/macosx/el-capitan/contrib/3.4/MuMIn_1.42.1.tgz", repos=NULL, type="source")' \
     && Rscript -e 'install.packages("R.matlab", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("Rserve", repos="https://cran.rstudio.com")' \
-    && Rscript -e 'install.packages("tableone", repos="https://cran.rstudio.com")'
+    && Rscript -e 'install.packages("foreach", repos="https://cran.rstudio.com")' \
+    && Rscript -e 'install.packages("doParallel", repos="https://cran.rstudio.com")' \
+    && Rscript -e 'install.packages("jsonlite", repos="https://cran.rstudio.com")' \
+    && Rscript -e 'install.packages("tableone", repos="https://cran.rstudio.com")' 
 
 EXPOSE 80
 ENTRYPOINT ["/deap-startup.sh"]

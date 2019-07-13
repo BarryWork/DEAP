@@ -1,5 +1,5 @@
 library(rjson)
-data = readRDS("/var/www/html/data/ABCD/data_uncorrected/nda17.Rds");
+data = readRDS("/var/www/html/data/ABCD/data_uncorrected/nda18.Rds");
 
 data.dic = data.frame(field_name = names(data), 
                       class = as.character(unlist(lapply(data, class))),  
@@ -21,8 +21,18 @@ censor = function(x, fraction=.005) {
 
 #data = data[which(data$eventname == "baseline_year_1_arm_1"),]
 vlist = names(data)
+
+
+if(length(list.files("/var/www/html/data/ABCD/NewDataExpo/variableInfo/")) > 60000){
+    #variable info already loaded, don't need to run again
+    q()
+}
+
+
 for(v in vlist){
     cat(v);
+    temp = data[,c("eventname", v)]
+    event_sm = summary(temp[!is.na(temp[[v]]),]$eventname)
     fvar = levels(as.factor(data[[v]]));
     fvar_length = length(fvar);
     line = "";
@@ -85,6 +95,6 @@ for(v in vlist){
 #        line = list(x = density(data[v]$x ,x = density(data[v]$y)))
 #    }
 
-    s = list(summary = sm, factors = summary(fvar), histograms = hs);
+    s = list(summary = sm, factors = summary(fvar), histograms = hs, event_summary = event_sm);
     write(toJSON(s),paste(sep = "", "/var/www/html/data/ABCD/NewDataExpo/variableInfo/",v,".json")) 
 }

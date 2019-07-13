@@ -46,10 +46,11 @@
  }
  $fn = "/var/www/html/data/ABCD/Filter/data/filterSets_".$project_name."_".$key.".json";
  $data = array();
- if (is_readable($fn)) {
-   $data = json_decode(file_get_contents($fn), TRUE);
- }
+ //if (is_readable($fn)) {
+ //  $data = json_decode(file_get_contents($fn), TRUE);
+ //}
  $found = false;
+ /*
  foreach ($data as &$s) {
    if ($key === $s['key']) {
      $s['sets'] = $set;
@@ -59,6 +60,7 @@
      break;
    }
  }
+ */
  if ($found == false) {
     $data[] = array( "key" => $key, "set" => $set, "code" => $code, "which" => $which);
  }

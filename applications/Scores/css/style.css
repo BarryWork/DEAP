@@ -274,4 +274,11 @@ font: 10px sans-serif;
         white-space: nowrap;
         display: inline-flex;
     }
-    
+    .bg-primary {
+        background-color: green !important;
+    }
+    .card-text a:link {
+        background-color: white;
+        padding-left: 2px;
+        padding-right: 2px;
+    }

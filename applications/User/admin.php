@@ -37,10 +37,10 @@
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 
-	<link href="/css/bootstrap.css" rel="stylesheet">
-	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link href="./css/font-awesome.min.css" rel="stylesheet">
-	<link href="/css/bootswatch.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/bootswatch.css" rel="stylesheet">
 
   <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/start/jquery-ui.css" rel="stylesheet" type="text/css"/>
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -110,8 +110,8 @@
   <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
   <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="//code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="/js/tmpl.min.js?_=2345"></script>
-  <script type="text/javascript" src="/js/md5-min.js"></script>
+  <script type="text/javascript" src="js/tmpl.min.js?_=2345"></script>
+  <script type="text/javascript" src="js/md5-min.js"></script>
   <!-- <script type="text/javascript" src="/js/picnet.table.filter.min.js"></script> -->
 
   <script src="/js/bootstrap.min.js"></script>
@@ -123,7 +123,7 @@
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand" href="/applications/enroll/tableview.php">View Contacts</a>
+        <a class="brand" href="/index.php">Home</a>
         <a class="brand" href="/code/php/logout.php">Logout</a>
       </div>
     </div>

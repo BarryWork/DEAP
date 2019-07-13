@@ -147,8 +147,11 @@ function scatter(data, dep, ind, group,id,line_data,line_color_list){
     function barplot_marginal(id,color,groupid,id_tag){
 
 
-
-        data.sort(function(a,b){ return a[ind] > b[ind] ? 1 : -1; }) 
+	var histogram = d3.layout.histogram()
+        .frequency(true)
+        .bins(70)
+        
+	    data.sort(function(a,b){ return a[ind] > b[ind] ? 1 : -1; }) 
         data_x_min = data[0][ind];
         data_x_max = data[data.length-1][ind];
         data_x = [];
@@ -178,12 +181,14 @@ function scatter(data, dep, ind, group,id,line_data,line_color_list){
             .attr("fill",color)
             .attr("fill-opacity", function(d){ return x(d.x) < 0 || x(d.x) > width ? "0" : "0.3" })
             .attr("x", function(d) { return x(d.x) + 1; })
-            .attr("y", function(d) { return y_hist(d.y); })
+            .attr("y", function(d) { return x_hist(d.y)/3; })
             .attr("width", x(histogram(data_x)[0].dx + histogram(data_x)[0].x) - x(histogram(data_x)[0].x) - 1)
-            .attr("height", function(d) { return 20 -  y_hist(d.y);  })
-            .attr("transform", "translate(0,-"+(margin.top/3)+")")
+            .attr("height", function(d) { return (20 -  x_hist(d.y))/3;  })
+            .attr("transform", "translate(0,-"+(margin.top/5)+")")
 
-
+	var histogram = d3.layout.histogram()
+        .frequency(true)
+        .bins(70)
 
         histogram.range([data_y_min,data_y_max])
         svg.selectAll(".bar-y")
@@ -193,9 +198,9 @@ function scatter(data, dep, ind, group,id,line_data,line_color_list){
             .attr("fill",color)
             .attr("fill-opacity",function(d){ return y(d.x) < 0 || y(d.x) > height ? "0" : "0.3" })
             .attr("x", function(d) { return y(d.x) + 1; })
-            .attr("y", function(d) { return y_hist(d.y); })
+            .attr("y", function(d) { return y_hist(d.y)/3; })
             .attr("width",  y(histogram(data_y)[0].x)-y(histogram(data_y)[0].dx + histogram(data_y)[0].x)  - 1)
-            .attr("height", function(d) { return 20 - y_hist(d.y); })
+            .attr("height", function(d) { return (20 - y_hist(d.y))/3; })
             .attr("transform", "rotate(90)translate(-"+(y(histogram(data_y)[0].x)-y(histogram(data_y)[0].dx + histogram(data_y)[0].x)  - 1)+",-"+(width+margin.left/2)+")")
 
     }

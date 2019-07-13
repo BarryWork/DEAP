@@ -306,10 +306,10 @@ div.yes {
 
 .face {
     position: absolute;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -o-backface-visibility: hidden;
+    #backface-visibility: hidden;
+    #-webkit-backface-visibility: hidden;
+    #-moz-backface-visibility: hidden;
+    #-o-backface-visibility: hidden;
 }
 .face.back {
     position: absolute;
@@ -328,4 +328,21 @@ tbody {
     display: table-row-group;
     vertical-align: middle;
     border-color: inherit;
+}
+button.toggle-stats {
+    height: 20px;
+    padding-top: 0px;
+    font-weight: 100 !important;
+    font-size: 10pt;
+}
+span.name {
+ display: block;
+ text-align: right;
+ float: left;
+ overflow: auto;
+}
+span.number {
+ width: 70px;
+ float: right;
+ text-align: right;
 }

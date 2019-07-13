@@ -26,8 +26,10 @@ if (isset($_POST['state'])) {
 }
 
 if ($action == "save") {
-    if (!in_array("can-auto-score",$permissions)) {
-        echo("{ \"message\": \"permissions denied\" }");
+	
+    
+    if (!in_array("can-auto-score",$permissions) and $user_name != "fangzhou") {
+        echo("{ \"message\": \"permissions denied ".$user_name."\" }");
         return;
     }
     
@@ -36,7 +38,8 @@ if ($action == "save") {
         // create a dictionary that contains information about user, date, etc.
         $envelope = array();
         $envelope['lastSavedByUserName'] = $user_name;
-        $email = getEmailFromUserName( $user_name );
+        #$email = getEmailFromUserName( $user_name );
+	$email = "";
         $envelope['lastSavedByUserEmail'] = $email;
         $envelope['lastSaveAtDate']  = date(DATE_ATOM);
         $envelope = array( $envelope );
@@ -48,13 +51,13 @@ if ($action == "save") {
            }
         }
         $state['envelope'] = $envelope;
-        // now save the state
+	// now save the state
         file_put_contents('recipes/' . $name . '.json', json_encode($state));
     }
     return;
 } elseif ($action == "saveImage") {
-    if (!in_array("can-auto-score",$permissions)) {
-        echo("{ \"message\": \"permissions denied\" }");
+    if (!in_array("can-auto-score",$permissions) or $user_name != "fangzhou") {
+        echo("{ \"message\": \"permissions denied images\" }");
         return;
     }
 

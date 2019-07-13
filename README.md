@@ -32,7 +32,7 @@ A script is provided to launch the container, [run](https://github.com/ABCD-STUD
 Provide a directory that is outside of the docker container to store the volatile data (analysis scripts and new measures). At the first startup this directory should also contain a single Rds file which contains the data as processed by https://github.com/ABCD-STUDY/analysis-nda17.
 ```
 mkdir -p assets
-cp <data nda17.Rds> assets/
+cp <data nda18.Rds> assets/
 ./run deap deap 80 `pwd`/assets
 ```
 

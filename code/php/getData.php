@@ -16,14 +16,14 @@
   if (!$user_name || $user_name == "-1")
      return; // nothing
   //syslog(LOG_EMERG, "user name: ".$user_name);
-  $attachment_location = $_SERVER["DOCUMENT_ROOT"] . "/data/ABCD/data_uncorrected/nda17.Rds";
+  $attachment_location = $_SERVER["DOCUMENT_ROOT"] . "/data/ABCD/data_uncorrected/nda18.Rds";
   if (file_exists($attachment_location)) {
       header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
       header("Cache-Control: public"); // needed for internet explorer
       header("Content-Type: application/Rds");
       header("Content-Transfer-Encoding: Binary");
       header("Content-Length:".filesize($attachment_location));
-      header("Content-Disposition: attachment; filename=\"nda17.Rds\"");
+      header("Content-Disposition: attachment; filename=\"nda18.Rds\"");
       readfile($attachment_location);
       die();        
   } else {

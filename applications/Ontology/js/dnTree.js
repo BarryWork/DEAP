@@ -364,15 +364,23 @@ treeJSON = d3.json("/applications/Ontology/hierarchy.php?_v=&entry=root", functi
     }
 
     // Toggle children function
-    var lastOpen = null;
+    var lastOpen = [];
+    var lastOpenIdx = -1;
     d3.select("body").on("keydown", function(e) {
 	// there is a last undo step
 	if (lastOpen === null || d3.event.target === jQuery('#search') || d3.event.keyCode !== 85) {
 	    return;
 	}
-	toggleChildren(lastOpen);
-	update(lastOpen);
-	centerNode(lastOpen);
+        if (lastOpenIdx < 0) {
+            return; // do nothing
+        }
+        var lo = lastOpen[lastOpenIdx];
+	toggleChildren(lo, false);
+	update(lo);
+	centerNode(lo);
+        lastOpen.splice(lastOpenIdx,1);
+        lastOpenIdx--;
+        console.log("got : " + lastOpen.length);
     });
 
     function toggleAll(d) {
@@ -381,8 +389,9 @@ treeJSON = d3.json("/applications/Ontology/hierarchy.php?_v=&entry=root", functi
 	    toggle(d);
 	}
     }
-    
-    function toggleChildren(d) {
+
+    // if we get a boolean remember we will add this keystroke to the undo buffer (prevents click getting added again to undo during undo)
+    function toggleChildren(d, remember) {
         // the open flag seems to count what is visible, todo: how to toggle all off but the current one
         if (typeof d.open == 'undefined')
             d.open = true;
@@ -413,8 +422,12 @@ treeJSON = d3.json("/applications/Ontology/hierarchy.php?_v=&entry=root", functi
 	    d._children = d.children;
 	    delete d.children;
 	} else {
-	    console.log('remember this lastOpen');
-	    lastOpen = d;
+            if (typeof remember === 'undefined' || remember) {
+	        console.log('remember this lastOpen');
+                // only remember if we are not undo-ing
+	        lastOpen.push(d);
+                lastOpenIdx++;
+            }
 	    if (typeof d._children === "undefined") {
                 // if this takes too long d might be something else already
                 (function(d) {
