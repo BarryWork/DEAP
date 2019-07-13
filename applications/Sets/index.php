@@ -83,7 +83,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
     <div class="container-fluid" style="margin-top: 10px;">
       <div class="row">
         <div class="col-md-12">
-    <p class="tut-p">Define sets of variables that can be used in other DEAP applications. Start by searching for a measure of interest using the search field on the right. Highlight the set on the left you want to add the measure to and press the measures "+" button next to the element name for that variable. If you attempt to change a set marked as "public", a copy of that set will be created. You can change entries in the copy but not in the "public" set.</p>
+    <p class="tut-p">Define sets of variables that can be used in other DEAP applications. Start by searching for a measure of interest using the search field on the right. Highlight the set on the left you want to add the measure to and press the measures "+" button next to the element name for that variable. If you attempt to change a set marked as "public", a copy of that set will be created for your user. You can change entries in your users copy but not in the "public" set.</p>
         </div>
       </div>
       <div class="row">
