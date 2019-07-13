@@ -86,7 +86,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
   <script src="js/jquery-3.2.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/select2.full.min.js"></script>
+  <script src="js/select2.min.js"></script>
   <script src="js/d3.v3.min.js"></script>
  <!--  <script type="text/javascript" src="/js/d3/d3.layout.js"></script> -->
  <!--  <script src="js/highlight-js.js"></script> -->
