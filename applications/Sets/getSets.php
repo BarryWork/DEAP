@@ -24,6 +24,10 @@ if (isset($_GET['project'])) {
 $fn_all = "/var/www/html/data/".$project."/Sets/data/sets_".$project."_all.json";
 $fn = "/var/www/html/data/".$project."/Sets/data/sets_".$project."_".$user_name.".json";
 
+if (!is_dir("/var/www/html/data/".$project."/Sets/data/")) {
+  // dir doesn't exist, make it
+    mkdir("/var/www/html/data/".$project."/Sets/data", 0777, true);
+}
 if (!file_exists($fn)) {
     file_put_contents($fn, json_encode(array()));
 }
