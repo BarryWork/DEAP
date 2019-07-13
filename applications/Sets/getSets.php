@@ -21,8 +21,8 @@ if (isset($_GET['project'])) {
     $project = "ABCD";
 }
 
-$fn_all = "data/sets_".$project."_all.json";
-$fn = "data/sets_".$project."_".$user_name.".json";
+$fn_all = "/var/www/html/data/".$project."/Sets/data/sets_".$project."_all.json";
+$fn = "/var/www/html/data/".$project."/Sets/data/sets_".$project."_".$user_name.".json";
 
 if (!file_exists($fn)) {
     file_put_contents($fn, json_encode(array()));
