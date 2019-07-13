@@ -32,7 +32,14 @@ function getSets() {
     jQuery.getJSON('getSets.php', function(data) {
 	if (data == null)
 	    return;
-	jQuery('.num-sets').text(data.length);
+	if (data.length == 0)
+	    jQuery('.num-sets').text("no sets");
+	else {
+	    if (data.length == 1)
+		jQuery('.num-sets').text(data.length + " set");
+	    else
+		jQuery('.num-sets').text(data.length + " sets");
+	}
 	for (var i = 0; i < data.length; i++) {
 	    displaySet(data[i]);
 	}
