@@ -3,6 +3,10 @@
 session_start();
 include("../../code/php/AC.php");
 $user_name = check_logged();
+if($user_name == -1){
+   return array("Error" => "Login check failed");
+}
+
 if (isset($_SESSION['project_name']))
     $project_name = $_SESSION['project_name'];
 else {
