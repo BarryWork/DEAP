@@ -64,7 +64,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
     <div class="container-fluid" style="margin-top: 10px;">
       <div class="row">
         <div class="col-md-12">
-    <p class="tut-p">The co-occurrence matrix for sets list the combinations of variables present in the data. For factor variables we are using the factor levels, for continuous variables we use the lower and upper quartiles (.25, .75) to produce three categories. If less than 10 levels are found for a continuous variable it is treated as a factor variable. Select a set from the drop-down menu to start the algorithm. Co-occurrent entries between all variables in the selected set are displayed in a tree-view. Often occurring combinations of values use up more space.</p>
+                  <p class="tut-p">The co-occurrence matrix for sets list the combinations of variables present in the data. If there are many sparsely populated co-occuring variable combinations model fits can be impacted. To generate this visualization factor variables are included with their factor levels, for continuous variables we use the lower and upper quartiles (.25, .75) to produce three categories. If less than 10 levels are found for a continuous variable it is treated as a factor variable. Select a set from the drop-down menu to start the algorithm. Co-occurrent entries between all variables in the selected set are displayed in a rectangular treemap with often occurring combinations of values using up more space. This visualization is only useful for managable number of variables. Usually less than 20.</p>
         </div>
       </div>
       <div class="row">
