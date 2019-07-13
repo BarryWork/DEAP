@@ -28,7 +28,7 @@ function addOneMeasure( meas ) {
     }
     
     // ask the system to return this measure and add it to allMeasures (if it does not exist already)
-    return jQuery.getJSON('runR.php', { 'value': meas }, function(data) {
+    return jQuery.getJSON('../Filter/runR.php', { 'value': meas }, function(data) {
         // got the values, now add to allMeasures (merge with existing)
         var k  = Object.keys(allMeasures);
         k.splice(k.indexOf('src_subject_id'),1);
