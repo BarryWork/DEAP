@@ -93,7 +93,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
             <div style = "z-index:9; margin-top: 0px;">
                <i class="fa fa-plus-circle add-set" style="font-size:78px;color:red;margin:10px;cursor: pointer;"><span style="font-size: 12pt;">Add a new set</span></i>
             </div>
-            <div class="pull-left" style="color: gray; margin-top: 20px; font-weight: 200;">There are currently <span class="num-sets"></span> sets.</div>
+            <div class="pull-left" style="color: gray; margin-top: 20px; font-weight: 200;">There are currently <span class="num-sets"></span>.</div>
           </div>
           <div id="cards" style="margin-left: 0px;"></div>
         </div>
