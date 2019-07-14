@@ -168,7 +168,17 @@ function createGraph() {
 	    belowThreshold++;
 	}
     }
-    console.log("There are " + belowThreshold + " entries below the threshold that have been ignored.");
+    // calculate the total number of combinations possible
+    var totalComp = 0;
+    for (var i = 0; i < meas.length; i++) {
+	if (i == 0) {
+	    totalComp = allMeasuresStat[meas[i]].levels.length;
+	} else {
+	    totalComp *= allMeasuresStat[meas[i]].levels.length;
+	}
+    }
+    
+    console.log("There are " + belowThreshold + " entries below the threshold that have been ignored. The total number of possible combinations is " + totalComp + ".");
     // now render the treeview
     createTreemap(data, names);
 }
