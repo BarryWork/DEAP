@@ -162,6 +162,8 @@ function createGraph() {
             //}
             data['children'].push(entry);
 	} else {
+	    // It would be good to identify offending levels (or variables) in these cases.
+	    // Such entries should be sampled more or, should be removed to reduce noise in the model estimate.
 	    belowThreshold++;
 	}
     }
