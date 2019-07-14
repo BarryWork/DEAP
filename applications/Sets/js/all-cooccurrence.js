@@ -136,12 +136,9 @@ function createGraph() {
                 names.push(meas[j] + " ["+ allMeasuresStat[meas[j]]['type'] +"]");
             // add a combination if it does not exist yet
 	    var a = allMeasuresStat[meas[j]]['levels'].indexOf(''+allMeasuresStat[meas[j]]['factors'][i]);
-            if (a > occThreshold) {
+            if (a > -1) {
                 comb.push( allMeasuresStat[meas[j]]['factors'][i] );
             } else {
-		if (a > -1) {
-		    belowThreshold++;
-		}
                 valid = false;
             }
         }
@@ -156,14 +153,19 @@ function createGraph() {
             combinations[key]++;
         }
     }
-    console.log("Found " + (Object.keys(combinations).length + belowThreshold) + " different combinations of values (" + belowThreshold + " below the threshold of " + occThreshold + ")");
+    console.log("Found " + (Object.keys(combinations).length) + " different combinations of values.");
     for (var key in combinations) {
-        var entry = { "name": key, "total": combinations[key]+1, 'children': [] };
-        //for(var k in combinationsKeys[key]) {
-        //    entry['children'].push({ "name": k, 'total': 1 });
-        //}
-        data['children'].push(entry);
+	if (compbinations[key] > occThreshold) {
+            var entry = { "name": key, "total": combinations[key]+1, 'children': [] };
+            //for(var k in combinationsKeys[key]) {
+            //    entry['children'].push({ "name": k, 'total': 1 });
+            //}
+            data['children'].push(entry);
+	} else {
+	    belowThreshold++;
+	}
     }
+    console.log("There are " + belowThreshold + " entries below the threshold that have been ignored.");
     // now render the treeview
     createTreemap(data, names);
 }
