@@ -114,6 +114,9 @@ function addOneMeasure( meas ) {
     });
 }
 
+int occThreshold = 1; // don't show if there is only one entry, just count up how many look loke this
+int belowThreshold = 0; // count up the entries below threshold (but valid)
+
 function createGraph() {
     // add the display to the #treeview location on the page
 
@@ -132,9 +135,13 @@ function createGraph() {
             if (i === 0)
                 names.push(meas[j] + " ["+ allMeasuresStat[meas[j]]['type'] +"]");
             // add a combination if it does not exist yet
-            if (allMeasuresStat[meas[j]]['levels'].indexOf(''+allMeasuresStat[meas[j]]['factors'][i]) > -1) {
+	    var a = allMeasuresStat[meas[j]]['levels'].indexOf(''+allMeasuresStat[meas[j]]['factors'][i]);
+            if (a > occThreshold) {
                 comb.push( allMeasuresStat[meas[j]]['factors'][i] );
             } else {
+		if (a > -1) {
+		    belowThreshold++;
+		}
                 valid = false;
             }
         }
@@ -149,7 +156,7 @@ function createGraph() {
             combinations[key]++;
         }
     }
-    console.log("Found " + Object.keys(combinations).length + " different combinations of values");
+    console.log("Found " + (Object.keys(combinations).length + belowThreshold) + " different combinations of values (" + belowThreshold + " below the threshold of " + occThreshold + ")");
     for (var key in combinations) {
         var entry = { "name": key, "total": combinations[key]+1, 'children': [] };
         //for(var k in combinationsKeys[key]) {
