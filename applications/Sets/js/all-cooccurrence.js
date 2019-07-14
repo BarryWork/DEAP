@@ -114,8 +114,8 @@ function addOneMeasure( meas ) {
     });
 }
 
-int occThreshold = 1; // don't show if there is only one entry, just count up how many look loke this
-int belowThreshold = 0; // count up the entries below threshold (but valid)
+var occThreshold = 1; // don't show if there is only one entry, just count up how many look loke this
+var belowThreshold = 0; // count up the entries below threshold (but valid)
 
 function createGraph() {
     // add the display to the #treeview location on the page
