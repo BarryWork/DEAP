@@ -280,6 +280,7 @@ function createTreemap(percentages, names) {
 
 jQuery(document).ready(function() {
     getAllSets();
+    jQuery('#sets-list').select2();
 
     jQuery('#sets-list').on('change', function() {
 	var s = jQuery(this).find('option:selected').attr('item');
