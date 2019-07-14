@@ -13,6 +13,7 @@ function getAllSets() {
 	for (var i = 0; i < data.length; i++) {
 	    jQuery('#sets-list').append('<option item="' + data[i]['id'] + '">' + data[i]['name'] + ' (' + data[i]['variables'].length + ' variables)</option>');
 	}
+	jQuery('#sets-list').select2();
         //jQuery('#sets-list').selectpicker({ 'header': "Select a set" });
     });
 }
@@ -280,8 +281,7 @@ function createTreemap(percentages, names) {
 
 jQuery(document).ready(function() {
     getAllSets();
-    jQuery('#sets-list').select2();
-
+ 
     jQuery('#sets-list').on('change', function() {
 	var s = jQuery(this).find('option:selected').attr('item');
 
