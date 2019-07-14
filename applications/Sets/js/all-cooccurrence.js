@@ -155,7 +155,7 @@ function createGraph() {
     }
     console.log("Found " + (Object.keys(combinations).length) + " different combinations of values.");
     for (var key in combinations) {
-	if (compbinations[key] > occThreshold) {
+	if (combinations[key] > occThreshold) {
             var entry = { "name": key, "total": combinations[key]+1, 'children': [] };
             //for(var k in combinationsKeys[key]) {
             //    entry['children'].push({ "name": k, 'total': 1 });
