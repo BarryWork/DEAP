@@ -198,7 +198,7 @@ function createTreemap(percentages, names) {
         .attr("transform", "translate(.5,.5)");
 
     var last = names.pop();
-    jQuery('#treemap').append("<div><center style='font-size: 11pt;'><i>Co-occurrence of values in the variables " + names.join(", ") + " and " + last + ". There are " + percentages['children'].length + " unique combinations of values in the data.</i></center></div>");
+    jQuery('#treemap').append("<div><center style='font-size: 11pt;'><i>Co-occurrence of values in the variables " + names.join(", ") + " and " + last + ". There are " + (percentages['children'].length + belowThreshold) + " unique combinations of values in the data. " + belowThreshold + " of which are not displayed as they have an occupancy of less or equal to " + occThreshold + ".</i></center></div>");
 
     //d3.json("kinoko_takenoko.json", function(data) {
     //d3.json("party_asset.json", function(data) {
