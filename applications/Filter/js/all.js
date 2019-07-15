@@ -866,11 +866,16 @@ function addOneMeasure( meas ) {
         }
         // store this column in the localStorage
         if (storageAvailable('localStorage')) {
-            if (typeof allMeasures['src_subject_id'] !== 'undefined')
-                localStorage.setItem('src_subject_id', JSON.stringify(allMeasures['src_subject_id']));
-            if (typeof allMeasures['eventname'] !== 'undefined')
-                localStorage.setItem('eventname', JSON.stringify(allMeasures['eventname']));
-            localStorage.setItem(meas, JSON.stringify(allMeasures[meas]));
+	    // any store can fail if we have used up all the memory (5MB per site)
+	    try {
+		if (typeof allMeasures['src_subject_id'] !== 'undefined')
+                    localStorage.setItem('src_subject_id', JSON.stringify(allMeasures['src_subject_id']));
+		if (typeof allMeasures['eventname'] !== 'undefined')
+                    localStorage.setItem('eventname', JSON.stringify(allMeasures['eventname']));
+		localStorage.setItem(meas, JSON.stringify(allMeasures[meas]));
+	    } catch (e) {
+		console.log("Warning: Quota probably exceeded, no more values will be cached.");
+	    }
         }
     });
 }
