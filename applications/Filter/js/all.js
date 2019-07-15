@@ -304,9 +304,12 @@ function displayData(data, where) {
 	jQuery(where).children().remove();
 	str = '<div class="datas front face">';
 	let str_later = '';
-	//str += '<button class=\"btn-toggle-stats toggle-stats btn btn-sm btn-dark\">Table 1</button>';
-	max_per_page = 1500
-	hide_elements = 0
+        //str += '<button class=\"btn-toggle-stats toggle-stats btn btn-sm btn-dark\">Table 1</button>';
+        // The max per page should depend on the number of elements drawn, if we have a lot of variables in the equation
+        // We should show less elements. If we have only a single variable show more.
+        var variables = getUsedVariables();
+        max_per_page  = 1500/variables.length;
+        hide_elements = 0;
 	if(data.length < max_per_page){
 		max = 0
 	}else{
@@ -1058,43 +1061,45 @@ jQuery(document).ready(function() {
     setTimeout(function() { addOneMeasure('age'); addOneMeasure('rel_family_id'), addOneMeasure('rel_group_id'); addOneMeasure('abcd_site'); }, 0);
 });
 
+function getUsedVariables() {
+    var search = jQuery('.inputmeasures').val();
+    var variables = [];
+    try {
+        variables = search.match(/[\"\$]*[A-Za-z0-9_\.]+[\"\ ]*?/g).map(function(v){ return v.replace(/[\"\$]/g,''); });
+    } catch(e) {};
+    
+    // create unique list of variables
+    variables = variables.sort();
+    for (var i = 1; i < variables.length; i++) {
+        if (variables[i] == variables[i-1]) {
+            variables.splice(i,1);
+            i--;
+        }
+    }
+    
+    var languageKeywords = [ "has", "not", "and", "or", "visit", "numVisits", "unique", "quantile" ];
+    for (var i = 0; i < variables.length; i++) {
+        var idx = languageKeywords.indexOf(variables[i]);
+        if ( idx !== -1 || variables[i] == +variables[i]) {
+            variables.splice(i, 1);
+            i--; // check same position again because we removed an entry
+        }
+    }
+    
+    if (variables.length == 0) {
+        variables.push("src_subject_id");
+    }
+    return variables;
+}
 
 function zoomCalculate(){
-        
-        var search = jQuery('.inputmeasures').val();
-        var variables = [];
-        try {
-            variables = search.match(/[\"\$]*[A-Za-z0-9_\.]+[\"\ ]*?/g).map(function(v){ return v.replace(/[\"\$]/g,''); });
-        } catch(e) {};
-        
-        // create unique list of variables
-        variables = variables.sort();
-        for (var i = 1; i < variables.length; i++) {
-            if (variables[i] == variables[i-1]) {
-                variables.splice(i,1);
-                i--;
-            }
-        }
-        
-        var languageKeywords = [ "has", "not", "and", "or", "visit", "numVisits", "unique", "quantile" ];
-        for (var i = 0; i < variables.length; i++) {
-            var idx = languageKeywords.indexOf(variables[i]);
-            if ( idx !== -1 || variables[i] == +variables[i]) {
-                variables.splice(i, 1);
-                i--; // check same position again because we removed an entry
-            }
-        }
-        
-        if (variables.length == 0) {
-            variables.push("src_subject_id");
-        }
-        variables.forEach( function(v) { 
-            highlight('.yes', v);
-        });
-        variables.forEach( function(v) { 
-            highlight('.no', v);
-        });
-        jQuery('.loading').hide();
-        setZoom(zoomFactor);
-
+    var variables = getUsedVariables();
+    variables.forEach( function(v) { 
+        highlight('.yes', v);
+    });
+    variables.forEach( function(v) { 
+        highlight('.no', v);
+    });
+    jQuery('.loading').hide();
+    setZoom(zoomFactor);
 }
