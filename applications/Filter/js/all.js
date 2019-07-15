@@ -440,7 +440,7 @@ function showInfoWindow(event, t) {
         mmax = "";
         // search for the next entry
         for (var i = 1; i < allMeasures['src_subject_id'].length; i++) {
-          if (allMeasures[header[idWhat]][i] !== "" && allMeasures[header[idWhat]][i] !== mmin) {
+            if ( (allMeasures[header[idWhat]][i] !== "" && allMeasures[header[idWhat]][i] !== null) && allMeasures[header[idWhat]][i] !== mmin) {
               mmax = allMeasures[header[idWhat]][i]; // just show the first two as examples 
               break;
           }
