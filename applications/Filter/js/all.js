@@ -84,7 +84,9 @@ function highlight(where, what) {
         var sid = jQuery(this).attr('subjid');
         var vid = jQuery(this).attr('visitid');
         var need_light = jQuery(this).attr('light');
-	if(need_light == "on") return
+	// we could show only a single circle, but what if we have more variables? We could also show all of them and less pills
+	//if (need_light == "on")
+	//   return;
         var v = valueAr.indexOf(""+measure[sid][vid]) / (valueAr.length - 1);
         var col = parseInt(8 * v); // goes from 0 to valueAr.length
         // console.log("highlight: "+dat + " " + sid + " " + vid + " " + measure[sid][vid] + " val: .q" + col + "-9");
