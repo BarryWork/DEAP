@@ -433,36 +433,36 @@ function showInfoWindow(event, t) {
        return;
      }
 
-     var min = +allMeasures[header[idWhat]][0];
-     var max = min;
-     if (isNaN(min)) {
-        min = allMeasures[header[idWhat]][0];
-        max = "";
+     var mmin = +allMeasures[header[idWhat]][0];
+     var mmax = mmin;
+     if (isNaN(mmin)) {
+        mmin = allMeasures[header[idWhat]][0];
+        mmax = "";
         // search for the next entry
         for (var i = 1; i < allMeasures['src_subject_id'].length; i++) {
-          if (allMeasures[header[idWhat]][i] !== "" && allMeasures[header[idWhat]][i] !== min) {
-              max = allMeasures[header[idWhat]][i]; // just show the first two as examples 
+          if (allMeasures[header[idWhat]][i] !== "" && allMeasures[header[idWhat]][i] !== mmin) {
+              mmax = allMeasures[header[idWhat]][i]; // just show the first two as examples 
               break;
           }
         }
      } else {
          for (var i = 0; i < allMeasures['src_subject_id'].length; i++) {
              if (!isNaN(allMeasures[header[idWhat]][i])) {
-                 if (min > allMeasures[header[idWhat]][i])
-                     min = +allMeasures[header[idWhat]][i];
-                 if (max < allMeasures[header[idWhat]][i])
-                     max = +allMeasures[header[idWhat]][i];
+                 if (mmin > allMeasures[header[idWhat]][i])
+                     mmin = +allMeasures[header[idWhat]][i];
+                 if (mmax < allMeasures[header[idWhat]][i])
+                     mmax = +allMeasures[header[idWhat]][i];
              }
          }
-         min = parseFloat(min).toFixed(2);
-         max = parseFloat(max).toFixed(2);
+         mmin = parseFloat(min).toFixed(2);
+         mmax = parseFloat(max).toFixed(2);
      }
-       sc_min = getColorForMeasure(t, min);
-       sc_max = getColorForMeasure(t, max);
+       sc_min = getColorForMeasure(t, mmin);
+       sc_max = getColorForMeasure(t, mmax);
 
        infoStr = infoStr + "<div class=\"info\"><span class=\"var-name\">" + t + "</span>:" +
-           "<div class=\"spot " + sc_min + "\"></div><span> " + min.toString() + "</span>..." +
-           "<span>" + max.toString() + "</span>" + " <div class=\"spot " + sc_max + "\"></div>" +
+           "<div class=\"spot " + sc_min + "\"></div><span> " + mmin.toString() + "</span>..." +
+           "<span>" + mmax.toString() + "</span>" + " <div class=\"spot " + sc_max + "\"></div>" +
            "</div>";
    });
    jQuery('#info').html(infoStr);
