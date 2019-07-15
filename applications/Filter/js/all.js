@@ -454,8 +454,8 @@ function showInfoWindow(event, t) {
                      mmax = +allMeasures[header[idWhat]][i];
              }
          }
-         mmin = parseFloat(min).toFixed(2);
-         mmax = parseFloat(max).toFixed(2);
+         mmin = parseFloat(mmin).toFixed(2);
+         mmax = parseFloat(mmax).toFixed(2);
      }
        sc_min = getColorForMeasure(t, mmin);
        sc_max = getColorForMeasure(t, mmax);
