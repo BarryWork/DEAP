@@ -1031,6 +1031,9 @@ function insert_save_tabs() {
         nameTag: small_tag,
       }
       jQuery.post("./run.php", pass_post).done(function(data) {
+        if(data["Error"]){
+	      alert( "Error: Model was not saved correctly." +"\n" + JSON.stringify(data)  );
+	}
         update_load_list_pannel()
       })
     } else {
@@ -1307,7 +1310,8 @@ function insert_model_save_pannel() {
       if (data == "success") {
         derror.html("Model saved")
       } else {
-        derror.html(data)
+        derror.html("Model was not saved.")
+	alert("[Error] Model was not saved properly.")
       }
       update_load_list_pannel()
     })

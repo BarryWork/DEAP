@@ -84,9 +84,14 @@ function highlight(where, what) {
         var sid = jQuery(this).attr('subjid');
         var vid = jQuery(this).attr('visitid');
         var need_light = jQuery(this).attr('light');
+        // Skip lighted items to avoid duplicate tooltips
+	var lighted_items = jQuery(this).attr('light-items') ? jQuery(this).attr('light-items').split(","): [];
+	if( lighted_items.indexOf(what) > -1) return;
 	// we could show only a single circle, but what if we have more variables? We could also show all of them and less pills
 	//if (need_light == "on")
 	//   return;
+
+	
         var v = valueAr.indexOf(""+measure[sid][vid]) / (valueAr.length - 1);
         var col = parseInt(8 * v); // goes from 0 to valueAr.length
         // console.log("highlight: "+dat + " " + sid + " " + vid + " " + measure[sid][vid] + " val: .q" + col + "-9");
@@ -99,6 +104,7 @@ function highlight(where, what) {
         }
         //jQuery(this).append('<div class="spot ' + "q" + col + "-9" + '" title="' + what + ' = ' + measure[sid][vid] + '"></div>');
 	jQuery(this).attr('light', "on");
+	jQuery(this).attr('light-items', (jQuery(this).attr('light-items') ? jQuery(this).attr('light-items') + "," : "")  + what)
     });
     
 }
