@@ -4,7 +4,7 @@
 session_start();
 include("../../code/php/AC.php");
 $user_name = check_logged();
-if ($user_name == FALSE) {
+if ($user_name == FALSE || $user_name == -1) {
   echo "no user name";
   return;
 }

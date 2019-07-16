@@ -3,6 +3,9 @@
 session_start();
 include("/var/www/html/code/php/AC.php");
 $user_name = check_logged();
+if($user_name == -1){
+    return;
+}
 
 $storelocation = "/var/www/html/data/ABCD/Scores/data/";
 
