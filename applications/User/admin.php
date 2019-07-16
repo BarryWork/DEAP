@@ -40,7 +40,7 @@
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
-	<link href="css/bootswatch.css" rel="stylesheet">
+	<!-- <link href="css/bootswatch.css" rel="stylesheet">-->
 
   <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/start/jquery-ui.css" rel="stylesheet" type="text/css"/>
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -115,7 +115,7 @@
   <!-- <script type="text/javascript" src="/js/picnet.table.filter.min.js"></script> -->
 
   <script src="/js/bootstrap.min.js"></script>
-  <script src="/js/bootswatch.js"></script>
+  <!-- <script src="/js/bootswatch.js"></script> -->
 </head>
 
 <body class="index" id="top" style="padding-top: 70px;">
