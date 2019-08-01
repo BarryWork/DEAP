@@ -83,7 +83,7 @@ var analysis_scores_list = []
 var om = insert_ontology_modal()
 var window_width = jQuery(window).width()
 var predefined_gr_list = [
-  "race.ethnicity.5level",
+  "race.4level",
   "sex",
   "high.educ.bl",
   "household.income.bl",
@@ -3403,7 +3403,7 @@ function compute() {
   // a random number designed to be unique for the model.
   time_start = new Date().getTime()
   usercovArray()
-  random = Math.round(Math.random() * 1000000)
+  random = Math.round(Math.random() * 10000000000)
   timeout_check = true
 
   var pass_post = {

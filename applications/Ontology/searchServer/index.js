@@ -21,7 +21,8 @@ var local_data = {};
 var locals     = require('path').dirname(require.main.filename) + "/../local_data.json";
 var alias_data = {};
 var aliases    = require('path').dirname(require.main.filename) + "/../alias_mapping.json"; // use npm's csv2json to convert
-
+//var exclude_data = {};
+var exclude    = require('path').dirname(require.main.filename) + "/../empty_variable.json";
 console.log('Starting search server...');
 var maxNumberResults = 100;
 
@@ -418,8 +419,14 @@ function getInstrumentList( names ) {
 	    // reduce the memory footprint here by only including elements we actually want
 	    var t = [];
 	    for (var i = 0; i < data['dataElements'].length; i++) {
+
 		// lets check if the name should be changed to one of the alias names
 		var aname = data['dataElements'][i]['name'];
+		// check if the name is in exclude list 
+		if (exclude_data && exclude_data.indexOf(aname) >= 0) {
+	            console.log("exclude variable: "+ aname);
+		    continue;	
+		} 
 		if (typeof alias_data[aname] !== 'undefined') {
 		    data['dataElements'][i]['aliases'].push(aname);
 		    aname = alias_data[aname]['abcd'];
@@ -494,7 +501,11 @@ if (fs.existsSync(aliases)) {
     }
     console.log("Imported local alias file... ")
 }
-
+exclude_data = [];
+if (fs.existsSync(exclude)) {
+    exclude_data = JSON.parse(fs.readFileSync(exclude, 'utf8'));
+    console.log("Imported exclude data file... ")
+}
 // keep the time this program is started
 var startTime = moment();
 

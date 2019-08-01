@@ -315,7 +315,7 @@ function scatter(data, dep, ind, group,id,line_data,line_color_list){
                 return "ID : "+d["src_subject_id"]+
                     "<br>Site : "+d["abcd_site"]+
                     (d["sex"] ? "<br>Sex : "+d["sex"] : "" )+ 
-                    (d["race.ethnicity"] ? "<br>Race : "+d["race.ethnicity"] : "" )+
+                    (d["race.4level"] ? "<br>Race : "+d["race.4level"] : "" )+
                     (d["age"] ? "<br>Age : "+d["age"] : "" )+
                     (d["high.educ"] ? "<br>Household Highest Education : "+d["high.educ"] : "" )+
                     (d["household.income"] ? "<br>Household Income : "+d["household.income"] : "" )+
@@ -326,7 +326,7 @@ function scatter(data, dep, ind, group,id,line_data,line_color_list){
                 return "ID : "+d["src_subject_id"]+
                     "<br>Site : "+d["abcd_site"]+
                     (d["sex"] ? "<br>Sex : "+d["sex"] : "" )+ 
-                    (d["race.ethnicity"] ? "<br>Race : "+d["race.ethnicity"] : "")+
+                    (d["race.4level"] ? "<br>Race : "+d["race.4level"] : "")+
                     (d["age"] ? "<br>Age : "+d["age"] : "")+
                     (d["high.educ"] ? "<br>Household Highest Education : "+d["high.educ"] : "")+
                     (d["household.income"] ? "<br>Household Income : "+d["household.income"] : "")+
