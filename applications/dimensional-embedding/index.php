@@ -129,8 +129,7 @@
    include("../../code/php/AC.php");
    $user_name = check_logged(); /// function checks if visitor is logged.
 
-   if (isset($_SESSION['project_name']))
-      $project_name = $_SESSION['project_name'];
+   $project_name = "ABCD";
 
    echo('<script type="text/javascript"> user_name = "'.$user_name.'"; project_name = "'.$project_name.'"; </script>');
 
