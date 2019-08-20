@@ -140,13 +140,13 @@
  <div class="container-fluid">
    <div class="row">
      <div class="col-md-12">
-       <p class="tut-p">This application visualizes high dimensional data. The <a href="/applications/Sets/index.php">"Set Definitions"</a> application is used to define the lists of variables.</p>
+       <p class="tut-p">This application visualizes high dimensional data by embedding them in two dimensions.</p>
      </div>
    </div>
    <div class="row">
      <div class="col-md-3">
        <form class="form-group" style="margin-top: 20px;">
-         <label for="#sets">Select a set of variables to start</label>
+         <label for="#sets">Select a set of variables to start or <a href="/applications/Sets/index.php">create a new set first</a></label>
          <select class="form-control" id="sets"></select>
        </form>
      </div>
