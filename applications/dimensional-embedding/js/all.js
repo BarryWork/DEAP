@@ -413,7 +413,7 @@ function runSequence( total, tsne ) {
                     //var result = robustPointInPolygon(p, point);
                     var result = inside(point, p);
                     if (result) {
-                        if (direction == "By participants")
+                        if (direction == "By participant")
                             ParticipantList.push(participant);
                         else
                             ParticipantList.push(site);                            
@@ -421,7 +421,7 @@ function runSequence( total, tsne ) {
                 });
                 // now show these participants with their data
                 var s = jQuery('#sets').find('option:selected').text();
-                if (direction == "By participants") {
+                if (direction == "By participant") {
                     var vals = Object.keys(allMeasures);
                     var str = vals.join(",") + "\n";
                     for (var i = 0; i < allMeasures['src_subject_id'].length; i++) {
@@ -479,7 +479,7 @@ function createGraph(data) {
     // get the data from the page
     jQuery('svg').children().remove();
     firstTime = true;
-    if (direction == "By participants") {
+    if (direction == "By participant") {
         data = setup(data);
     } else
         data = setupTransposed(data);
@@ -554,7 +554,7 @@ function getSubsets( selectThis ) {
 var perplexity = 30;
 var iterations = 500;
 var colorby = "abcd_site";
-var direction = "By participants";
+var direction = "By participant";
 jQuery(document).ready(function() {
     jQuery('.project_name').text(project_name);
     jQuery('.perplexity').text(perplexity);
