@@ -146,7 +146,7 @@
    <div class="row">
      <div class="col-md-3">
        <form class="form-group" style="margin-top: 20px;">
-         <label for="#sets">Select a set of variables to start or <a href="/applications/Sets/index.php">create a new set first</a></label>
+         <label for="#sets">Select a set or <a href="/applications/Sets/index.php">create a new set</a></label>
          <select class="form-control" id="sets"></select>
        </form>
      </div>
