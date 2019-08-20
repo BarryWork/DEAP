@@ -139,7 +139,6 @@
  <div class="container-fluid">
    <div class="row">
      <div class="col-md-12">
-       <p class="tut-p">This application visualizes high dimensional data by embedding them in two dimensions.</p>
      </div>
    </div>
    <div class="row">
@@ -157,9 +156,10 @@
    </div>
    <div class="row">
      <div class="col-md-12">
+       <p class="tut-p">This application visualizes high dimensional data by embedding them in a 2D plot. The axis of the plot don't have any special meaning. They are selected by the algorithm.</p>
        <p class="tut-p">There are two major modes for this application. The default setting <i>By participants</i> visualizes the participants based on the selected subset of measures. The mode <i>By variables</i> will in turn visualize the variables based on the participants. Dots are used to represent participants or variables. The closer the dots are to each other the more similar they are given the current set of variables.</p>
        <p class="tut-p">The result of the visualization depends heavily on the selected value for <i>perplexity</i>, which measures the number of neighbors a single data point is influenced by. The value depends on the total number of data points in the analysis and has to be selected based on experimentation. Values of perplexity between 5 and 60 have been suggested in the literature. Most computations require approximately 5,000 iterations until convergence.</p>
-       <p class="tut-p">The algorithm implemented on this webpage is called t-distributed stochastic neighbor embedding (<a href="https://github.com/karpathy/tsnejs">t-SNE code</a>, <a href="http://jmlr.csail.mit.edu/papers/volume9/vandermaaten08a/vandermaaten08a.pdf">PDF</a>). A good introduction into how to interprete the results can be found <a href="https://distill.pub/2016/misread-tsne/">here</a>.</p>       
+       <p class="tut-p">The algorithm implemented on this webpage is called t-distributed stochastic neighbor embedding (<a href="https://github.com/karpathy/tsnejs">t-SNE code</a>, <a href="http://jmlr.csail.mit.edu/papers/volume9/vandermaaten08a/vandermaaten08a.pdf">PDF</a>). A good introduction into how to interpret the results can be found <a href="https://distill.pub/2016/misread-tsne/">here</a>.</p>       
      </div>
    </div>   
    <div class="row">
