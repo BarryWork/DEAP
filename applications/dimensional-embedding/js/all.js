@@ -546,7 +546,7 @@ function getSubsets( selectThis ) {
                 }
             }
         });
-    }).error(function(e) {
+    }).fail(function(e) {
 	console.log("Error on getting filter from Filter page" + e);
     });
 }
