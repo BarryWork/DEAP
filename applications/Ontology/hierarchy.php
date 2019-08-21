@@ -247,6 +247,10 @@ function php_json_encode($arr) {
    <!--  <link href="/css/bootstrap-responsive.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="css/style.css" crossorigin="anonymous">    
   </head>
+EOT;
+	   include_once("../../code/php/analytics.php");
+    
+echo <<< EOT
     <body style="overflow: hidden;">
 
       <header>

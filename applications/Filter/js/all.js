@@ -794,7 +794,7 @@ function getColorForMeasure( what, value ) {
 }
 
 // some variables are not measures (like "M"), only try to pull those once and remember them to be bad
-var noMeasureList = ["M", "F"];
+var noMeasureList = ["M", "F", "baseline_year_1_arm_1", "6_month_follow_up_arm_1", "1_year_follow_up_y_arm_1", "18_month_follow_up_arm_1"];
 
 // pull only the data we need (allMeasures as a dictionary of columns)
 function addOneMeasure( meas ) {

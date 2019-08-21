@@ -2,6 +2,7 @@
 
 $ok = session_start();
 
+include_once("../../code/php/analytics.php");
 include("../../code/php/AC.php");
 
 $incorrect = '';
@@ -95,7 +96,7 @@ if (isset($_SESSION["logged"]) && array_key_exists($_SESSION["logged"],$USERS)) 
    </div>
   </div>
   
-  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/jquery-3.3.1.min.js"></script>
   <script src="../../js/jquery-ui.min.js"></script>
   <!-- create an md5sum version of the password before sending it -->
   <script src="../../js/md5-min.js"></script>

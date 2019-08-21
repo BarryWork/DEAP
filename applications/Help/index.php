@@ -30,7 +30,9 @@
     <link rel="stylesheet" href="css/style.css">
 
   </head>
-
+ <?php 
+include_once("../../code/php/analytics.php");
+ ?>
   <body spellcheck="false">
 
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">

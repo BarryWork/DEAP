@@ -16,8 +16,9 @@
     <meta property="og:site_name" content="A website">
     <!-- ========== style sheet ========== -->
     <link rel="stylesheet" href="/css/master.css">
-
 <?php
+include_once("code/php/analytics.php");
+
 $status = session_status();
 if($status == PHP_SESSION_NONE){
        session_start();

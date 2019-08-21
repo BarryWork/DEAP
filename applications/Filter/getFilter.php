@@ -2,6 +2,7 @@
 
 // make sure user is logged in
 session_start();
+//#include_once("../../code/php/analytics.php");
 include("../../code/php/AC.php");
 $user_name = check_logged();
 if ($user_name == FALSE || $user_name == -1) {

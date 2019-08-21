@@ -89,6 +89,7 @@ div.col-sm-12.row.row-fluid.input-group {
         <link rel="stylesheet" href="css/style.css">
 <?php
 session_start();
+include_once("../../code/php/analytics.php");
 include("../../code/php/AC.php");
 $user_name = check_logged();
 if (isset($_SESSION['project_name']))

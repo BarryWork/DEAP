@@ -4,7 +4,6 @@
  #
  # ToDo: implement digest based authentication
  #
-
  date_default_timezone_set('America/Los_Angeles');
 
  //$pw_file = "passwords.json";
@@ -554,13 +553,14 @@ syslog(LOG_EMERG, 'try to remove permission '.$name.' ('.$id.') from '.$role['na
         else
            header("Location: /applications/User/login.php"."?url=".$_SERVER['PHP_SELF']);
         // in some cases the redirect will not be fast enough... instead the calling script will see the -1 - test the output of check_logged for != -1 to prevent accidential access
-        return -1; // not logged in
-     };
+     	return -1;
+     }
      // store that this user has logged in now
      setUserVariable( $_SESSION["logged"], "lastTimeLoggedIn", date(DATE_RFC2822) );
 
      audit( "check_logged", " as user \"".$_SESSION["logged"]."\"" );
      return $_SESSION["logged"];
+     
   };
 
   // has to be logged in, forwards to login page if not

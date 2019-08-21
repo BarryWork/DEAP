@@ -423,10 +423,17 @@ function getInstrumentList( names ) {
 		// lets check if the name should be changed to one of the alias names
 		var aname = data['dataElements'][i]['name'];
 		// check if the name is in exclude list 
-		if (exclude_data && exclude_data.indexOf(aname) >= 0) {
+		var exclude_status = false;
+		var exclude_status = (exclude_data && exclude_data.indexOf(aname) >= 0);
+		for( var alias_it = 0; alias_it < data['dataElements'][i]['aliases'].length; alias_it++){
+		    alias_name_temp = data['dataElements'][i]['aliases'][alias_it];
+		    exclude_status = (exclude_status || exclude_data.indexOf(alias_name_temp) >= 0);
+		}
+		if (exclude_status) {
 	            console.log("exclude variable: "+ aname);
 		    continue;	
-		} 
+		}
+
 		if (typeof alias_data[aname] !== 'undefined') {
 		    data['dataElements'][i]['aliases'].push(aname);
 		    aname = alias_data[aname]['abcd'];
