@@ -89,6 +89,7 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo ' /usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R &' >> $ND_ENTRYPOINT \
          && echo ' sudo -u www-data /usr/bin/Rscript /var/www/html/applications/Scores/R/transfer.R &' >> $ND_ENTRYPOINT \
          && echo 'fi' >> $ND_ENTRYPOINT \
+         && echo 'cp /var/www/html/data/ABCD/*.php /var/www/html/code/php/' >> $ND_ENTRYPOINT \
          && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
          && echo "ServerName localhost" >> /etc/apache2/apache2.conf \
          && echo "<Directory /var/www/html/>\n    Options -Indexes +FollowSymLinks\n    AllowOverride None\n    Require all granted\n</Directory>" >> /etc/apache2/apache2.conf \
