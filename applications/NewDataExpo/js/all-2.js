@@ -2995,13 +2995,13 @@ jQuery(
     })
 
   if (value.indexOf("s(") >= 0) {
-    $div_button.find(".v-s-button").trigger("click")
+    $div_button.find(".v-s-button").css("background-color", "lightgreen")
   } else if (value.indexOf("log(") >= 0) {
-    $div_button.find(".v-log-button").trigger("click")
+    $div_button.find(".v-log-button").css("background-color", "lightgreen")
   } else if (value.indexOf("*") >= 0) {
-    $div_button.find(".v-interaction-button").trigger("click")
+    $div_button.find(".v-interaction-button").css("background-color", "lightgreen")
   } else if (value.indexOf("^") >= 0) {
-    $div_button.find(".v-sq-button").trigger("click")
+    $div_button.find(".v-sq-button").css("background-color", "lightgreen")
   }
 
   if (value.indexOf("Censor(") >= 0) {
@@ -3534,7 +3534,7 @@ function clearDisplayCheck(time) {
               jQuery("<pre>")
               .css("color", "red")
               .css("margin-bottom", "0")
-              .html("Error: Dependent variable is empty."))
+              .html("Error: Time out. Maximum calculation time is 120s."))
           )
         }});
     }
@@ -3681,6 +3681,9 @@ function clearDisplayCheck(time) {
               }
 
               if (JSON.parse(d)["stable"])
+		summary_text.append(
+                  "<h4 class='parameter-table-title'>Smooth Parameter table</h4>"
+                )
                 summary_text.append(
                   jQuery(
                     JSON.parse(d)
