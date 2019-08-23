@@ -89,7 +89,7 @@ var predefined_gr_list = [
   "household.income.bl",
   "married.bl",
 ]
-
+var run_once = 0 ;
 
 var add_gr_list = []
 var agreenment_text =
@@ -417,7 +417,7 @@ function insert_single_select(item_input) {
   temp_val = input.val()
   input.html("")
   input.append(jQuery("<option>").text("")) // default empty option
-  input.append(jQuery("<optgroup>").attr("class","demo-group").attr("label","Demographic Features").text("")) 
+  input.append(jQuery("<optgroup>").attr("class","demo-group").attr("label","Demographic Features ▼").text("")) 
   jQuery.each(
     removeDuplicates(predefined_gr_list)
     .filter(function(value) {
@@ -442,7 +442,7 @@ function insert_single_select(item_input) {
   levels = Array.from(new Set(add_gr_list.map(function(item){return item["n.uniques"]}))).map(function(item){return parseInt(item)}).sort(function(a, b){return a-b})
   for (let lev =0 ; lev < levels.length ;lev++){
 	  ll = levels[lev]
-  input.append(jQuery("<optgroup>").attr("class","other-group-"+ll).attr("label",ll +" levels").text("")) 
+  input.append(jQuery("<optgroup>").attr("class","other-group-"+ll).attr("label",ll +" levels ▼").text("")) 
   jQuery.each(
     removeDuplicates(add_gr_list.filter(function(item){return item["n.uniques"]==ll}).map(function(item){return item["variable"]}))
     .filter(function(value) {
@@ -490,9 +490,30 @@ function insert_single_select(item_input) {
     allowClear: true,
   })
 
-  $("body").on('click', '.select2-results__group', function() {
+	$("body").on('click', '.select2-results__group', function() {
 
-  	$(this).siblings().toggle();
+		$(this).siblings().toggle();
+		if(run_once == 0 ) {
+			if(jQuery(this).text().indexOf("►") >= 0){
+				jQuery(this).text(jQuery(this).text().split("►")[0]+"▼");
+			}
+			else if(jQuery(this).text().indexOf("▼") >= 0){
+				jQuery(this).text(jQuery(this).text().split("▼")[0]+"►");
+			}   
+			jQuery(".select2-results__group").on("click", function(){ 
+				if(jQuery(this).text().indexOf("►") >= 0){
+					jQuery(this).text(jQuery(this).text().split("►")[0]+"▼");
+				}
+				else if(jQuery(this).text().indexOf("▼") >= 0){
+					jQuery(this).text(jQuery(this).text().split("▼")[0]+"►");
+				}   
+
+			});
+			run_once += 1;
+		}
+	})
+  $("body").on('click', 'select2-selection', function(){
+  
   })
 }
 
@@ -4231,3 +4252,5 @@ function makeDragable(dragHandle, dragTarget) {
     }
   }
 }
+
+
