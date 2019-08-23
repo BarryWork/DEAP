@@ -181,7 +181,8 @@ function createBlock(below) {
         
         jQuery('#save-filter-box').modal('show');
         jQuery('#save-filter-button').attr('filter', jQuery('.inputmeasures').val());
-        jQuery('#new-filter-name').val(jQuery('.selectpickerS').val());
+	 jQuery('#new-filter-name').attr("placeholder","Please name your new filter here")
+        jQuery('#new-filter-name').val(jQuery('.selectpickerS').val() == "Predefined filters" ? "" : jQuery('.selectpickerS').val());
         
         //alert('not implemented yet, would have to store this as a filter');  
     });
@@ -612,7 +613,7 @@ function parse() {
 
  	for (var event_it_id in yesDictList){	
 	    event_it = yesDictList[event_it_id];
-	     yesEvents += "<small style=\"display: block;\"><span class=\"name\">" + event_it.replace("_arm_1","") + ":</span><span class=\"number\">" + yesDictEvents[event_it].toLocaleString() + "</span></small>";
+	     yesEvents += "<small style=\"display: block;\"><span class=\"name\">" + event_it + ":</span><span class=\"number\">" + yesDictEvents[event_it].toLocaleString() + "</span></small>";
 	}
 	yesEvents += "";
         if (yes.length > 0) {
@@ -649,7 +650,7 @@ function parse() {
 
  	for (var event_it_id in noDictList){	
 	    event_it = noDictList[event_it_id];
-	    noEvents += "<small style=\"display: block;\"><span class=\"name\">" + event_it.replace("_arm_1","") + ":</span><span class=\"number\">" + noDictEvents[event_it].toLocaleString() + "</span></small>";
+	    noEvents += "<small style=\"display: block;\"><span class=\"name\">" + event_it + ":</span><span class=\"number\">" + noDictEvents[event_it].toLocaleString() + "</span></small>";
 	}
 	noEvents += ""
 
