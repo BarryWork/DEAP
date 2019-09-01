@@ -1,6 +1,6 @@
 <?php
 // 
-// All logged in users to download the Rds version of the merged data.
+// Allow all logged in users to download the Rds version of the merged data.
 // (prevent direct download in apache2.conf by adding:
 //
 // <FilesMatch "\.Rds$">
