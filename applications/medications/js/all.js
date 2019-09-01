@@ -250,23 +250,30 @@ function pullRXNORM() {
                     alternates = [];
                 }
                 
-                // just add it to the first class
-                var concept = drugClassArray[0]['minConcept'];
-                var cl = drugClassArray[0]['rxclassMinConceptItem'];
-                if (typeof listOfAllclassIds[cl['classId']] !== 'undefined') {
-                    if (typeof listOfAllclassIds[cl['classId']]['ABCDNum'] == 'undefined') {
-                        listOfAllclassIds[cl['classId']]['ABCDNum'] = ABCDNum;
-                    } else {
-                        listOfAllclassIds[cl['classId']]['ABCDNum'] += ABCDNum;
+                // we want to add it to every class - but we need to be careful what the relationship is. A is-a would be ok.
+		for (var j = 0; j < drugClassArray.length; j++) {
+                    var concept = drugClassArray[j]['minConcept'];
+		    // inside the concept we get "tty": "IN"
+		    if (typeof concept["tty"] !== 'undefined' && concept["tty"] !== "IN") {
+			console.log("Got a non-IN concept (ignored): " + concept["tty"]);
+			continue;
+		    }
+                    var cl = drugClassArray[j]['rxclassMinConceptItem'];
+                    if (typeof listOfAllclassIds[cl['classId']] !== 'undefined') {
+			if (typeof listOfAllclassIds[cl['classId']]['ABCDNum'] == 'undefined') {
+                            listOfAllclassIds[cl['classId']]['ABCDNum'] = ABCDNum;
+			} else {
+                            listOfAllclassIds[cl['classId']]['ABCDNum'] += ABCDNum;
+			}
+			if (typeof listOfAllclassIds[cl['classId']]['children'] == 'undefined') {
+                            listOfAllclassIds[cl['classId']]['children'] = [];
+			}
+			// keep track of the drug that caused this entry, should we look for pGUID as well? could be done by adding key to drugClassArray
+			listOfAllclassIds[cl['classId']]['children'].push({ "name": keys[i] + " " + classesForDrugs[keys[i]]['MedName'],
+                                                                            'ABCDNum': ABCDNum, 'rxcui': classesForDrugs[keys[i]]['userInput']['rxcui'],
+                                                                            "children": [], "alternates": alternates });
                     }
-                    if (typeof listOfAllclassIds[cl['classId']]['children'] == 'undefined') {
-                        listOfAllclassIds[cl['classId']]['children'] = [];
-                    }
-                    // keep track of the drug that caused this entry, should we look for pGUID as well? could be done by adding key to drugClassArray
-                    listOfAllclassIds[cl['classId']]['children'].push({ "name": keys[i] + " " + classesForDrugs[keys[i]]['MedName'],
-                                                                        'ABCDNum': ABCDNum, 'rxcui': classesForDrugs[keys[i]]['userInput']['rxcui'],
-                                                                        "children": [], "alternates": alternates });
-                }
+		}
             }
         }
         // now we think that the tree contains all the numbers, we need to move them up the tree to the root
