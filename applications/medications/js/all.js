@@ -254,10 +254,10 @@ function pullRXNORM() {
 		for (var j = 0; j < drugClassArray.length; j++) {
                     var concept = drugClassArray[j]['minConcept'];
 		    // inside the concept we get "tty": "IN"
-		    if (typeof concept["tty"] !== 'undefined' && concept["tty"] !== "IN") {
-			console.log("Got a non-IN concept (ignored): " + concept["tty"]);
-			continue;
-		    }
+		    //if (typeof concept["tty"] !== 'undefined' && concept["tty"] !== "IN") {
+		    //	console.log("Got a non-IN concept (ignored): " + concept["tty"]);
+		    //	continue;
+		    //}
                     var cl = drugClassArray[j]['rxclassMinConceptItem'];
                     if (typeof listOfAllclassIds[cl['classId']] !== 'undefined') {
 			if (typeof listOfAllclassIds[cl['classId']]['ABCDNum'] == 'undefined') {
