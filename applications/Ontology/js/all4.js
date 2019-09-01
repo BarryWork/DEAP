@@ -167,11 +167,12 @@ jQuery(document).ready(function() {
 			    d.push({ 'frequency': histogram['histogram']['counts'][i], 'x': histogram['histogram']['mids'][i] });
 			}
 		    }
-		}
-		else{
-		    summary_obj = data['summary'][0]["summary"];
-                    obj = Object.keys(data['summary'][0]["summary"]);
-		}
+                } else {
+                    if (typeof data['summary'] !== 'undefined' ) {
+                        summary_obj = data['summary'][0]["summary"];
+                        obj = Object.keys(data['summary'][0]["summary"]);
+                    }
+                }
 		var sumstr = "<table><tbody style='font-size: 10pt; line-height: 1.1em;'>";
 		for (var i = 0; i < obj.length; i++) {
 		    // sanitize the text (remove html and ##)
