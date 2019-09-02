@@ -666,7 +666,7 @@ jQuery(document).ready(function() {
     jQuery('#create-new-score').on('show.bs.modal', function() {
         // announce this as a new variable in DEAP (use the Scores/getScores.php script)
         var vname_orig = jQuery('#select-search-select option:selected').attr('value');
-        var parent_child = jQuery('#group-indicator option:selected').text();
+        var parent_child = jQuery('#select-medication-group a.active').text();
         var data = { 'src_subject_id': [], 'eventname': [] };
         // create this information given the currently selected node
         // first find the location in the tree
@@ -733,7 +733,7 @@ jQuery(document).ready(function() {
     jQuery('#create-new-score-button').on('click', function() {
         // announce this as a new variable in DEAP (use the Scores/getScores.php script)
         var vname_orig = jQuery('#select-search-select option:selected').attr('value');
-        var parent_child = jQuery('#group-indicator option:selected').text();
+        var parent_child = jQuery('#select-medication-group a.active').text();
         var data = { 'src_subject_id': [], 'eventname': [] };
         // create this information given the currently selected node
         // first find the location in the tree
