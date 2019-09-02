@@ -833,7 +833,7 @@ jQuery(document).ready(function() {
             temp["content"] = temp['content'] + "<p>The score has been derived from the ATC classification <i>" + nodes[0]['name'] + "</i> (" + nodes[0]['classId'] + ") and codes all participants with \"use\" that have at least one reported medication use in this category and \"no-use\" otherwise. The score calculation is based on values shared in the following measures: " + listOfScores + ".</p>";
         }
         if (typeof nodes[0]['rxcui'] !== 'undefined') {
-            temp["content"] = temp['content'] + "<p>The score has been derived from the RxNorm classification <i>" + nodes[0]['name'] + "</i> (" + nodes[0]['rxcui'] + ") and codes all participants with \"use\" that have at least one reported medication use in this category and \"no-use\" otherwise. The score calculation is based on values shared in the following measures: " + listOfScores + ".</p>";
+            temp["content"] = temp['content'] + "<p>The score has been derived from the RxNorm classification <i>" + nodes[0]['name'] + "</i> (" + nodes[0]['rxcui'] + ") and codes all participants with \"use\" that have at least one reported medication use in this category and \"no-use\" otherwise. The score calculation is based on values shared in the following measures" + listOfScores + "</p>";
         }
         temp["content"] = JSON.stringify(temp["content"]);
         
