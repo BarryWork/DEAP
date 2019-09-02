@@ -810,14 +810,16 @@ jQuery(document).ready(function() {
             }
         }
 	// list the individual scores that have been used to define this category
-	var listOfScores = "";
+	var listOfScores = "<ul>";
 	for (var i = 0; i < aM[parent_child].length; i++) {
-	    listOfScores += aM[parent_child][i];
+	    listOfScores += "<li>" + aM[parent_child][i];
 	    if (i < aM[parent_child].length-2)
 		listOfScores += ", ";
 	    if (i == aM[parent_child].length-2)
 		listOfScores += " and ";
+	    listOfScores += "</li>";
 	}
+	listOfScores += "</ul>";
         
         // sanitize the name
         vname = "meduse_" + parent_child.toLowerCase() + "_" + vname_orig.toLowerCase().replace(/ /g, "_").replace(/[^a-z_]+/g, '');
