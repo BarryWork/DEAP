@@ -535,7 +535,7 @@ function drawMedicationTree( treeData ) {
             
             jQuery('div.pill-navigation').append('<div class="pill-nav-2">' + formatNumber(Object.keys(pGUIDs).length) + " " +
                                                  who + " (" + (numPGUIDS/allKids * 100.0).toFixed(2) + "&#37;) " +
-                                                 ' reported use in this ' + (typeof lastCenterNode['rxcui'] !== 'undefined' ? '<a href="http://purl.bioontology.org/ontology/RXNORM/' + lastCenterNode['rxcui'] +  '" target="_external">category</a>' : '<a href="https://www.whocc.no/atc_ddd_index/?code=' + lastCenterNode['classId'] + '" target="_external">category</a>') +
+                                                 ' reported use in this ' + (typeof lastCenterNode['rxcui'] !== 'undefined' ? '<a href="http://purl.bioontology.org/ontology/RXNORM/' + lastCenterNode['rxcui'] +  '" target="_external" class="underlined">category</a>' : '<a href="https://www.whocc.no/atc_ddd_index/?code=' + lastCenterNode['classId'] + '" target="_external" class="underlined">category</a>') +
                                                  (hasAlternates?". There are " + alt + " for this drug":"") + 
                                                  //formatNumber(lastCenterNode['ABCDNum']) + ' drug usages in this category for ' +
                                                  //formatNumber(Object.keys(pGUIDs).length) + " " + who +
