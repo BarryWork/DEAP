@@ -664,7 +664,69 @@ jQuery(document).ready(function() {
     });
 
     jQuery('#create-new-score').on('show.bs.modal', function() {
-	console.log("show the dialog");
+        // announce this as a new variable in DEAP (use the Scores/getScores.php script)
+        var vname_orig = jQuery('#select-search-select option:selected').attr('value');
+        var data = { 'src_subject_id': [], 'eventname': [] };
+        // create this information given the currently selected node
+        // first find the location in the tree
+        function findNodesInTree( name, tree ) {
+            if (tree['name'] == name) {
+                return [ tree ];
+            }
+            if (typeof tree['children'] == 'undefined' || tree['children'].length == 0)
+                return [];
+            var nodes = [];
+            for (var i = 0; i < tree['children'].length; i++) {
+                var node = findNodesInTree(name, tree['children'][i]);
+                if (node.length > 0) {
+                    for (var j = 0; j < node.length; j++) {
+                        nodes.push(node[j]);
+                    }
+                }
+            }
+            return nodes;
+        }
+        var nodes = findNodesInTree( vname_orig, result );
+
+        if (nodes.length == 0) {
+            console.log("error");
+            return;
+        }
+        var data = getPGUIDEvent( nodes[0] );
+        // ok, that data contains all the pGUID and events that have this medication, set them to value = 1/use
+        data[vname_orig] = [];
+        for (var i = 0; i < data['src_subject_id'].length; i++) {
+            data[vname_orig].push("use");
+        }
+        // add the other participants with a value of 0/no-use (but only for events that have been returned)
+        var eventList = {};
+        eventList = data['eventname'].reduce( function (eventlist, a) { eventList[a] = 1; return eventList; } );
+        eventList = Object.keys(eventList);
+        for (var i = 0; i < eventList.length; i++) {
+            var event = eventList[i];
+            for (var j = 0; j < allMeasures['src_subject_id'].length; j++) {
+                // make sure we have all these subjects
+                var m = allMeasures['src_subject_id'][j];
+                // check if we have this m, event already
+                var found = false;
+                for (var k = 0; k < data['src_subject_id'].length; k++) {
+                    if (data['src_subject_id'][k] == m && data['eventname'][k] == event) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    // add this entry
+                    data['src_subject_id'].push( m );
+                    data['eventname'].push( event );
+                    data[vname_orig].push( "no-use" );
+                }
+            }
+        }
+        
+        // sanitize the name
+        vname = "meduse_" + vname_orig.toLowerCase().replace(/ /g, "_").replace(/[^a-z_]+/g, '');
+	jQuery('#med-stats').append('<dl><dt>Name</dt><dd>' + vname + '</dd></dl>');
     });
     
     jQuery('#create-new-score-button').on('click', function() {
