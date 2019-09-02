@@ -742,7 +742,7 @@ jQuery(document).ready(function() {
 	for (var i = 0; i < ks.length; i++) {
 	    stat_msg += "<dt>Event " + ks[i] + "</dt><dt>" + byEvent[ks[i]] + "</dt>";
 	}
-	
+	jQuery('#med-stats').children().remove(); // clean out old stats
 	jQuery('#med-stats').append('<dl><dt>Medication category</dt><dd>' + vname + '</dd>' + stat_msg + '</dl>');
     });
     
