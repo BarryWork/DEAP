@@ -739,6 +739,7 @@ dl {
 }
 dd {
     margin-left: 20px;
+    margin-top: 3px;
 }
 dt {
     font-weight: 450;
