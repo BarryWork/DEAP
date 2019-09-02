@@ -473,7 +473,8 @@ function drawMedicationTree( treeData ) {
         if (typeof lastCenterNode['ABCDNum'] !== 'undefined') {
             // what is the percentage of the ATC1-4?
             var pGUIDs = getPGUIDs( lastCenterNode );
-            var allKids = [...new Set(allMeasures['src_subject_id'])].length;
+            var allKids = [...new Set(allMeasures['src_subject_id'])].length; // this is not a good measure, some kids have not filled out the form - still they are in ABCD
+	    allKids = 11876; // official number
             var numPGUIDS = Object.keys(pGUIDs).length;
             var ACTNUMTotal = root['children'][0]['ABCDNum'];
             var perc = lastCenterNode['ABCDNum']/ACTNUMTotal * 100.0;
