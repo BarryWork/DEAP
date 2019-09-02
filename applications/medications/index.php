@@ -141,9 +141,7 @@ Info on ADHD from the CDC: https://www.cdc.gov/ncbddd/adhd/data.html
        <div class="modal-body">
           <div id="med-stats"></div>
           <p style="font-weight: 300;font-size: 14pt;line-height: 24px;">
-Your user account will be able to use this score for further statistical analysis.
-          </p>
-          <p style="line-height: 1.5em;">This is an experimental feature, please report any issues on <a href="github.com/ABCD-STUDY/DEAP/issues">github.com/ABCD-STUDY/DEAP/issues.</a></p>
+Your user account will be able to use this score for further statistical analysis. This is an experimental feature, please report any issues on <a href="//github.com/ABCD-STUDY/DEAP/issues">github.com/ABCD-STUDY/DEAP/issues.</a></p>
        </div>
        <div class="modal-footer">
            <button type="button" data-dismiss="modal" class="btn">Cancel</button>

@@ -666,6 +666,7 @@ jQuery(document).ready(function() {
     jQuery('#create-new-score').on('show.bs.modal', function() {
         // announce this as a new variable in DEAP (use the Scores/getScores.php script)
         var vname_orig = jQuery('#select-search-select option:selected').attr('value');
+        var parent_child = jQuery('#group-indicator option:selected').text();
         var data = { 'src_subject_id': [], 'eventname': [] };
         // create this information given the currently selected node
         // first find the location in the tree
@@ -725,13 +726,14 @@ jQuery(document).ready(function() {
         }
         
         // sanitize the name
-        vname = "meduse_" + vname_orig.toLowerCase().replace(/ /g, "_").replace(/[^a-z_]+/g, '');
-	jQuery('#med-stats').append('<dl><dt>Name</dt><dd>' + vname + '</dd></dl>');
+        vname = "meduse_" + parent_child.toLowerCase() + "_" + vname_orig.toLowerCase().replace(/ /g, "_").replace(/[^a-z_]+/g, '');
+	jQuery('#med-stats').append('<dl><dt>Medication category</dt><dd>' + vname + '</dd></dl>');
     });
     
     jQuery('#create-new-score-button').on('click', function() {
         // announce this as a new variable in DEAP (use the Scores/getScores.php script)
         var vname_orig = jQuery('#select-search-select option:selected').attr('value');
+        var parent_child = jQuery('#group-indicator option:selected').text();
         var data = { 'src_subject_id': [], 'eventname': [] };
         // create this information given the currently selected node
         // first find the location in the tree
@@ -791,7 +793,7 @@ jQuery(document).ready(function() {
         }
         
         // sanitize the name
-        vname = "meduse_" + vname_orig.toLowerCase().replace(/ /g, "_").replace(/[^a-z_]+/g, '');
+        vname = "meduse_" + parent_child.toLowerCase() + "_" + vname_orig.toLowerCase().replace(/ /g, "_").replace(/[^a-z_]+/g, '');
         temp  = {};
         temp["name"]        = vname;
         temp["description"] = "Medication category: " + vname_orig;
