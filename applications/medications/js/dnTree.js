@@ -395,7 +395,7 @@ function drawMedicationTree( treeData ) {
         
         var focus = svgGroup.select('#focusLineX');
         focus.attr('x1', 0).attr('y1', -1000);
-        focus.attr('x2', 0).attr('y2', 20000);
+        focus.attr('x2', 0).attr('y2', 200000);
         focus.transition().duration(duration*1.5)
             .attr("transform", function(d) {
                 return "translate(" + source.y0 + ",0)";
