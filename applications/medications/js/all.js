@@ -663,7 +663,7 @@ jQuery(document).ready(function() {
         
     });
 
-    jQuery('#create-new-score').on('show', function() {
+    jQuery('#create-new-score').on('Show.bs.modal', function() {
 	console.log("show the dialog");
     });
     
