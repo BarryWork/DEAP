@@ -740,3 +740,6 @@ dl {
 dd {
     margin-left: 20px;
 }
+dt {
+    font-weight: 450;
+}
