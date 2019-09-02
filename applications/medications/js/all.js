@@ -662,6 +662,10 @@ jQuery(document).ready(function() {
         var nv = jQuery(this).val();
         
     });
+
+    jQuery('#create-new-score').on('show', function() {
+	console.log("show the dialog");
+    });
     
     jQuery('#create-new-score-button').on('click', function() {
         // announce this as a new variable in DEAP (use the Scores/getScores.php script)

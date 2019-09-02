@@ -139,6 +139,7 @@ Info on ADHD from the CDC: https://www.cdc.gov/ncbddd/adhd/data.html
               <h4>Create a new score</h4>
               </div>
        <div class="modal-body">
+          <div id="med-stats"></div>
           <p style="font-weight: 300;font-size: 14pt;line-height: 24px;">
 Your user account will be able to use this score for further statistical analysis.
           </p>
