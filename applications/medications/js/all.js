@@ -727,7 +727,23 @@ jQuery(document).ready(function() {
         
         // sanitize the name
         vname = "meduse_" + parent_child.toLowerCase() + "_" + vname_orig.toLowerCase().replace(/ /g, "_").replace(/[^a-z_]+/g, '');
-	jQuery('#med-stats').append('<dl><dt>Medication category</dt><dd>' + vname + '</dd></dl>');
+	// create some stats
+	var byEvent = {};
+	for (var i = 0; i < data['eventname'].length; i++) {
+	    if (data[vname_orig][i] !== "use")
+		continue; // ignore this event
+	    if (typeof byEvent[data['eventname'][i]] == 'undefined')
+		byEvent[data['eventname'][i]] = 1;
+	    else
+		byEvent[data['eventname'][i]] += 1;
+	}
+	var ks = Object.keys(byEvent);
+	var stat_msg = "";
+	for (var i = 0; i < ks.length; i++) {
+	    stat_msg += "<dt>Event " + ks[i] + "</dt><dt>" + byEvent[ks[i]] + "</dt>";
+	}
+	
+	jQuery('#med-stats').append('<dl><dt>Medication category</dt><dd>' + vname + '</dd>' + stat_msg + '</dl>');
     });
     
     jQuery('#create-new-score-button').on('click', function() {
