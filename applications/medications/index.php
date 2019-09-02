@@ -136,7 +136,7 @@ Info on ADHD from the CDC: https://www.cdc.gov/ncbddd/adhd/data.html
    <div class="modal-dialog modal-lg">
      <div class="modal-content">
               <div class="modal-header">
-              <h4>Create a new score</h4>
+              <h4>Create a new medication category score</h4>
               </div>
        <div class="modal-body">
           <div id="med-stats"></div>

@@ -740,7 +740,7 @@ jQuery(document).ready(function() {
 	var ks = Object.keys(byEvent);
 	var stat_msg = "";
 	for (var i = 0; i < ks.length; i++) {
-	    stat_msg += "<dt>Event " + ks[i] + "</dt><dt>" + byEvent[ks[i]] + "</dt>";
+	    stat_msg += "<dt>Event " + ks[i] + "</dt><dd>reported uses: " + byEvent[ks[i]] + "</dd>";
 	}
 	jQuery('#med-stats').children().remove(); // clean out old stats
 	jQuery('#med-stats').append('<dl><dt>Medication category</dt><dd>' + vname + '</dd>' + stat_msg + '</dl>');
