@@ -132,8 +132,8 @@ Info on ADHD from the CDC: https://www.cdc.gov/ncbddd/adhd/data.html
  </div>
 
 
- <div id="create-new-score" class="modal fade modal-lg" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-   <div class="modal-dialog">
+ <div id="create-new-score" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+   <div class="modal-dialog modal-lg">
      <div class="modal-content">
               <div class="modal-header">
               <h4>Create a new score</h4>
