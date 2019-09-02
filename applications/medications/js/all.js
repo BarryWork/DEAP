@@ -269,9 +269,20 @@ function pullRXNORM() {
                             listOfAllclassIds[cl['classId']]['children'] = [];
 			}
 			// keep track of the drug that caused this entry, should we look for pGUID as well? could be done by adding key to drugClassArray
+			// we can reach the same entry now twice. Make sure you only this field (identified by rxcuid) once
+			let foundIt = false;
+			for (var k = 0; k < listOfAllclassIds[cl['classId']]['children'].length; k++) {
+			    if (listOfAllclassIds[cl['classId']]['children'][k]['rxcui'] == classesForDrugs[keys[i]]['userInput']['rxcui']) {
+				foundIt = true;
+				break;
+			    }
+			}
+			if (foundIt)
+			    continue;
 			listOfAllclassIds[cl['classId']]['children'].push({ "name": keys[i] + " " + classesForDrugs[keys[i]]['MedName'],
-                                                                            'ABCDNum': ABCDNum, 'rxcui': classesForDrugs[keys[i]]['userInput']['rxcui'],
-                                                                            "children": [], "alternates": alternates });
+									    'ABCDNum': ABCDNum, 'rxcui': classesForDrugs[keys[i]]['userInput']['rxcui'],
+									    "children": [], "alternates": alternates });
+			
                     }
 		}
             }
