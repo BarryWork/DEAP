@@ -14,11 +14,11 @@ $('input[type="file"]').change(function(e){
 
   var file = e.target.files[0];
   //magic number need to be changed 
-  var default_rows = 4522
+  var default_rows = 27369
   if (file) {
     var fileName = e.target.files[0].name;
     $.get( "../../data/ABCD/data_uncorrected/ABCD_datadictionary01.csv", function( data_dict ) {
-      $.get("R/Template.csv", function(data_template){
+      $.get("../../data/ABCD/Scores/Template.csv", function(data_template){
         temp_dict = data_template
         var reader = new FileReader();
         reader.readAsText(file, "UTF-8");

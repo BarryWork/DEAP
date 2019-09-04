@@ -22,9 +22,9 @@ censor = function(x, fraction=.005) {
 #data = data[which(data$eventname == "baseline_year_1_arm_1"),]
 vlist = names(data)
 
-if (!file.exists("/var/www/html/applications/Scores/R/Template.csv")) {
+if (!file.exists("/var/www/html/data/ABCD/Scores/Template.csv")) {
   out = data[,c("src_subject_id","eventname")]
-  write.csv(out,'/var/www/html/applications/Scores/R/Template.csv', row.names=FALSE)
+  write.csv(out,'/var/www/html/data/ABCD/Scores/Template.csv', row.names=FALSE)
 }
 
 if(length(list.files("/var/www/html/data/ABCD/NewDataExpo/variableInfo/")) > 60000){

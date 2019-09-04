@@ -248,7 +248,7 @@ text{
             <!--<img class="card-img-top" src="..." alt="Card image cap">--!>
               <div class="card-body mb-1">
                 <h5 class="card-title">B) Add a new score created outside DEAP</h5>
-<p class="card-text">Upload the spreadsheet of precalculated features. Start by <a href="/applications/Scores/R/Template.csv">downloading the template</a>. Append your scores as additional columns. Do not change the names of the predefined columns (src_subject_id, eventname). This feature cannot be used to add new participants (rows). The maximum file size accepted is 10 megabyte.</p>
+<p class="card-text">Upload the spreadsheet of precalculated features. Start by <a href="/data/ABCD/Scores/Template.csv">downloading the template</a>. Append your scores as additional columns. Do not change the names of the predefined columns (src_subject_id, eventname). This feature cannot be used to add new participants (rows). The maximum file size accepted is 10 megabyte.</p>
                 <form class="input-group"  method="post" id="uploading-form" enctype="multipart/form-data">
                   <div class="custom-file">
                     <input type="file" accept=".csv"  class="custom-file-input" id="inputGroupFile01" onClick="this.form.reset()" aria-describedby="inputGroupFileAddon01">

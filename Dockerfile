@@ -85,8 +85,8 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
          && echo 'alias deap="cd /var/www/html/" >> /root/.bashrc;' >> $ND_ENTRYPOINT \
          && echo 'cron' >> $ND_ENTRYPOINT \
          && echo '/bin/bash /var/www/html/code/setup.sh;' >> $ND_ENTRYPOINT \
-         && echo ' /usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R &' >> $ND_ENTRYPOINT \
-         && echo ' sudo -u www-data /usr/bin/Rscript /var/www/html/applications/Scores/R/transfer.R &' >> $ND_ENTRYPOINT \
+         && echo '/usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R;' >> $ND_ENTRYPOINT \
+         && echo 'sudo -u www-data /usr/bin/Rscript /var/www/html/applications/Scores/R/transfer.R;' >> $ND_ENTRYPOINT \
          && echo 'cp /var/www/html/data/ABCD/*.php /var/www/html/code/php/' >> $ND_ENTRYPOINT \
          && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
          && echo "ServerName localhost" >> /etc/apache2/apache2.conf \
