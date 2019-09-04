@@ -395,7 +395,7 @@ function drawMedicationTree( treeData ) {
         
         var focus = svgGroup.select('#focusLineX');
         focus.attr('x1', 0).attr('y1', -1000);
-        focus.attr('x2', 0).attr('y2', 20000);
+        focus.attr('x2', 0).attr('y2', 200000);
         focus.transition().duration(duration*1.5)
             .attr("transform", function(d) {
                 return "translate(" + source.y0 + ",0)";
@@ -473,7 +473,8 @@ function drawMedicationTree( treeData ) {
         if (typeof lastCenterNode['ABCDNum'] !== 'undefined') {
             // what is the percentage of the ATC1-4?
             var pGUIDs = getPGUIDs( lastCenterNode );
-            var allKids = [...new Set(allMeasures['src_subject_id'])].length;
+            var allKids = [...new Set(allMeasures['src_subject_id'])].length; // this is not a good measure, some kids have not filled out the form - still they are in ABCD
+	    allKids = 11876; // official number
             var numPGUIDS = Object.keys(pGUIDs).length;
             var ACTNUMTotal = root['children'][0]['ABCDNum'];
             var perc = lastCenterNode['ABCDNum']/ACTNUMTotal * 100.0;
@@ -534,7 +535,7 @@ function drawMedicationTree( treeData ) {
             
             jQuery('div.pill-navigation').append('<div class="pill-nav-2">' + formatNumber(Object.keys(pGUIDs).length) + " " +
                                                  who + " (" + (numPGUIDS/allKids * 100.0).toFixed(2) + "&#37;) " +
-                                                 ' reported use in this ' + (typeof lastCenterNode['rxcui'] !== 'undefined' ? '<a href="http://purl.bioontology.org/ontology/RXNORM/' + lastCenterNode['rxcui'] +  '">category</a>' : 'category') +
+                                                 ' reported use in this ' + (typeof lastCenterNode['rxcui'] !== 'undefined' ? '<a href="http://purl.bioontology.org/ontology/RXNORM/' + lastCenterNode['rxcui'] +  '" target="_external" class="underlined">category</a>' : '<a href="https://www.whocc.no/atc_ddd_index/?code=' + lastCenterNode['classId'] + '" target="_external" class="underlined">category</a>') +
                                                  (hasAlternates?". There are " + alt + " for this drug":"") + 
                                                  //formatNumber(lastCenterNode['ABCDNum']) + ' drug usages in this category for ' +
                                                  //formatNumber(Object.keys(pGUIDs).length) + " " + who +

@@ -250,23 +250,41 @@ function pullRXNORM() {
                     alternates = [];
                 }
                 
-                // just add it to the first class
-                var concept = drugClassArray[0]['minConcept'];
-                var cl = drugClassArray[0]['rxclassMinConceptItem'];
-                if (typeof listOfAllclassIds[cl['classId']] !== 'undefined') {
-                    if (typeof listOfAllclassIds[cl['classId']]['ABCDNum'] == 'undefined') {
-                        listOfAllclassIds[cl['classId']]['ABCDNum'] = ABCDNum;
-                    } else {
-                        listOfAllclassIds[cl['classId']]['ABCDNum'] += ABCDNum;
+                // we want to add it to every class - but we need to be careful what the relationship is. A is-a would be ok.
+		for (var j = 0; j < drugClassArray.length; j++) {
+                    var concept = drugClassArray[j]['minConcept'];
+		    // inside the concept we get "tty": "IN"
+		    //if (typeof concept["tty"] !== 'undefined' && concept["tty"] !== "IN") {
+		    //	console.log("Got a non-IN concept (ignored): " + concept["tty"]);
+		    //	continue;
+		    //}
+                    var cl = drugClassArray[j]['rxclassMinConceptItem'];
+                    if (typeof listOfAllclassIds[cl['classId']] !== 'undefined') {
+			if (typeof listOfAllclassIds[cl['classId']]['ABCDNum'] == 'undefined') {
+                            listOfAllclassIds[cl['classId']]['ABCDNum'] = ABCDNum;
+			} else {
+                            listOfAllclassIds[cl['classId']]['ABCDNum'] += ABCDNum;
+			}
+			if (typeof listOfAllclassIds[cl['classId']]['children'] == 'undefined') {
+                            listOfAllclassIds[cl['classId']]['children'] = [];
+			}
+			// keep track of the drug that caused this entry, should we look for pGUID as well? could be done by adding key to drugClassArray
+			// we can reach the same entry now twice. Make sure you only this field (identified by rxcuid) once
+			let foundIt = false;
+			for (var k = 0; k < listOfAllclassIds[cl['classId']]['children'].length; k++) {
+			    if (listOfAllclassIds[cl['classId']]['children'][k]['rxcui'] == classesForDrugs[keys[i]]['userInput']['rxcui']) {
+				foundIt = true;
+				break;
+			    }
+			}
+			if (foundIt)
+			    continue;
+			listOfAllclassIds[cl['classId']]['children'].push({ "name": keys[i] + " " + classesForDrugs[keys[i]]['MedName'],
+									    'ABCDNum': ABCDNum, 'rxcui': classesForDrugs[keys[i]]['userInput']['rxcui'],
+									    "children": [], "alternates": alternates });
+			
                     }
-                    if (typeof listOfAllclassIds[cl['classId']]['children'] == 'undefined') {
-                        listOfAllclassIds[cl['classId']]['children'] = [];
-                    }
-                    // keep track of the drug that caused this entry, should we look for pGUID as well? could be done by adding key to drugClassArray
-                    listOfAllclassIds[cl['classId']]['children'].push({ "name": keys[i] + " " + classesForDrugs[keys[i]]['MedName'],
-                                                                        'ABCDNum': ABCDNum, 'rxcui': classesForDrugs[keys[i]]['userInput']['rxcui'],
-                                                                        "children": [], "alternates": alternates });
-                }
+		}
             }
         }
         // now we think that the tree contains all the numbers, we need to move them up the tree to the root
@@ -512,6 +530,8 @@ function getPGUIDEvent( n ) {
 }
 
 
+var aM = {};
+
 function init( s ) {
     if (typeof s == 'undefined')
         s = 'Parent';
@@ -539,7 +559,7 @@ function init( s ) {
     //measures2 = Array.apply(null, Array(14)).map(function(x,i) { return "med_otc_" + (i+1) + "_rxnorm_p"; });
 
     // everything with rxnorm in the element name
-    var aM = {
+    aM = {
         "Parent":  [
             "devhx_8_rxnorm_med2_p",         "devhx_8_rxnorm_med3_p",
             "devhx_9_med1_rxnorm_p",         "devhx_9_med2_rxnorm_p",
@@ -644,10 +664,11 @@ jQuery(document).ready(function() {
         var nv = jQuery(this).val();
         
     });
-    
-    jQuery('#create-new-score-button').on('click', function() {
+
+    jQuery('#create-new-score').on('show.bs.modal', function() {
         // announce this as a new variable in DEAP (use the Scores/getScores.php script)
         var vname_orig = jQuery('#select-search-select option:selected').attr('value');
+        var parent_child = jQuery('#select-medication-group a.active').text();
         var data = { 'src_subject_id': [], 'eventname': [] };
         // create this information given the currently selected node
         // first find the location in the tree
@@ -707,7 +728,101 @@ jQuery(document).ready(function() {
         }
         
         // sanitize the name
-        vname = "meduse_" + vname_orig.toLowerCase().replace(/ /g, "_").replace(/[^a-z_]+/g, '');
+        vname = "meduse_" + parent_child.toLowerCase() + "_" + vname_orig.toLowerCase().replace(/ /g, "_").replace(/[^a-z_]+/g, '');
+	// create some stats
+	var byEvent = {};
+	for (var i = 0; i < data['eventname'].length; i++) {
+	    if (data[vname_orig][i] !== "use")
+		continue; // ignore this event
+	    if (typeof byEvent[data['eventname'][i]] == 'undefined')
+		byEvent[data['eventname'][i]] = 1;
+	    else
+		byEvent[data['eventname'][i]] += 1;
+	}
+	var ks = Object.keys(byEvent);
+	var stat_msg = "";
+	for (var i = 0; i < ks.length; i++) {
+	    stat_msg += "<dt>Event " + ks[i] + "</dt><dd>reported uses: " + byEvent[ks[i]] + "</dd>";
+	}
+	jQuery('#med-stats').children().remove(); // clean out old stats
+	jQuery('#med-stats').append('<dl><dt>Medication category</dt><dd>' + vname + '</dd>' + stat_msg + '</dl>');
+    });
+    
+    jQuery('#create-new-score-button').on('click', function() {
+        // announce this as a new variable in DEAP (use the Scores/getScores.php script)
+        var vname_orig = jQuery('#select-search-select option:selected').attr('value');
+        var parent_child = jQuery('#select-medication-group a.active').text();
+        var data = { 'src_subject_id': [], 'eventname': [] };
+        // create this information given the currently selected node
+        // first find the location in the tree
+        function findNodesInTree( name, tree ) {
+            if (tree['name'] == name) {
+                return [ tree ];
+            }
+            if (typeof tree['children'] == 'undefined' || tree['children'].length == 0)
+                return [];
+            var nodes = [];
+            for (var i = 0; i < tree['children'].length; i++) {
+                var node = findNodesInTree(name, tree['children'][i]);
+                if (node.length > 0) {
+                    for (var j = 0; j < node.length; j++) {
+                        nodes.push(node[j]);
+                    }
+                }
+            }
+            return nodes;
+        }
+        var nodes = findNodesInTree( vname_orig, result );
+
+        if (nodes.length == 0) {
+            console.log("error");
+            return;
+        }
+        var data = getPGUIDEvent( nodes[0] );
+        // ok, that data contains all the pGUID and events that have this medication, set them to value = 1/use
+        data[vname_orig] = [];
+        for (var i = 0; i < data['src_subject_id'].length; i++) {
+            data[vname_orig].push("use");
+        }
+        // add the other participants with a value of 0/no-use (but only for events that have been returned)
+        var eventList = {};
+        eventList = data['eventname'].reduce( function (eventlist, a) { eventList[a] = 1; return eventList; } );
+        eventList = Object.keys(eventList);
+        for (var i = 0; i < eventList.length; i++) {
+            var event = eventList[i];
+            for (var j = 0; j < allMeasures['src_subject_id'].length; j++) {
+                // make sure we have all these subjects
+                var m = allMeasures['src_subject_id'][j];
+                // check if we have this m, event already
+                var found = false;
+                for (var k = 0; k < data['src_subject_id'].length; k++) {
+                    if (data['src_subject_id'][k] == m && data['eventname'][k] == event) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    // add this entry
+                    data['src_subject_id'].push( m );
+                    data['eventname'].push( event );
+                    data[vname_orig].push( "no-use" );
+                }
+            }
+        }
+	// list the individual scores that have been used to define this category
+	var listOfScores = "<ul>";
+	for (var i = 0; i < aM[parent_child].length; i++) {
+	    listOfScores += "<li>" + aM[parent_child][i];
+	    if (i < aM[parent_child].length-2)
+		listOfScores += ", ";
+	    if (i == aM[parent_child].length-2)
+		listOfScores += " and ";
+	    listOfScores += "</li>";
+	}
+	listOfScores += "</ul>";
+        
+        // sanitize the name
+        vname = "meduse_" + parent_child.toLowerCase() + "_" + vname_orig.toLowerCase().replace(/ /g, "_").replace(/[^a-z_]+/g, '');
         temp  = {};
         temp["name"]        = vname;
         temp["description"] = "Medication category: " + vname_orig;
@@ -715,10 +830,10 @@ jQuery(document).ready(function() {
         temp["content"]     = "<p>This score has been created using the medUse application. To edit this score " +
                                              "open the <a href='/applications/medications/'>medUse</a> application.</p>";
         if (typeof nodes[0]['classId'] !== 'undefined') {
-            temp["content"] = temp['content'] + "<p>The score has been derived from the ATC classification <i>" + nodes[0]['name'] + "</i> (" + nodes[0]['classId'] + ") and codes all participants with \"use\" that have at least one reported medication use in this category and \"no-use\" otherwise.</p>";
+            temp["content"] = temp['content'] + "<p>The score has been derived from the ATC classification <i>" + nodes[0]['name'] + "</i> (" + nodes[0]['classId'] + ") and codes all participants with \"use\" that have at least one reported medication use in this category and \"no-use\" otherwise. The score calculation is based on values shared in the following measures: " + listOfScores + ".</p>";
         }
         if (typeof nodes[0]['rxcui'] !== 'undefined') {
-            temp["content"] = temp['content'] + "<p>The score has been derived from the RxNorm classification <i>" + nodes[0]['name'] + "</i> (" + nodes[0]['rxcui'] + ") and codes all participants with \"use\" that have at least one reported medication use in this category and \"no-use\" otherwise.</p>";
+            temp["content"] = temp['content'] + "<p>The score has been derived from the RxNorm classification <i>" + nodes[0]['name'] + "</i> (" + nodes[0]['rxcui'] + ") and codes all participants with \"use\" that have at least one reported medication use in this category and \"no-use\" otherwise. The score calculation is based on values shared in the following measures" + listOfScores + "</p>";
         }
         temp["content"] = JSON.stringify(temp["content"]);
         

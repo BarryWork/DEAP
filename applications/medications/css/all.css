@@ -732,3 +732,18 @@ div.pill-nav-2 {
 #select-alternates .dropdown-toggle::after {
     display: none;
 }
+dl {
+    font-weight: 300;
+    font-size: 14pt;
+    line-height: 1em;
+}
+dd {
+    margin-left: 20px;
+    margin-top: 3px;
+}
+dt {
+    font-weight: 450;
+}
+.underlined {
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+}

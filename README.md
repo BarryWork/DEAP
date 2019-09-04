@@ -29,12 +29,15 @@ Instead of building the docker container manually, you can also use the CI build
 
 A script is provided to launch the container, [run](https://github.com/ABCD-STUDY/DEAP/blob/master/run).  For usage instructions, run it with no arguments.
 
-Provide a directory that is outside of the docker container to store the volatile data (analysis scripts and new measures). At the first startup this directory should also contain a single Rds file which contains the data as processed by https://github.com/ABCD-STUDY/analysis-nda17.
+Provide a directory that is outside of the docker container to store the volatile data (analysis scripts and new measures). At the first startup this directory should also contain a single Rds file which contains the data as processed by https://github.com/ABCD-STUDY/analysis-nda.
 ```
 mkdir -p assets
 cp <data nda18.Rds> assets/
 ./run deap deap 80 `pwd`/assets
 ```
+With access to an existing DEAP server you can also download its Rds file with the link: <server address>/code/php/getData.php. This only works of you have authenticated previously in the same session with a valid user.
+
+## Miscellaneous
 
 To visualize the development process of DEAP you can run gource:
 ```

@@ -133,16 +133,15 @@ Info on ADHD from the CDC: https://www.cdc.gov/ncbddd/adhd/data.html
 
 
  <div id="create-new-score" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-   <div class="modal-dialog">
+   <div class="modal-dialog modal-lg">
      <div class="modal-content">
               <div class="modal-header">
-              <h4>Create a new score</h4>
+              <h4>Create a new medication category score</h4>
               </div>
        <div class="modal-body">
+          <div id="med-stats"></div>
           <p style="font-weight: 300;font-size: 14pt;line-height: 24px;">
-Your user account will be able to use this score for further statistical analysis.
-          </p>
-          <p style="line-height: 1.5em;">This is an experimental feature, please report any issues on <a href="github.com/ABCD-STUDY/DEAP/issues">github.com/ABCD-STUDY/DEAP/issues.</a></p>
+Your user account will be able to use this score for further statistical analysis. This is an experimental feature, please report any issues on <a href="//github.com/ABCD-STUDY/DEAP/issues">github.com/ABCD-STUDY/DEAP/issues.</a></p>
        </div>
        <div class="modal-footer">
            <button type="button" data-dismiss="modal" class="btn">Cancel</button>

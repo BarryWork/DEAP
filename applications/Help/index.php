@@ -69,7 +69,7 @@ include_once("../../code/php/analytics.php");
             About the Study
           </div>
           <div class="card-body">
-            <p>The Data Exploration and Analysis Portal (DEAP) provides advanced statistical analysis functions that we built to work with the Adolescent Brain Cognitive Development (ABCD) Study - a long-term study of cognitive and brain development in children across the United States. From 2016-2018, we invited children between the ages of 9-11 to join ABCD from 20 sites around the nation, with the intent to enroll and follow 11,900 healthy children longitudinally for 10 years into young adulthood. </p>
+            <p>The Data Exploration and Analysis Portal (DEAP) provides advanced statistical analysis functions that we built to work with the Adolescent Brain Cognitive Development (ABCD) Study - a long-term study of cognitive and brain development in children across the United States. From 2016-2018, we invited children between the ages of 9-11 to join ABCD from 21 sites around the nation, with the intent to enroll and follow 11,900 healthy children longitudinally for 10 years into young adulthood. </p>
           </div>
         </div>
        
@@ -78,7 +78,7 @@ include_once("../../code/php/analytics.php");
             About the Data
           </div>
           <div class="card-body">
-            <p>The data available on DEAP is a copy of the published data of the ABCD study on the National Data Archive (NDA). The data is pre-processed and merged into a single large database that is easiest understood as a spreadsheet. This process is documented on a public repository at <a href="https://github.com/ABCD-STUDY/analysis-nda17">github.com/ABCD-STUDY/analysis-nda17</a>. The current version of DEAP is based on the <i>ABCD Release 2.0</i> package under the doi: 10.15154/1503209. Check the <a href="https://ndar.nih.gov/study.html?id=634" >ABCD Release 2.0 Notes</a> for more detail. </p> 
+            <p>The data available on DEAP is a copy of the published data of the ABCD study on the NIMH Data Archive (NDA). The data is pre-processed and merged into a single large database that is easiest understood as a spreadsheet. This process is documented on a public repository at <a href="https://github.com/ABCD-STUDY/analysis-nda17">github.com/ABCD-STUDY/analysis-nda17</a>. The current version of DEAP is based on the <i>ABCD Release 2.0</i> package under the doi: 10.15154/1503209. Check the <a href="https://ndar.nih.gov/study.html?id=634" >ABCD Release 2.0 Notes</a> for more detail. </p> 
             <p>Access to DEAP is only available to users with an existing NDA data use certification (<a href="https://data-archive.nimh.nih.gov/abcd">apply here</a>).</p>
           </div>
         </div>
@@ -154,7 +154,7 @@ include_once("../../code/php/analytics.php");
           <div class="card-body">
             <p>DEAP is a software provided by the Data Analysis and Informatics Center of ABCD located at the UC San Diego with generous support from the National Institutes of Health and the Centers for Disease Control and Prevention under award number U24DA041123.</p>
             <p>The DEAP project information and links to its source code are available under the resource identifier <a href="https://scicrunch.org/resolver/SCR_016158" title="resource identifier SCR_016158 link to scicrunch">RRID: SCR_016158</a>.</p>
-            <p>The content is solely the responsibility of the authors and does not necessarily represent the official views of the National Data Archive or the National Institutes of Health.</p>
+            <p>The content is solely the responsibility of the authors and does not necessarily represent the official views of the NIMH Data Archive or the National Institutes of Health.</p>
           </div>
         </div>
         
