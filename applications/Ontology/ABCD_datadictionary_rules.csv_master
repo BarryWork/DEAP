@@ -253,7 +253,10 @@ H_Rssfm,/(rsfm_var)/i,"MRI Resting State Temporal Variance"
 
 
 
-H_Deemo,/(abcd_site|demo_gender_id_v2$|demo_sex_v2|^acs_wi_post$|^interview_age|rel_family_id|rel_group_id|rel_relationship|demo_prnt_marital_v2$|high.educ|^married$|^female$|^race.ethnicity|household.income|^age|^gender|^hisp|^interview_date|^married.|^race.|^sex|^site_id_l|^smri_visitid|^src_subject_id|^subjectid)/i,"Demographic (Core)"
+H_Deemo,/(abcd_site|demo_gender_id_v2$|demo_sex_v2|^acs_wi_post$|^interview_age|rel_family_id|rel_group_id|rel_relationship|demo_prnt_marital_v2$|high.educ|^married$|^female$|^race.ethnicity|household.income|^age|^gender|^hisp|^interview_datetime|^married.|^race.|^sex|^site_id_l|^smri_visitid|^src_subject_id|^subjectid|H_GAF|H_relzygo|^event_name)/i,"Demographic (Core)"
+H_GAF,/(AFR|EUR|EAS|AMR)/,"rel_GAF"
+H_relzygo,/(paired.subjectid|PI_HAT|Zygosity)/,"rel_zygosity"
+
 H_all,/.*/,"All Measures"
 
 H_TASKMRI,/(^H_TASKMID$|^H_TASKSST$|^H_TASKNBACK$|H_Beehrec)/,"Task MRI"
