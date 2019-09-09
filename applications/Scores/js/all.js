@@ -24,6 +24,30 @@ $('input[type="file"]').change(function(e){
         reader.readAsText(file, "UTF-8");
         reader.onload = function (evt) {
           parsed_file =  evt.target.result.split("\n").map(CSVtoArray)
+
+	  try{
+	  // correrct the data format as non-catagorical if the distinct value more than 10
+	  var new_variable_list = parsed_file[0].slice(2);
+	  var distinct_dict = {};
+	  var MAX_LENGTH_CATA = 10;
+	  for(let it_var = 0; it_var < new_variable_list.length; it_var++){
+	      var real_id = it_var + 2;
+	      var var_name_temp = new_variable_list[real_id];
+	      if(!distinct_dict[var_name_temp]){
+	   	distinct_dict[var_name_temp] = new Set([]);
+	      }
+	      for(var it_row = 1; it_row < parsed_file.length; it_row++){
+	      	distinct_dict[var_name_temp].add(parsed_file[it_row][real_id]);
+	      }
+	      if(distinct_dict[var_name_temp].size > MAX_LENGTH_CATA){
+	      	for(var it_row = 1; it_row < parsed_file.length; it_row++){
+                  parsed_file[it_row][real_id] = parsed_file[it_row][real_id] == "" ? NaN : parseFloat(parsed_file[it_row][real_id]); 
+                }
+	      }	
+	  }
+	  } catch (error) {
+	     console.log(error);
+	  }	
           if(parsed_file[parsed_file.length -1].length == 0){
             parsed_file.splice(-1,1)
           }
@@ -485,7 +509,7 @@ function announce_spreadsheet(vname,data){
   temp["name"]        = vname;
   temp["description"] = "";
   temp["permission"]  = "private";
-  temp["content"] = "";
+  temp["content"] = "Variables extended by spreadsheet upoloading, please provide calculation detail this section.";
   temp["action"]      = "save";
   temp_data = {"src_subject_id": upload_spreadsheet_obj["src_subject_id"], 
     "eventname": upload_spreadsheet_obj["eventname"]};
