@@ -652,7 +652,7 @@ function update(data, compute_block_id) {
   var table_location = jQuery(document.getElementById(vname+'-table'));
   var hist_location  = jQuery(document.getElementById(vname+'-hist'));
 
-  if (vname !== "" && vname && element_type == "") {
+  if (vname !== "" && vname && (element_type == "" || !element_type)) {
     var temp_json = {};
     if (data.listColumns().indexOf(vname) > -1) {
       try {
@@ -914,7 +914,7 @@ function insert_recipe_block(input, top) {
       temp["content"]     = JSON.stringify(simplemde.value());
       temp["action"]      = "save";
 
-      if(temp["source"] == "spreadsheet" ){
+      if(temp["source"] == "spreadsheet" || temp["source"] == ""){
         temp["data"]        = JSON.stringify(output_vlist[bootstrap_input_name.find("input").val()]);
       }
 
