@@ -57,7 +57,10 @@ jQuery(document).ready(function() {
 });
 
 function show_updates(){
-	$.get("./code/php/getNewsUpdates.php ",function(data){$(".news-updates").append(data)
+	$.get("./code/php/getNewsUpdates.php ",function(data){
+			
+ 		$(".news-updates").html("")
+ 		$(".news-updates").append(data)
 		if(!$(".news-updates").is(":visible")){
 			$(".news-updates").fadeIn()
 		} else {
