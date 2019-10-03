@@ -9,7 +9,6 @@
 	{ "name": "BMI small", "func": "has(anthro_bmi_calc)and(anthro_bmi_calc<quantile(anthro_bmi_calc,0.25))" },
 	{ "name": "Single", "func": "rel_relationship==\"single\"" },
 	{ "name": "Sibling, Twin, Triplet", "func": "rel_relationship<>\"single\"" },
-        { "name": "Scanner Model Known","func":"has(dti_manufacturers_modelname)"},
         { "name": "Recommended T1w","func":"fsqc_qc=\"pass\""},
         { "name": "Recommended T2w","func":"(fsqc_qc=\"pass\")and(iqc_t2_ok_ser>0)"},
         { "name": "Recommended dMRI","func":"(fsqc_qc=\"pass\")and(dmri_dti_postqc_qc=1)"},
