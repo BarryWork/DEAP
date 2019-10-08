@@ -1140,6 +1140,10 @@ function insert_save_tabs() {
     var p1 = Promise.resolve("foo")
       .then(function() {})
       .then(function() {
+        plot_id = "plot-0"
+        return new Promise(createSVG)
+      })
+      .then(function() {
         plot_id = "plot-1"
         return new Promise(createSVG)
       })
