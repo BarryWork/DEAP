@@ -1,4 +1,4 @@
-// testing:
+// testing:alias_data
 //    curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "search=iq" http://127.0.0.1:8001/
 // check if port is open:
 //     lsof -i:8001
@@ -48,8 +48,24 @@ function search( what, longsearch ) {
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
 		entry['aliases'] = instr[j]['aliases'];
-		results.push(entry);
+		results.unshift(entry);
 		found = true;
+	    }
+	    // look for aliases
+	    if (typeof instr[j]['aliases'] !== 'undefined' && instr[j]['aliases'].length > 0) {
+		for (var k = 0; k < instr[j]['aliases'].length; k++) {
+		    if (instr[j]['aliases'][k].indexOf(what) > -1) {
+			var entry = { name: instr[j]['name'], description: instr[j]['description'], notes: instr[j]['notes'] };
+			entry['marker'] = [what,"matches alias"];
+			entry['instrument'] = keys[i];
+			entry['title'] = instrumentTitles[keys[i]]['title'];
+			entry['categories'] = instrumentTitles[keys[i]]['categories'];
+			entry['aliases'] = instr[j]['aliases'];
+			results.unshift(entry);
+			found = true;
+			break; // one is sufficient
+		    }
+		}
 	    }
 	    // look at instrument description
 	    if (!found && instrumentTitles[keys[i]]['title'].toLowerCase().indexOf(what) > -1) {
@@ -73,22 +89,7 @@ function search( what, longsearch ) {
 		results.push(entry);
 		found = true;
 	    }
-	    // look for aliases
-	    if (!found &&  typeof instr[j]['aliases'] !== 'undefined' && instr[j]['aliases'].length > 0) {
-		for (var k = 0; k < instr[j]['aliases'].length; k++) {
-		    if (instr[j]['aliases'][k].indexOf(what) > -1) {
-			var entry = { name: instr[j]['name'], description: instr[j]['description'], notes: instr[j]['notes'] };
-			entry['marker'] = [what,"matches alias"];
-			entry['instrument'] = keys[i];
-			entry['title'] = instrumentTitles[keys[i]]['title'];
-			entry['categories'] = instrumentTitles[keys[i]]['categories'];
-			entry['aliases'] = instr[j]['aliases'];
-			results.push(entry);
-			found = true;
-			break; // one is sufficient
-		    }
-		}
-	    }
+	    
 	    if (!found && typeof instr[j]['description_lower_case'] !== 'undefined' && instr[j]['description_lower_case'].indexOf(what) > -1) {
 		var entry = { name: instr[j]['name'], description: instr[j]['description'], notes: instr[j]['notes'] };
 		entry['marker'] = [what,"matches description"];
@@ -183,8 +184,24 @@ function searchRegExp(results, what) {
 		entry['title'] = instrumentTitles[keys[i]]['title'];
 		entry['categories'] = instrumentTitles[keys[i]]['categories'];
 		entry['aliases'] = instr[j]['aliases'];
-		results.push(entry);
+		results.unshift(entry);
 		found = true;
+	    }
+	    // look for aliases
+	    if (typeof instr[j]['aliases'] !== 'undefined' && instr[j]['aliases'].length > 0) {
+		for (var k = 0; k < instr[j]['aliases'].length; k++) {
+		    if (reg.test(instr[j]['aliases'][k])) {
+			var entry = { name: instr[j]['name'], description: instr[j]['description'], notes: instr[j]['notes'] };
+			entry['marker'] = [what,"matches alias"];
+			entry['instrument'] = keys[i];
+			entry['title'] = instrumentTitles[keys[i]]['title'];
+			entry['categories'] = instrumentTitles[keys[i]]['categories'];
+			entry['aliases'] = instr[j]['aliases'];
+			results.unshift(entry);
+			found = true;
+			break; // one is sufficient
+		    }
+		}
 	    }
 	    // look at instrument description
 	    if (!found && reg.test(instrumentTitles[keys[i]]['title'])) {
@@ -208,22 +225,7 @@ function searchRegExp(results, what) {
 		results.push(entry);
 		found = true;
 	    }
-	    // look for aliases
-	    if (!found && typeof instr[j]['aliases'] !== 'undefined' && instr[j]['aliases'].length > 0) {
-		for (var k = 0; k < instr[j]['aliases'].length; k++) {
-		    if (reg.test(instr[j]['aliases'][k])) {
-			var entry = { name: instr[j]['name'], description: instr[j]['description'], notes: instr[j]['notes'] };
-			entry['marker'] = [what,"matches alias"];
-			entry['instrument'] = keys[i];
-			entry['title'] = instrumentTitles[keys[i]]['title'];
-			entry['categories'] = instrumentTitles[keys[i]]['categories'];
-			entry['aliases'] = instr[j]['aliases'];
-			results.push(entry);
-			found = true;
-			break; // one is sufficient
-		    }
-		}
-	    }
+	    
 	    if (!found && typeof instr[j]['description'] !== 'undefined' && reg.test(instr[j]['description'])) {
 		var entry = { name: instr[j]['name'], description: instr[j]['description'], notes: instr[j]['notes'] };
 		entry['marker'] = [what,"matches description"];
@@ -275,8 +277,10 @@ function searchKeywords(result, what) {
     }
     console.log(JSON.stringify(finds));
     // now sort the different measures by length (number of matching entries)
+    // TODO: a better sort script that will put direct matches on top 
     var ks = Object.keys(finds);
-    var sks = ks.sort(function(a,b) { return finds[b].length - finds[a].length; });
+    //var sks = ks.sort(function(a,b) { return finds[b].length - finds[a].length; });
+    var sks = ks;
     for (var i = 0; i < sks.length; i++) {
 	// merge all the marker
 	

@@ -12,9 +12,13 @@ function search( t ) {
 	parsedData = JSON.parse(data);
 	if(t.split(" ").length == 1){
 	  parsedData.sort(function compare(a,b) {
-	    if (a.name < b.name)
+	    if (a.instrument == "DEAP")
+		  return -1
+	    if (b.instrument == "DEAP")
+		  return 1
+	    if (a.marker[1] < b.marker[1])
 	 	return -1;
-	    if (a.name > b.name)
+	    if (a.marker[1] > b.marker[1])
 		return 1;
 	    return 0;
 	  });
