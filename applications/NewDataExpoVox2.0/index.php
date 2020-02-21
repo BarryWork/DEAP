@@ -406,13 +406,13 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script src="../NewDataExpoVox2.0/js/Detector.js"></script> 
 <script src="../NewDataExpoVox2.0/js/Tween.js"></script> 
 <script src="../NewDataExpoVox2.0/js/Threex.screenshot.js"></script>
-<script type="text/javascript" src="../NewDataExpoVox/js/jquery.minicolors.js"></script>
+<script type="text/javascript" src="../NewDataExpoVox2.0/js/jquery.minicolors.js"></script>
 <script type="text/javascript" src="../NewDataExpoVox/js/jquery.jeditable.js"></script>
 <script src="./js/all-2.js?_=333"></script>
 
 
 
-<script src="../NewDataExpoVox/js/all-surface.js"></script>
+<script src="../NewDataExpoVox2.0/js/all-surface.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js" integrity="sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h" crossorigin="anonymous"></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script src="js/bootstrap-toggle.min.js"></script>
