@@ -88,7 +88,7 @@ div.col-sm-12.row.row-fluid.input-group {
         <link rel="stylesheet" href="all.css">
         <link rel="stylesheet" href="../NewDataExpoVox2.0/css/all-surface.css">
         <link rel="stylesheet" href="css/style.css">
-	<link href="../NewDataExpoVox/js/jquery.minicolors.css" rel="stylesheet" type="text/css"/> 
+	<link href="../NewDataExpoVox2.0/js/jquery.minicolors.css" rel="stylesheet" type="text/css"/> 
 <?php
 session_start();
 include_once("../../code/php/analytics.php");
@@ -360,9 +360,10 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script> -->
 <script type="text/javascript" src="/js/highslide/highslide.config.js" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="/js/highslide/highslide.css" />
-<script type="text/javascript" src="/js/HighChart414/js/highcharts.js"></script>
+<!-- <script type="text/javascript" src="/js/HighChart414/js/highcharts.js"></script>
 <script type="text/javascript" src="/js/HighChart414/js/highcharts-more.js"></script>
 <script type="text/javascript" src="/js/HighChart414/js/modules/exporting.js"></script>
+--!>
 <script type="text/javascript" src="/js/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="/js/pixastic/pixastic.core.js"></script>
 <script type="text/javascript" src="/js/pixastic/pixastic.jquery.js"></script>
@@ -391,20 +392,20 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script src="./js/coeffient.js" charset="utf-8"></script>
 <script src="../Ontology/js/highlight-js.js" charset="utf-8"></script>
 
-<script src="../NewDataExpoVox/js/three.min.js"></script> 
-<script src="../NewDataExpoVox/js/ShaderExtras.js"></script> 
+<script src="../NewDataExpoVox2.0/js/three.min.js"></script> 
+<script src="../NewDataExpoVox2.0/js/ShaderExtras.js"></script> 
 
-<script src="../NewDataExpoVox/js/postprocessing/EffectComposer.js"></script> 
-<script src="../NewDataExpoVox/js/postprocessing/RenderPass.js"></script> 
-<script src="../NewDataExpoVox/js/postprocessing/ShaderPass.js"></script> 
-<script src="../NewDataExpoVox/js/postprocessing/MaskPass.js"></script> 
-<script src="../NewDataExpoVox/js/postprocessing/BloomPass.js"></script> 
-<script src="../NewDataExpoVox/js/postprocessing/FilmPass.js"></script> 
+<script src="../NewDataExpoVox2.0/js/postprocessing/EffectComposer.js"></script> 
+<script src="../NewDataExpoVox2.0/js/postprocessing/RenderPass.js"></script> 
+<script src="../NewDataExpoVox2.0/js/postprocessing/ShaderPass.js"></script> 
+<script src="../NewDataExpoVox2.0/js/postprocessing/MaskPass.js"></script> 
+<script src="../NewDataExpoVox2.0/js/postprocessing/BloomPass.js"></script> 
+<script src="../NewDataExpoVox2.0/js/postprocessing/FilmPass.js"></script> 
 
 <script src="../NewDataExpoVox/js/loaders/VTKLoader.js"></script> 
-<script src="../NewDataExpoVox/js/Detector.js"></script> 
-<script src="../NewDataExpoVox/js/Tween.js"></script> 
-<script src="../NewDataExpoVox/js/Threex.screenshot.js"></script>
+<script src="../NewDataExpoVox2.0/js/Detector.js"></script> 
+<script src="../NewDataExpoVox2.0/js/Tween.js"></script> 
+<script src="../NewDataExpoVox2.0/js/Threex.screenshot.js"></script>
 <script type="text/javascript" src="../NewDataExpoVox/js/jquery.minicolors.js"></script>
 <script type="text/javascript" src="../NewDataExpoVox/js/jquery.jeditable.js"></script>
 <script src="./js/all-2.js?_=333"></script>
