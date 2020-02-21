@@ -203,16 +203,114 @@ primary
         return threshold;
     }    
     / "visit" __ "(" __ ")" {
-        return visitOrder();
+	// ok, we want to return a vector which has numbers in it, a 0 for baseline_year_1_arm_1 for example
+	var event_mapping = {
+	    "screener_arm_1": -1,
+	    "baseline_year_1_arm_1": 0,
+	    "6_month_follow_up_arm_1": 1,
+	    "1_year_follow_up_y_arm_1": 2,
+	    "18_month_follow_up_arm_1": 3,
+	    "2_year_follow_up_y_arm_1": 4,
+	    "30_month_follow_up_arm_1": 5,
+	    "3_year_follow_up_y_arm_1": 6,
+	    "42_month_follow_up_arm_1": 7,
+	    "4_year_follow_up_arm_1": 8,
+	    "54_month_follow_up_arm_1": 9,
+	    "5_year_follow_up_y_arm_1": 10 };
+
+	var res = Array.apply(null, new Array(allMeasures.eventname.length)).map(function(){return ""});
+	for (var i = 0; i < allMeasures.eventname.length; i++) {
+	    var e = allMeasures.eventname[i];
+	    res[i] = event_mapping[e];
+	}
+        return res;
     }
     / "numVisits" __ "(" __ ")" {
-        return numVisits();
+	var res = Array.apply(null, new Array(allMeasures.src_subject_id.length)).map(function(){return ""});
+	// for each participant how many events do we have?
+	var participants = [... new Set(allMeasures['src_subject_id'])];
+	var cache = {}; // keep track
+	for (var i = 0; i < allMeasures.src_subject_id.length; i++) {
+	    var p = allMeasures.src_subject_id[i];
+	    var e = allMeasures.eventname[i];
+	    if (typeof cache[p] == 'undefined')
+	       cache[p] = [];
+	    if (cache[p].indexOf(e) == -1)
+	       cache[p].push(e);
+	}
+	for (var i = 0; i < allMeasures.src_subject_id.length; i++) {
+	    var p = allMeasures.src_subject_id[i];
+	    var e = allMeasures.eventname[i];
+	    res[i] = cache[p].length;
+	}
+        return res;
     }
     / "visit" __ "(" __ name:measure __ ")" {
-        return visitOrder( name );
+        if ((typeof name === "undefined") || (name === "") || (name === "NA"))
+           return false;
+
+	// ok, we want to return a vector which has numbers in it, a 0 for baseline_year_1_arm_1 for example
+	var event_mapping = {
+	    "screener_arm_1": -1,
+	    "baseline_year_1_arm_1": 0,
+	    "6_month_follow_up_arm_1": 1,
+	    "1_year_follow_up_y_arm_1": 2,
+	    "18_month_follow_up_arm_1": 3,
+	    "2_year_follow_up_y_arm_1": 4,
+	    "30_month_follow_up_arm_1": 5,
+	    "3_year_follow_up_y_arm_1": 6,
+	    "42_month_follow_up_arm_1": 7,
+	    "4_year_follow_up_arm_1": 8,
+	    "54_month_follow_up_arm_1": 9,
+	    "5_year_follow_up_y_arm_1": 10 };
+
+        if (header.indexOf(name) == -1) {
+           return "";
+        }
+	var res = Array.apply(null, new Array(allMeasures[name].length)).map(function(){return ""});
+	for (var i = 0; i < allMeasures[name].length; i++) {
+	    var m = allMeasures[name][i];
+	    var e = allMeasures.eventname[i];
+	    if (m == "" || m == "NA") { // if we don't have a value we return empty string
+	       res[i] = "";
+	       continue;
+	    }
+	    res[i] = event_mapping[e];
+	}
+        return res;
     }
     / "numVisits" __ "(" __ name:measure __ ")" {
-        return numVisits( name );
+      	// we want to compute the number of visits that have a measure for this variable
+        if ((typeof name === "undefined") || (name === "") || (name === "NA"))
+           return false;
+
+        if (header.indexOf(name) == -1) {
+           return "";
+        }
+	var res = Array.apply(null, new Array(allMeasures[name].length)).map(function(){return ""});
+	// for each participant how many events do we have?
+	var participants = [... new Set(allMeasures[name])];
+	var cache = {}; // keep track
+	for (var i = 0; i < allMeasures[name].length; i++) {
+	    var m = allMeasures[name][i];
+	    var p = allMeasures.src_subject_id[i];
+	    var e = allMeasures.eventname[i];
+	    if (typeof cache[p] == 'undefined')
+	       cache[p] = [];
+	    if (cache[p].indexOf(e) == -1)
+	       cache[p].push(e);
+	}
+	for (var i = 0; i < allMeasures[name].length; i++) {
+	    var m = allMeasures[name][i];
+	    var p = allMeasures.src_subject_id[i];
+	    var e = allMeasures.eventname[i];
+	    if (m == "" || m == "NA") { // if we don't have a value we return empty string
+	       res[i] = "";
+	       continue;
+	    }
+	    res[i] = cache[p].length;
+	}
+        return res;
     }
     / "(" __ equal:equal __ ")" {
         return equal;

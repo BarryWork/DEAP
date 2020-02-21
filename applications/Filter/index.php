@@ -102,7 +102,7 @@
           </p>
           <hr>
           <p style="font-weight: 300;font-size: 14pt;line-height: 24px;">
-            Here is a short description of the functionality for subsetting that is available:
+            Here is a short description of the functionality for subsetting:
             <dl>
                <dt style="margin-top: 10px;">age=="120"</dt>
                <dd>Measures to filter by such as "age" are referenced by their name. You can either test for being the same (==), or test for numeric quantities such as <code>age<="130"</code>. More than one test can be applied at the same time by using brackets and the "and" operator. To restrict the age range to participants that are between 9 and 10 years old we can therefore use the filter: <code>(age>=(12*9)) and (age<(12*11))</code>.</dd>       
@@ -112,12 +112,10 @@
                <dd>Returns a threshold value for a given variable. This can be used as in: <code>age>quantile(age,0.75)</code> to select participants with a age value below the 75 percentile.</dd>
        <dt style="margin-top: 10px;">unique(rel_family_id)</dt>
        <dd>Unique returns a single session (at random) for each value in the specified measure. Using it with rel_family_id it returns a single member of each family.</dd>
-               <!--<dt>visit()</dt>
-               <dd>Returns for each visit a number that indicates the order as defined by "StudyDate". For the oldest visit of a subject this value will be 0.</dd>
-               <dt style="margin-top: 10px;">visit( measure )</dt>
-               <dd>Returns the sorting order given the measure. For example visit ("StudyDate") will return 
-               the sorting order based on the StudyDate column (same as calling visit()). If a variable other
-               than "StudyDate" is defined the sorting will be done numerically or alphabetically.</dd> -->
+       <dt>visit()</dt>
+       <dd>Returns for each visit a number that indicates the order (baseline = 0, 6 month followup = 1, etc).</dd>
+       <dt style="margin-top: 10px;">numVisits( age )</dt>
+       <dd>Returns the number of visits for a given variable.</dd>
                    
             </dl>
           </p>

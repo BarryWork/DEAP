@@ -79,7 +79,7 @@ echo('<script type="text/javascript"> admin = '.($admin?"true":"false").'; can_q
               <br> </p>
             <div class="message__image" style="transform: translateY(0px);"></div>
             <p class="current">
-              <span class="current__counter">2018</span> NDA18
+              <span class="current__counter">2019</span> NDA19
             </p>
             <p class="login">
               Username:
