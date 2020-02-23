@@ -10,29 +10,31 @@ ENV LANG="en_US.UTF-8" \
     ND_ENTRYPOINT="/deap-startup.sh"
 
 RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
-        apache2 \
-        apt-utils \
-        build-essential \
-        bzip2 \
-        ca-certificates \
-        cron \
-        curl \
-        ed \
-        vim \
-        gfortran \
-        git \
-        libblas-dev \
-        liblapack-dev \
-        locales \
-        nodejs \
-        npm \
-        php7.2 \
-        php7.2-curl \
-	php7.2-mbstring \
-	libapache2-mod-php7.2 \
-	rsync \
-        sudo \
-        unzip \
+    apache2 \
+    apt-utils \
+    build-essential \
+    bzip2 \
+    ca-certificates \
+    cron \
+    curl \
+    ed \
+    vim \
+    gfortran \
+    git \
+    libblas-dev \
+    liblapack-dev \
+    locales \
+    nodejs \
+    npm \
+    php7.2 \
+    php7.2-curl \
+    php7.2-mbstring \
+    libapache2-mod-php7.2 \
+    rsync \
+    add-apt-key \
+    wget \
+    sudo \
+    unzip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && rm /var/www/html/index.html \
@@ -71,28 +73,29 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends  \
     && localedef --force --inputfile=en_US --charmap=UTF-8 C.UTF-8
 
 RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
-         echo '#!/usr/bin/env bash' >> $ND_ENTRYPOINT \
-         && echo 'set +x' >> $ND_ENTRYPOINT \
-         && echo 'if [ -z "$*" ]; then /usr/bin/env bash; else' >> $ND_ENTRYPOINT \
-         && echo '  if [ "$1" == "start" ]; then' >> $ND_ENTRYPOINT \
-         && echo '    echo "Start system services and apache...";' >> $ND_ENTRYPOINT \
-         && echo '    mkdir -p /usr/local/;' >> $ND_ENTRYPOINT \
-         && echo '  else $*;' >> $ND_ENTRYPOINT \
-         && echo '  fi' >> $ND_ENTRYPOINT \
-         && echo 'fi' >> $ND_ENTRYPOINT \
-         && echo 'touch /var/www/html/applications/Ontology/searchServer/log.log' >> $ND_ENTRYPOINT \
-         && echo 'chmod a+w /var/www/html/applications/Ontology/searchServer/log.log' >> $ND_ENTRYPOINT \
-         && echo 'alias deap="cd /var/www/html/" >> /root/.bashrc;' >> $ND_ENTRYPOINT \
-         && echo 'cron' >> $ND_ENTRYPOINT \
-         && echo '/bin/bash /var/www/html/code/setup.sh;' >> $ND_ENTRYPOINT \
-         && echo '/usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R;' >> $ND_ENTRYPOINT \
-         && echo 'sudo -u www-data /usr/bin/Rscript /var/www/html/applications/Scores/R/transfer.R;' >> $ND_ENTRYPOINT \
-         && echo 'cp /var/www/html/data/ABCD/*.php /var/www/html/code/php/' >> $ND_ENTRYPOINT \
-         && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
-         && echo "ServerName localhost" >> /etc/apache2/apache2.conf \
-         && echo "<Directory /var/www/html/>\n    Options -Indexes +FollowSymLinks\n    AllowOverride None\n    Require all granted\n</Directory>" >> /etc/apache2/apache2.conf \
-         && echo "<FilesMatch \"\\.Rds\$\">\n    Require all denied\n</FilesMatch>" >> /etc/apache2/apache2.conf; \
-       fi \
+    echo '#!/usr/bin/env bash' >> $ND_ENTRYPOINT \
+    && echo 'set +x' >> $ND_ENTRYPOINT \
+    && echo 'if [ -z "$*" ]; then /usr/bin/env bash; else' >> $ND_ENTRYPOINT \
+    && echo '  if [ "$1" == "start" ]; then' >> $ND_ENTRYPOINT \
+    && echo '    echo "Start system services and apache...";' >> $ND_ENTRYPOINT \
+    && echo '    mkdir -p /usr/local/;' >> $ND_ENTRYPOINT \
+    && echo '  else $*;' >> $ND_ENTRYPOINT \
+    && echo '  fi' >> $ND_ENTRYPOINT \
+    && echo 'fi' >> $ND_ENTRYPOINT \
+    && echo 'touch /var/www/html/applications/Ontology/searchServer/log.log' >> $ND_ENTRYPOINT \
+    && echo 'chmod a+w /var/www/html/applications/Ontology/searchServer/log.log' >> $ND_ENTRYPOINT \
+    && echo 'alias deap="cd /var/www/html/" >> /root/.bashrc;' >> $ND_ENTRYPOINT \
+    && echo 'cron' >> $ND_ENTRYPOINT \
+    && echo '/bin/bash /var/www/html/code/setup.sh;' >> $ND_ENTRYPOINT \
+    && echo '/usr/bin/Rscript /var/www/html/applications/NewDataExpo/generator.R;' >> $ND_ENTRYPOINT \
+    && echo '/usr/bin/Rscript /var/www/html/applications/code/setup_database1.R;' >> $ND_ENTRYPOINT \
+    && echo 'sudo -u www-data /usr/bin/Rscript /var/www/html/applications/Scores/R/transfer.R;' >> $ND_ENTRYPOINT \
+    && echo 'cp /var/www/html/data/ABCD/*.php /var/www/html/code/php/' >> $ND_ENTRYPOINT \
+    && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
+    && echo "ServerName localhost" >> /etc/apache2/apache2.conf \
+    && echo "<Directory /var/www/html/>\n    Options -Indexes +FollowSymLinks\n    AllowOverride None\n    Require all granted\n</Directory>" >> /etc/apache2/apache2.conf \
+    && echo "<FilesMatch \"\\.Rds\$\">\n    Require all denied\n</FilesMatch>" >> /etc/apache2/apache2.conf; \
+    fi \
     && chmod -R 777 /deap-startup.sh
 
 RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
@@ -115,6 +118,30 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     && Rscript -e 'install.packages("doParallel", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("jsonlite", repos="https://cran.rstudio.com")' \
     && Rscript -e 'install.packages("tableone", repos="https://cran.rstudio.com")' 
+
+#-------------------------------------------------------------------------------
+# Install internal database (monetdb - column store mirrors data from ndaXX.Rds)
+#-------------------------------------------------------------------------------
+RUN echo -e "deb https://dev.monetdb.org/downloads/deb/ bionic monetdb\ndeb-src https://dev.monetdb.org/downloads/deb/ bionic monetdb\n" > /etc/apt/sources.list.d/monetdb.list \
+    && wget --output-document=- https://www.monetdb.org/downloads/MonetDB-GPG-KEY | sudo apt-key add - \
+    && apt-get update && apt-get install monetdb5-sql monetdb-client -yq \
+    && echo -e "user=deap\npassword=`tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1`\nlanguage=sql" > /root/.monetdb \
+    && echo -e "user=monetdb\npassword=monetdb\nlanguage=sql" > /root/.monetdb_root \
+    && monetdbd create /var/www/html/data/ABCD/DB1 \
+    && monetdbd start /var/www/html/data/ABCD/DB1 \
+    && monetdbd set port=11223 /var/www/html/data/ABCD/DB1 \
+    && monetdbd set control="no" /var/www/html/data/ABCD/DB1 \
+    && monetdb create abcd && monetdb start abcd && monetdb release abcd \
+    && echo -e "CREATE USER \"deap\" WITH PASSWORD '"$(cat /root/.monetdb | grep password | cut -d'=' -f2)"' NAME 'DEAP User' SCHEMA \"sys\";\nCREATE SCHEMA \"deap\" AUTHORIZATION \"deap\";\nALTER USER \"deap\" SET SCHEMA \"deap\";" | DOTMONETDBFILE=/root/.monetdb_root mclient --port=11223 -d abcd
+
+# toolkit required for code/setup_database1.R (imports the Rds to the database table abcd)
+RUN apt-get update && apt-get install libcurl4-openssl-dev libxml2-dev libssl-dev -yq \
+    && apt-get clean \
+    && Rscript -e 'install.packages("httr")' \
+    && Rscript -e 'install.packages("git2r")' \
+    && Rscript -e 'install.packages("devtools")' \
+    && Rscript -e 'install.packages("DBI")' \
+    && Rscript -e 'devtools::install_github("hannesmuehleisen/MonetDBLite-R")'
 
 EXPOSE 80
 ENTRYPOINT ["/deap-startup.sh"]

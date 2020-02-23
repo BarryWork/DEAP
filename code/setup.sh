@@ -36,6 +36,7 @@ if [ -f "${dataRds}" ] && [ ! -f "${dataRdsEnd}" ]; then
     mkdir -p "${rootpath}/data/${project}/NewDataExpo/usercache/"
     mkdir -p "${rootpath}/data/${project}/NewDataExpo/variableInfo/"
     mkdir -p "${rootpath}/data/${project}/Pre-Registration/"
+    mkdir -p "${rootpath}/data/${project}/DB1/"
     mkdir -p "${rootpath}/data/${project}/ModelBuilder/viewer/recipes/"
     cp "${rootpath}/applications/ModelBuilder/viewer/recipes/"GAMM4-FZ-CR.* "${rootpath}/data/${project}/ModelBuilder/viewer/recipes/"
 
