@@ -6,22 +6,24 @@
 # > DOTMONETDBFILE=/root/.monetdb_root mclient --port=11223 -d abcd /tmp/createTable.sql
 #
 # Speed: The "COPY RECORDS" method below is the fastest way to import large data into MonetDB.
-#        That said, the speed of the import of the table is still slow (call to mclient). 
+#        That said, the speed of the import of the table is still slow (call to mclient 30min). 
 #
 # There will be several tables based on a calculated prefix derived from each item name.
-# Attention: The prefix is not derived from actual NDA instruments. We just split by "_.-"
-#            and use the first entries for each. Also, all splits that produce groups with 
-#            less than 40 items will be combined into a general "abcd_other" table.
+# Attention: The prefix is not derived from actual NDA instruments. We just split the item
+#            name by "_.-" and use the first entry as a prefix to the table name (abcd_<split[0]>). 
+#            Also, all splits that produce groups with less than 40 items will be combined into a 
+#            general "abcd_other" table.
 #
 # The resulting MonetDB database can be used to extract values from it by:
 #  - check if the column you are looking for is in the table "abcd_other"
 #  - if not, split the item name using [_.-] and create a table name using the index 0 string
-#    prefixed with "abcd_". For example "fam_roster_2c_v2_l" will be in table "abcd_fam".
+#    prefixed with "abcd_". For example "fam_roster_2c_v2_l" will be in table "abcd_fam" as well
+#    as all other columns that start with "fam_".
 #
 # All tables in the MonetDB database will have the two columns "subjectid" and "eventname" as
 # VARCHAR. All other columns are numeric where numeric values appear as REAL data type and factors
 # are coded as INT based on their levels in R. As an example the "fam_roster_2c_v2_l" in R
-# has levels:
+# (table abcd_fam) has levels:
 # > levels(nda18['fam_roster_2c_v2_l'])
 #  [1] "Husband or wife"            "Unmarried partner"         
 #  [3] "Father or mother"           "Foster child"              
@@ -31,7 +33,7 @@
 # [11] "Roomer or boarder"          "Housemate or roommate"     
 # [13] "Brother or sister"         
 #
-# In MonetDB this column would have integers 1:13 with 3 meaning "Father or mother" etc..
+# In MonetDB this variable would have integer values 1:13 with 3 meaning "Father or mother" etc..
 #
 
 # for test purposes lets limit the columns of our table to data without these instruments
