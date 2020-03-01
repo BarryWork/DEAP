@@ -6,7 +6,8 @@
 # > DOTMONETDBFILE=/root/.monetdb_root mclient --port=11223 -d abcd /tmp/createTable.sql
 #
 # Speed: The "COPY RECORDS" method below is the fastest way to import large data into MonetDB.
-#        That said, the speed of the import of the table is still slow (call to mclient 30min). 
+#        That said, the speed of the import of the table is still slow (call to mclient 30min).
+#        Creating the data import files using this script should take about 10-15min. 
 #
 # There will be several tables based on a calculated prefix derived from each item name.
 # Attention: The prefix is not derived from actual NDA instruments. We just split the item
@@ -37,7 +38,8 @@
 #
 
 # for test purposes lets limit the columns of our table to data without these instruments
-dontuse=c("^tfmri", "^rsfmri")
+#dontuse=c("^tfmri", "^rsfmri")
+dontuse=c()
 nda18 = readRDS('/var/www/html/data/ABCD/data_uncorrected/nda18.Rds_copy')
 for (u in dontuse) { 
     nda18 = nda18[,grep(u, names(nda18), invert=TRUE)]; 
@@ -110,5 +112,5 @@ con <- file(tmp, "w")
 writeLines(paste0(sqldump1, collapse=""), con=con)
 close(con)
 
-# Should be tested, running it on command line using 'pv' timing is not too bad (not days but hours).
+# Should be tested, running it on command line using 'pv' timing is not too bad (30min).
 system(paste("DOTMONETDBFILE=/root/.monetdb_root mclient --port=11223 -d abcd ", tmp, sep=""))
