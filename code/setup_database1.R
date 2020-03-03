@@ -25,7 +25,7 @@
 # VARCHAR. All other columns are numeric where numeric values appear as REAL data type and factors
 # are coded as INT based on their levels in R. As an example the "fam_roster_2c_v2_l" in R
 # (table abcd_fam) has levels:
-# > levels(nda18['fam_roster_2c_v2_l'])
+# > levels(nda20['fam_roster_2c_v2_l'])
 #  [1] "Husband or wife"            "Unmarried partner"         
 #  [3] "Father or mother"           "Foster child"              
 #  [5] "Grandchild"                 "Other nonrelative"         
@@ -40,11 +40,11 @@
 # for test purposes lets limit the columns of our table to data without these instruments
 #dontuse=c("^tfmri", "^rsfmri")
 dontuse=c()
-nda18 = readRDS('/var/www/html/data/ABCD/data_uncorrected/nda18.Rds_copy')
+nda20 = readRDS('/var/www/html/data/ABCD/data_uncorrected/nda2.0.1.Rds')
 for (u in dontuse) { 
-    nda18 = nda18[,grep(u, names(nda18), invert=TRUE)]; 
+    nda20 = nda20[,grep(u, names(nda20), invert=TRUE)]; 
 }
-othercolumns=names(nda18) # without the musthaves
+othercolumns=names(nda20) # without the musthaves
 othercolumns=othercolumns[othercolumns != "subjectid"]
 othercolumns=othercolumns[othercolumns != "eventname"]
 prefixes=gsub("([^_.-]+[_.-]).*", "\\1", othercolumns)
@@ -66,7 +66,7 @@ for (t in names(howmany)) {
     sqldump1[[length(sqldump1)+1]] = paste("ALTER TABLE", tab, "ADD CONSTRAINT ",paste(tab, "_uc", sep="")," UNIQUE (\"subjectid\", \"eventname\"); ", sep=" ")
     # now we can create a CSV for this table and import (get names for all columns first - has to be in order)
     tcolumns = c("subjectid", "eventname", havedones[!(havedones %in% lasttablescolumnnames)])
-    dt = nda18[,tcolumns]
+    dt = nda20[,tcolumns]
     fac=names(dt)[sapply(dt, class) == "factor"]
     i = 3 # we always have two columns first that should stay VARCHAR (subjectid and eventname)
     while(i <= length(fac)) {
@@ -89,7 +89,7 @@ for (t in names(howmany)) {
     sqldump1[[length(sqldump1)+1]] = paste("DROP TABLE IF EXISTS", tab, ";", sep=" ")
     sqldump1[[length(sqldump1)+1]] = paste("CREATE TABLE", tab, "( \"subjectid\" VARCHAR(100), \"eventname\" VARCHAR(100)", sep=" ")
   }
-  data = nda18[,grep(paste("^",t,sep=""), names(nda18)), drop=FALSE] # prevent a vector, need data.table
+  data = nda20[,grep(paste("^",t,sep=""), names(nda20)), drop=FALSE] # prevent a vector, need data.table
   cnames=names(data)
   for(col in seq(1, length(cnames))) {
     #print(cnames[[col]])
@@ -101,8 +101,10 @@ for (t in names(howmany)) {
       sqldump1[[length(sqldump1)+1]] = paste(paste(", \"", cnames[[col]], "\"", sep=""), "INT", sep=" ");
     } else if (class(data[[col]]) == "numeric") {
       sqldump1[[length(sqldump1)+1]] = paste(paste(", \"", cnames[[col]], "\"", sep=""), "REAL", sep=" ");
+    } else if (class(data[[col]]) == "character") {
+      sqldump1[[length(sqldump1)+1]] = paste(paste(", \"", cnames[[col]], "\"", sep=""), "VARCHAR(100)", sep=" ");
     } else {
-      print("Error, found a column that is neither numeric nor factor")
+      print(paste("Error, found a column that is neither numeric nor factor: ", cnames[[col]], " instead type is: ", class(data[[col]])))
     }  
   }
 }
@@ -113,4 +115,5 @@ writeLines(paste0(sqldump1, collapse=""), con=con)
 close(con)
 
 # Should be tested, running it on command line using 'pv' timing is not too bad (30min).
-system(paste("DOTMONETDBFILE=/root/.monetdb_root mclient --port=11223 -d abcd ", tmp, sep=""))
+system(paste("/bin/bash -c 'DOTMONETDBFILE=/root/.monetdb_root mclient --port=11223 -d abcd ", tmp, "'", sep=""))
+#system(paste("DOTMONETDBFILE=/root/.monetdb_root mclient --port=11223 -d abcd ", tmp, sep=""))
