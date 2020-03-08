@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>hiearchical-clustering</title>
+    <title>hierarchical-clustering</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -47,7 +47,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
   <body spellcheck="false">
     
     <nav class="navbar navbar-expand-lg  navbar-light bg-light">
-      <a class="navbar-brand" href="#">Hiearchical-Clustering</a>
+      <a class="navbar-brand" href="#">Hierarchical-Clustering</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -64,7 +64,7 @@ echo('<script type="text/javascript"> user_name = "'.$user_name.'";model_name = 
     <div class="container-fluid" style="margin-top: 10px;">
       <div class="row">
         <div class="col-md-12">
-                  <p class="tut-p">The hiearchical-clustering is done based on sets of variables. Such sets can be created in the <a href="/applications/Sets/">Sets application</a> on DEAP.</p>
+                  <p class="tut-p">The hierarchical-clustering is done based on sets of variables. Such sets can be created in the <a href="/applications/Sets/">Sets application</a> on DEAP. <span id="timing"></span></p>
         </div>
       </div>
       <div class="row">

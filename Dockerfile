@@ -150,8 +150,9 @@ RUN apt-get update && apt-get install libcurl4-openssl-dev libxml2-dev libssl-de
 RUN cd /tmp/ && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
     && sh Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && source /opt/conda/bin/activate \
     && conda init bash && source ~/.bashrc && conda update -n base -c defaults conda -y \
-    && conda create --name scikit-learn -y &&  conda activate scikit-learn -y \
-    && conda install scikit-learn matplotlib -y && pip install pymonetdb
+    && conda create --name scikit-learn -y &&  conda activate scikit-learn \
+    && conda install scikit-learn matplotlib pandas -y && pip install pymonetdb \
+    && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
 
 EXPOSE 80
 ENTRYPOINT ["/deap-startup.sh"]
