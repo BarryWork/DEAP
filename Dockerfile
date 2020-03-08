@@ -122,17 +122,17 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
 #-------------------------------------------------------------------------------
 # Install internal database (monetdb - column store mirrors data from ndaXX.Rds)
 #-------------------------------------------------------------------------------
-RUN echo -e "deb https://dev.monetdb.org/downloads/deb/ bionic monetdb\ndeb-src https://dev.monetdb.org/downloads/deb/ bionic monetdb\n" > /etc/apt/sources.list.d/monetdb.list \
-    && wget --output-document=- https://www.monetdb.org/downloads/MonetDB-GPG-KEY | sudo apt-key add - \
+RUN /bin/echo -e "deb https://dev.monetdb.org/downloads/deb/ bionic monetdb\ndeb-src https://dev.monetdb.org/downloads/deb/ bionic monetdb\n" > /etc/apt/sources.list.d/monetdb.list \
+    && wget --output-document=- https://www.monetdb.org/downloads/MonetDB-GPG-KEY | apt-key add - \
     && apt-get update && apt-get install monetdb5-sql monetdb-client -yq \
-    && echo -e "user=deap\npassword=`tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1`\nlanguage=sql" > /root/.monetdb \
-    && echo -e "user=monetdb\npassword=monetdb\nlanguage=sql" > /root/.monetdb_root \
+    && /bin/echo -e "user=deap\npassword=`tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1`\nlanguage=sql" > /root/.monetdb \
+    && /bin/echo -e "user=monetdb\npassword=monetdb\nlanguage=sql" > /root/.monetdb_root \
     && monetdbd create /var/www/html/data/ABCD/DB1 \
     && monetdbd start /var/www/html/data/ABCD/DB1 \
     && monetdbd set port=11223 /var/www/html/data/ABCD/DB1 \
     && monetdbd set control="no" /var/www/html/data/ABCD/DB1 \
     && monetdb create abcd && monetdb start abcd && monetdb release abcd \
-    && echo -e "CREATE USER \"deap\" WITH PASSWORD '"$(cat /root/.monetdb | grep password | cut -d'=' -f2)"' NAME 'DEAP User' SCHEMA \"sys\";\nCREATE SCHEMA \"deap\" AUTHORIZATION \"deap\";\nALTER USER \"deap\" SET SCHEMA \"deap\";" | DOTMONETDBFILE=/root/.monetdb_root mclient --port=11223 -d abcd
+    && echo -e "CREATE USER \"deap\" WITH PASSWORD '"$(cat /root/.monetdb | grep password | cut -d'=' -f2)"' NAME 'DEAP User' SCHEMA \"sys\";\nCREATE SCHEMA \"deap\" AUTHORIZATION \"deap\";\nALTER USER \"deap\" SET SCHEMA \"deap\";" | DOTMONETDBFILE=/root/.monetdb_root mclient -d abcd
 
 # toolkit required for code/setup_database1.R (imports the Rds to the database table abcd)
 RUN apt-get update && apt-get install libcurl4-openssl-dev libxml2-dev libssl-dev -yq \
