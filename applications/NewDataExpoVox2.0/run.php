@@ -74,6 +74,7 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
         $plot_statistics = glob($dirname."/*_statistics.json");
         $plot_lineplot = glob($dirname."/*_lineplot.json");
         $plot_output = glob($dirname."/*_output.txt");
+        $plot_log = glob($dirname."/*_output_log.json");
         if(count($plot_scatter) > 0 and count($plot_statistics) > 0 and count($plot_lineplot)> 0){
             $ret = array();
             $paths = pathinfo($plot_scatter[0]);
@@ -82,6 +83,8 @@ if( $action == "start" && isset($_POST["jsondata"]) && isset($_POST["code"] ))
             $ret["statistics"] = "/data/".$project_name."/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];	
             $paths = pathinfo($plot_lineplot[0]);
             $ret["lineplot"] = "/data/".$project_name."/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];
+	    $paths = pathInfo($plot_log[0]);
+            $ret["log"] = "/data/".$project_name."/NewDataExpo/usercache/".$owner_id."/".$paths['basename'];
             echo(json_encode($ret));
 	
 	}else {

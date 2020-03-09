@@ -175,10 +175,16 @@ GAMM4.prototype.work = function (inputs, outputs, state) {
     //R = R + "user_name = \"" + this._path.split("usercache\/")[1].split("_")[0]+"\"\n";
     var fname_scatter = this._path + "/" + code + "_scatter.json";
     R = R + "if (exists(\"scatter\")) write(rjson::toJSON(scatter),file=\"" + fname_scatter + "\")\n";
+    
+    var fname_log = this._path + "/" + code + "_output_log.json";
+    R = R + "if (exists(\"output_log\")) write(rjson::toJSON(output_log),file=\"" + fname_log + "\")\n";
+    
     var fname_lineplot = this._path + "/" + code + "_lineplot.json";
     R = R + "if (exists(\"lineplot\")) write(rjson::toJSON(lineplot),file=\"" + fname_lineplot + "\")\n";
+    
     var fname_tunnel = this._path + "/" + code + "_tunnel.json";
     R = R + "if (exists(\"tunnel\")) write(rjson::toJSON(tunnel),file=\"" + fname_tunnel + "\")\n";
+    
     var fname_statistics = this._path + "/" + code + "_statistics.json";
     R = R + "if (exists(\"statistics\")) write(rjson::toJSON(statistics),file=\"" + fname_statistics + "\")\n";
 

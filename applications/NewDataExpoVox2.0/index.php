@@ -358,6 +358,8 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script src="./js/saveSvgAsPng.js"></script>
 <script src="/js/md5-min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script> -->
+<script type="text/javascript" src="/js/highslide/highslide-full.min.js"></script>
+<script type="text/javascript" src="/js/highslide/highslide.config.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/highslide/highslide.config.js" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="/js/highslide/highslide.css" />
 <!-- <script type="text/javascript" src="/js/HighChart414/js/highcharts.js"></script>
@@ -402,12 +404,12 @@ iki/Bayesian_information_criterion">BIC</a>) are more appropriate for model comp
 <script src="../NewDataExpoVox2.0/js/postprocessing/BloomPass.js"></script> 
 <script src="../NewDataExpoVox2.0/js/postprocessing/FilmPass.js"></script> 
 
-<script src="../NewDataExpoVox/js/loaders/VTKLoader.js"></script> 
+<script src="../NewDataExpoVox2.0/js/loaders/VTKLoader.js"></script> 
 <script src="../NewDataExpoVox2.0/js/Detector.js"></script> 
 <script src="../NewDataExpoVox2.0/js/Tween.js"></script> 
 <script src="../NewDataExpoVox2.0/js/Threex.screenshot.js"></script>
 <script type="text/javascript" src="../NewDataExpoVox2.0/js/jquery.minicolors.js"></script>
-<script type="text/javascript" src="../NewDataExpoVox/js/jquery.jeditable.js"></script>
+<script type="text/javascript" src="../NewDataExpoVox2.0/js/jquery.jeditable.js"></script>
 <script src="./js/all-2.js?_=333"></script>
 
 

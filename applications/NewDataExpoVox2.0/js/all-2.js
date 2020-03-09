@@ -75,6 +75,7 @@ var json = ""
 var scatter_output_json = ""
 var line_output_json = ""
 var statistics_output_json = ""
+var log_output_json = ""
 
 var model = model_name
 var analysis_names = []
@@ -98,7 +99,7 @@ var agreenment_text =
 function load_interface_from_json(model_address) {
   var run_on_json = false
   var default_path =
-    "../ModelBuilder/viewer/recipes/" + model + ".json?_" + Math.random()
+    "../../data/ABCD/ModelBuilder/viewer/recipes/" + model + ".json?_" + Math.random()
   if (model_address == "loaded-json") {
     model_address = default_path
     run_on_json = true
@@ -1645,16 +1646,27 @@ function insert_mutiple_input(item_input, isIndpv) {
       var content = jQuery(event.currentTarget).html()
     },
   })
+	let render_count = 0
   au.data("ui-autocomplete")._renderItem = function(ul, item) {
-    return analysis_scores_list.includes(item.label) ?
-      $("<li></li>")
+    rtn = {}
+
+	if(analysis_scores_list.includes(item.label)){
+      rtn = $("<li></li>")
       .data("item.autocomplete", item)
       .append("<div>" + item.label + "<span class = 'miniTag' title='This variable has been defined using the Extend application. It is not part of the ABCD data released.'>Extend</span></div>")
-      .appendTo(ul) 
-      :$("<li></li>")
+	} else if (item.label.slice(-7) == "roi_all" ){ 
+      rtn = $("<li></li>")
+      .data("item.autocomplete", item)
+      .append("<div>" + item.label + "<span class = 'miniTag' title='ROI calculation variables'>ROI</span></div>")
+	}else{
+      rtn = $("<li></li>")
       .data("item.autocomplete", item)
       .append("<div>" + item.label + "</div>")
-      .appendTo(ul)
+	}
+	  render_count += 1
+	  console.log(render_count)
+    rtn.appendTo(ul)
+    return rtn
   }
 
   input.keyup(function() {
@@ -3003,12 +3015,13 @@ jQuery(
         }
       )
       setTimeout(function() {
-        document
-          .getElementsByClassName(input_id + "-" + act_name_tag + "-wrapper")[0]
-          .scrollIntoView({
-            behavior: "smooth",
-            block: "end",
-          })
+     
+          jQuery("<div class = 'col-sm-5' style = 'overflow-y:scroll; overflow-x:hidden; max-height: 220px; min-height: 200px;margin:0; font-size: 0.8 rem;line-height:20px; font-height: 2px;padding-left:0px;padding-right:0px;border:0px;'></div>")
+            .append($div_button)
+            .append(type_a_info) 
+            .appendTo($a);
+
+
       }, 200)
     })
     .fail(function(e) {
@@ -3017,6 +3030,14 @@ jQuery(
       )
         .html("ERROR: Column " + act_v + " does not exist")
         .appendTo($a)
+      setTimeout(function() {
+     
+          jQuery("<div class = 'col-sm-5' style = 'overflow-y:scroll; overflow-x:hidden; max-height: 220px; min-height: 200px;margin:0; font-size: 0.8 rem;line-height:20px; font-height: 2px;padding-left:0px;padding-right:0px;border:0px;'></div>")
+            .append($div_button)
+            .appendTo($a);
+
+
+      }, 200)
     })
 
   if (value.indexOf("s(") >= 0) {
@@ -3544,6 +3565,22 @@ function clearDisplayCheck(time) {
   display_data = {}
   var lineplot_data = []
   for (file_name_index in display_file_list) {
+
+    if (file_name_index == "log") {
+       filename = display_file_list[file_name_index]
+       jQuery.get(filename, function(data) {
+	  if (data == null){
+		  return
+	  } 
+	  jQuery("#scatter").append(
+            "<h2 class='tut-data-display'>Log from R code</h2>"
+          )
+	  for (line in data){
+	  	jQuery("#scatter").append("<p>"+data[line]+"</p>")
+	  }
+    
+    })
+    i}	    
     if (file_name_index == "error") {
       filename = display_file_list[file_name_index]
       console.log(filename[0])
@@ -3579,9 +3616,10 @@ function clearDisplayCheck(time) {
     }
     if (file_name_index == "scatter") {
       switchMeasure("1",fname_temp);
-
       filename = display_file_list[file_name_index]
       jQuery.get(filename, function(data) {
+	
+        jQuery("#scatter").append(JSON.stringify(data))
         scatter_output_json = data
         //if(!data[0]["src_subject_id"]) return;
         jQuery.get(display_file_list["lineplot"], function(ldata) {

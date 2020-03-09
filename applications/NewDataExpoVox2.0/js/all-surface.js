@@ -381,7 +381,7 @@ jQuery(document).ready(function() {
         }
         var minVal = jQuery('#color-min-value').val();
         var maxVal = jQuery('#color-max-value').val();
-        // drawColormap(colormap, minVal, maxVal);
+	drawColormap(colormap, minVal, maxVal);
         updateColormap(minVal, maxVal);
         return false;
     });
@@ -1185,6 +1185,10 @@ function switchMeasure(selectIndex, filename) {
         jQuery('#message-text').html('loading...').fadeIn('fast');
         jQuery.getJSON(filename, function(a) {
             a = a["lh"];
+
+	    for (roi_name in a){
+	    	$("#scatter").append("<tr> <td>" + roi_name + "</td><td> " + a[roi_name]+ "</td>")
+	    }
             temp = {};
             temp["values"] = [Object.values(a).splice(0, 2564)];
             // Mapping ROI data to vertexwise musk here, if needed
@@ -1221,6 +1225,8 @@ function switchMeasure(selectIndex, filename) {
 
             minC = leftValues.windowLevel[0] / 2;
             maxC = leftValues.windowLevel[1] / 2;
+	    minC = Math.max(-10, minC)
+	    maxC = Math.min(10, maxC)
             rescaleExpertColormap(minC, maxC);
             mini = minC - (maxC - minC) / 2;
             maxi = maxC + (maxC - minC) / 2;
@@ -1243,6 +1249,8 @@ function switchMeasure(selectIndex, filename) {
             if (temp["values"][0].length < 50) {
                 temp["values"] = transformRoiToVertex(a, "rh")
             }
+
+	    
             temp_min = temp["values"][0].reduce(function(a, b) {
                 return Math.min(a, b)
             });
@@ -1259,6 +1267,8 @@ function switchMeasure(selectIndex, filename) {
             }
             minC = rightValues.windowLevel[0] / 2
             maxC = rightValues.windowLevel[1] / 2
+	    minC = Math.max(-10, minC)
+	    maxC = Math.min(10, maxC)
             rescaleExpertColormap(minC, maxC);
             mini = minC - (maxC - minC) / 2;
             maxi = maxC + (maxC - minC) / 2;
@@ -1865,9 +1875,9 @@ function drawColormap(colormap, minV, maxV) {
     if (colormap == undefined)
         return;
 
-    if (jQuery('#colormapDialog').dialog('isOpen')) {
-        drawExpertColormap(colormap, minV, maxV);
-    }
+    //if (jQuery('#colormapDialog').dialog('isOpen')) {
+    //    drawExpertColormap(colormap, minV, maxV);
+    //}
 
     var numColors = colormap.length / 3;
     context = document.getElementById('colormapDisplay').getContext('2d');
@@ -2033,10 +2043,13 @@ function transformRoiToVertex(data, label) {
             for (desikan_roi in data) {
                 desikan_roi_name = desikan_roi.split("desikan_")[1].split(".")[0]
                 value = data[desikan_roi]
-                list_of_vertex = map_dict[desikan_roi_name]["vertex"]
-
+		if (map_dict[desikan_roi_name]){
+                    list_of_vertex = map_dict[desikan_roi_name]["vertex"]
+		} else {
+		    continue
+		}
                 for (item in list_of_vertex) {
-                    musk[list_of_vertex[item]] = value
+                    musk[list_of_vertex[item]] = (value == "Inf" || value == "-Inf" ? 0 : value)
                 }
 
             }

@@ -28,7 +28,7 @@ if (isset($_POST['state'])) {
 if ($action == "save") {
 	
     
-    if (!in_array("can-auto-score",$permissions) and $user_name != "fangzhou") {
+    if (!in_array("can-auto-score",$permissions) or $user_name != "admin") {
         echo("{ \"message\": \"permissions denied ".$user_name."\" }");
         return;
     }
@@ -52,11 +52,12 @@ if ($action == "save") {
         }
         $state['envelope'] = $envelope;
 	// now save the state
-        file_put_contents('recipes/' . $name . '.json', json_encode($state));
+        file_put_contents('/var/www/html/data/ABCD/ModelBuilder/viewer/recipes/' . $name . '.json', json_encode($state));
     }
     return;
 } elseif ($action == "saveImage") {
-    if (!in_array("can-auto-score",$permissions) or $user_name != "fangzhou") {
+    return;
+    if (!in_array("can-auto-score",$permissions) or  $user_name != "admin") {
         echo("{ \"message\": \"permissions denied images\" }");
         return;
     }
@@ -90,7 +91,7 @@ if ($action == "save") {
         return;
         }*/
 
-    $files = glob('recipes/*.json');
+    $files = glob('/var/www/html/data/ABCD/ModelBuilder/viewer/recipes/*.json');
     $res = array();
     foreach($files as $file) {
         $path_parts = pathinfo($file);
