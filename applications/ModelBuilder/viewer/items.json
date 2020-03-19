@@ -48,7 +48,9 @@
         { "name": "sq. var", "type": "constant-text"},
         { "name": "gr. var", "type": "constant-text"},
         { "name": "ws. var", "type": "constant-text"},
-	{ "name": "fl. var", "type": "constant-text"}
+	{ "name": "fl. var", "type": "constant-text"},
+	{ "name": "rand. var", "type": "constant-text"},
+	{ "name": "weight. var", "type": "constant-text"}
 	],
 	"outputs": [
 	    { "name": "scatter", "type": "scatter" },

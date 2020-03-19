@@ -3175,18 +3175,29 @@ function insert_single_input(item_input) {
 function insert_checkbox(arr) {
   var group = jQuery('<div class="form-group">')
   var ran_group = jQuery('<div class="form-group">')
+  var other_group = jQuery('<div class="form-group">')
+  
+  // Fixed effect section
   var label = jQuery("<label>")
   label.html("Fixed Effect Covariates")
   label.attr("class", "col-md-10 col-form-label span3")
   label.css("line-height", 1.1)
-
   group.append(label)
+
+  // rand effect section
   var label2 = jQuery("<label>")
   label2.html("Random Effects")
   label2.attr("class", "col-md-10 col-form-label span3")
   label2.css("line-height", 1.1)
-
   ran_group.append(label2)
+ 
+  // Other effect section 
+  var label3 = jQuery("<label>")
+  label3.html("Other Options")
+  label3.attr("class", "col-md-10 col-form-label span3")
+  label3.css("line-height", 1.1)
+  other_group.append(label3)
+
   var div = jQuery("<div>")
   div.attr("class", "btn-group col-md-10 span7").css("margin-top", 0)
   div.attr("role", "group")
@@ -3194,10 +3205,18 @@ function insert_checkbox(arr) {
     .css("overflow-x", "auto")
     .css("overflow-y", "hidden")
 
+
   var div_random = jQuery("<div>")
   div_random.attr("class", "btn-group col-md-10 span7")
   div_random.attr("role", "group")
   div_random.attr("data-toggle", "buttons")
+
+
+  var div_other = jQuery("<div>")
+  div_other.attr("class", "btn-group col-md-10 span7")
+  div_other.attr("role", "group")
+  div_other.attr("data-toggle", "buttons")
+
 
   for (index in arr) {
     if (index == "shuffle") continue
@@ -3243,7 +3262,7 @@ function insert_checkbox(arr) {
     prepend_label = "<div class='overlay'>Parent</div>";
     if(name == 'SEX' || name == 'Race/Ethnicity' || name == 'AGE'){
       prepend_label = "<div class='overlay'>Youth</div>";
-    } else if ( name == 'SITE' || name == 'SUBJECT' || name == 'FAMILY' || name == 'DEVICE'){
+    } else if ( name == 'SITE' || name == 'SUBJECT' || name == 'FAMILY' || name == 'DEVICE' || name == 'Propensity Weight'){
       prepend_label = ""
     }
     input
@@ -3299,14 +3318,18 @@ function insert_checkbox(arr) {
 
     if (id == "random-SITE" || id == "random-Family" || id == "random-SUBJECT" || id == "random-DEVICE") {
       div_random.append(input)
-    } else {
+    } else if (id == "weight.var"){
+	 		div_other.append(input)
+	  } else {
       div.append(input)
     }
   }
   group.append(div)
   ran_group.append(div_random)
+  other_group.append(div_other)
   jQuery(".content").append(group)
   jQuery(".content").append(ran_group)
+  jQuery(".content").append(other_group)
   //$('[data-toggle="tooltip"]').tooltip({container: 'body'});
 }
 
