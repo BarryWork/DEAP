@@ -122,17 +122,17 @@ RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
 #-------------------------------------------------------------------------------
 # Install internal database (monetdb - column store mirrors data from ndaXX.Rds)
 #-------------------------------------------------------------------------------
+#     && /bin/echo -e "user=deap\npassword=`tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1`\nlanguage=sql" > /root/.monetdb \
+#     && echo -e "CREATE USER \"deap\" WITH PASSWORD '"$(/bin/cat /root/.monetdb_root | grep password | cut -d'=' -f2)"' NAME 'DEAP User' SCHEMA \"sys\";\nCREATE SCHEMA \"deap\" AUTHORIZATION \"deap\";\nALTER USER \"deap\" SET SCHEMA \"deap\";" | DOTMONETDBFILE=/root/.monetdb_root mclient -d abcd
 RUN /bin/echo -e "deb https://dev.monetdb.org/downloads/deb/ bionic monetdb\ndeb-src https://dev.monetdb.org/downloads/deb/ bionic monetdb\n" > /etc/apt/sources.list.d/monetdb.list \
     && wget --output-document=- https://www.monetdb.org/downloads/MonetDB-GPG-KEY | apt-key add - \
     && apt-get update && apt-get install monetdb5-sql monetdb-client -yq \
-    && /bin/echo -e "user=deap\npassword=`tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1`\nlanguage=sql" > /root/.monetdb \
     && /bin/echo -e "user=monetdb\npassword=monetdb\nlanguage=sql" > /root/.monetdb_root \
     && monetdbd create /var/www/html/data/ABCD/DB1 \
     && monetdbd start /var/www/html/data/ABCD/DB1 \
     && monetdbd set port=11223 /var/www/html/data/ABCD/DB1 \
     && monetdbd set control="no" /var/www/html/data/ABCD/DB1 \
-    && monetdb create abcd && monetdb start abcd && monetdb release abcd \
-    && echo -e "CREATE USER \"deap\" WITH PASSWORD '"$(cat /root/.monetdb | grep password | cut -d'=' -f2)"' NAME 'DEAP User' SCHEMA \"sys\";\nCREATE SCHEMA \"deap\" AUTHORIZATION \"deap\";\nALTER USER \"deap\" SET SCHEMA \"deap\";" | DOTMONETDBFILE=/root/.monetdb_root mclient -d abcd
+    && monetdb create abcd && monetdb start abcd && monetdb release abcd
 
 # toolkit required for code/setup_database1.R (imports the Rds to the database table abcd)
 RUN apt-get update && apt-get install libcurl4-openssl-dev libxml2-dev libssl-dev -yq \
@@ -148,11 +148,20 @@ RUN apt-get update && apt-get install libcurl4-openssl-dev libxml2-dev libssl-de
 # Application: applications/hierarchical-clustering/
 #-------------------------------------------------------------------------------
 RUN cd /tmp/ && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-    && sh Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && source /opt/conda/bin/activate \
-    && conda init bash && source ~/.bashrc && conda update -n base -c defaults conda -y \
+    && sh Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && . /opt/conda/bin/activate \
+    && conda init bash && . ~/.bashrc && conda update -n base -c defaults conda -y \
     && conda create --name scikit-learn -y &&  conda activate scikit-learn \
     && conda install scikit-learn matplotlib pandas -y && pip install pymonetdb \
     && ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+
+#-------------------------------------------------------------------------------
+# Create an example app for ABCD_ML
+# Application: applications//
+#-------------------------------------------------------------------------------
+RUN cd /var/www/html/applications/Example-ABCD_ML && git clone https://github.com/sahahn/ABCD_ML.git \
+    && cd /var/www/html/applications/Example-ABCD_ML/ABCD_ML && . ~/.bashrc \
+    && conda create --name ABCD_ML -y && conda activate ABCD_ML && pip install .
+
 
 EXPOSE 80
 ENTRYPOINT ["/deap-startup.sh"]
