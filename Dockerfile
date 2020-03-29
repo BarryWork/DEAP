@@ -158,7 +158,8 @@ RUN cd /tmp/ && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux
 # Create an example app for ABCD_ML
 # Application: applications//
 #-------------------------------------------------------------------------------
-RUN cd /var/www/html/applications/Example-ABCD_ML && git clone https://github.com/sahahn/ABCD_ML.git \
+RUN cd /var/www/html && git pull \
+    && cd /var/www/html/applications/Example-ABCD_ML && git clone https://github.com/sahahn/ABCD_ML.git \
     && cd /var/www/html/applications/Example-ABCD_ML/ABCD_ML && . ~/.bashrc \
     && conda create --name ABCD_ML -y && conda activate ABCD_ML && pip install .
 
