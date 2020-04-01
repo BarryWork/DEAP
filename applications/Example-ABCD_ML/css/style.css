@@ -12,3 +12,6 @@ stroke: #ccc;
 stroke-width: 1.5px;
 }
 
+label.active {
+    background-color: #007bff !important;
+}

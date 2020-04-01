@@ -2,16 +2,13 @@ from timeit import default_timer as timer
 
 start = timer()
 
+from ABCD_ML import ABCD_ML
 import numpy as np
 import pymonetdb.sql
 import json
 import getopt, sys, re
 import pandas as pd
 from functools import reduce
-
-from scipy.cluster.hierarchy import dendrogram, to_tree
-from sklearn.datasets import load_iris
-from sklearn.cluster import AgglomerativeClustering
 
 step1 = timer()
 
@@ -91,18 +88,18 @@ def fetchABCDData(variables):
     return df
 
 def main(argv):
-    variables = []
     opts,args = getopt.getopt(argv,"hp:o:",["help", "parameter=", "output="])
     output = ""
+    params = {}
     
     for opt, arg in opts:
         if opt in ("-h", "--help"):
-            print ("Usage : hierarchical-clustering.py –p <parameter json filename> -o <output json filename>")
+            print ("Usage : example-abcd_ml.py –p <parameter json filename> -o <output json filename>")
             sys.exit(-1)
         if opt in ("-p", "-parameter"):
             # read the variable names
             with open(arg) as f:
-                variables = json.load(f)
+                params = json.load(f)
         if opt in ("-o", "-output"):
             output = arg
 
@@ -110,76 +107,87 @@ def main(argv):
         print("Error: No output json file specified")
         sys.exit(-1)
 
-    if len(variables) == 0:
+    if len(params['variables']) == 0:
         print("Error: No variables specified")
         sys.exit(-1)
         
     step_read_data = timer()
-    data = fetchABCDData(variables)
+    variables    = params['variables']
+    target_name  = params['target'];
+    df_variables = fetchABCDData(variables)
+    df_target    = fetchABCDData([target_name])
+    df_other     = fetchABCDData(['sex_at_birth','rel_family_id'])
     step_read_data_end = timer()
 
-    # stupid stupid stupid, but hey, this is a test...
-    data.fillna(-1, inplace=True)
-    model = AgglomerativeClustering(distance_threshold=1, n_clusters=None)
-    model = model.fit(data.drop(['subjectid', 'eventname'], axis=1))
+    # create the model
+    ML = ABCD_ML(exp_name = 'Deap',
+                 random_state = 1)
+    ML.Set_Default_Load_Params(dataset_type = 'basic', eventname = 'baseline_year_1_arm_1')
 
-    counts = np.zeros(model.children_.shape[0])
-    n_samples = len(model.labels_)
-    for i, merge in enumerate(model.children_):
-        current_count = 0
-        for child_idx in merge:
-            if child_idx < n_samples:
-                current_count += 1  # leaf node
-            else:
-                current_count += counts[child_idx - n_samples]
-        counts[i] = current_count
+    # load the target into the model
+    ML.Load_Targets(df = df_target,
+                   subject_id = 'subjectid',
+                   col_name = target_name,
+                   data_type = 'float',
+                   filter_outlier_std = (3,4),
+                   clear_existing = True)
+    # load the data
+    ML.Load_Data(df = df_variables,
+                 subject_id = 'subjectid',
+                 filter_outlier_std = 6,
+                 clear_existing = True)
+    ML.Load_Strat(df = df_other,
+                  subject_id = 'subjectid',
+                  col_name='rel_family_id')
+    ML.Load_Strat(df = df_other,
+                  subject_id = 'subjectid',
+                  col_name='sex_at_birth')
+    ML.Define_Validation_Strategy(groups='rel_family_id')
 
-    linkage_matrix = np.column_stack([model.children_, model.distances_,
-                                      counts]).astype(float)
+    # model
+    ML.Train_Test_Split(test_size = .2)
+    ML.Set_Default_ML_Params(problem_type = 'regression',
+                         metric = ['r2', 'mae'],
+                         scaler = 'robust',
+                         splits = 3,
+                         n_repeats = 1,
+                         n_jobs = 12)
 
-    def add_node(node, parent ):
-        # First create the new node and append it to its parent's children
-        newNode = dict( node_id=node.id, children=[] )
-        parent["children"].append( newNode )
+    #results = ML.Evaluate(model = 'linear')
+    results = ML.Evaluate(model = 'ridge',
+                          model_params = 1,
+                          search_type = 'DiscreteOnePlusOne',
+                          search_n_iter = 50)
 
-        # Recursively add the current node's children
-        if node.left: add_node( node.left, newNode )
-        if node.right: add_node( node.right, newNode )
-    
-    T = to_tree( linkage_matrix , rd=False )
-    labels = list(data.subjectid)
-    id2name = dict(zip(range(len(labels)), labels))
-    d3Dendro = dict(children=[], name="Root1")
-    add_node( T, d3Dendro )
-
-    # This label_tree will run into a recusion limit of python
-    # Python as a language for scientific work? I guess that disqualifies it.
-    sys.setrecursionlimit(11785*4)
-    def label_tree( n ):
-        # If the node is a leaf, then we have its name
-        if len(n["children"]) == 0:
-            leafNames = [ id2name[n["node_id"]] ]
-
-        # If not, flatten all the leaves in the node's subtree
-        else:
-            #leafNames = reduce(lambda ls, c: ls + label_tree(c), n["children"], [])
-            leafNames = "many"
-
-        # Delete the node id since we don't need it anymore and
-        # it makes for cleaner JSON
-        del n["node_id"]
-
-        # Labeling convention: "-"-separated leaf names
-        n["name"] = name = "-".join(sorted(map(str, leafNames)))
-
-        return leafNames
-
-    label_tree( d3Dendro["children"][0] )
-    
     end = timer()
-    d3Dendro['timing'] = { "reading libraries": (step1-start), "parse arguments": (step_read_data - step1), "fetch data from database": (step_read_data_end - step_read_data), "run clustering": (end - step_read_data_end), "amount of data": data.shape };
+
+    timings = {}
+    timings['timing'] = { "reading libraries": (step1-start),
+                          "parse arguments": (step_read_data - step1),
+                          "fetch data from database": (step_read_data_end - step_read_data),
+                          "run machine learning": (end - step_read_data_end),
+                          "amount of data": df_variables.shape };
+    timings['r2-mean-validation-score'] = results['summary_scores'][0][0]
+    timings['r2-std-in-validation-score'] = results['summary_scores'][0][2]
+    timings['neg-mean-absolute-error-mean-validation-score'] = results['summary_scores'][1][0]
+    timings['neg-mean-absolute-error-std-in-validation-score'] = results['summary_scores'][1][2]
+
+    
+    feat_importance = 0
+    for fis in ML.Model_Pipeline.feat_importances:
+        if 'global' in fis.scopes:
+            feat_importance = fis
+    df = feat_importance.global_df
+    target = feat_importance.target
+    #target_key = ML._get_targets_key(target)
+    #classes = ML.targets_encoders[target_key].classes_
+    timings['dd'] = str(ML._get_targets_key(feat_importance.target))
+    
+    timings['results'] = str(results)
+
+    
     with open(output,'w') as f:
-        json.dump(d3Dendro, f)
+        json.dump(timings, f)
         
 if __name__ == "__main__":
     main(sys.argv[1:])

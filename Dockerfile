@@ -91,6 +91,8 @@ RUN if [ ! -f "$ND_ENTRYPOINT" ]; then \
     && echo '/usr/bin/Rscript /var/www/html/applications/code/setup_database1.R;' >> $ND_ENTRYPOINT \
     && echo 'sudo -u www-data /usr/bin/Rscript /var/www/html/applications/Scores/R/transfer.R;' >> $ND_ENTRYPOINT \
     && echo 'cp /var/www/html/data/ABCD/*.php /var/www/html/code/php/' >> $ND_ENTRYPOINT \
+    && echo 'monetdbd start /var/www/html/data/ABCD/DB1' >> $ND_ENTRYPOINT \
+    && echo 'monetdb start abcd' >> $ND_ENTRYPOINT \
     && echo 'apachectl -D FOREGROUND' >> $ND_ENTRYPOINT \
     && echo "ServerName localhost" >> /etc/apache2/apache2.conf \
     && echo "<Directory /var/www/html/>\n    Options -Indexes +FollowSymLinks\n    AllowOverride None\n    Require all granted\n</Directory>" >> /etc/apache2/apache2.conf \
@@ -156,13 +158,13 @@ RUN cd /tmp/ && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux
 
 #-------------------------------------------------------------------------------
 # Create an example app for ABCD_ML
-# Application: applications//
+# Application: applications/Example-ABCD_ML/
 #-------------------------------------------------------------------------------
 RUN cd /var/www/html && git pull \
     && cd /var/www/html/applications/Example-ABCD_ML && git clone https://github.com/sahahn/ABCD_ML.git \
     && cd /var/www/html/applications/Example-ABCD_ML/ABCD_ML && . ~/.bashrc \
     && conda create --name ABCD_ML -y && conda activate ABCD_ML && conda install pip \
-    && pip install .
+    && pip install . && pip install pymonetdb ipywidgets
 
 
 EXPOSE 80
